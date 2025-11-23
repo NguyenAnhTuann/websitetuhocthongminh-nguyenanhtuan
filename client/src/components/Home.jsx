@@ -267,10 +267,12 @@ const Home = ({ language }) => {
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-black  font-outfit leading-tight"
+            className="text-3xl md:text-5xl lg:text-5xl font-extrabold text-white font-outfit leading-tight 
+             bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm inline-block"
           >
             {t.heroTitle}
           </motion.h1>
+
 
           <Typewriter text={t.heroType} />
 
@@ -292,13 +294,13 @@ const Home = ({ language }) => {
           >
             <button
               onClick={() => navigate("/kynangtuhoc")}
-              className="px-5 py-2.5 rounded-full bg-sky-600 text-white text-sm font-semibold shadow-md hover:bg-sky-700 transition"
+              className="px-5 py-2.5 rounded-full bg-[#3C9E8F] text-white text-sm font-semibold shadow-md hover:bg-yellow-500 transition"
             >
               {t.heroPrimaryBtn}
             </button>
             <button
-              onClick={() => navigate("/student-login")} // route tạm, bạn sẽ tạo sau
-              className="px-5 py-2.5 rounded-full border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition flex items-center gap-2"
+              onClick={() => navigate("/login")} // route tạm, bạn sẽ tạo sau
+              className="px-5 py-2.5 rounded-full border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-300 transition flex items-center gap-2"
             >
               <LuUserRoundPen className="w-4 h-4" />
               {t.heroSecondaryBtn}
@@ -313,11 +315,11 @@ const Home = ({ language }) => {
             className="mt-6 grid grid-cols-2 gap-3 text-xs md:text-sm text-gray-500 dark:text-gray-400"
           >
             <div className="flex items-center gap-2">
-              <FileText className="w-4 h-4 text-sky-600" />
+              <FileText className="w-4 h-4 text-[#3C9E8F]" />
               <span>Tài liệu PDF, video lưu trên Google Drive</span>
             </div>
             <div className="flex items-center gap-2">
-              <MessageCircle className="w-4 h-4 text-sky-600" />
+              <MessageCircle className="w-4 h-4 text-[#3C9E8F]" />
               <span>ChatBot ChatGPT tích hợp</span>
             </div>
           </motion.div>
@@ -342,7 +344,7 @@ const Home = ({ language }) => {
 
           {/* Text bên dưới avatar */}
           <div className="flex flex-col items-center gap-1">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold text-sky-600 uppercase tracking-wide">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#3C9E8F] uppercase tracking-wide">
               <Laptop className="w-4 h-4" />
               {language === "vi"
                 ? "Học tập chủ động trong kỷ nguyên số"
@@ -374,13 +376,13 @@ const Home = ({ language }) => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
-              className="bg-white border border-gray-200 hover:border-sky-600 rounded-2xl p-5 shadow-sm hover:shadow-md transition cursor-pointer flex flex-col"
+              className="bg-white border border-gray-200 hover:border-[#3C9E8F] rounded-2xl p-5 shadow-sm hover:shadow-md transition cursor-pointer flex flex-col"
               onClick={() => navigate(section.route)}
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="relative w-10 h-10 flex items-center justify-center">
-                  <div className="absolute w-10 h-10 bg-cyan-100 rounded-xl opacity-60"></div>
-                  <div className="relative z-10 text-sky-600">{section.icon}</div>
+                  <div className="absolute w-10 h-10 bg-[#A8DCD2] rounded-xl opacity-60"></div>
+                  <div className="relative z-10 text-[#3C9E8F]">{section.icon}</div>
                 </div>
                 <h3 className="text-sm md:text-base font-bold text-gray-900 ">
                   {section.title}
@@ -389,7 +391,7 @@ const Home = ({ language }) => {
               <ul className="text-xs md:text-sm text-gray-600  space-y-1.5 flex-1">
                 {section.points.map((p, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="mt-1 w-1.5 h-1.5 rounded-full bg-sky-500 flex-shrink-0" />
+                    <span className="mt-1 w-1.5 h-1.5 rounded-full bg-[#3C9E8F] flex-shrink-0" />
                     <span>{p}</span>
                   </li>
                 ))}
@@ -418,7 +420,7 @@ const Home = ({ language }) => {
             </div>
             <div className="flex flex-col items-start md:items-end gap-2 text-xs text-gray-500 dark:text-gray-400">
               <div className="inline-flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-sky-600" />
+                <ShieldCheck className="w-4 h-4 text-[#3C9E8F]" />
                 <span>
                   {language === "vi"
                     ? "Mật khẩu được mã hoá – phân quyền sinh viên / admin"
@@ -426,7 +428,7 @@ const Home = ({ language }) => {
                 </span>
               </div>
               <div className="inline-flex items-center gap-2">
-                <LineChart className="w-4 h-4 text-sky-600" />
+                <LineChart className="w-4 h-4 text-[#3C9E8F]" />
                 <span>
                   {language === "vi"
                     ? "Admin xem thống kê số lượng học sinh & điểm số"
@@ -440,7 +442,7 @@ const Home = ({ language }) => {
             {/* Student account */}
             <div className="bg-white  border border-gray-200  rounded-xl p-4 shadow-sm">
               <div className="flex items-center gap-2 mb-2">
-                <LuUserRoundPen className="w-5 h-5 text-sky-600" />
+                <LuUserRoundPen className="w-5 h-5 text-[#3C9E8F]" />
                 <h3 className="font-bold text-gray-900  text-sm md:text-base">
                   {t.accountStudentTitle}
                 </h3>
@@ -448,7 +450,7 @@ const Home = ({ language }) => {
               <ul className="text-xs md:text-sm text-gray-600  space-y-1.5">
                 {t.accountStudentPoints.map((p, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="mt-1 w-1.5 h-1.5 rounded-full bg-sky-500 flex-shrink-0" />
+                    <span className="mt-1 w-1.5 h-1.5 rounded-full bg-[#3C9E8F] flex-shrink-0" />
                     <span>{p}</span>
                   </li>
                 ))}
@@ -458,7 +460,7 @@ const Home = ({ language }) => {
             {/* Admin account */}
             <div className="bg-white  border border-gray-200  rounded-xl p-4 shadow-sm">
               <div className="flex items-center gap-2 mb-2">
-                <ShieldCheck className="w-5 h-5 text-sky-600" />
+                <ShieldCheck className="w-5 h-5 text-[#3C9E8F]" />
                 <h3 className="font-bold text-gray-900  text-sm md:text-base">
                   {t.accountAdminTitle}
                 </h3>
@@ -466,7 +468,7 @@ const Home = ({ language }) => {
               <ul className="text-xs md:text-sm text-gray-600  space-y-1.5">
                 {t.accountAdminPoints.map((p, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="mt-1 w-1.5 h-1.5 rounded-full bg-sky-500 flex-shrink-0" />
+                    <span className="mt-1 w-1.5 h-1.5 rounded-full bg-[#3C9E8F] flex-shrink-0" />
                     <span>{p}</span>
                   </li>
                 ))}
@@ -475,7 +477,7 @@ const Home = ({ language }) => {
           </div>
 
           <p className="mt-4 text-xs md:text-sm text-gray-500 dark:text-gray-400 flex items-start gap-2">
-            <ShieldCheck className="w-4 h-4 text-sky-600 mt-0.5 flex-shrink-0" />
+            <ShieldCheck className="w-4 h-4 text-[#3C9E8F] mt-0.5 flex-shrink-0" />
             <span>{t.accountSecurityNote}</span>
           </p>
         </div>
@@ -501,7 +503,7 @@ const Home = ({ language }) => {
           <div>
             <button
               onClick={() => navigate("/kynangtuhoc")}
-              className="px-5 py-2.5 rounded-full bg-sky-600 text-white text-sm font-semibold shadow-md hover:bg-sky-700 transition inline-flex items-center gap-2"
+              className="px-5 py-2.5 rounded-full bg-[#3C9E8F] text-white text-sm font-semibold shadow-md hover:bg-yellow-500 transition inline-flex items-center gap-2"
             >
               <BookOpen className="w-4 h-4" />
               {t.ctaBottom}
@@ -511,11 +513,6 @@ const Home = ({ language }) => {
             </p>
           </div>
           <div className="flex items-center gap-2 text-xs text-gray-500">
-
-            <FileText className="w-4 h-4 text-sky-600" />
-            <span>
-              Google Drive sẽ được dùng để lưu trữ toàn bộ PDF, hình ảnh và video
-            </span>
           </div>
         </div>
       </motion.div>

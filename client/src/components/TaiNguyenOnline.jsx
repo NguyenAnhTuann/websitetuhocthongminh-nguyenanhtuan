@@ -1,142 +1,93 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { UserGroupIcon } from '@heroicons/react/24/outline';
-import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
-import { FaFacebookF, FaXTwitter, FaGithub, FaInstagram, FaLinkedinIn, FaTelegram } from 'react-icons/fa6';
-import { FiExternalLink } from "react-icons/fi";
-import { LuNotepadText } from "react-icons/lu";
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import { FileText, Link as LinkIcon } from "lucide-react";
 
-const Contact = ({ language }) => {
-  const translations = {
-    vi: {
-      title: "THÔNG TIN LIÊN HỆ",
-      subtitle: "Hãy kết nối với tôi qua các thông tin bên dưới!",
-      cvButton: "My CV",
-      contacts: [
-        { title: "Email", value: "nguyenanhtuan.it@outlook.com", link: "mailto:nguyenanhtuan.it@outlook.com", icon: <EnvelopeIcon className="w-6 h-6 text-sky-600" /> },
-        { title: "Điện thoại/Zalo", value: "0869094929", link: "https://zalo.me/0869094929", icon: <PhoneIcon className="w-6 h-6 text-sky-600" /> },
-        { title: "Facebook", value: "Kết nối Facebook", link: "https://www.facebook.com/NguyenAnhTuxn", icon: <FaFacebookF className="w-5 h-5 text-sky-600" /> },
-        { title: "Instagram", value: "Kết nối Instagram", link: "https://www.instagram.com/nguyenanhtuan___/", icon: <FaInstagram className="w-5 h-5 text-sky-600" /> },
-        { title: "X (Twitter)", value: "Kết nối X", link: "https://x.com/nguyenanhtuan__", icon: <FaXTwitter className="w-5 h-5 text-sky-600" /> },
-        { title: "Github", value: "Kết nối Github", link: "https://github.com/NguyenAnhTuann", icon: <FaGithub className="w-5 h-5 text-sky-600" /> },
-        { title: "LinkedIn", value: "Kết nối LinkedIn", link: "https://www.linkedin.com/in/ngg-anhtuan", icon: <FaLinkedinIn className="w-5 h-5 text-sky-600" /> },
-        { title: "Telegram", value: "Kết nối Telegram", link: "https://t.me/nguyenanhtuxn", icon: <FaTelegram className="w-5 h-5 text-sky-600" /> },
-        { title: "Form Liên hệ", value: "Điền Form", link: "https://forms.gle/abcd1234", icon: <LuNotepadText className="w-5 h-5 text-sky-600" /> }
-      ]
+const TaiNguyenOnline = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const pdfFiles = [
+    {
+      title: "Tài liệu kỹ năng tự học (PDF 1)",
+      link: "https://drive.google.com/file/d/14rvbx4P6vzL1-4q5R8Vr24KUIwNeuDvp/view?usp=sharing",
     },
-    en: {
-      title: "CONTACT INFORMATION",
-      subtitle: "Let's connect through the information below!",
-      cvButton: "My CV",
-      contacts: [
-        { title: "Email", value: "nguyenanhtuan.it@outlook.com", link: "mailto:nguyenanhtuan.it@outlook.com", icon: <EnvelopeIcon className="w-6 h-6 text-sky-600" /> },
-        { title: "Phone/Zalo", value: "0869094929", link: "https://zalo.me/0869094929", icon: <PhoneIcon className="w-6 h-6 text-sky-600" /> },
-        { title: "Facebook", value: "Connect Facebook", link: "https://www.facebook.com/NguyenAnhTuxn", icon: <FaFacebookF className="w-5 h-5 text-sky-600" /> },
-        { title: "Instagram", value: "Connect Instagram", link: "https://www.instagram.com/nguyenanhtuan___/", icon: <FaInstagram className="w-5 h-5 text-sky-600" /> },
-        { title: "X (Twitter)", value: "Connect X", link: "https://x.com/nguyenanhtuan__", icon: <FaXTwitter className="w-5 h-5 text-sky-600" /> },
-        { title: "Github", value: "Connect Github", link: "https://github.com/NguyenAnhTuann", icon: <FaGithub className="w-5 h-5 text-sky-600" /> },
-        { title: "LinkedIn", value: "Connect LinkedIn", link: "https://www.linkedin.com/in/ngg-anhtuan", icon: <FaLinkedinIn className="w-5 h-5 text-sky-600" /> },
-        { title: "Telegram", value: "Connect Telegram", link: "https://t.me/nguyenanhtuxn", icon: <FaTelegram className="w-5 h-5 text-sky-600" /> },
-        { title: "Contact Form", value: "Fill Form", link: "https://forms.gle/abcd1234", icon: <LuNotepadText className="w-5 h-5 text-sky-600" /> }
-      ]
-    }
-  };
+    {
+      title: "Tài liệu kỹ năng sống – an toàn mạng",
+      link: "https://drive.google.com/file/d/xxxxxx/view",
+    },
+    {
+      title: "Bài giảng giáo dục công dân lớp 10",
+      link: "https://drive.google.com/file/d/yyyyyy/view",
+    },
+  ];
 
   return (
-    <section id="contact" className="min-h-screen pb-16 bg-white dark:bg-gray-900 text-gray-800 dark:text-white pt-24 px-4">
+    <section className="min-h-screen w-full flex flex-col items-center px-4 py-24 bg-white">
 
-      {/* Tiêu đề */}
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
+      {/* ======= TIÊU ĐỀ ======= */}
+      <motion.h1
+        initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-10"
+        transition={{ duration: 0.6 }}
+        className="
+          text-3xl md:text-5xl lg:text-6xl font-extrabold text-white text-center font-outfit
+          bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm inline-block
+        "
       >
-        <h2 className="text-4xl font-extrabold flex justify-center items-center gap-3 text-gray-900 dark:text-white">
-          <UserGroupIcon className="w-8 h-8 text-sky-600" />
-          {translations[language].title}
-        </h2>
-        <p className="text-gray-400 mt-2 text-sm">{translations[language].subtitle}</p>
-      </motion.div>
+        TÀI NGUYÊN ONLINE
+      </motion.h1>
 
-      {/* Nút My CV */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 1 }}
-        className="mt-8 mb-12 flex justify-center"
+      <motion.p
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="text-gray-600 text-center max-w-2xl mt-3 text-sm md:text-base"
       >
-        <a
-          href="https://drive.google.com/file/d/13F8UwV06bmFO27coub4JLLLgNW5DNMhS/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="relative overflow-hidden border border-gray-300 text-gray-700 dark:text-white font-outfit font-medium py-2 px-6 rounded-2xl group transition duration-300 ease-in-out hover:text-white dark:hover:text-white flex items-center gap-2"
-        >
-          <span className="absolute inset-0 bg-sky-600 transform scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-300 ease-out z-0 rounded-2xl"></span>
-          <span className="relative z-10 flex items-center gap-2">
-            <LuNotepadText className="w-5 h-5" />
-            {translations[language].cvButton}
-          </span>
-        </a>
-      </motion.div>
+        Tổng hợp tài liệu PDF, giáo trình, bài giảng, hướng dẫn học tập được lưu trữ trên Google Drive.
+      </motion.p>
 
-
-      {/* Các Contact Card */}
-      <motion.div
-        initial="hidden"
-        animate="show"
-        variants={{
-          hidden: {},
-          show: { transition: { staggerChildren: 0.2, delayChildren: 1.5 } }
-        }}
-        className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6"
-      >
-        {translations[language].contacts.map((contact, idx) => (
+      {/* ======= DANH SÁCH FILE PDF ======= */}
+      <div className="w-full max-w-5xl mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {pdfFiles.map((item, index) => (
           <motion.div
-            key={idx}
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              show: { opacity: 1, y: 0 }
-            }}
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="
+              bg-white border border-gray-200 rounded-2xl p-6 shadow-sm
+              hover:shadow-md hover:border-[#3C9E8F] transition cursor-pointer
+            "
+            onClick={() => window.open(item.link, "_blank")}
           >
-            <ContactCard {...contact} />
+            <div className="flex items-center gap-3 mb-3">
+              <div className="relative w-10 h-10 flex items-center justify-center">
+                <div className="absolute w-10 h-10 bg-[#A8DCD2] rounded-xl opacity-60" />
+                <FileText className="relative z-10 w-6 h-6 text-[#3C9E8F]" />
+              </div>
+
+              <h3 className="text-base md:text-lg font-bold text-gray-900">
+                {item.title}
+              </h3>
+            </div>
+
+            <div className="flex items-center gap-2 text-sm text-[#3C9E8F] font-semibold">
+              <LinkIcon className="w-4 h-4" />
+              <span className="underline">Mở tài liệu</span>
+            </div>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
+
+      {/* FOOTER */}
+      <p className="mt-8 text-xs text-gray-500">
+        Tài liệu được lưu trữ an toàn trên Google Drive – cập nhật thường xuyên.
+      </p>
 
     </section>
   );
 };
 
-const ContactCard = ({ icon, title, value, link }) => {
-  const Wrapper = link ? 'a' : 'div';
-
-  return (
-    <Wrapper
-      href={link}
-      target={link ? "_blank" : undefined}
-      rel={link ? "noopener noreferrer" : undefined}
-      className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-6 rounded-2xl hover:shadow-lg hover:border-sky-600 dark:hover:border-sky-600 transition relative cursor-pointer block"
-    >
-      <div className="flex items-start gap-5">
-        <div className="flex items-center justify-center relative w-10 h-10">
-          <div className="absolute w-10 h-10 bg-cyan-100 dark:bg-cyan-400/10 rounded-xl opacity-60"></div>
-          <div className="relative z-10 text-sky-600 text-xl">
-            {icon}
-          </div>
-        </div>
-
-        <div className="flex-1 ">
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">{title}</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-300 leading-relaxed">{value}</p>
-        </div>
-
-        {link && (
-          <FiExternalLink className="w-5 h-5 text-sky-600 mt-4" />
-        )}
-      </div>
-    </Wrapper>
-  );
-};
-
-export default Contact;
+export default TaiNguyenOnline;

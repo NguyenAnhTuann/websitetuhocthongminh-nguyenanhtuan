@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import avatarImage from "../assets/a.JPG";
 import { FileText, Images } from "lucide-react";
 
 // Hiệu ứng gõ chữ
@@ -65,7 +64,8 @@ const KyNangSong = ({ language }) => {
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl md:text-5xl font-extrabold text-black font-outfit"
+        className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
+                   bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm inline-block"
       >
         {t[language].title}
       </motion.h1>
@@ -80,16 +80,16 @@ const KyNangSong = ({ language }) => {
         className="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
       >
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
-          <FileText className="text-sky-600 w-6 h-6" />
+          <FileText className="text-[#3C9E8F] w-6 h-6" />
           {t[language].pdfTitle}
         </h2>
 
         <ul className="space-y-4 text-gray-700">
-          <li className="p-4 rounded-xl border hover:border-sky-600 cursor-pointer transition">
+          <li className="p-4 rounded-xl border hover:border-[#3C9E8F] cursor-pointer transition">
             📄 {t[language].pdf1}
           </li>
 
-          <li className="p-4 rounded-xl border hover:border-sky-600 cursor-pointer transition">
+          <li className="p-4 rounded-xl border hover:border-[#3C9E8F] cursor-pointer transition">
             📄 {t[language].pdf2}
           </li>
         </ul>
@@ -103,7 +103,7 @@ const KyNangSong = ({ language }) => {
         className="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl p-8 shadow-md"
       >
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-4 flex items-center justify-center gap-2">
-          <Images className="text-sky-600 w-6 h-6" />
+          <Images className="text-[#3C9E8F] w-6 h-6" />
           {t[language].mediaTitle}
         </h2>
 
