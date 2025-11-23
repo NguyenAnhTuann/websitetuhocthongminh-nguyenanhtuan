@@ -1,123 +1,47 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { FileText, Images } from "lucide-react";
-
-// Hiệu ứng gõ chữ
-const Typewriter = ({ text, speed = 40 }) => {
-  const [displayed, setDisplayed] = useState("");
-
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayed(text.slice(0, i));
-      i++;
-      if (i > text.length) clearInterval(interval);
-    }, speed);
-    return () => clearInterval(interval);
-  }, [text]);
-
-  return (
-    <motion.p
-      initial={{ opacity: 0, scale: 0.6 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1 }}
-      className="w-full max-w-[90%] px-4 text-center text-sm md:text-base pt-4 pb-4 text-black"
-    >
-      {displayed}
-      <span className="animate-pulse">|</span>
-    </motion.p>
-  );
-};
+import React from "react";
+import { Link } from "react-router-dom";
 
 const KyNangSong = ({ language }) => {
   const t = {
     vi: {
-      title: "KỸ NĂNG SỐNG",
-      subtitle:
-        "Rèn luyện tư duy tích cực – Ứng phó tình huống – Xây dựng lối sống lành mạnh và an toàn.",
-      pdfTitle: "Tài liệu PDF",
-      pdf1: "Chia sẻ tình huống mất kiểm soát trên không gian mạng (An toàn mạng)",
-      pdf2: "Biện pháp xử lý bạo lực học đường",
-      mediaTitle: "Video - Hình ảnh",
-      mediaDesc:
-        "Tư liệu minh họa các tình huống thực tế liên quan đến kỹ năng sống của học sinh.",
+      title: "Kỹ năng sống",
+      bl: "Kỹ năng sống trong bạo lực",
+      other: "Kỹ năng sống khác"
     },
-
     en: {
-      title: "LIFE SKILLS",
-      subtitle:
-        "Strengthen positive thinking – Handle situations wisely – Build a healthy and safe lifestyle.",
-      pdfTitle: "PDF Resources",
-      pdf1: "Case study: Losing control online (Cyber safety)",
-      pdf2: "Solutions for dealing with school violence",
-      mediaTitle: "Videos – Images",
-      mediaDesc:
-        "Visual materials demonstrating real-life situations related to life skills.",
-    },
+      title: "Life Skills",
+      bl: "Life skills in violence & safety",
+      other: "Other life skills"
+    }
   };
 
   return (
-    <section className="min-h-screen w-full flex flex-col items-center px-4 py-20 bg-white">
-
-      {/* ======= TIÊU ĐỀ ======= */}
-      <motion.h1
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
-                   bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm inline-block"
-      >
+    <section className="min-h-screen px-4 py-20 flex flex-col items-center">
+      <h1 className="text-4xl font-bold text-[#1c7c76] mb-10">
         {t[language].title}
-      </motion.h1>
+      </h1>
 
-      <Typewriter text={t[language].subtitle} />
+      <div className="w-full max-w-3xl space-y-6">
 
-      {/* ======= TÀI LIỆU PDF ======= */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        className="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
-      >
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
-          <FileText className="text-[#3C9E8F] w-6 h-6" />
-          {t[language].pdfTitle}
-        </h2>
+        {/* Folder 1 */}
+        <Link
+          to="/kynangsong/baoluc"
+          className="block p-6 bg-gray-50 rounded-xl border hover:border-[#1c7c76] hover:bg-gray-100 transition shadow-sm"
+        >
+          <h2 className="text-2xl font-semibold">{t[language].bl}</h2>
+          <p className="text-gray-500 mt-1">Nhấn để mở</p>
+        </Link>
 
-        <ul className="space-y-4 text-gray-700">
-          <li className="p-4 rounded-xl border hover:border-[#3C9E8F] cursor-pointer transition">
-            📄 {t[language].pdf1}
-          </li>
+        {/* Folder 2 */}
+        <Link
+          to="/kynangsong/khac"
+          className="block p-6 bg-gray-50 rounded-xl border hover:border-[#1c7c76] hover:bg-gray-100 transition shadow-sm"
+        >
+          <h2 className="text-2xl font-semibold">{t[language].other}</h2>
+          <p className="text-gray-500 mt-1">Nhấn để mở</p>
+        </Link>
 
-          <li className="p-4 rounded-xl border hover:border-[#3C9E8F] cursor-pointer transition">
-            📄 {t[language].pdf2}
-          </li>
-        </ul>
-      </motion.div>
-
-      {/* ======= VIDEO – HÌNH ẢNH ======= */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1 }}
-        className="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl p-8 shadow-md"
-      >
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-4 flex items-center justify-center gap-2">
-          <Images className="text-[#3C9E8F] w-6 h-6" />
-          {t[language].mediaTitle}
-        </h2>
-
-        <p className="text-gray-600 text-center mb-6">{t[language].mediaDesc}</p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div className="bg-gray-100 h-40 rounded-lg flex items-center justify-center">
-            🎬 Video
-          </div>
-          <div className="bg-gray-100 h-40 rounded-lg flex items-center justify-center">
-            🖼 Hình ảnh
-          </div>
-        </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

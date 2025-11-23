@@ -1,13 +1,28 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { LuNotebookPen, LuSchool } from "react-icons/lu";
 import { PiGraduationCapBold } from "react-icons/pi";
 import { MdOutlineLibraryBooks } from "react-icons/md";
 import { Menu, X } from "lucide-react";
 import { BsSun } from "react-icons/bs";
+import React, { useState, useRef, useEffect } from "react";
+
 
 const Header = ({ language, setLanguage }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openLifeMenu, setOpenLifeMenu] = useState(false);
+  const lifeMenuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (lifeMenuRef.current && !lifeMenuRef.current.contains(e.target)) {
+        setOpenLifeMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+
 
   const handleLanguageToggle = () => {
     setLanguage((prev) => (prev === "vi" ? "en" : "vi"));
@@ -66,9 +81,43 @@ const Header = ({ language, setLanguage }) => {
             <LuNotebookPen className="w-4 h-4" /> {t.menu.kynangtuhoch}
           </Link>
 
-          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/kynangsong">
-            <LuSchool className="w-4 h-4" /> {t.menu.kynangsong}
-          </Link>
+          <div
+  ref={lifeMenuRef}
+  className="relative"
+>
+  <button
+    onClick={() => setOpenLifeMenu((prev) => !prev)}
+    onMouseEnter={() => setOpenLifeMenu(true)}
+    className="hover:text-yellow-400 transition flex items-center gap-1"
+  >
+    <LuSchool className="w-4 h-4" /> {t.menu.kynangsong}
+  </button>
+
+  {/* DROPDOWN – chỉ đóng khi click ra ngoài */}
+  {openLifeMenu && (
+    <div
+      onMouseEnter={() => setOpenLifeMenu(true)}
+      onMouseLeave={() => setOpenLifeMenu(true)} 
+      className="absolute top-full left-0 mt-2 w-60 bg-white text-gray-800 rounded-xl shadow-lg border border-gray-200 p-2 z-50"
+    >
+      <Link
+        to="/kynangsong/baoluc"
+        className="block px-4 py-2 rounded-lg hover:bg-gray-100"
+      >
+        🔹 Kỹ năng sống trong bạo lực
+      </Link>
+
+      <Link
+        to="/kynangsong/khac"
+        className="block px-4 py-2 rounded-lg hover:bg-gray-100"
+      >
+        🔹 Kỹ năng sống khác
+      </Link>
+    </div>
+  )}
+</div>
+
+
 
           <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/chatbot">
             <BsSun className="w-4 h-4" /> {t.menu.chatbot}
