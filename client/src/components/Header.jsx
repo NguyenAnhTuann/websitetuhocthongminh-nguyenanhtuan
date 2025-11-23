@@ -33,7 +33,7 @@ const Header = ({ language, setLanguage }) => {
       LOGO1: "TỰ HỌC",
       LOGO2: "THÔNG MINH",
       menu: {
-        kynangtuhoch: "Kỹ năng tự học",
+        kynangtuhoc: "Kỹ năng tự học",
         kynangsong: "Kỹ năng sống",
         chatbot: "AI ChatBot",
         thuchanh: "Thực hành",
@@ -45,7 +45,7 @@ const Header = ({ language, setLanguage }) => {
       LOGO1: "SMART",
       LOGO2: "SELF-LEARNING",
       menu: {
-        kynangtuhoch: "Self-learning",
+        kynangtuhoc: "Self-learning",
         kynangsong: "Life skills",
         chatbot: "AI ChatBot",
         thuchanh: "Practice",
@@ -78,30 +78,27 @@ const Header = ({ language, setLanguage }) => {
         {/* 🔥 MENU DESKTOP */}
         <nav className="hidden md:flex items-center gap-8 text-[15px] text-white/90 font-medium">
           <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/kynangtuhoc">
-            <LuNotebookPen className="w-4 h-4" /> {t.menu.kynangtuhoch}
+            <LuNotebookPen className="w-4 h-4" /> {t.menu.kynangtuhoc}
           </Link>
 
-          <div
-  ref={lifeMenuRef}
-  className="relative"
->
+          <div ref={lifeMenuRef} className="relative">
+  {/* NÚT CHÍNH — CLICK ĐỂ MỞ MENU */}
   <button
     onClick={() => setOpenLifeMenu((prev) => !prev)}
-    onMouseEnter={() => setOpenLifeMenu(true)}
     className="hover:text-yellow-400 transition flex items-center gap-1"
   >
     <LuSchool className="w-4 h-4" /> {t.menu.kynangsong}
   </button>
 
-  {/* DROPDOWN – chỉ đóng khi click ra ngoài */}
+  {/* MENU CON */}
   {openLifeMenu && (
     <div
-      onMouseEnter={() => setOpenLifeMenu(true)}
-      onMouseLeave={() => setOpenLifeMenu(true)} 
-      className="absolute top-full left-0 mt-2 w-60 bg-white text-gray-800 rounded-xl shadow-lg border border-gray-200 p-2 z-50"
+      className="absolute top-full left-0 mt-2 w-60 bg-white text-gray-800 
+                 rounded-xl shadow-lg border border-gray-200 p-2 z-50"
     >
       <Link
         to="/kynangsong/baoluc"
+        onClick={() => setOpenLifeMenu(false)}   // 🔥 sẽ đóng menu khi click
         className="block px-4 py-2 rounded-lg hover:bg-gray-100"
       >
         🔹 Kỹ năng sống trong bạo lực
@@ -109,6 +106,7 @@ const Header = ({ language, setLanguage }) => {
 
       <Link
         to="/kynangsong/khac"
+        onClick={() => setOpenLifeMenu(false)}   // 🔥 sẽ đóng menu khi click
         className="block px-4 py-2 rounded-lg hover:bg-gray-100"
       >
         🔹 Kỹ năng sống khác
@@ -116,6 +114,7 @@ const Header = ({ language, setLanguage }) => {
     </div>
   )}
 </div>
+
 
 
 
@@ -182,7 +181,7 @@ const Header = ({ language, setLanguage }) => {
         <div className="md:hidden bg-[#1a6d66]/40 backdrop-blur-lg px-6 py-5 flex flex-col gap-5 text-white font-medium border-t border-white/20">
 
           <Link to="/kynangtuhoc" onClick={() => setIsMobileMenuOpen(false)}>
-            {t.menu.kynangtuhoch}
+            {t.menu.kynangtuhoc}
           </Link>
 
           <Link to="/kynangsong" onClick={() => setIsMobileMenuOpen(false)}>

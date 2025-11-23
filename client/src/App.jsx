@@ -18,13 +18,6 @@ import KyNangSong from './components/KyNangSong';
 import ChatBot from './components/ChatBot';
 import ThucHanh from './components/ThucHanh';
 import TaiNguyenOnline from './components/TaiNguyenOnline';
-import Login from "./components/Login";
-import Register from "./components/Register";
-import KyNangSongBaoLuc from "./components/KyNangSongBaoLuc";
-import KyNangSongKhac from "./components/KyNangSongKhac";
-
-
-
 
 const AppWrapper = () => {
   const location = useLocation();
@@ -72,23 +65,9 @@ const AppWrapper = () => {
               path="/kynangtuhoc" element={<KyNangTuHoc language={language} />}
             />
             <Route path="/kynangsong" element={<KyNangSong language={language} />} />
-
-            {/* 2 trang con */}
-            <Route path="/kynangsong/baoluc" element={<KyNangSongBaoLuc language={language} />} />
-            <Route path="/kynangsong/khac" element={<KyNangSongKhac language={language} />} />
-
-
-
             <Route path="/chatbot" element={<ChatBot language={language} />} />
             <Route path="/thuchanh" element={<ThucHanh language={language} />} />
             <Route path="/tailieuso" element={<TaiNguyenOnline language={language} />} />
-            {/* ===== Trang Đăng Nhập ===== */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-
-
-
-
           </Routes>
 
         </div>
