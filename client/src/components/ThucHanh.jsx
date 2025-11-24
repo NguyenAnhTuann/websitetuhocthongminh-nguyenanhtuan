@@ -11,6 +11,21 @@ const ThucHanh = () => {
       desc: "Bài tập tập hợp, các phép toán, toán tư duy – làm trực tiếp trên Canva.",
       link: "https://nguyenthanhthan.my.canva.site/tr-c-nghi-m-to-n-l-p-10-t-p-h-p"
     },
+    {
+      title: "Giải phương trình bậc 2",
+      desc: "Bài tập tập hợp các dạng Phương trình bậc 2",
+      link: "https://nguyenthanhthan.my.canva.site/gi-i-ph-ng-tr-nh-b-c-hai"
+    },
+    {
+      title: "Trắc nghiệm mệnh đề",
+      desc: "Bài tập về các dạng mệnh đề trong toán học",
+      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-m-nh"
+    },
+    {
+      title: "Bài tập tổng hợp",
+      desc: "Bài tập tập hợp các dạng toán lớp 10",
+      link: "https://nguyenthanhthan.my.canva.site/tr-c-nghi-m-to-n-l-p-10-t-p-h-p"
+    },
   ];
 
   return (

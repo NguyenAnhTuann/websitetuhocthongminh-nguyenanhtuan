@@ -136,7 +136,7 @@ const Header = ({ language, setLanguage }) => {
 
           {/* Nút đăng nhập */}
           <Link
-            to="/login"
+            to="/dangnhap"
             className="hidden md:block px-4 py-1.5 text-white/90 border border-white/30 rounded-xl hover:bg-white/20 transition text-sm backdrop-blur-md"
           >
             {t.auth.login}
@@ -144,7 +144,7 @@ const Header = ({ language, setLanguage }) => {
 
           {/* Nút đăng ký nổi bật */}
           <Link
-            to="/register"
+            to="/dangky"
             className="hidden md:block px-4 py-1.5 bg-yellow-400 text-[#1a2a2a] font-medium rounded-xl shadow-md hover:bg-yellow-300 transition text-sm"
           >
             {t.auth.register}
@@ -201,10 +201,10 @@ const Header = ({ language, setLanguage }) => {
           </Link>
 
           <div className="flex flex-col gap-3 border-t border-white/20 pt-4">
-            <Link to="/login" className="px-3 py-2 bg-white/20 rounded-lg text-center">
+            <Link to="/dangnhap" className="px-3 py-2 bg-white/20 rounded-lg text-center">
               {t.auth.login}
             </Link>
-            <Link to="/register" className="px-3 py-2 bg-yellow-400 text-[#1a2a2a] rounded-lg text-center">
+            <Link to="/dangky" className="px-3 py-2 bg-yellow-400 text-[#1a2a2a] rounded-lg text-center">
               {t.auth.register}
             </Link>
           </div>

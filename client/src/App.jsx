@@ -18,6 +18,8 @@ import KyNangSong from './components/KyNangSong';
 import ChatBot from './components/ChatBot';
 import ThucHanh from './components/ThucHanh';
 import TaiNguyenOnline from './components/TaiNguyenOnline';
+import Login from './components/Login';
+import Register from './components/Register';
 
 const AppWrapper = () => {
   const location = useLocation();
@@ -68,6 +70,8 @@ const AppWrapper = () => {
             <Route path="/chatbot" element={<ChatBot language={language} />} />
             <Route path="/thuchanh" element={<ThucHanh language={language} />} />
             <Route path="/tailieuso" element={<TaiNguyenOnline language={language} />} />
+            <Route path="/dangnhap" element={<Login language={language} />} />
+            <Route path="/dangky" element={<Register language={language} />} />
           </Routes>
 
         </div>
