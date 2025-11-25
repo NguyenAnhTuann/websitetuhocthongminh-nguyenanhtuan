@@ -81,42 +81,9 @@ const Header = ({ language, setLanguage }) => {
             <LuNotebookPen className="w-4 h-4" /> {t.menu.kynangtuhoc}
           </Link>
 
-          <div ref={lifeMenuRef} className="relative">
-  {/* NÚT CHÍNH — CLICK ĐỂ MỞ MENU */}
-  <button
-    onClick={() => setOpenLifeMenu((prev) => !prev)}
-    className="hover:text-yellow-400 transition flex items-center gap-1"
-  >
-    <LuSchool className="w-4 h-4" /> {t.menu.kynangsong}
-  </button>
-
-  {/* MENU CON */}
-  {openLifeMenu && (
-    <div
-      className="absolute top-full left-0 mt-2 w-60 bg-white text-gray-800 
-                 rounded-xl shadow-lg border border-gray-200 p-2 z-50"
-    >
-      <Link
-        to="/kynangsong/baoluc"
-        onClick={() => setOpenLifeMenu(false)}   // 🔥 sẽ đóng menu khi click
-        className="block px-4 py-2 rounded-lg hover:bg-gray-100"
-      >
-        🔹 Kỹ năng sống trong bạo lực
-      </Link>
-
-      <Link
-        to="/kynangsong/khac"
-        onClick={() => setOpenLifeMenu(false)}   // 🔥 sẽ đóng menu khi click
-        className="block px-4 py-2 rounded-lg hover:bg-gray-100"
-      >
-        🔹 Kỹ năng sống khác
-      </Link>
-    </div>
-  )}
-</div>
-
-
-
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/kynangsong">
+            <LuNotebookPen className="w-4 h-4" /> {t.menu.kynangsong}
+          </Link>
 
           <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/chatbot">
             <BsSun className="w-4 h-4" /> {t.menu.chatbot}

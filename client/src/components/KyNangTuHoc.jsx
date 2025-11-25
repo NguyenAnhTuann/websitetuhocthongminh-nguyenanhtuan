@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import {
   FileText,
   Images,
-  Laptop,
   MessageCircle
 } from "lucide-react";
 
@@ -385,7 +384,7 @@ rounded-2xl p-8 text-center">
               {/* === HIỂN THỊ DANH SÁCH FILE THEO FOLDER === */}
 
               {selectedFolder === "pdf_ai" && (
-                <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
                       name: "Sáng tác bài hát bằng AI - Suno",
@@ -419,60 +418,81 @@ rounded-2xl p-8 text-center">
               )}
 
               {selectedFolder === "pdf_forest" && (
-                <div className="space-y-6">
-                  <a
-                    target="_blank"
-                    href="https://drive.google.com/file/d/1TVDHX4HbOfKZJQgSmgnvrwMwWjpZMKpD/view?usp=sharing"
-                    className="block bg-white border rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
-                  >
-                    <div className="p-4">
-                      <h3 className="font-semibold text-gray-900">Cách dùng Forest</h3>
-                      <p className="text-gray-500 text-sm">Nhấn để mở PDF</p>
-                    </div>
-                  </a>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      name: "Cách dùng Forest",
+                      link: "https://drive.google.com/file/d/1TVDHX4HbOfKZJQgSmgnvrwMwWjpZMKpD/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764076070/Gemini_Generated_Image_5xjtyz5xjtyz5xjt_mvasub.png"
+                    }
+                  ].map((pdf, i) => (
+                    <a
+                      key={i}
+                      target="_blank"
+                      href={pdf.link}
+                      className="block bg-white border rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {pdf.thumbnail && (
+                        <img src={pdf.thumbnail} className="w-full object-cover" />
+                      )}
+
+                      <div className="p-4">
+                        <h3 className="font-semibold text-gray-900">{pdf.name}</h3>
+                        <p className="text-gray-500 text-sm">Nhấn để mở PDF</p>
+                      </div>
+                    </a>
+                  ))}
                 </div>
               )}
+
 
               {selectedFolder === "pdf_pomodoro" && (
-                <div className="space-y-6">
-                  <a
-                    target="_blank"
-                    href="https://drive.google.com/file/d/150MccvFhqCnwzSigYLikSYyGSII64-gn/view?usp=sharing"
-                    className="block bg-white border rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
-                  >
-                    <div className="p-4">
-                      <h3 className="font-semibold text-gray-900">Pomodoro là gì?</h3>
-                      <p className="text-gray-500 text-sm">Nhấn để mở PDF</p>
-                    </div>
-                  </a>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      name: "Pomodoro là gì?",
+                      link: "https://drive.google.com/file/d/150MccvFhqCnwzSigYLikSYyGSII64-gn/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764076353/Gemini_Generated_Image_hg1gtohg1gtohg1g_efan9e.png"  // 👈 THÊM DÒNG NÀY
+                    },
+                    {
+                      name: "Top ứng dụng Pomodoro",
+                      link: "https://drive.google.com/file/d/1MOSBCLm6Nx4rDoYORNSUKNbUe1UOSf0m/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764076595/Gemini_Generated_Image_631sb2631sb2631s_k8dtuy.png"  // 👈 THÊM DÒNG NÀY
+                    }
+                  ].map((pdf, i) => (
+                    <a key={i} target="_blank" href={pdf.link} className="block bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden">
+                      {pdf.thumbnail && <img src={pdf.thumbnail} className="w-full object-cover" />}
 
-                  <a
-                    target="_blank"
-                    href="https://drive.google.com/file/d/1MOSBCLm6Nx4rDoYORNSUKNbUe1UOSf0m/view?usp=sharing"
-                    className="block bg-white border rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
-                  >
-                    <div className="p-4">
-                      <h3 className="font-semibold text-gray-900">Top ứng dụng Pomodoro</h3>
-                      <p className="text-gray-500 text-sm">Nhấn để mở PDF</p>
-                    </div>
-                  </a>
+                      <div className="p-4">
+                        <h3 className="font-semibold text-gray-900">{pdf.name}</h3>
+                        <p className="text-gray-500 text-sm">Nhấn để mở PDF</p>
+                      </div>
+                    </a>
+                  ))}
                 </div>
               )}
+
 
               {selectedFolder === "pdf_calendar" && (
-                <div className="space-y-6">
-                  <a
-                    target="_blank"
-                    href="https://drive.google.com/file/d/1PsyqHSNy1ub-wdwcORryCkyIwFtDuXgQ/view?usp=sharing"
-                    className="block bg-white border rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
-                  >
-                    <div className="p-4">
-                      <h3 className="font-semibold text-gray-900">Cách sử dụng Google Calendar</h3>
-                      <p className="text-gray-500 text-sm">Nhấn để mở PDF</p>
-                    </div>
-                  </a>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      name: "Cách sử dụng Google Calendar",
+                      link: "https://drive.google.com/file/d/1PsyqHSNy1ub-wdwcORryCkyIwFtDuXgQ/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764076691/Gemini_Generated_Image_ibafz7ibafz7ibaf_joakci.png"   // 👈 THÊM 1 DÒNG
+                    }
+                  ].map((pdf, i) => (
+                    <a key={i} href={pdf.link} target="_blank" className="block bg-white rounded-xl border shadow-sm transition overflow-hidden">
+                      {pdf.thumbnail && <img src={pdf.thumbnail} className="w-full object-cover" />}
+                      <div className="p-4">
+                        <h3 className="text-lg font-semibold">{pdf.name}</h3>
+                        <p className="text-sm text-gray-500">Nhấn để mở PDF</p>
+                      </div>
+                    </a>
+                  ))}
                 </div>
               )}
+
 
               {/* CHƯA CHỌN FOLDER */}
               {!selectedFolder && (
@@ -498,7 +518,7 @@ rounded-2xl p-8 text-center">
 
               {/* VIDEO GIẢI TOÁN */}
               {selectedFolder === "video_math" && (
-                <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
                       name: "VIDEO CÁCH TÌM TRỌNG TÂM TAM GIÁC",
@@ -512,19 +532,23 @@ rounded-2xl p-8 text-center">
                     },
                     {
                       name: "CÁCH VẼ HÌNH LẬP PHƯƠNG",
-                      link: "https://drive.google.com/file/d/17LxPeTNUUuu7LgmaIaMmS-IUcP4wglDG/view?usp=sharing"
+                      link: "https://drive.google.com/file/d/17LxPeTNUUuu7LgmaIaMmS-IUcP4wglDG/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764077648/Gemini_Generated_Image_wbqooywbqooywbqo_zqdno3.png"
                     },
                     {
                       name: "CÁCH VẼ HÌNH CHÓP ĐỀU",
-                      link: "https://drive.google.com/file/d/1xzdwhwAnkMlhywd9TCW6JABdBf9qr2ML/view?usp=sharing"
+                      link: "https://drive.google.com/file/d/1xzdwhwAnkMlhywd9TCW6JABdBf9qr2ML/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764077648/Gemini_Generated_Image_3shffn3shffn3shf_cmnqrq.png"
                     },
                     {
                       name: "CÁCH TÌM TOẠ ĐỘ ĐIỂM TRONG Oxyz",
-                      link: "https://drive.google.com/file/d/12KKBUHMw3PjJ3V1Z0B5te-cvaNRYecds/view?usp=sharing"
+                      link: "https://drive.google.com/file/d/12KKBUHMw3PjJ3V1Z0B5te-cvaNRYecds/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764077649/Gemini_Generated_Image_nx3c8qnx3c8qnx3c_stdtbp.png"
                     },
                     {
                       name: "CÁC BƯỚC TÌM GÓC GIỮA ĐƯỜNG VÀ MẶT",
-                      link: "https://drive.google.com/file/d/1YMAI8Mzl-_N9Z6jkU9QaiO7PeFZq9EuQ/view?usp=sharing"
+                      link: "https://drive.google.com/file/d/1YMAI8Mzl-_N9Z6jkU9QaiO7PeFZq9EuQ/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764077649/Gemini_Generated_Image_dh94sfdh94sfdh94_p38kvw.png"
                     }
                   ].map((v, i) => (
                     <a
@@ -547,19 +571,22 @@ rounded-2xl p-8 text-center">
 
               {/* VIDEO TOÁN THỰC TẾ */}
               {selectedFolder === "video_real" && (
-                <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
                       name: "SGK Đường đi máy bay Oxyz",
-                      link: "https://drive.google.com/file/d/1Z5rp-6SMILH_5wy53DNqkfzwB2dNiX_I/view?usp=sharing"
+                      link: "https://drive.google.com/file/d/1Z5rp-6SMILH_5wy53DNqkfzwB2dNiX_I/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078414/Gemini_Generated_Image_yr3vcnyr3vcnyr3v_mft2gq.png"
                     },
                     {
                       name: "Lực tác động vào vật",
-                      link: "https://drive.google.com/file/d/1WM_gJQq0sSlMDVp-KvH7AOtY0VCG6ZOA/view?usp=sharing"
+                      link: "https://drive.google.com/file/d/1WM_gJQq0sSlMDVp-KvH7AOtY0VCG6ZOA/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078414/Gemini_Generated_Image_ib5i4pib5i4pib5i_l8okpv.png"
                     },
                     {
                       name: "Định lý Sin thực tế",
-                      link: "https://drive.google.com/file/d/1hOg7Qzbi1B4Yfauz4w2py46EcSqmlxTE/view?usp=sharing"
+                      link: "https://drive.google.com/file/d/1hOg7Qzbi1B4Yfauz4w2py46EcSqmlxTE/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078415/Gemini_Generated_Image_z51do6z51do6z51d_sfpnzg.png"
                     }
                   ].map((v, i) => (
                     <a
@@ -568,6 +595,10 @@ rounded-2xl p-8 text-center">
                       target="_blank"
                       className="block bg-white border rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
                     >
+                      {v.thumbnail && (
+                        <img src={v.thumbnail} className="w-full object-cover" />
+                      )}
+
                       <div className="p-4">
                         <h3 className="font-semibold text-gray-900">{v.name}</h3>
                         <p className="text-sm text-gray-500">Nhấn để mở video</p>
@@ -577,25 +608,30 @@ rounded-2xl p-8 text-center">
                 </div>
               )}
 
+
               {/* VIDEO AI */}
               {selectedFolder === "video_ai" && (
-                <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
                       name: "1. MV Trường hợp hai cạnh góc vuông",
-                      link: "https://drive.google.com/file/d/16tvRxAdPyJiL7SaOOdIXxZCtDuXu7n9a/view?usp=sharing"
+                      link: "https://drive.google.com/file/d/16tvRxAdPyJiL7SaOOdIXxZCtDuXu7n9a/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078414/Gemini_Generated_Image_cbwxytcbwxytcbwx_ziub39.png"
                     },
                     {
                       name: "2. MV Trường hợp cạnh góc vuông-góc nhọn kề",
-                      link: "https://drive.google.com/file/d/1Jk64p0H5W-hl5oB5tNhFd9An-NdNXq3l/view?usp=sharing"
+                      link: "https://drive.google.com/file/d/1Jk64p0H5W-hl5oB5tNhFd9An-NdNXq3l/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078414/Gemini_Generated_Image_8q00x08q00x08q00_bnbibf.png"
                     },
                     {
                       name: "3. Trường hợp bằng nhau cạnh huyền-góc nhọn",
-                      link: "https://drive.google.com/file/d/1upjr8zH0BpkbkkK50oLvvFHp8Tpo3uwZ/view?usp=sharing"
+                      link: "https://drive.google.com/file/d/1upjr8zH0BpkbkkK50oLvvFHp8Tpo3uwZ/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078415/Gemini_Generated_Image_3mxtz93mxtz93mxt_m57ih4.png"
                     },
                     {
                       name: "4. MV Trường hợp cạnh huyền-cạnh góc vuông",
-                      link: "https://drive.google.com/file/d/1x5y5xK-M5PxKQKv3KNnHFXUQSQxr6yq4/view?usp=sharing"
+                      link: "https://drive.google.com/file/d/1x5y5xK-M5PxKQKv3KNnHFXUQSQxr6yq4/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078416/Gemini_Generated_Image_fq6xlyfq6xlyfq6x_ua87e5.png"
                     }
                   ].map((v, i) => (
                     <a
@@ -604,6 +640,9 @@ rounded-2xl p-8 text-center">
                       target="_blank"
                       className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
                     >
+                      {v.thumbnail && (
+                        <img src={v.thumbnail} className="w-full object-cover" />
+                      )}
                       <div className="p-4">
                         <h3 className="font-semibold text-gray-900">{v.name}</h3>
                         <p className="text-sm text-gray-500">Nhấn để mở video</p>
