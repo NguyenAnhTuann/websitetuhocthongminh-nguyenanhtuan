@@ -224,7 +224,7 @@ const KyNangTuHoc = ({ language }) => {
               className={`p-3 rounded-lg cursor-pointer transition
 ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
             >
-              Kỹ năng sống trong bạo lực
+              Kỹ năng sống phòng tránh bạo lực
             </li>
 
 
@@ -234,8 +234,9 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                 setActiveTab("video");
                 setOpenVideo(true);
                 setOpenPDF(false);
-                setSelectedFolder(null);
+                setSelectedFolder("video_main"); // ✔ load 3 video mặc định
               }}
+
 
               className={`p-3 rounded-lg cursor-pointer transition
         ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
@@ -347,8 +348,9 @@ rounded-2xl p-8 text-center">
               transition={{ duration: 0.6 }}
               className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
             >
-              <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">
-                🎥 Video kỹ năng sống trong bạo lực
+              <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
+                <FileText className="text-[#3C9E8F] w-6 h-6" />
+                Danh sách tài liệu
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -403,44 +405,99 @@ rounded-2xl p-8 text-center">
               className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
             >
               <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
-                🎬 Danh sách video
+                <FileText className="text-[#3C9E8F] w-6 h-6" />
+                Danh sách tài liệu
               </h2>
 
-              {/* === HIỂN THỊ VIDEO THEO FOLDER === */}
+              {selectedFolder === "video_main" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                  {[
+                    {
+                      name: "KỸ NĂNG SỐNG SỐNG CÓ KỶ LUẬT",
+                      link: "https://drive.google.com/file/d/1uo8Hk2B7qcFuaHMmyXiwFS_6GCDXvBxG/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135937/Gemini_Generated_Image_vt08xmvt08xmvt08_ptpkcb.png"
+                    },
+                    {
+                      name: "KỸ NĂNG PHÒNG CHỐNG MA TÚY TRONG TRƯỜNG HỌC",
+                      link: "https://drive.google.com/file/d/1f1sSR896SHD7KS2NjK6x0m40F8HgEkJ7/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135939/Gemini_Generated_Image_2ot0zo2ot0zo2ot0_w8w4o5.png"
+                    },
+                    {
+                      name: "KỸ NĂNG ĐỊNH HƯỚNG NGHỀ NGHIỆP",
+                      link: "https://drive.google.com/file/d/1Lj2xvuy7OeQdJsgaVRlQ2Yz9nQFln6Xw/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135936/Gemini_Generated_Image_f6fbyyf6fbyyf6fb_ddsfpe.png"
+                    }
+                  ].map((v, i) => (
+                    <a
+                      key={i}
+                      href={v.link}
+                      target="_blank"
+                      className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {v.thumbnail && (
+                        <img src={v.thumbnail} className="w-full object-cover" />
+                      )}
+                      <div className="p-4">
+                        <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
+                        <p className="text-sm text-gray-500">Nhấn để mở tài liệu</p>
+                      </div>
+                    </a>
+                  ))}
+
+                </div>
+              )}
+
 
               {/* VIDEO GIẢI TOÁN */}
               {selectedFolder === "video_math" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
-                      name: "VIDEO CÁCH TÌM TRỌNG TÂM TAM GIÁC",
-                      link: "https://drive.google.com/file/d/19Q-R-p83n763T9ymvhrcb6YBADEtEMfb/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764069225/sfsdf_da6qpj.png"
+                      name: "Khái Niệm Kỹ Năng Là Gì",
+                      link: "https://drive.google.com/file/d/1xL7vlGUbLVL-fN3pOv22_beeXJKHiOYS/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_w6r07ow6r07ow6r0_q9dhfq.png"
                     },
                     {
-                      name: "GÓC GIỮA HAI MẶT",
-                      link: "https://drive.google.com/file/d/1kJNGevsvSxtkgzr3GyKrPJc_niX8I414/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764069225/dgfdr_i4iu80.png"
+                      name: "Top 10 Điều Thú Vị Về Tính Cách ISFJ Trong Trắc Nghiệm MBTI",
+                      link: "https://drive.google.com/file/d/1Q3Zouk2z67l4ds_7VGqO5rQ819K4Tq1J/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135937/Gemini_Generated_Image_3x9w343x9w343x9w_fi5duz.png"
                     },
                     {
-                      name: "CÁCH VẼ HÌNH LẬP PHƯƠNG",
-                      link: "https://drive.google.com/file/d/17LxPeTNUUuu7LgmaIaMmS-IUcP4wglDG/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764077648/Gemini_Generated_Image_wbqooywbqooywbqo_zqdno3.png"
+                      name: "Tính Cách ISTP Là Gì",
+                      link: "https://drive.google.com/file/d/1PlCjlrtvVw-mNx7OZqUQVq5R3sYqPfcn/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135936/Gemini_Generated_Image_dvhm34dvhm34dvhm_stgify.png"
                     },
                     {
-                      name: "CÁCH VẼ HÌNH CHÓP ĐỀU",
-                      link: "https://drive.google.com/file/d/1xzdwhwAnkMlhywd9TCW6JABdBf9qr2ML/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764077648/Gemini_Generated_Image_3shffn3shffn3shf_cmnqrq.png"
+                      name: "Tính Cách INTJ Có Gì Khác Biệt",
+                      link: "https://drive.google.com/file/d/1reWoFcDRfkvmPoc3uHU7OvsafFbs6t8n/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_wccnvowccnvowccn_eozu9x.png"
                     },
                     {
-                      name: "CÁCH TÌM TOẠ ĐỘ ĐIỂM TRONG Oxyz",
-                      link: "https://drive.google.com/file/d/12KKBUHMw3PjJ3V1Z0B5te-cvaNRYecds/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764077649/Gemini_Generated_Image_nx3c8qnx3c8qnx3c_stdtbp.png"
+                      name: "Tìm Hiểu Nhóm Tính Cách ENTJ",
+                      link: "https://drive.google.com/file/d/1NZhvQs5ndzdfv5BV8cPnrMcnSdj1rZlE/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135933/Gemini_Generated_Image_4dzhxa4dzhxa4dzh_tdtl5q.png"
                     },
                     {
-                      name: "CÁC BƯỚC TÌM GÓC GIỮA ĐƯỜNG VÀ MẶT",
-                      link: "https://drive.google.com/file/d/1YMAI8Mzl-_N9Z6jkU9QaiO7PeFZq9EuQ/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764077649/Gemini_Generated_Image_dh94sfdh94sfdh94_p38kvw.png"
+                      name: "Những Kỹ Năng Làm Quen Với Người Lạ Trong Giao Tiếp Hiệu Quả",
+                      link: "https://drive.google.com/file/d/1eo6BqO2uydG6cEb2g3kPwDp7OsufKMZT/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_5nm1qu5nm1qu5nm1_ukq9yj.png"
+                    },
+                    {
+                      name: "Nhóm Tính Cách ESFP",
+                      link: "https://drive.google.com/file/d/1lGHpsmatecP8Jxit7d8ev6Jzo1qmZpEx/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135939/Gemini_Generated_Image_61f31y61f31y61f3_qjqtsz.png"
+                    },
+                    {
+                      name: "Kỹ Năng Giao Tiếp Qua Điện Thoại",
+                      link: "https://drive.google.com/file/d/1QjAR7Gw_nE6vN2IjE4b3TwxgEkzGCpIU/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135933/Gemini_Generated_Image_3r8bej3r8bej3r8b_vsscoj.png"
+                    },
+
+                    {
+                      name: "Cách Giải Quyết Vấn Đề Và Ra Quyết Định Chỉ Với 6 Bước 6 Kỹ Năng",
+                      link: "https://drive.google.com/file/d/1-bXAlyM91EyYP-jayijnkiw0dbIid4uy/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_scp1vtscp1vtscp1_mgugge.png"
                     }
                   ].map((v, i) => (
                     <a
@@ -466,20 +523,10 @@ rounded-2xl p-8 text-center">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
-                      name: "SGK Đường đi máy bay Oxyz",
-                      link: "https://drive.google.com/file/d/1Z5rp-6SMILH_5wy53DNqkfzwB2dNiX_I/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078414/Gemini_Generated_Image_yr3vcnyr3vcnyr3v_mft2gq.png"
+                      name: "KỸ NĂNG ỨNG PHÓ VỚI TÌNH HUỐNG KHẨN CẤP",
+                      link: "https://drive.google.com/file/d/1_IWl6ZXNR7Hz920MvM7CtE52JYrUcI0G/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137145/Gemini_Generated_Image_g5c7l0g5c7l0g5c7_kgxfh4.png"
                     },
-                    {
-                      name: "Lực tác động vào vật",
-                      link: "https://drive.google.com/file/d/1WM_gJQq0sSlMDVp-KvH7AOtY0VCG6ZOA/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078414/Gemini_Generated_Image_ib5i4pib5i4pib5i_l8okpv.png"
-                    },
-                    {
-                      name: "Định lý Sin thực tế",
-                      link: "https://drive.google.com/file/d/1hOg7Qzbi1B4Yfauz4w2py46EcSqmlxTE/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078415/Gemini_Generated_Image_z51do6z51do6z51d_sfpnzg.png"
-                    }
                   ].map((v, i) => (
                     <a
                       key={i}
@@ -493,7 +540,7 @@ rounded-2xl p-8 text-center">
 
                       <div className="p-4">
                         <h3 className="font-semibold text-gray-900">{v.name}</h3>
-                        <p className="text-sm text-gray-500">Nhấn để mở video</p>
+                        <p className="text-sm text-gray-500">Nhấn để mở tài liệu</p>
                       </div>
                     </a>
                   ))}
@@ -506,25 +553,71 @@ rounded-2xl p-8 text-center">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
-                      name: "1. MV Trường hợp hai cạnh góc vuông",
-                      link: "https://drive.google.com/file/d/16tvRxAdPyJiL7SaOOdIXxZCtDuXu7n9a/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078414/Gemini_Generated_Image_cbwxytcbwxytcbwx_ziub39.png"
+                      name: "Top 13 Các Công Ty Startup Việt Nam Hứa Hẹn Thành Công Nhất",
+                      link: "https://drive.google.com/file/d/1clocMDzOBCMyfM1MGlOPb50EC9Xh_zGm/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137144/Gemini_Generated_Image_t2mdozt2mdozt2md_zq5xjj.png"
                     },
                     {
-                      name: "2. MV Trường hợp cạnh góc vuông-góc nhọn kề",
-                      link: "https://drive.google.com/file/d/1Jk64p0H5W-hl5oB5tNhFd9An-NdNXq3l/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078414/Gemini_Generated_Image_8q00x08q00x08q00_bnbibf.png"
+                      name: "Thích Kinh Doanh Nên Học Ngành Gì",
+                      link: "https://drive.google.com/file/d/1JCoXTpi470cfdHChNNxOGwSNtzhhYAFP/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137139/Gemini_Generated_Image_27mio027mio027mi_g78lsa.png"
                     },
                     {
-                      name: "3. Trường hợp bằng nhau cạnh huyền-góc nhọn",
-                      link: "https://drive.google.com/file/d/1upjr8zH0BpkbkkK50oLvvFHp8Tpo3uwZ/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078415/Gemini_Generated_Image_3mxtz93mxtz93mxt_m57ih4.png"
+                      name: "Nhân Viên Xuất Nhập Khẩu Là Gì",
+                      link: "https://drive.google.com/file/d/1JaT93jUBSjFYf0kJWydX6bkOiHdz2pkR/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137149/Gemini_Generated_Image_afu6ycafu6ycafu6_qcqdsu.png"
                     },
                     {
-                      name: "4. MV Trường hợp cạnh huyền-cạnh góc vuông",
-                      link: "https://drive.google.com/file/d/1x5y5xK-M5PxKQKv3KNnHFXUQSQxr6yq4/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764078416/Gemini_Generated_Image_fq6xlyfq6xlyfq6x_ua87e5.png"
+                      name: "Nhân Viên Vật Tư Làm Công Việc Gì",
+                      link: "https://drive.google.com/file/d/19O-geMkBKa1hToUhW43CGcTT-0u5HAFt/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137141/Gemini_Generated_Image_ugzo43ugzo43ugzo_qxyqus.png"
+                    },
+                    {
+                      name: "Nhân Viên Văn Phòng Là Gì",
+                      link: "https://drive.google.com/file/d/1optU3j3ctt5SXFA2CD6nNFXCiA2jnOFq/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137139/Gemini_Generated_Image_d4as44d4as44d4as_fd9dtv.png"
+                    },
+                    {
+                      name: "Nhân Viên Tư Vấn Tuyển Sinh Là Làm Gì",
+                      link: "https://drive.google.com/file/d/1I7EMrdlhPV5PsclU396IvwYo3s6jr7CZ/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137134/Gemini_Generated_Image_f8c4yff8c4yff8c4_m4jdwi.png"
+                    },
+                    {
+                      name: "Nhân Viên Sale Tour Là Gì Và Kỹ Năng Sale Tour Hiệu Quả 2022",
+                      link: "https://drive.google.com/file/d/1CTalu4x9C877N1aRtzLPufJr6w6QGnrd/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137133/Gemini_Generated_Image_qjq5lrqjq5lrqjq5_qifyjh.png"
+                    },
+                    {
+                      name: "Ngành Kỹ Sư Nông Nghiệp Làm Gì",
+                      link: "https://drive.google.com/file/d/1Ks3DbUSG4xLJIlKKlaEa5eQpew3A1FwG/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137135/Gemini_Generated_Image_tnanq7tnanq7tnan_dnbbrq.png"
+                    },
+                    {
+                      name: "Kỹ Sư Môi Trường Là Gì Và Làm Gì",
+                      link: "https://drive.google.com/file/d/1Ks3DbUSG4xLJIlKKlaEa5eQpew3A1FwG/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137141/Gemini_Generated_Image_fjccxxfjccxxfjcc_xvddbs.png"
+                    },
+                    {
+                      name: "Định Hướng Nghề Nghiệp Cho Tương Lai Không Khó Như Bạn Nghĩ",
+                      link: "https://drive.google.com/file/d/1-yrI4DjrU3-sy8ZNpKqyl9IBTV3Y6C2m/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137156/Gemini_Generated_Image_6c2ztb6c2ztb6c2z_gcr9nd.png"
+                    },
+                    {
+                      name: "Đâu Là Điểm Khác Nhau Giữa Học Tập & Làm Việc",
+                      link: "https://drive.google.com/file/d/18hI4yHKctk6eI8ceYBaFoedpMtw6Ddoo/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137154/Gemini_Generated_Image_ysjqz6ysjqz6ysjq_m1iyk1.png"
+                    },
+                    {
+                      name: "Chuyên Viên Khác Nhân Viên Như Thế Nào",
+                      link: "https://drive.google.com/file/d/196z_Y1kemd5s2gWF8QC4-2PeyqxsTWzL/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137152/Gemini_Generated_Image_ys9b8sys9b8sys9b_tzs8w1.png"
+                    },
+                    {
+                      name: "Các Công Việc Làm Thêm Cho Sinh Viên Giúp Cải Thiện Tài Chính",
+                      link: "https://drive.google.com/file/d/1N-WvUnEVOxFsQt5Ka8AEt8K7T13ZPiID/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137155/Gemini_Generated_Image_4mzn5l4mzn5l4mzn_ugjgha.png"
                     }
+
                   ].map((v, i) => (
                     <a
                       key={i}
