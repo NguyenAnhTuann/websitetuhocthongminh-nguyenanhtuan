@@ -227,7 +227,7 @@ const ThucHanh = ({ language }) => {
               className={`p-3 rounded-lg cursor-pointer transition
 ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
             >
-              Bạo lực học đường
+              Tương tác kỹ năng
             </li>
 
 
@@ -245,35 +245,42 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               className={`p-3 rounded-lg cursor-pointer transition
         ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
             >
-              An toàn mạng
+              Tương tác học tập
             </li>
-
-            {/* NỘI DUNG HIỆN THEO FOLDER ĐƯỢC CHỌN */}
 
             {openVideo && activeTab === "video" && (
               <ul className="pl-5 space-y-2 text-sm">
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_math")}
+                  onClick={() => setSelectedFolder("math_10")}
                 >
-                  Lợi ích, rủi ro và giải pháp an toàn trên không gian mạng
+                  Toán 10
                 </li>
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_real")}
+                  onClick={() => setSelectedFolder("math_11")}
                 >
-                  Cẩm nang sử dụng mạng an toàn
+                  Toán 11
                 </li>
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("math_12")}
+                >
+                  Toán 11
+                </li>
+
+
               </ul>
             )}
-
-
-
 
           </ul>
         </aside>
 
+        {/* CHƯA CHỌN FOLDER */}
+        {!selectedFolder && (
+          <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
+        )}
 
         {/* MAIN CONTENT BÊN PHẢI */}
         <main className="flex-1 w-full">
@@ -282,70 +289,62 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
             <div className="max-w-4xl mx-auto mt-10 bg-[#f8fffe] border border-[#d8efea] shadow-sm 
 rounded-2xl p-8 text-center">
 
-              {activeTab === "intro" && (
-                <div className="max-w-4xl mx-auto mt-10 bg-[#f8fffe] border border-[#d8efea] shadow-sm 
-rounded-2xl p-8 text-center">
+              <h2 className="text-2xl md:text-3xl font-extrabold text-[#1c7c76] mb-3">
+                Thực hành kỹ năng là gì?
+              </h2>
 
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-[#1c7c76] mb-3">
-                    Thực hành kỹ năng là gì?
-                  </h2>
+              <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6">
+                Thực hành kỹ năng giúp học sinh – sinh viên luyện tập qua các tình huống mô phỏng,
+                rèn tư duy xử lý, biết cách ứng phó an toàn trong đời sống và trên không gian mạng.
+                Đây là bước quan trọng để biến kiến thức thành kỹ năng thật.
+              </p>
 
-                  <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6">
-                    Thực hành kỹ năng giúp học sinh – sinh viên luyện tập qua các tình huống mô phỏng,
-                    rèn tư duy xử lý, biết cách ứng phó an toàn trong đời sống và trên không gian mạng.
-                    Đây là bước quan trọng để biến kiến thức thành kỹ năng thật.
-                  </p>
+              {/* 3 FEATURE GRID */}
+              <div className="grid md:grid-cols-3 gap-6 mt-6">
 
-                  {/* 3 FEATURE GRID */}
-                  <div className="grid md:grid-cols-3 gap-6 mt-6">
-
-                    {/* Item 1 */}
-                    <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
-                      <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
-                        <FileText className="w-6 h-6 text-[#1c7c76]" />
-                      </div>
-                      <h3 className="font-bold text-gray-800 mb-2">Bài tập – Tình huống PDF</h3>
-                      <p className="text-sm text-gray-600">
-                        Bộ tài liệu gồm các tình huống thực tế, yêu cầu học sinh phân tích và lựa chọn cách xử lý phù hợp.
-                      </p>
-                    </div>
-
-                    {/* Item 2 */}
-                    <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
-                      <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
-                        <Images className="w-6 h-6 text-[#1c7c76]" />
-                      </div>
-                      <h3 className="font-bold text-gray-800 mb-2">Video tình huống</h3>
-                      <p className="text-sm text-gray-600">
-                        Các video mô phỏng và tình huống thực tế giúp học sinh quan sát, nhận diện vấn đề và rèn kỹ năng phản ứng.
-                      </p>
-                    </div>
-
-                    {/* Item 3 */}
-                    <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
-                      <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
-                        <MessageCircle className="w-6 h-6 text-[#1c7c76]" />
-                      </div>
-                      <h3 className="font-bold text-gray-800 mb-2">Thực hành & tương tác</h3>
-                      <p className="text-sm text-gray-600">
-                        Học sinh có thể trao đổi, đặt câu hỏi và luyện tập cách xử lý với chatbot hỗ trợ và các bài thực hành mở rộng.
-                      </p>
-                    </div>
-
+                {/* Item 1 */}
+                <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
+                  <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
+                    <FileText className="w-6 h-6 text-[#1c7c76]" />
                   </div>
-
-                  {/* FOOT TEXT */}
-                  <p className="mt-8 text-sm md:text-base text-gray-600 leading-relaxed">
-                    Mục <span className="font-semibold text-[#1c7c76]">Thực hành kỹ năng</span> giúp học sinh – sinh viên
-                    biến kiến thức thành kỹ năng thực tế thông qua luyện tập liên tục và có hướng dẫn.
+                  <h3 className="font-bold text-gray-800 mb-2">Bài tập – Tình huống PDF</h3>
+                  <p className="text-sm text-gray-600">
+                    Bộ tài liệu gồm các tình huống thực tế, yêu cầu học sinh phân tích và lựa chọn cách xử lý phù hợp.
                   </p>
                 </div>
-              )}
 
+                {/* Item 2 */}
+                <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
+                  <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
+                    <Images className="w-6 h-6 text-[#1c7c76]" />
+                  </div>
+                  <h3 className="font-bold text-gray-800 mb-2">Video tình huống</h3>
+                  <p className="text-sm text-gray-600">
+                    Các video mô phỏng và tình huống thực tế giúp học sinh quan sát, nhận diện vấn đề và rèn kỹ năng phản ứng.
+                  </p>
+                </div>
 
+                {/* Item 3 */}
+                <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
+                  <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
+                    <MessageCircle className="w-6 h-6 text-[#1c7c76]" />
+                  </div>
+                  <h3 className="font-bold text-gray-800 mb-2">Thực hành & tương tác</h3>
+                  <p className="text-sm text-gray-600">
+                    Học sinh có thể trao đổi, đặt câu hỏi và luyện tập cách xử lý với chatbot hỗ trợ và các bài thực hành mở rộng.
+                  </p>
+                </div>
+
+              </div>
+
+              {/* FOOT TEXT */}
+              <p className="mt-8 text-sm md:text-base text-gray-600 leading-relaxed">
+                Mục <span className="font-semibold text-[#1c7c76]">Thực hành kỹ năng</span> giúp học sinh – sinh viên
+                biến kiến thức thành kỹ năng thực tế thông qua luyện tập liên tục và có hướng dẫn.
+              </p>
             </div>
-
           )}
+
 
           {activeTab === "violence" && (
             <motion.div
@@ -356,42 +355,43 @@ rounded-2xl p-8 text-center">
             >
               <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
                 <FileText className="text-[#3C9E8F] w-6 h-6" />
-                Video về bạo lực học đường
+                Danh sách bài tập
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 {[
                   {
-                    name: "Tung tin xấu, bóc phốt bạn",
-                    link: "https://drive.google.com/file/d/1NU33RLcj4gzv51RiYJVzphrFtN5Xwf8k/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142505/Gemini_Generated_Image_70cipi70cipi70ci_hrxepw.png"
+                    name: "Kỹ năng an toàn mạng – Công nghệ",
+                    link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-an-to-n-m-ng-l-p-10",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764143867/Gemini_Generated_Image_3vjfra3vjfra3vjf_f9epvh.png"
                   },
                   {
-                    name: "Tạo nhóm nói xấu, cô lập bạn",
-                    link: "https://drive.google.com/file/d/1e9v8zObtOKPavgyy87iD0hf4wqSa6DXb/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142494/Gemini_Generated_Image_7q8jhy7q8jhy7q8j_yhlrgp.png"
+                    name: "Phòng chống thiên tai",
+                    link: "https://nguyenthanhthan.my.canva.site/quiz-ph-ng-ch-ng-thi-n-tai",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764143866/Gemini_Generated_Image_ila2twila2twila2_vraszx.png"
                   },
                   {
-                    name: "Nhận diện 5 dạng bạo lực học đường",
-                    link: "https://drive.google.com/file/d/1Z0HT4PRanI5mnfxalgf3Nb-jCZar8fXK/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142494/Gemini_Generated_Image_duksaaduksaaduks_oukx51.png"
+                    name: "Kỹ năng cá nhân",
+                    link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-k-n-ng-c-nh-n",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764143871/Gemini_Generated_Image_w37txew37txew37t_w8gses.png"
                   },
                   {
-                    name: "Nghe được nhóm bạn chuẩn bị đánh nhau",
-                    link: "https://drive.google.com/file/d/19lSY9esepnWfd1HfS0BOnbj0-ttXwcuT/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142498/Gemini_Generated_Image_tg37uvtg37uvtg37_z1fr6o.png"
+                    name: "Kỹ năng giao tiếp – xã hội",
+                    link: "https://nguyenthanhthan.my.canva.site/quiz-k-n-ng-giao-ti-p-x-h-i",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764143866/Gemini_Generated_Image_9bb4qi9bb4qi9bb4_xpmq7v.png"
                   },
                   {
-                    name: "Đặt biệt danh nói xấu, đe dọa người khác",
-                    link: "https://drive.google.com/file/d/1D5S0Y1CgSPiHPDUDB9Ctlhw0xkfbcFJk/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142492/Gemini_Generated_Image_204ti2204ti2204t_myecy4.png"
+                    name: "Kỹ năng an toàn – Sức khỏe",
+                    link: "https://nguyenthanhthan.my.canva.site/b-i-ki-m-tra-an-to-n-s-c-kh-e",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764143870/Gemini_Generated_Image_4raqgn4raqgn4raq_zgjhwe.png"
                   },
                   {
-                    name: "Bạo lực học đường – Nhận biết & phòng tránh",
-                    link: "https://drive.google.com/file/d/175D78VNdOvxHOrn2FaEniqmtgus4cKhb/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142493/Gemini_Generated_Image_o6lxsso6lxsso6lx_qgshk7.png"
+                    name: "Kỹ năng định hướng và tư duy",
+                    link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-k-n-ng-n-ng",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764143865/Gemini_Generated_Image_4jjqsc4jjqsc4jjq_f5dgsm.png"
                   }
+
                 ].map((v, i) => (
                   <a
                     key={i}
@@ -423,76 +423,111 @@ rounded-2xl p-8 text-center">
               <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
                 <FileText className="text-[#3C9E8F] w-6 h-6" />
                 Danh sách tài liệu
+
               </h2>
 
-              {selectedFolder === "video_main" && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                  {[
-                    {
-                      name: "TIN GIẢ",
-                      link: "https://drive.google.com/file/d/1etugj85jn76wEu1B4dmeYnEdGV7MT2EB/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142491/Gemini_Generated_Image_76ecuj76ecuj76ec_vxenvr.png"
-                    },
-                    {
-                      name: "NHẬN ĐƯỢC TIN NHẮN TRÚNG THƯỞNG",
-                      link: "https://drive.google.com/file/d/1pdJgMQvHE91Lm8J-yluWbelMHLhPnYbw/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142480/Gemini_Generated_Image_xtz6arxtz6arxtz6_sloi54.png"
-                    },
-                    {
-                      name: "LỪA NẠP TIỀN, MẤT TÀI KHOẢN GAME",
-                      link: "https://drive.google.com/file/d/1cb5GryPeOGqXGL45x19K2p4ivSdGc1Ep/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142477/Gemini_Generated_Image_bqv3dgbqv3dgbqv3_vk86wv.png"
-                    },
-                    {
-                      name: "LỘ THÔNG TIN CÁ NHÂN, VỊ TRÍ, ẢNH",
-                      link: "https://drive.google.com/file/d/1t2hTPdcdA6KrI3v9a5qhw53nQFDm75cG/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142473/Gemini_Generated_Image_x846ycx846ycx846_btfsq0.png"
-                    },
-                    {
-                      name: "GÀI BẪY TÌNH, ĐE DỌA ĐĂNG ẢNH ĐỂ TỐNG TIỀN",
-                      link: "https://drive.google.com/file/d/1YRXKqPMnQRravqlY8OcIMS8IMr3QK_oz/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142467/Gemini_Generated_Image_etklp2etklp2etkl_ivqknn.png"
-                    },
-                    {
-                      name: "ĐĂNG HÀNH VI BẠO LỰC LÊN MẠNG ĐỂ CÂU LIKE",
-                      link: "https://drive.google.com/file/d/1lnk-MfznE3VoCgdeweMpvtPrUi8oiZXT/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142481/Gemini_Generated_Image_tlg041tlg041tlg0_bzbjyl.png"
-                    },
-                    {
-                      name: "ĐĂNG HÀNH VI BẠO LỰC ĐỂ CÂU LIKE",
-                      link: "https://drive.google.com/file/d/1lnk-MfznE3VoCgdeweMpvtPrUi8oiZXT/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142471/Gemini_Generated_Image_6ng6bt6ng6bt6ng6_i8ekfj.png"
-                    }
-
-                  ].map((v, i) => (
-                    <a
-                      key={i}
-                      href={v.link}
-                      target="_blank"
-                      className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
-                    >
-                      {v.thumbnail && (
-                        <img src={v.thumbnail} className="w-full object-cover" />
-                      )}
-                      <div className="p-4">
-                        <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
-                        <p className="text-sm text-gray-500">Nhấn để mở vieo</p>
-                      </div>
-                    </a>
-                  ))}
-
-                </div>
-              )}
-
-              {selectedFolder === "video_math" && (
+              {selectedFolder === "math_10" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
-                      name: "LỢI ÍCH, RỦI RO VÀ GIẢI PHÁP AN TOÀN TRÊN KHÔNG GIAN MẠNG",
-                      link: "https://drive.google.com/file/d/1z2P3QBo0GXelf2UqX_hXtGzGUNC7yGvB/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142473/Gemini_Generated_Image_58ragp58ragp58ra_jfd7t4.png"
+                      name: "Giải phương trình bậc hai",
+                      link: "https://nguyenthanhthan.my.canva.site/gi-i-ph-ng-tr-nh-b-c-hai",
+                      thumbnail: ""
                     },
+                    {
+                      name: "Bài tập trắc nghiệm mệnh đề",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-m-nh",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Trắc nghiệm toán lớp 10 - Tập hợp",
+                      link: "https://nguyenthanhthan.my.canva.site/tr-c-nghi-m-to-n-l-p-10-t-p-h-p",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Các phép toán trên tập hợp",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-to-n-l-p-10",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Mệnh đề và tập hợp",
+                      link: "https://nguyenthanhthan.my.canva.site/btrfj6548pzbsqqy",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Bất phương trình bậc nhất hai ẩn",
+                      link: "https://nguyenthanhthan.my.canva.site/btrfxg29jzj1k4ka",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Hệ bất phương trình bậc nhất hai ẩn",
+                      link: "https://nguyenthanhthan.my.canva.site/btrg7rw07zjshcpy",
+                      thumbnail: ""
+                    },
+
+                    {
+                      name: "Bất phương trình và Hệ bất phương trình bậc nhất hai ẩn",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-to-n-l-p-10",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Hàm số và đồ thị",
+                      link: "https://nguyenthanhthan.my.canva.site/btrh3zahbgta381h",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Hàm số bậc hai",
+                      link: "https://nguyenthanhthan.my.canva.site/tr-c-nghi-m-h-m-s-b-c-hai",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Đồ thị và hàm số",
+                      link: "https://nguyenthanhthan.my.canva.site/btrhhq70c6wjvw71",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Số gần đúng và sai số",
+                      link: "https://nguyenthanhthan.my.canva.site/btrkgb2rcy16jb7h",
+                      thumbnail: ""
+                    },
+
+                    {
+                      name: "Tích vô hướng của hai véc-tơ",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-to-n-10",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Tích của một số với một véc-tơ",
+                      link: "https://nguyenthanhthan.my.canva.site/btrjw3h2kvsjyttz",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Tổng và hiệu của hai véc-tơ",
+                      link: "https://nguyenthanhthan.my.canva.site/btrjp36yy81f22vh",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Véc-tơ",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-vecto",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Tam giác",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-gi-i-tam-gi-c",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Cosin và Sin",
+                      link: "https://nguyenthanhthan.my.canva.site/btrhwpsz34k9qsxh",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Giá trị lượng giác của một góc từ 0° đến 180°",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-gi-tr-l-ng-gi-c",
+                      thumbnail: ""
+                    },
+
 
                   ].map((v, i) => (
                     <a
@@ -513,14 +548,44 @@ rounded-2xl p-8 text-center">
                 </div>
               )}
 
-              {selectedFolder === "video_real" && (
+              {selectedFolder === "math_11" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
-                      name: "CHIA SẺ VỀ TÌNH HUỐNG MẤT KIỂM SOÁT AN TOÀN TRÊN KHÔNG GIAN MẠNG",
-                      link: "https://drive.google.com/file/d/1Zbet2-wOLsg9NKc43MeQbksqnjMQ3FZm/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142475/Gemini_Generated_Image_kjwz2pkjwz2pkjwz_jv8n7j.png"
+                      name: "Trung vị và Tứ phân vị của mẫu số liệu ghép nhóm",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-to-n-h-c",
+                      thumbnail: ""
                     },
+                    {
+                      name: "Số Trung Bình & Mốt - Mẫu Số Liệu Ghép Nhóm",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-to-n-th-ng-k",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Phương trình lượng giác cơ bản",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-l-ng-gi-c-l-p-11",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Hàm Số Lượng Giác",
+                      link: "https://nguyenthanhthan.my.canva.site/quiz-h-m-s-l-ng-gi-c",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "CÔNG THỨC LƯỢNG GIÁC",
+                      link: "https://nguyenthanhthan.my.canva.site/tr-c-nghi-m-l-ng-gi-c",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Giá Trị Lượng Giác",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-quiz-gi-tr-l-ng-gi-c",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Góc Lượng Giác",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-ki-m-tra-g-c-l-ng-gi-c",
+                      thumbnail: ""
+                    }
                   ].map((v, i) => (
                     <a
                       key={i}
@@ -542,99 +607,76 @@ rounded-2xl p-8 text-center">
               )}
 
 
-              {/* VIDEO AI */}
-              {selectedFolder === "video_ai" && (
+              {selectedFolder === "math_12" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
-                      name: "Top 13 Các Công Ty Startup Việt Nam Hứa Hẹn Thành Công Nhất",
-                      link: "https://drive.google.com/file/d/1clocMDzOBCMyfM1MGlOPb50EC9Xh_zGm/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137144/Gemini_Generated_Image_t2mdozt2mdozt2md_zq5xjj.png"
+                      name: "Tính đơn điệu và cực trị của hàm số",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-ki-m-tra-to-n-l-p-12",
+                      thumbnail: ""
                     },
                     {
-                      name: "Thích Kinh Doanh Nên Học Ngành Gì",
-                      link: "https://drive.google.com/file/d/1JCoXTpi470cfdHChNNxOGwSNtzhhYAFP/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137139/Gemini_Generated_Image_27mio027mio027mi_g78lsa.png"
+                      name: "Giá Trị Lớn Nhất, Giá Trị Nhỏ Nhất Của Hàm Số",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-to-n-12",
+                      thumbnail: ""
                     },
                     {
-                      name: "Nhân Viên Xuất Nhập Khẩu Là Gì",
-                      link: "https://drive.google.com/file/d/1JaT93jUBSjFYf0kJWydX6bkOiHdz2pkR/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137149/Gemini_Generated_Image_afu6ycafu6ycafu6_qcqdsu.png"
+                      name: "Đường Tiệm Cận của Đồ Thị Hàm Số",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-to-n-ng-ti-m-c-n",
+                      thumbnail: ""
                     },
                     {
-                      name: "Nhân Viên Vật Tư Làm Công Việc Gì",
-                      link: "https://drive.google.com/file/d/19O-geMkBKa1hToUhW43CGcTT-0u5HAFt/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137141/Gemini_Generated_Image_ugzo43ugzo43ugzo_qxyqus.png"
+                      name: "Khảo sát và vẽ đồ thị hàm số cơ bản",
+                      link: "https://nguyenthanhthan.my.canva.site/tr-c-nghi-m-to-n-l-p-12",
+                      thumbnail: ""
                     },
                     {
-                      name: "Nhân Viên Văn Phòng Là Gì",
-                      link: "https://drive.google.com/file/d/1optU3j3ctt5SXFA2CD6nNFXCiA2jnOFq/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137139/Gemini_Generated_Image_d4as44d4as44d4as_fd9dtv.png"
+                      name: "Vecto và Các phép toán trên vecto",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-to-n",
+                      thumbnail: ""
                     },
                     {
-                      name: "Nhân Viên Tư Vấn Tuyển Sinh Là Làm Gì",
-                      link: "https://drive.google.com/file/d/1I7EMrdlhPV5PsclU396IvwYo3s6jr7CZ/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137134/Gemini_Generated_Image_f8c4yff8c4yff8c4_m4jdwi.png"
+                      name: "Tọa độ của vectơ trong không gian",
+                      link: "https://nguyenthanhthan.my.canva.site/bv38q85w5z8qy4ts",
+                      thumbnail: ""
                     },
                     {
-                      name: "Nhân Viên Sale Tour Là Gì Và Kỹ Năng Sale Tour Hiệu Quả 2022",
-                      link: "https://drive.google.com/file/d/1CTalu4x9C877N1aRtzLPufJr6w6QGnrd/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137133/Gemini_Generated_Image_qjq5lrqjq5lrqjq5_qifyjh.png"
+                      name: "Tổng hợp",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-to-n-h-c-tr-c-nghi-m",
+                      thumbnail: ""
                     },
                     {
-                      name: "Ngành Kỹ Sư Nông Nghiệp Làm Gì",
-                      link: "https://drive.google.com/file/d/1Ks3DbUSG4xLJIlKKlaEa5eQpew3A1FwG/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137135/Gemini_Generated_Image_tnanq7tnanq7tnan_dnbbrq.png"
+                      name: "Khoảng biến thiên và khoảng tứ phân vị",
+                      link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-to-n-l-p-12",
+                      thumbnail: ""
                     },
                     {
-                      name: "Kỹ Sư Môi Trường Là Gì Và Làm Gì",
-                      link: "https://drive.google.com/file/d/1Ks3DbUSG4xLJIlKKlaEa5eQpew3A1FwG/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137141/Gemini_Generated_Image_fjccxxfjccxxfjcc_xvddbs.png"
-                    },
-                    {
-                      name: "Định Hướng Nghề Nghiệp Cho Tương Lai Không Khó Như Bạn Nghĩ",
-                      link: "https://drive.google.com/file/d/1-yrI4DjrU3-sy8ZNpKqyl9IBTV3Y6C2m/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137156/Gemini_Generated_Image_6c2ztb6c2ztb6c2z_gcr9nd.png"
-                    },
-                    {
-                      name: "Đâu Là Điểm Khác Nhau Giữa Học Tập & Làm Việc",
-                      link: "https://drive.google.com/file/d/18hI4yHKctk6eI8ceYBaFoedpMtw6Ddoo/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137154/Gemini_Generated_Image_ysjqz6ysjqz6ysjq_m1iyk1.png"
-                    },
-                    {
-                      name: "Chuyên Viên Khác Nhân Viên Như Thế Nào",
-                      link: "https://drive.google.com/file/d/196z_Y1kemd5s2gWF8QC4-2PeyqxsTWzL/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137152/Gemini_Generated_Image_ys9b8sys9b8sys9b_tzs8w1.png"
-                    },
-                    {
-                      name: "Các Công Việc Làm Thêm Cho Sinh Viên Giúp Cải Thiện Tài Chính",
-                      link: "https://drive.google.com/file/d/1N-WvUnEVOxFsQt5Ka8AEt8K7T13ZPiID/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137155/Gemini_Generated_Image_4mzn5l4mzn5l4mzn_ugjgha.png"
+                      name: "Phương Sai và Độ Lệch Chuẩn của Mẫu Số Liệu Ghép Nhóm",
+                      link: "https://nguyenthanhthan.my.canva.site/quiz-to-n-h-c-l-p-12",
+                      thumbnail: ""
                     }
-
                   ].map((v, i) => (
                     <a
                       key={i}
                       href={v.link}
                       target="_blank"
-                      className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                      className="block bg-white border rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
                     >
                       {v.thumbnail && (
                         <img src={v.thumbnail} className="w-full object-cover" />
                       )}
+
                       <div className="p-4">
                         <h3 className="font-semibold text-gray-900">{v.name}</h3>
-                        <p className="text-sm text-gray-500">Nhấn để mở video</p>
+                        <p className="text-sm text-gray-500">Nhấn để mở tài liệu</p>
                       </div>
                     </a>
                   ))}
                 </div>
               )}
 
-              {/* CHƯA CHỌN FOLDER */}
-              {!selectedFolder && (
-                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
-              )}
+
+
             </motion.div>
           )}
 
