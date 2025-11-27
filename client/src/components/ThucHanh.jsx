@@ -422,7 +422,7 @@ rounded-2xl p-8 text-center">
             >
               <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
                 <FileText className="text-[#3C9E8F] w-6 h-6" />
-                Danh sách tài liệu
+                Danh sách bài tập
 
               </h2>
 
