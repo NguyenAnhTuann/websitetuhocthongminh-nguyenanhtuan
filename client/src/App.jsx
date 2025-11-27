@@ -23,6 +23,9 @@ import Register from './components/Register';
 import RedirectIfLoggedIn from "./utils/RedirectIfLoggedIn";
 import AdminDashboard from "./components/AdminDashboard";
 import RequireAuth from "./utils/RequireAuth";
+import ProtectedRoute from "./utils/ProtectedRoute";
+import GlobalToastProvider from './components/GlobalToast';
+
 
 
 
@@ -67,7 +70,7 @@ const AppWrapper = () => {
 
 
         <div className="pt-[50px]">
-
+<GlobalToastProvider>
           <Routes>
             {/* Redirect root → /home */}
             <Route path="/" element={<Navigate to="/home" replace />} />
@@ -86,14 +89,15 @@ const AppWrapper = () => {
             <Route
               path="/thuchanh"
               element={
-                <RequireAuth>
-                  <ThucHanh language={language} />
-                </RequireAuth>
+                <ProtectedRoute>
+                  <ThucHanh />
+                </ProtectedRoute>
               }
             />
 
 
-            
+
+
             <Route path="/tailieuonline" element={<TaiNguyenOnline language={language} />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
 
@@ -121,6 +125,7 @@ const AppWrapper = () => {
 
 
           </Routes>
+          </GlobalToastProvider>
 
         </div>
       </div>

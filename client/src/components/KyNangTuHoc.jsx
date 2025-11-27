@@ -310,7 +310,7 @@ const KyNangTuHoc = ({ language }) => {
         <main className="flex-1 w-full">
 
           {activeTab === "intro" && (
-            <div className="max-w-4xl mx-auto mt-10 bg-[#f8fffe] border border-[#d8efea] shadow-sm 
+            <div className="max-w-4xl mx-auto bg-[#f8fffe] border border-[#d8efea] shadow-sm 
 rounded-2xl p-8 text-center">
 
               <h2 className="text-2xl md:text-3xl font-extrabold text-[#1c7c76] mb-3">
