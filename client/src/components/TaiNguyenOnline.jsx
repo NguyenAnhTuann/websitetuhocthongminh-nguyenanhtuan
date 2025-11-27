@@ -1,90 +1,666 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FileText, Link as LinkIcon } from "lucide-react";
+import {
+  FileText,
+  Images,
+  MessageCircle
+} from "lucide-react";
 
-const TaiNguyenOnline = () => {
+
+// Hiệu ứng gõ chữ
+const Typewriter = ({ text, speed = 40 }) => {
+  const [displayed, setDisplayed] = useState("");
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const pdfFiles = [
-    {
-      title: "Tài liệu kỹ năng tự học (PDF 1)",
-      link: "https://drive.google.com/file/d/14rvbx4P6vzL1-4q5R8Vr24KUIwNeuDvp/view?usp=sharing",
-    },
-    {
-      title: "Tài liệu kỹ năng sống – an toàn mạng",
-      link: "https://drive.google.com/file/d/xxxxxx/view",
-    },
-    {
-      title: "Bài giảng giáo dục công dân lớp 10",
-      link: "https://drive.google.com/file/d/yyyyyy/view",
-    },
-  ];
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayed(text.slice(0, i));
+      i++;
+      if (i > text.length) clearInterval(interval);
+    }, speed);
+    return () => clearInterval(interval);
+  }, [text]);
 
   return (
-    <section className="min-h-screen w-full flex flex-col items-center px-4 py-24 bg-white">
+    <motion.p
+      initial={{ opacity: 0, scale: 0.6 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1 }}
+      className="w-full max-w-[90%] px-4 text-center text-sm md:text-base pt-4 pb-4 text-black"
+    >
+      {displayed}
+      <span className="animate-pulse">|</span>
+    </motion.p>
+  );
+};
+
+
+const TaiNguyenOnline = ({ language }) => {
+  const [openPDF, setOpenPDF] = useState(false);
+  const [openVideo, setOpenVideo] = useState(false);
+  const [selectedFolder, setSelectedFolder] = useState(null);
+
+  const [showFolder1, setShowFolder1] = useState(false);
+  const [activeTab, setActiveTab] = useState("intro"); // intro | pdf | video
+
+
+  const t = {
+    vi: {
+      title: "TÀI NGUYÊN ONLINE",
+      subtitle:
+        "Kho học liệu số miễn phí dành cho học sinh – sinh viên: PDF, video, bài giảng, công cụ hỗ trợ và tài nguyên học tập.",
+
+      pdfTitle: "Tài liệu PDF",
+      pdf1: "Ebook – Bài giảng – Tài liệu tham khảo",
+      pdf2: "Tài nguyên học tập giúp nâng cao kỹ năng và kiến thức",
+
+      mediaTitle: "Video – Hình ảnh – Bài giảng",
+      mediaDesc:
+        "Tổng hợp video minh họa, bài giảng trực quan giúp việc học trở nên dễ hiểu và sinh động."
+    },
+
+    en: {
+      title: "ONLINE RESOURCES",
+      subtitle:
+        "A free digital learning library for students: PDF documents, videos, lectures, tools, and study materials.",
+
+      pdfTitle: "PDF Documents",
+      pdf1: "E-books – Lecture notes – Reference materials",
+      pdf2: "Learning resources to enhance knowledge and skills",
+
+      mediaTitle: "Videos – Visuals – Lectures",
+      mediaDesc:
+        "A collection of visual content and lectures to support effective and engaging learning."
+    }
+  };
+
+
+  //------------------------------------------------------
+  const PdfFolder = ({ title, pdfs }) => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <div className="mt-8">
+        <div
+          onClick={() => setOpen(!open)}
+          className="p-4 rounded-xl bg-[#f3fafc] border flex justify-between items-center cursor-pointer hover:bg-[#e8f5f7] transition"
+        >
+          <span className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+            📁 {title}
+          </span>
+          <span className="text-xl text-gray-700">{open ? "−" : "+"}</span>
+        </div>
+
+        {open && (
+          <div className="mt-4 space-y-6">
+            {pdfs.map((pdf, i) => (
+              <a
+                key={i}
+                href={pdf.link}
+                target="_blank"
+                className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+              >
+                {/* Ảnh to nằm trên */}
+                {pdf.thumbnail && (
+                  <img
+                    src={pdf.thumbnail}
+                    alt={pdf.name}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+
+                <div className="p-4">
+                  <h4 className="text-lg font-semibold text-gray-900">
+                    {pdf.name}
+                  </h4>
+                  <p className="text-sm text-gray-500">Nhấn để mở PDF</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+
+
+  //------------------------------------------------------
+
+  //------------------------------------------------------
+  const VideoFolder = ({ title, videos }) => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <div className="mt-8">
+        <div
+          onClick={() => setOpen(!open)}
+          className="p-4 rounded-xl bg-[#e8f8f6] border flex justify-between items-center cursor-pointer hover:bg-[#dff3f1] transition"
+        >
+          <span className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+            📁 {title}
+          </span>
+          <span className="text-xl text-gray-700">{open ? "−" : "+"}</span>
+        </div>
+
+        {open && (
+          <div className="mt-4 space-y-6">
+            {videos.map((v, i) => (
+              <a
+                key={i}
+                href={v.link}
+                target="_blank"
+                className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+              >
+                {/* Ảnh to nằm trên */}
+                {v.thumbnail && (
+                  <img
+                    src={v.thumbnail}
+                    alt={v.name}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+
+                <div className="p-4">
+                  <h4 className="text-lg font-semibold text-gray-900">
+                    {v.name}
+                  </h4>
+                  <p className="text-sm text-gray-500">Nhấn để mở tài liệu</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+
+  //-----------------------------------------------------------
+
+  return (
+    <section className="min-h-screen w-full px-4 py-20 bg-white max-w-7xl mx-auto">
 
       {/* ======= TIÊU ĐỀ ======= */}
       <motion.h1
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="
-          text-3xl md:text-5xl lg:text-6xl font-extrabold text-white text-center font-outfit
-          bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm inline-block
-        "
+        transition={{ duration: 0.8 }}
+        className="mx-auto text-center block
+             text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
+             bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
       >
-        TÀI NGUYÊN ONLINE
+        {t[language].title}
       </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-gray-600 text-center max-w-2xl mt-3 text-sm md:text-base"
-      >
-        Tổng hợp tài liệu PDF, giáo trình, bài giảng, hướng dẫn học tập được lưu trữ trên Google Drive.
-      </motion.p>
 
-      {/* ======= DANH SÁCH FILE PDF ======= */}
-      <div className="w-full max-w-5xl mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {pdfFiles.map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="
-              bg-white border border-gray-200 rounded-2xl p-6 shadow-sm
-              hover:shadow-md hover:border-[#3C9E8F] transition cursor-pointer
-            "
-            onClick={() => window.open(item.link, "_blank")}
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="relative w-10 h-10 flex items-center justify-center">
-                <div className="absolute w-10 h-10 bg-[#A8DCD2] rounded-xl opacity-60" />
-                <FileText className="relative z-10 w-6 h-6 text-[#3C9E8F]" />
+      <Typewriter text={t[language].subtitle} />
+
+
+      <div className="mt-10 w-full max-w-7xl mx-auto flex gap-6">
+
+        {/* SIDEBAR Trái */}
+        <aside className="w-64 h-fit bg-white border rounded-2xl shadow p-5">
+          <ul className="space-y-3">
+
+            {/* GIỚI THIỆU */}
+            <li
+              onClick={() => {
+                setActiveTab("intro");
+                setSelectedFolder(null);
+              }}
+              className={`p-3 rounded-lg cursor-pointer transition
+        ${activeTab === "intro" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
+            >
+              Giới thiệu
+            </li>
+
+            {/* PDF */}
+            <li
+              onClick={() => {
+                setActiveTab("violence");
+                setSelectedFolder("violence_videos"); // auto load
+                setOpenPDF(false);
+                setOpenVideo(false);
+              }}
+              className={`p-3 rounded-lg cursor-pointer transition
+${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
+            >
+              Bạo lực học đường
+            </li>
+
+
+
+            {/* VIDEO */}
+            <li
+              onClick={() => {
+                setActiveTab("video");
+                setOpenVideo(true);
+                setOpenPDF(false);
+                setSelectedFolder("video_main"); // ✔ load 3 video mặc định
+              }}
+
+
+              className={`p-3 rounded-lg cursor-pointer transition
+        ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
+            >
+              Kỹ năng sống khác
+            </li>
+
+            {/* NỘI DUNG HIỆN THEO FOLDER ĐƯỢC CHỌN */}
+
+            {openVideo && activeTab === "video" && (
+              <ul className="pl-5 space-y-2 text-sm">
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("video_math")}
+                >
+                  Phát triển bản thân: Kỹ năng cứng & mềm
+                </li>
+
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("video_real")}
+                >
+                  Kỹ năng ứng phó với tình huống khẩn cấp
+                </li>
+
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("video_ai")}
+                >
+                  Định hướng nghề nghiệp
+                </li>
+              </ul>
+            )}
+
+
+
+
+          </ul>
+        </aside>
+
+
+        {/* MAIN CONTENT BÊN PHẢI */}
+        <main className="flex-1 w-full">
+
+          {activeTab === "intro" && (
+            <div className="max-w-4xl mx-auto mt-10 bg-[#f8fffe] border border-[#d8efea] shadow-sm 
+rounded-2xl p-8 text-center">
+
+              <h2 className="text-2xl md:text-3xl font-extrabold text-[#1c7c76] mb-3">
+                Kỹ năng tự học là gì?
+              </h2>
+
+              <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6">
+                Kỹ năng tự học giúp học sinh – sinh viên chủ động khám phá kiến thức, quản lý thời gian
+                hiệu quả, rèn luyện tư duy độc lập và thích ứng với sự thay đổi nhanh chóng của kỷ nguyên số.
+              </p>
+
+              {/* 3 FEATURE GRID */}
+              <div className="grid md:grid-cols-3 gap-6 mt-6">
+
+                {/* Item 1 */}
+                <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
+                  <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
+                    <FileText className="w-6 h-6 text-[#1c7c76]" />
+                  </div>
+                  <h3 className="font-bold text-gray-800 mb-2">Tài liệu PDF</h3>
+                  <p className="text-sm text-gray-600">
+                    Tổng hợp tài liệu Google Drive giúp rèn luyện tư duy, nắm phương pháp học tập hiện đại.
+                  </p>
+                </div>
+
+                {/* Item 2 */}
+                <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
+                  <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
+                    <Images className="w-6 h-6 text-[#1c7c76]" />
+                  </div>
+                  <h3 className="font-bold text-gray-800 mb-2">Video – Hình ảnh</h3>
+                  <p className="text-sm text-gray-600">
+                    Video minh họa, dự án thực tế giúp học sinh tiếp thu dễ dàng và vận dụng vào cuộc sống.
+                  </p>
+                </div>
+
+                {/* Item 3 */}
+                <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
+                  <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
+                    <MessageCircle className="w-6 h-6 text-[#1c7c76]" />
+                  </div>
+                  <h3 className="font-bold text-gray-800 mb-2">Công cụ hỗ trợ</h3>
+                  <p className="text-sm text-gray-600">
+                    Kết hợp AI ChatBot và phương pháp Pomodoro – Forest giúp học sinh học hiệu quả hơn.
+                  </p>
+                </div>
+
               </div>
 
-              <h3 className="text-base md:text-lg font-bold text-gray-900">
-                {item.title}
-              </h3>
+              {/* FOOT TEXT */}
+              <p className="mt-8 text-sm md:text-base text-gray-600 leading-relaxed">
+                Mục <span className="font-semibold text-[#1c7c76]">Kỹ năng tự học</span> được xây dựng nhằm
+                hỗ trợ học sinh – sinh viên hình thành thói quen học tập chủ động, linh hoạt và bền vững.
+              </p>
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-[#3C9E8F] font-semibold">
-              <LinkIcon className="w-4 h-4" />
-              <span className="underline">Mở tài liệu</span>
-            </div>
-          </motion.div>
-        ))}
+          )}
+
+          {activeTab === "violence" && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
+            >
+              <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
+                <FileText className="text-[#3C9E8F] w-6 h-6" />
+                Video về bạo lực học đường
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {[
+                  {
+                    name: "Tung tin xấu, bóc phốt bạn",
+                    link: "https://drive.google.com/file/d/1NU33RLcj4gzv51RiYJVzphrFtN5Xwf8k/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142505/Gemini_Generated_Image_70cipi70cipi70ci_hrxepw.png"
+                  },
+                  {
+                    name: "Tạo nhóm nói xấu, cô lập bạn",
+                    link: "https://drive.google.com/file/d/1e9v8zObtOKPavgyy87iD0hf4wqSa6DXb/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142494/Gemini_Generated_Image_7q8jhy7q8jhy7q8j_yhlrgp.png"
+                  },
+                  {
+                    name: "Nhận diện 5 dạng bạo lực học đường",
+                    link: "https://drive.google.com/file/d/1Z0HT4PRanI5mnfxalgf3Nb-jCZar8fXK/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142494/Gemini_Generated_Image_duksaaduksaaduks_oukx51.png"
+                  },
+                  {
+                    name: "Nghe được nhóm bạn chuẩn bị đánh nhau",
+                    link: "https://drive.google.com/file/d/19lSY9esepnWfd1HfS0BOnbj0-ttXwcuT/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142498/Gemini_Generated_Image_tg37uvtg37uvtg37_z1fr6o.png"
+                  },
+                  {
+                    name: "Đặt biệt danh nói xấu, đe dọa người khác",
+                    link: "https://drive.google.com/file/d/1D5S0Y1CgSPiHPDUDB9Ctlhw0xkfbcFJk/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142492/Gemini_Generated_Image_204ti2204ti2204t_myecy4.png"
+                  },
+                  {
+                    name: "Bạo lực học đường – Nhận biết & phòng tránh",
+                    link: "https://drive.google.com/file/d/175D78VNdOvxHOrn2FaEniqmtgus4cKhb/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142493/Gemini_Generated_Image_o6lxsso6lxsso6lx_qgshk7.png"
+                  }
+                ].map((v, i) => (
+                  <a
+                    key={i}
+                    href={v.link}
+                    target="_blank"
+                    className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                  >
+                    {v.thumbnail && <img src={v.thumbnail} className="w-full object-cover" />}
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
+                      <p className="text-sm text-gray-500">Nhấn để xem video</p>
+                    </div>
+                  </a>
+                ))}
+
+              </div>
+            </motion.div>
+          )}
+
+
+
+          {activeTab === "video" && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
+            >
+              <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
+                <FileText className="text-[#3C9E8F] w-6 h-6" />
+                Danh sách tài liệu
+              </h2>
+
+              {selectedFolder === "video_main" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                  {[
+                    {
+                      name: "KỸ NĂNG SỐNG SỐNG CÓ KỶ LUẬT",
+                      link: "https://drive.google.com/file/d/1uo8Hk2B7qcFuaHMmyXiwFS_6GCDXvBxG/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135937/Gemini_Generated_Image_vt08xmvt08xmvt08_ptpkcb.png"
+                    },
+                    {
+                      name: "KỸ NĂNG PHÒNG CHỐNG MA TÚY TRONG TRƯỜNG HỌC",
+                      link: "https://drive.google.com/file/d/1f1sSR896SHD7KS2NjK6x0m40F8HgEkJ7/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135939/Gemini_Generated_Image_2ot0zo2ot0zo2ot0_w8w4o5.png"
+                    },
+                    {
+                      name: "KỸ NĂNG ĐỊNH HƯỚNG NGHỀ NGHIỆP",
+                      link: "https://drive.google.com/file/d/1Lj2xvuy7OeQdJsgaVRlQ2Yz9nQFln6Xw/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135936/Gemini_Generated_Image_f6fbyyf6fbyyf6fb_ddsfpe.png"
+                    }
+                  ].map((v, i) => (
+                    <a
+                      key={i}
+                      href={v.link}
+                      target="_blank"
+                      className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {v.thumbnail && (
+                        <img src={v.thumbnail} className="w-full object-cover" />
+                      )}
+                      <div className="p-4">
+                        <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
+                        <p className="text-sm text-gray-500">Nhấn để mở tài liệu</p>
+                      </div>
+                    </a>
+                  ))}
+
+                </div>
+              )}
+
+
+              {/* VIDEO GIẢI TOÁN */}
+              {selectedFolder === "video_math" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      name: "Khái Niệm Kỹ Năng Là Gì",
+                      link: "https://drive.google.com/file/d/1xL7vlGUbLVL-fN3pOv22_beeXJKHiOYS/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_w6r07ow6r07ow6r0_q9dhfq.png"
+                    },
+                    {
+                      name: "Top 10 Điều Thú Vị Về Tính Cách ISFJ Trong Trắc Nghiệm MBTI",
+                      link: "https://drive.google.com/file/d/1Q3Zouk2z67l4ds_7VGqO5rQ819K4Tq1J/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135937/Gemini_Generated_Image_3x9w343x9w343x9w_fi5duz.png"
+                    },
+                    {
+                      name: "Tính Cách ISTP Là Gì",
+                      link: "https://drive.google.com/file/d/1PlCjlrtvVw-mNx7OZqUQVq5R3sYqPfcn/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135936/Gemini_Generated_Image_dvhm34dvhm34dvhm_stgify.png"
+                    },
+                    {
+                      name: "Tính Cách INTJ Có Gì Khác Biệt",
+                      link: "https://drive.google.com/file/d/1reWoFcDRfkvmPoc3uHU7OvsafFbs6t8n/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_wccnvowccnvowccn_eozu9x.png"
+                    },
+                    {
+                      name: "Tìm Hiểu Nhóm Tính Cách ENTJ",
+                      link: "https://drive.google.com/file/d/1NZhvQs5ndzdfv5BV8cPnrMcnSdj1rZlE/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135933/Gemini_Generated_Image_4dzhxa4dzhxa4dzh_tdtl5q.png"
+                    },
+                    {
+                      name: "Những Kỹ Năng Làm Quen Với Người Lạ Trong Giao Tiếp Hiệu Quả",
+                      link: "https://drive.google.com/file/d/1eo6BqO2uydG6cEb2g3kPwDp7OsufKMZT/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_5nm1qu5nm1qu5nm1_ukq9yj.png"
+                    },
+                    {
+                      name: "Nhóm Tính Cách ESFP",
+                      link: "https://drive.google.com/file/d/1lGHpsmatecP8Jxit7d8ev6Jzo1qmZpEx/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135939/Gemini_Generated_Image_61f31y61f31y61f3_qjqtsz.png"
+                    },
+                    {
+                      name: "Kỹ Năng Giao Tiếp Qua Điện Thoại",
+                      link: "https://drive.google.com/file/d/1QjAR7Gw_nE6vN2IjE4b3TwxgEkzGCpIU/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135933/Gemini_Generated_Image_3r8bej3r8bej3r8b_vsscoj.png"
+                    },
+
+                    {
+                      name: "Cách Giải Quyết Vấn Đề Và Ra Quyết Định Chỉ Với 6 Bước 6 Kỹ Năng",
+                      link: "https://drive.google.com/file/d/1-bXAlyM91EyYP-jayijnkiw0dbIid4uy/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_scp1vtscp1vtscp1_mgugge.png"
+                    }
+                  ].map((v, i) => (
+                    <a
+                      key={i}
+                      href={v.link}
+                      target="_blank"
+                      className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {v.thumbnail && (
+                        <img src={v.thumbnail} className="w-full object-cover" />
+                      )}
+                      <div className="p-4">
+                        <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
+                        <p className="text-sm text-gray-500">Nhấn để mở video</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* VIDEO TOÁN THỰC TẾ */}
+              {selectedFolder === "video_real" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      name: "KỸ NĂNG ỨNG PHÓ VỚI TÌNH HUỐNG KHẨN CẤP",
+                      link: "https://drive.google.com/file/d/1_IWl6ZXNR7Hz920MvM7CtE52JYrUcI0G/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137145/Gemini_Generated_Image_g5c7l0g5c7l0g5c7_kgxfh4.png"
+                    },
+                  ].map((v, i) => (
+                    <a
+                      key={i}
+                      href={v.link}
+                      target="_blank"
+                      className="block bg-white border rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {v.thumbnail && (
+                        <img src={v.thumbnail} className="w-full object-cover" />
+                      )}
+
+                      <div className="p-4">
+                        <h3 className="font-semibold text-gray-900">{v.name}</h3>
+                        <p className="text-sm text-gray-500">Nhấn để mở tài liệu</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+
+              {/* VIDEO AI */}
+              {selectedFolder === "video_ai" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      name: "Top 13 Các Công Ty Startup Việt Nam Hứa Hẹn Thành Công Nhất",
+                      link: "https://drive.google.com/file/d/1clocMDzOBCMyfM1MGlOPb50EC9Xh_zGm/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137144/Gemini_Generated_Image_t2mdozt2mdozt2md_zq5xjj.png"
+                    },
+                    {
+                      name: "Thích Kinh Doanh Nên Học Ngành Gì",
+                      link: "https://drive.google.com/file/d/1JCoXTpi470cfdHChNNxOGwSNtzhhYAFP/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137139/Gemini_Generated_Image_27mio027mio027mi_g78lsa.png"
+                    },
+                    {
+                      name: "Nhân Viên Xuất Nhập Khẩu Là Gì",
+                      link: "https://drive.google.com/file/d/1JaT93jUBSjFYf0kJWydX6bkOiHdz2pkR/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137149/Gemini_Generated_Image_afu6ycafu6ycafu6_qcqdsu.png"
+                    },
+                    {
+                      name: "Nhân Viên Vật Tư Làm Công Việc Gì",
+                      link: "https://drive.google.com/file/d/19O-geMkBKa1hToUhW43CGcTT-0u5HAFt/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137141/Gemini_Generated_Image_ugzo43ugzo43ugzo_qxyqus.png"
+                    },
+                    {
+                      name: "Nhân Viên Văn Phòng Là Gì",
+                      link: "https://drive.google.com/file/d/1optU3j3ctt5SXFA2CD6nNFXCiA2jnOFq/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137139/Gemini_Generated_Image_d4as44d4as44d4as_fd9dtv.png"
+                    },
+                    {
+                      name: "Nhân Viên Tư Vấn Tuyển Sinh Là Làm Gì",
+                      link: "https://drive.google.com/file/d/1I7EMrdlhPV5PsclU396IvwYo3s6jr7CZ/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137134/Gemini_Generated_Image_f8c4yff8c4yff8c4_m4jdwi.png"
+                    },
+                    {
+                      name: "Nhân Viên Sale Tour Là Gì Và Kỹ Năng Sale Tour Hiệu Quả 2022",
+                      link: "https://drive.google.com/file/d/1CTalu4x9C877N1aRtzLPufJr6w6QGnrd/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137133/Gemini_Generated_Image_qjq5lrqjq5lrqjq5_qifyjh.png"
+                    },
+                    {
+                      name: "Ngành Kỹ Sư Nông Nghiệp Làm Gì",
+                      link: "https://drive.google.com/file/d/1Ks3DbUSG4xLJIlKKlaEa5eQpew3A1FwG/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137135/Gemini_Generated_Image_tnanq7tnanq7tnan_dnbbrq.png"
+                    },
+                    {
+                      name: "Kỹ Sư Môi Trường Là Gì Và Làm Gì",
+                      link: "https://drive.google.com/file/d/1Ks3DbUSG4xLJIlKKlaEa5eQpew3A1FwG/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137141/Gemini_Generated_Image_fjccxxfjccxxfjcc_xvddbs.png"
+                    },
+                    {
+                      name: "Định Hướng Nghề Nghiệp Cho Tương Lai Không Khó Như Bạn Nghĩ",
+                      link: "https://drive.google.com/file/d/1-yrI4DjrU3-sy8ZNpKqyl9IBTV3Y6C2m/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137156/Gemini_Generated_Image_6c2ztb6c2ztb6c2z_gcr9nd.png"
+                    },
+                    {
+                      name: "Đâu Là Điểm Khác Nhau Giữa Học Tập & Làm Việc",
+                      link: "https://drive.google.com/file/d/18hI4yHKctk6eI8ceYBaFoedpMtw6Ddoo/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137154/Gemini_Generated_Image_ysjqz6ysjqz6ysjq_m1iyk1.png"
+                    },
+                    {
+                      name: "Chuyên Viên Khác Nhân Viên Như Thế Nào",
+                      link: "https://drive.google.com/file/d/196z_Y1kemd5s2gWF8QC4-2PeyqxsTWzL/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137152/Gemini_Generated_Image_ys9b8sys9b8sys9b_tzs8w1.png"
+                    },
+                    {
+                      name: "Các Công Việc Làm Thêm Cho Sinh Viên Giúp Cải Thiện Tài Chính",
+                      link: "https://drive.google.com/file/d/1N-WvUnEVOxFsQt5Ka8AEt8K7T13ZPiID/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137155/Gemini_Generated_Image_4mzn5l4mzn5l4mzn_ugjgha.png"
+                    }
+
+                  ].map((v, i) => (
+                    <a
+                      key={i}
+                      href={v.link}
+                      target="_blank"
+                      className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {v.thumbnail && (
+                        <img src={v.thumbnail} className="w-full object-cover" />
+                      )}
+                      <div className="p-4">
+                        <h3 className="font-semibold text-gray-900">{v.name}</h3>
+                        <p className="text-sm text-gray-500">Nhấn để mở video</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* CHƯA CHỌN FOLDER */}
+              {!selectedFolder && (
+                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
+              )}
+            </motion.div>
+          )}
+
+
+        </main>
       </div>
 
-      {/* FOOTER */}
-      <p className="mt-8 text-xs text-gray-500">
-        Tài liệu được lưu trữ an toàn trên Google Drive – cập nhật thường xuyên.
-      </p>
 
     </section>
   );

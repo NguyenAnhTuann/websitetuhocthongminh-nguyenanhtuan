@@ -35,7 +35,7 @@ const Typewriter = ({ text, speed = 40 }) => {
 };
 
 
-const KyNangTuHoc = ({ language }) => {
+const KyNangSong = ({ language }) => {
   const [openPDF, setOpenPDF] = useState(false);
   const [openVideo, setOpenVideo] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState(null);
@@ -286,57 +286,57 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 rounded-2xl p-8 text-center">
 
               <h2 className="text-2xl md:text-3xl font-extrabold text-[#1c7c76] mb-3">
-                Kỹ năng tự học là gì?
+                Kỹ năng sống là gì?
               </h2>
 
               <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6">
-                Kỹ năng tự học giúp học sinh – sinh viên chủ động khám phá kiến thức, quản lý thời gian
-                hiệu quả, rèn luyện tư duy độc lập và thích ứng với sự thay đổi nhanh chóng của kỷ nguyên số.
+                Kỹ năng sống giúp học sinh – sinh viên biết cách ứng xử phù hợp,
+                bảo vệ bản thân, giao tiếp hiệu quả và xử lý tình huống an toàn
+                trong học tập và cuộc sống hằng ngày.
               </p>
 
-              {/* 3 FEATURE GRID */}
               <div className="grid md:grid-cols-3 gap-6 mt-6">
 
-                {/* Item 1 */}
                 <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
                   <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
                     <FileText className="w-6 h-6 text-[#1c7c76]" />
                   </div>
-                  <h3 className="font-bold text-gray-800 mb-2">Tài liệu PDF</h3>
+                  <h3 className="font-bold text-gray-800 mb-2">Tài liệu hướng dẫn</h3>
                   <p className="text-sm text-gray-600">
-                    Tổng hợp tài liệu Google Drive giúp rèn luyện tư duy, nắm phương pháp học tập hiện đại.
+                    Các tài liệu PDF về phòng tránh bạo lực, kiểm soát cảm xúc,
+                    xử lý mâu thuẫn và bảo vệ an toàn cá nhân.
                   </p>
                 </div>
 
-                {/* Item 2 */}
                 <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
                   <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
                     <Images className="w-6 h-6 text-[#1c7c76]" />
                   </div>
-                  <h3 className="font-bold text-gray-800 mb-2">Video – Hình ảnh</h3>
+                  <h3 className="font-bold text-gray-800 mb-2">Video – Minh họa</h3>
                   <p className="text-sm text-gray-600">
-                    Video minh họa, dự án thực tế giúp học sinh tiếp thu dễ dàng và vận dụng vào cuộc sống.
+                    Video mô phỏng các tình huống thực tế giúp học sinh dễ hiểu và
+                    biết cách phản ứng đúng đắn.
                   </p>
                 </div>
 
-                {/* Item 3 */}
                 <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition">
                   <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
                     <MessageCircle className="w-6 h-6 text-[#1c7c76]" />
                   </div>
-                  <h3 className="font-bold text-gray-800 mb-2">Công cụ hỗ trợ</h3>
+                  <h3 className="font-bold text-gray-800 mb-2">Kỹ năng ứng xử</h3>
                   <p className="text-sm text-gray-600">
-                    Kết hợp AI ChatBot và phương pháp Pomodoro – Forest giúp học sinh học hiệu quả hơn.
+                    Hướng dẫn giao tiếp, từ chối, tìm kiếm hỗ trợ và giải quyết vấn đề
+                    một cách văn minh và an toàn.
                   </p>
                 </div>
-
               </div>
 
-              {/* FOOT TEXT */}
               <p className="mt-8 text-sm md:text-base text-gray-600 leading-relaxed">
-                Mục <span className="font-semibold text-[#1c7c76]">Kỹ năng tự học</span> được xây dựng nhằm
-                hỗ trợ học sinh – sinh viên hình thành thói quen học tập chủ động, linh hoạt và bền vững.
+                Mục <span className="font-semibold text-[#1c7c76]">Kỹ năng sống </span>
+                được xây dựng nhằm giúp học sinh – sinh viên phát triển hành vi tích cực,
+                rèn luyện nhân cách và biết cách bảo vệ bản thân trong mọi hoàn cảnh.
               </p>
+
             </div>
 
           )}
@@ -653,4 +653,4 @@ rounded-2xl p-8 text-center">
   );
 };
 
-export default KyNangTuHoc;
+export default KyNangSong;
