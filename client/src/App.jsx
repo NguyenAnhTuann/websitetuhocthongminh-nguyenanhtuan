@@ -20,10 +20,20 @@ import ThucHanh from './components/ThucHanh';
 import TaiNguyenOnline from './components/TaiNguyenOnline';
 import Login from './components/Login';
 import Register from './components/Register';
+import RedirectIfLoggedIn from "./utils/RedirectIfLoggedIn";
+import AdminDashboard from "./components/AdminDashboard";
+import RequireAuth from "./utils/RequireAuth";
+
+
+
 
 const AppWrapper = () => {
   const location = useLocation();
   const [language, setLanguage] = useState('vi');
+  // Ẩn Header cho trang admin
+  const hideHeaderPages = ["/admin-dashboard"];
+  const shouldHideHeader = hideHeaderPages.includes(location.pathname);
+
 
   const getInitialTheme = () => {
     const hour = new Date().getHours();
@@ -46,12 +56,15 @@ const AppWrapper = () => {
       <ScrollToTop />
 
       <div className="font-sans">
-        <Header
-          language={language}
-          setLanguage={setLanguage}
-          isDarkMode={isDarkMode}
-          setIsDarkMode={setIsDarkMode}
-        />
+        {!shouldHideHeader && (
+          <Header
+            language={language}
+            setLanguage={setLanguage}
+            isDarkMode={isDarkMode}
+            setIsDarkMode={setIsDarkMode}
+          />
+        )}
+
 
         <div className="pt-[50px]">
 
@@ -68,10 +81,45 @@ const AppWrapper = () => {
             />
             <Route path="/kynangsong" element={<KyNangSong language={language} />} />
             <Route path="/chatbot" element={<ChatBot language={language} />} />
-            <Route path="/thuchanh" element={<ThucHanh language={language} />} />
+
+
+            <Route
+              path="/thuchanh"
+              element={
+                <RequireAuth>
+                  <ThucHanh language={language} />
+                </RequireAuth>
+              }
+            />
+
+
+            
             <Route path="/tailieuonline" element={<TaiNguyenOnline language={language} />} />
-            <Route path="/dangnhap" element={<Login language={language} />} />
-            <Route path="/dangky" element={<Register language={language} />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+
+
+
+            <Route
+              path="/dangnhap"
+              element={
+                <RedirectIfLoggedIn>
+                  <Login />
+                </RedirectIfLoggedIn>
+              }
+            />
+
+            <Route
+              path="/dangky"
+              element={
+                <RedirectIfLoggedIn>
+                  <Register />
+                </RedirectIfLoggedIn>
+              }
+            />
+
+
+
+
           </Routes>
 
         </div>

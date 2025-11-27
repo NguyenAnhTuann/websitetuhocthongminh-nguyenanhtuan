@@ -3,8 +3,12 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const fetch = require("node-fetch");
 require("dotenv").config();
+
+// Dùng node-fetch để gọi API trực tiếp
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
+const User = require("./models/User");
 
 const app = express();
 app.use(cors());
@@ -12,130 +16,88 @@ app.use(express.json());
 
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
+const adminRoutes = require("./routes/admin");
+app.use("/api/admin", adminRoutes);
 
 
 // ===============================
 // 1) KẾT NỐI MONGODB
 // ===============================
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("✅ MongoDB connected"))
-.catch(err => console.error("❌ MongoDB error:", err));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch(err => console.error("❌ MongoDB error:", err));
 
 
-// ===============================
-// 2) TẠO USER MODEL
-// ===============================
-const UserSchema = new mongoose.Schema({
-  fullname: String,
-  email: { type: String, unique: true },
-  password: String,
-});
-
-const User = mongoose.model("User", UserSchema);
 
 
-// ===============================
-// 3) API ĐĂNG KÝ
-// ===============================
-app.post("/api/auth/register", async (req, res) => {
+app.get("/make-admin", async (req, res) => {
   try {
-    const { fullname, email, password } = req.body;
-
-    const existing = await User.findOne({ email });
-    if (existing) {
-      return res.json({ success: false, message: "Email đã được sử dụng" });
-    }
-
-    const hashed = await bcrypt.hash(password, 10);
-
-    await User.create({ fullname, email, password: hashed });
-
-    res.json({ success: true, message: "Đăng ký thành công" });
-
+    const email = "admin@gmail.com"; // sửa thành email bạn muốn
+    await User.findOneAndUpdate(
+      { email },
+      { role: "admin" }
+    );
+    res.send("Đã chuyển tài khoản thành admin");
   } catch (err) {
-    res.json({ success: false, message: "Lỗi server" });
+    res.status(500).send("Lỗi server");
   }
 });
 
 
 // ===============================
-// 4) API ĐĂNG NHẬP
+// 4) API Gemini Chat (ĐÃ SỬA VỀ MODEL CHUẨN)
 // ===============================
-app.post("/api/auth/login", async (req, res) => {
+app.post("/api/chat", async (req, res) => {
+  const { message } = req.body;
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (!apiKey) {
+    return res.json({ reply: "⚠️ Lỗi: Chưa cấu hình API Key trong file .env" });
+  }
+
   try {
-    const { email, password } = req.body;
-
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.json({ success: false, message: "Email không tồn tại" });
-    }
-
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) {
-      return res.json({ success: false, message: "Sai mật khẩu" });
-    }
-
-    const token = jwt.sign(
-      { id: user._id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [{ text: message }]
+            }
+          ]
+        }),
+      }
     );
 
-    res.json({
-      success: true,
-      message: "Đăng nhập thành công",
-      token,
-      fullname: user.fullname
-    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("❌ Google API Error Detail:", JSON.stringify(data, null, 2));
+      return res.json({ reply: `⚠️ Lỗi từ Google: ${data.error?.message || "Không rõ nguyên nhân"}` });
+    }
+
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (reply) {
+      res.json({ reply });
+    } else {
+      res.json({ reply: "⚠️ AI không trả lời (Phản hồi trống)." });
+    }
 
   } catch (err) {
-    res.json({ success: false, message: "Lỗi server" });
+    console.error("❌ Server Error:", err);
+    res.json({ reply: "⚠️ Lỗi kết nối đến server." });
   }
 });
 
-
 // ===============================
-// 5) API CHAT GPT (giữ nguyên của bạn)
+// 5) KHỞI ĐỘNG SERVER
 // ===============================
-app.post("/chat", async (req, res) => {
-  const { message } = req.body;
-
-  try {
-    const result = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          {
-            role: "system",
-            content:
-              "Bạn là trợ lý Toán Lớp 10 – Cô Ngân. Hãy giải thích dễ hiểu, từng bước, không bỏ sót."
-          },
-          { role: "user", content: message }
-        ]
-      })
-    });
-
-    const data = await result.json();
-    res.json({ reply: data.choices[0].message.content });
-
-  } catch (err) {
-    console.log(err);
-    res.json({ reply: "Lỗi server hoặc API OpenAI" });
-  }
-});
-
-
-// ===============================
-// 6) KHỞI ĐỘNG SERVER
-// ===============================
-app.listen(5000, () => {
-  console.log("🚀 Server đang chạy tại http://localhost:5000");
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
 });

@@ -299,7 +299,7 @@ const Home = ({ language }) => {
               {t.heroPrimaryBtn}
             </button>
             <button
-              onClick={() => navigate("/login")} // route tạm, bạn sẽ tạo sau
+              onClick={() => navigate("/dangnhap")} // route tạm, bạn sẽ tạo sau
               className="px-5 py-2.5 rounded-full border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-300 transition flex items-center gap-2"
             >
               <LuUserRoundPen className="w-4 h-4" />

@@ -1,30 +1,114 @@
 import { motion } from "framer-motion";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
 import { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+
+
 
 export default function Register() {
-  const [name, setName] = useState("");
-  const [emailPhone, setEmailPhone] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [dob, setDob] = useState("");
+  const [school, setSchool] = useState("");
+  const [grade, setGrade] = useState("");
+
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
   const [pass, setPass] = useState("");
   const [passAgain, setPassAgain] = useState("");
+  const [showPass, setShowPass] = useState(false);
+  const [showPass2, setShowPass2] = useState(false);
 
-  const handleRegister = () => {
-    console.log("Register:", name, emailPhone, pass, passAgain);
+  const [msg, setMsg] = useState("");
+
+  const handleRegister = async () => {
+    if (pass !== passAgain) {
+      setMsg("❌ Mật khẩu nhập lại không khớp!");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setMsg("❌ Email không hợp lệ!");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      return;
+    }
+
+    if (!/^\d{10}$/.test(phone)) {
+      setMsg("❌ Số điện thoại phải gồm đúng 10 số!");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      return;
+    }
+    const strongPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!strongPass.test(pass)) {
+      setMsg("❌ Mật khẩu phải 8 ký tự, có chữ hoa, thường, số và ký tự đặc biệt!");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      return;
+    }
+
+
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName,
+          dob,
+          school,
+          grade,
+          phone,
+          email,
+          password: pass,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.error) {
+        setMsg("❌ " + data.error);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+      } else {
+        setMsg("✅ Tạo tài khoản thành công!");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // 🔥 Reset form
+        setFullName("");
+        setDob("");
+        setSchool("");
+        setGrade("");
+        setPhone("");
+        setEmail("");
+        setPass("");
+        setPassAgain("");
+        setShowPass(false);
+        setShowPass2(false);
+      }
+
+    } catch (err) {
+      setMsg("❌ Lỗi kết nối server!");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+    }
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-white px-4">
+    <section className="min-h-screen flex items-start justify-center bg-white px-4 pt-32 pb-32">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-lg p-8"
       >
-
         {/* HEADER */}
-        <h1 className="text-3xl font-extrabold text-center mb-2
-                       text-white bg-[#1c7c76] rounded-xl py-3">
+        <h1 className="text-3xl font-extrabold text-center mb-2 text-white bg-[#1c7c76] rounded-xl py-3">
           Đăng Ký Tài Khoản
         </h1>
 
@@ -32,61 +116,143 @@ export default function Register() {
           Tạo tài khoản mới để bắt đầu học tập hiệu quả hơn.
         </p>
 
+        {msg && (
+          <p
+            className={`text-center mb-4 ${msg.includes("✅") ? "text-green-600" : "text-red-600"
+              }`}
+          >
+            {msg}
+          </p>
+        )}
+
+
         {/* FULL NAME */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-1">
-            Họ và tên
-          </label>
+          <label className="block text-gray-700 font-medium mb-1">Họ và tên</label>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
             placeholder="Nhập họ tên..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
         </div>
 
-        {/* EMAIL / PHONE */}
+        {/* DOB */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-1">
-            Email hoặc Số điện thoại
-          </label>
+          <label className="block text-gray-700 font-medium mb-1">Ngày sinh (dd/mm/yyyy)</label>
           <input
             type="text"
-            value={emailPhone}
-            onChange={(e) => setEmailPhone(e.target.value)}
-            placeholder="Nhập email hoặc số điện thoại..."
+            value={dob}
+
+
+            onChange={(e) => {
+              let v = e.target.value.replace(/\D/g, ""); // chỉ giữ số
+
+              if (v.length > 2 && v.length <= 4) {
+                v = v.replace(/(\d{2})(\d{1,2})/, "$1/$2");
+              }
+              else if (v.length > 4) {
+                v = v.replace(/(\d{2})(\d{2})(\d{1,4})/, "$1/$2/$3");
+              }
+
+              setDob(v);
+            }}
+
+            placeholder="01/01/2007"
+            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+          />
+        </div>
+
+        {/* SCHOOL */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Trường học</label>
+          <input
+            type="text"
+            value={school}
+            onChange={(e) => setSchool(e.target.value)}
+            placeholder="Nhập tên trường..."
+            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+          />
+        </div>
+
+        {/* GRADE */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Lớp</label>
+          <input
+            type="text"
+            value={grade}
+            onChange={(e) => setGrade(e.target.value)}
+            placeholder="Ví dụ: 10A1"
+            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+          />
+        </div>
+
+        {/* PHONE */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Số điện thoại</label>
+          <input
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="Nhập số điện thoại..."
+            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+          />
+        </div>
+
+        {/* EMAIL */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Nhập email..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
         </div>
 
         {/* PASSWORD */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-1">
-            Mật khẩu
-          </label>
+        <div className="mb-4 relative">
+          <label className="block text-gray-700 font-medium mb-1">Mật khẩu</label>
+
           <input
-            type="password"
+            type={showPass ? "text" : "password"}
             value={pass}
             onChange={(e) => setPass(e.target.value)}
             placeholder="Tạo mật khẩu..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
+
+          <span
+            className="absolute right-4 top-[45px] text-gray-600 cursor-pointer"
+            onClick={() => setShowPass(!showPass)}
+          >
+            {showPass ? <FiEyeOff size={22} /> : <FiEye size={22} />}
+          </span>
         </div>
 
+
         {/* PASSWORD AGAIN */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-1">
-            Nhập lại mật khẩu
-          </label>
+        <div className="mb-4 relative">
+          <label className="block text-gray-700 font-medium mb-1">Nhập lại mật khẩu</label>
+
           <input
-            type="password"
+            type={showPass2 ? "text" : "password"}
             value={passAgain}
             onChange={(e) => setPassAgain(e.target.value)}
             placeholder="Nhập lại mật khẩu..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
+
+          <span
+            className="absolute right-4 top-[45px] text-gray-600 cursor-pointer"
+            onClick={() => setShowPass2(!showPass2)}
+          >
+            {showPass2 ? <FiEyeOff size={22} /> : <FiEye size={22} />}
+          </span>
         </div>
+
 
         {/* REGISTER BUTTON */}
         <button
@@ -96,34 +262,9 @@ export default function Register() {
           Tạo tài khoản
         </button>
 
-        {/* OR LINE */}
-        <div className="flex items-center my-6">
-          <div className="flex-1 h-px bg-gray-300" />
-          <span className="px-3 text-gray-500">Hoặc</span>
-          <div className="flex-1 h-px bg-gray-300" />
-        </div>
-
-        {/* SOCIAL LOGIN */}
-        <div className="grid grid-cols-1 gap-3">
-          {/* GOOGLE */}
-          <button className="flex items-center justify-center gap-3 border rounded-xl py-3 hover:bg-gray-50 transition">
-            <FcGoogle size={24} />
-            <span className="font-medium">Đăng ký bằng Google</span>
-          </button>
-
-          {/* FACEBOOK */}
-          <button className="flex items-center justify-center gap-3 border rounded-xl py-3 hover:bg-gray-50 transition">
-            <FaFacebook size={22} className="text-blue-600" />
-            <span className="font-medium">Đăng ký bằng Facebook</span>
-          </button>
-        </div>
-
-        {/* LOGIN LINK */}
         <p className="text-center text-gray-600 mt-6 text-sm">
-          Đã có tài khoản?{" "}
-          <a href="/login" className="text-[#1c7c76] font-medium underline">
-            Đăng nhập
-          </a>
+          Đã có tài khoản?
+          <a href="/dangnhap" className="text-[#1c7c76] font-medium underline"> Đăng nhập</a>
         </p>
       </motion.div>
     </section>

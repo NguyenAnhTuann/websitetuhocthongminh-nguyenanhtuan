@@ -41,7 +41,7 @@ const ThucHanh = ({ language }) => {
   const [selectedFolder, setSelectedFolder] = useState(null);
 
   const [showFolder1, setShowFolder1] = useState(false);
-  const [activeTab, setActiveTab] = useState("intro"); // intro | pdf | video
+  const [activeTab, setActiveTab] = useState("intro");
 
 
   const t = {

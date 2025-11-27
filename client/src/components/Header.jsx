@@ -11,6 +11,21 @@ const Header = ({ language, setLanguage }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openLifeMenu, setOpenLifeMenu] = useState(false);
   const lifeMenuRef = useRef(null);
+  const [user, setUser] = useState(null);
+
+useEffect(() => {
+  const storedUser = localStorage.getItem("user");
+  const storedToken = localStorage.getItem("token");
+
+  if (storedUser && storedToken) {
+    setUser(JSON.parse(storedUser));
+  } else {
+    setUser(null);   // 🔥 đảm bảo React update UI khi chưa login
+  }
+}, []);
+
+
+
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -101,82 +116,54 @@ const Header = ({ language, setLanguage }) => {
         {/* 🔥 ACTIONS */}
         <div className="flex items-center gap-4">
 
-          {/* Nút đăng nhập */}
-          <Link
-            to="/dangnhap"
-            className="hidden md:block px-4 py-1.5 text-white/90 border border-white/30 rounded-xl hover:bg-white/20 transition text-sm backdrop-blur-md"
-          >
-            {t.auth.login}
-          </Link>
+          {/* Nếu CHƯA đăng nhập → hiện Login + Register */}
+          {!user && (
+            <>
+              <Link
+                to="/dangnhap"
+                className="hidden md:block px-4 py-1.5 text-white/90 border border-white/30 rounded-xl hover:bg-white/20 transition text-sm backdrop-blur-md"
+              >
+                {t.auth.login}
+              </Link>
 
-          {/* Nút đăng ký nổi bật */}
-          <Link
-            to="/dangky"
-            className="hidden md:block px-4 py-1.5 bg-yellow-400 text-[#1a2a2a] font-medium rounded-xl shadow-md hover:bg-yellow-300 transition text-sm"
-          >
-            {t.auth.register}
-          </Link>
+              <Link
+                to="/dangky"
+                className="hidden md:block px-4 py-1.5 bg-yellow-400 text-[#1a2a2a] font-medium rounded-xl shadow-md hover:bg-yellow-300 transition text-sm"
+              >
+                {t.auth.register}
+              </Link>
+            </>
+          )}
 
-          {/* Language toggle */}
-          <button
-            onClick={handleLanguageToggle}
-            className="border border-white/30 rounded-lg p-1 w-11 h-7 flex items-center justify-center hover:bg-white/20 backdrop-blur-md"
-          >
-            <img
-              src={
-                language === "vi"
-                  ? "https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg"
-                  : "https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg"
-              }
-              alt="Flag"
-              className="w-6 h-4 object-cover"
-            />
-          </button>
+          {/* Nếu ĐÃ đăng nhập → hiện TÊN + ĐĂNG XUẤT */}
+          {user && (
+            <div className="flex items-center gap-3 text-white">
+              <span className="font-semibold flex items-center gap-2">
+                👋 {user.fullName}
+              </span>
 
-          {/* Mobile button */}
-          <button
-            className="md:hidden text-white"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+              <button
+                onClick={() => {
+                  localStorage.removeItem("user");
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("role");  // 🔥 thêm dòng này
+                  window.location.reload();         // reload lại UI
+                }}
+
+                className="px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
+              >
+                Đăng xuất
+              </button>
+            </div>
+          )}
+
+
+
         </div>
+
       </div>
 
-      {/* 🔥 MOBILE MENU (Glassmorphism) */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#1a6d66]/40 backdrop-blur-lg px-6 py-5 flex flex-col gap-5 text-white font-medium border-t border-white/20">
 
-          <Link to="/kynangtuhoc" onClick={() => setIsMobileMenuOpen(false)}>
-            {t.menu.kynangtuhoc}
-          </Link>
-
-          <Link to="/kynangsong" onClick={() => setIsMobileMenuOpen(false)}>
-            {t.menu.kynangsong}
-          </Link>
-
-          <Link to="/chatbot" onClick={() => setIsMobileMenuOpen(false)}>
-            {t.menu.chatbot}
-          </Link>
-
-          <Link to="/thuchanh" onClick={() => setIsMobileMenuOpen(false)}>
-            {t.menu.thuchanh}
-          </Link>
-
-          <Link to="/tailieuonline" onClick={() => setIsMobileMenuOpen(false)}>
-            {t.menu.tailieuonline}
-          </Link>
-
-          <div className="flex flex-col gap-3 border-t border-white/20 pt-4">
-            <Link to="/dangnhap" className="px-3 py-2 bg-white/20 rounded-lg text-center">
-              {t.auth.login}
-            </Link>
-            <Link to="/dangky" className="px-3 py-2 bg-yellow-400 text-[#1a2a2a] rounded-lg text-center">
-              {t.auth.register}
-            </Link>
-          </div>
-        </div>
-      )}
     </header>
   );
 };
