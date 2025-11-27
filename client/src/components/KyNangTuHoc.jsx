@@ -296,6 +296,31 @@ const KyNangTuHoc = ({ language }) => {
                 >
                   Video AI
                 </li>
+
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("anh1")}
+                >
+                  Sơ đồ tư duy toán lớp 10
+                </li>
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("anh2")}
+                >
+                  Sơ đồ tư duy toán lớp 11
+                </li>
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("anh3")}
+                >
+                  Sơ đồ tư duy toán lớp 12
+                </li>
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("anh4")}
+                >
+                  Kiến thức thú vị
+                </li>
               </ul>
             )}
 
@@ -511,7 +536,7 @@ rounded-2xl p-8 text-center">
               className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
             >
               <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
-                🎬 Danh sách video
+                🎬 Danh sách hình ảnh & Video
               </h2>
 
               {/* === HIỂN THỊ VIDEO THEO FOLDER === */}
@@ -656,8 +681,190 @@ rounded-2xl p-8 text-center">
               {!selectedFolder && (
                 <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
               )}
+
+              {selectedFolder === "anh1" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      name: "Vecto và các phép toán vecto",
+                      link: "https://drive.google.com/file/d/1eINt8AeeoPjS_LzZSLOIHgjOgx_Mq0um/view?usp=sharing",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Tỷ số lượng giác của góc nhọn",
+                      link: "https://drive.google.com/file/d/1PwbM7WDA40FOh1eA4USWPNqlJCggfhfv/view?usp=sharing",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Hình bình hành",
+                      link: "https://drive.google.com/file/d/1e62Dq_EwFAYWOd0yX79D4_renbo8KjxU/view?usp=sharing",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Hệ thức lượng trong tam giác",
+                      link: "https://drive.google.com/file/d/1pZXfiw4jvLdpyXu6Fbf08uakzc2-0nOe/view?usp=sharing",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Hệ thức lượng trong tam giác vuông",
+                      link: "https://drive.google.com/file/d/1oxE-cYc-e_2k-lnVlIJ39T4CXFjqXM4t/view?usp=sharing",
+                      thumbnail: ""
+                    },
+                    {
+                      name: "Hàm số bậc hai",
+                      link: "https://drive.google.com/file/d/1MLkeSDTLhr8SUH62H3gEWybeGinzOA98/view?usp=sharing",
+                      thumbnail: ""
+                    }
+
+                  ].map((v, i) => (
+                    <a
+                      key={i}
+                      href={v.link}
+                      target="_blank"
+                      className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {v.thumbnail && (
+                        <img src={v.thumbnail} className="w-full object-cover" />
+                      )}
+                      <div className="p-4">
+                        <h3 className="font-semibold text-gray-900">{v.name}</h3>
+                        <p className="text-sm text-gray-500">Nhấn để mở hình ảnh</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+
+              {selectedFolder === "anh2" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+
+                    { name: "XÁC SUẤT CÓ ĐIỀU KIỆN", link: "https://drive.google.com/file/d/1RLWevvrLzLeNpfyGK6aw-Vrk1GvWJ_wH/view?usp=sharing", thumbnail: "" },
+                    { name: "TỨ PHÂN VỊ CỦA MẪU SỐ LIỆU GHÉP NHÓM", link: "https://drive.google.com/file/d/1GYLt0PLR678k77BvNjpMYoQDxfcXmfcn/view?usp=sharing", thumbnail: "" },
+                    { name: "TỔ HỢP, CHỈNH HỢP", link: "https://drive.google.com/file/d/1p9w-DPplgWxRYwkhvTuxgGgtG6g8-JvV/view?usp=sharing", thumbnail: "" },
+                    { name: "QUAN HỆ SONG SONG TRONG KHÔNG GIAN", link: "https://drive.google.com/file/d/1xDuYUwnxoYQcQfRJAi42g-pwrNwLfPY0/view?usp=sharing", thumbnail: "" },
+                    { name: "PHÉP CHIẾU SONG SONG", link: "https://drive.google.com/file/d/1Q6_O3GYWllZX_Kc8_p9jBwW6_lpbZswu/view?usp=sharing", thumbnail: "" },
+                    { name: "HAI MẶT PHẲNG SONG SONG", link: "https://drive.google.com/file/d/10pQfwANGsLyaYEourzW9eMEPxrojoxt0/view?usp=sharing", thumbnail: "" },
+                    { name: "HAI ĐƯỜNG THẲNG SONG SONG", link: "https://drive.google.com/file/d/1xnjxf3BOANdnZVfeW8JKzoWD5TJAW85m/view?usp=sharing", thumbnail: "" },
+                    { name: "ĐƯỜNG THẲNG SONG SONG MẶT PHẲNG", link: "https://drive.google.com/file/d/1xnjxf3BOANdnZVfeW8JKzoWD5TJAW85m/view?usp=sharing", thumbnail: "" },
+                    { name: "ĐƯỜNG THẲNG & MẶT PHẲNG TRONG KHÔNG GIAN", link: "https://drive.google.com/file/d/1xnjxf3BOANdnZVfeW8JKzoWD5TJAW85m/view?usp=sharing", thumbnail: "" },
+                    { name: "DÃY SỐ, CẤP SỐ CỘNG, CẤP SỐ NHÂN", link: "https://drive.google.com/file/d/1oLex-4zObb1Zo8UozilOhWXHxvyG07RO/view?usp=sharing", thumbnail: "" },
+                    { name: "CÔNG THỨC LƯỢNG GIÁC", link: "https://drive.google.com/file/d/1D0neS4QFPJVF3mOISfZkYsrtil0ay-4E/view?usp=sharing", thumbnail: "" },
+                    { name: "CẤP SỐ NHÂN", link: "https://drive.google.com/file/d/1BTc7ik4jma7DbhyHG7EC0C6sDXLS0z68/view?usp=sharing", thumbnail: "" },
+                    { name: "CẤP SỐ CỘNG", link: "https://drive.google.com/file/d/1kHY8QLL_ccD4RWwcbFyNzDP-Q79NBv5P/view?usp=sharing", thumbnail: "" },
+                    { name: "CÁC SỐ ĐẶC TRƯNG CỦA MẪU SỐ LIỆU GHÉP NHÓM", link: "", thumbnail: "" }
+
+
+                  ].map((v, i) => (
+                    <a
+                      key={i}
+                      href={v.link}
+                      target="_blank"
+                      className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {v.thumbnail && (
+                        <img src={v.thumbnail} className="w-full object-cover" />
+                      )}
+                      <div className="p-4">
+                        <h3 className="font-semibold text-gray-900">{v.name}</h3>
+                        <p className="text-sm text-gray-500">Nhấn để mở hình ảnh</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+
+
+              {selectedFolder === "anh3" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+
+                    { name: "XÁC SUẤT CÓ ĐIỀU KIỆN & CÔNG THỨC BAYES", link: "https://drive.google.com/file/d/1y9Dg2yNJemDruT6XaeazgPgdiQuCrm7C/view?usp=sharing", thumbnail: "" },
+                    { name: "ỨNG DỤNG HÌNH HỌC CỦA TÍCH PHÂN", link: "https://drive.google.com/file/d/1aUyevn6V9f_ia3vNCBTrwZir_w15LCbe/view?usp=sharing", thumbnail: "" },
+                    { name: "TỔNG HỢP CÔNG THỨC THỂ TÍCH CÁC KHỐI HÌNH KHÔNG GIAN", link: "https://drive.google.com/file/d/17GVGKgBEw_wXbBBg_OO15-uJus7NBTp8/view?usp=sharing", thumbnail: "" },
+                    { name: "HỆ TỌA ĐỘ Oxyz", link: "https://drive.google.com/file/d/1QPQZrWQpQVUIWuahSd_EjpI-m-FW6XoY/view?usp=sharing", thumbnail: "" },
+                    { name: "GIÁ TRỊ LỚN NHẤT, GIÁ TRỊ NHỎ NHẤT CỦA HÀM SỐ", link: "https://drive.google.com/file/d/1W_ZMjwRkxbn6AXGcxmzDPf8QH0kIVSIR/view?usp=sharing", thumbnail: "" },
+                    { name: "ĐỊNH NGHĨA & TÍNH CHẤT TÍCH PHÂN", link: "https://drive.google.com/file/d/17aoWP3IxqkOj64gAvYlEs_TVh9MD4Lby/view?usp=sharing", thumbnail: "" },
+                    { name: "CÔNG THỨC TỌA ĐỘ VECTO TRONG KHÔNG GIAN", link: "https://drive.google.com/file/d/1dIgjdWk-FdA7fqfGtBHcpVJZOQ5rNiaz/view?usp=sharing", thumbnail: "" },
+                    { name: "CÔNG THỨC NGUYÊN HÀM", link: "https://drive.google.com/file/d/1w2QKuZ_d70GdegA-jyFJLdQiueXCyyxd/view?usp=sharing", thumbnail: "" },
+                    { name: "CÔNG THỨC KHỐI TRỤ", link: "https://drive.google.com/file/d/1cLigbFQze1S2nFT23L86IjBy-Pi5aD27/view?usp=sharing", thumbnail: "" },
+                    { name: "CÔNG THỨC KHỐI NÓN", link: "https://drive.google.com/file/d/1E6ABraZc5XPvE2M90okVQrtgT21p-Og_/view?usp=sharing", thumbnail: "" },
+                    { name: "CÁC PHÉP TOÁN VECTO TRONG KHÔNG GIAN", link: "https://drive.google.com/file/d/177d2hy_s57pONHrgPzF8hmElpBewrQHE/view?usp=sharing", thumbnail: "" },
+                    { name: "CÁC BƯỚC VẼ ĐỒ THỊ HÀM SỐ", link: "https://drive.google.com/file/d/1qV67mUE7XvgcJtVe0QQHMHbHPfW_EHhX/view?usp=sharing", thumbnail: "" },
+                    { name: "6 BƯỚC VẼ ĐỒ THỊ HÀM SỐ", link: "https://drive.google.com/file/d/1qV67mUE7XvgcJtVe0QQHMHbHPfW_EHhX/view?usp=sharing", thumbnail: "" }
+
+
+
+                  ].map((v, i) => (
+                    <a
+                      key={i}
+                      href={v.link}
+                      target="_blank"
+                      className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {v.thumbnail && (
+                        <img src={v.thumbnail} className="w-full object-cover" />
+                      )}
+                      <div className="p-4">
+                        <h3 className="font-semibold text-gray-900">{v.name}</h3>
+                        <p className="text-sm text-gray-500">Nhấn để mở hình ảnh</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+
+
+              {selectedFolder === "anh4" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    
+                      { name: "VẺ ĐẸP ĐỐI XỨNG TRONG CUỘC SỐNG", link: "https://drive.google.com/file/d/1pPJ8WjXcHN2oL8O3t6bk8g6BxKuxnK52/view?usp=sharing", thumbnail: "" },
+                      { name: "THẾ GIỚI VUI NHỘN CỦA VECTO", link: "https://drive.google.com/file/d/1nuvdWOCoPAVZLP6pAexzOosO4WUQe5EZ/view?usp=sharing", thumbnail: "" },
+                      { name: "SỐ NGUYÊN", link: "https://drive.google.com/file/d/1sZJII7HTNPOirB_UDAMn_xId3VXgeQcB/view?usp=sharing", thumbnail: "" },
+                      { name: "SỐ NGUYÊN ÂM", link: "https://drive.google.com/file/d/1cHcxh0SCzMbN6dQpJZFZLELB0i9OwJtG/view?usp=sharing", thumbnail: "" },
+                      { name: "PYTAGO – NHÀ TOÁN HỌC", link: "https://drive.google.com/file/d/1cHcxh0SCzMbN6dQpJZFZLELB0i9OwJtG/view?usp=sharing", thumbnail: "" },
+                      { name: "HÌNH HỌC PHẲNG", link: "https://drive.google.com/file/d/1oJ85JQlRbQWFDc17w85FG2q7kOrpIxcJ/view?usp=sharing", thumbnail: "" },
+                      { name: "CASIO CHƯƠNG HÀM SỐ", link: "https://drive.google.com/file/d/1s3DKoT1whqjBBWZ8jx-U7hT3CQsrOe_D/view?usp=sharing", thumbnail: "" }
+                    
+
+
+                  ].map((v, i) => (
+                    <a
+                      key={i}
+                      href={v.link}
+                      target="_blank"
+                      className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {v.thumbnail && (
+                        <img src={v.thumbnail} className="w-full object-cover" />
+                      )}
+                      <div className="p-4">
+                        <h3 className="font-semibold text-gray-900">{v.name}</h3>
+                        <p className="text-sm text-gray-500">Nhấn để mở hình ảnh</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+
+              {/* CHƯA CHỌN FOLDER */}
+              {!selectedFolder && (
+                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
+              )}
+
+
             </motion.div>
           )}
+
+
+
+
+
 
 
         </main>
