@@ -37,7 +37,7 @@ const Header = ({ language, setLanguage }) => {
         kynangsong: "Kỹ năng sống",
         chatbot: "AI ChatBot",
         thuchanh: "Thực hành",
-        tailieuso: "Tài nguyên online",
+        tailieuonline: "Tài nguyên online",
       },
       auth: { login: "Đăng nhập", register: "Đăng ký" },
     },
@@ -49,7 +49,7 @@ const Header = ({ language, setLanguage }) => {
         kynangsong: "Life skills",
         chatbot: "AI ChatBot",
         thuchanh: "Practice",
-        tailieuso: "Online resources",
+        tailieuonline: "Online resources",
       },
       auth: { login: "Login", register: "Register" },
     },
@@ -93,8 +93,8 @@ const Header = ({ language, setLanguage }) => {
             <PiGraduationCapBold className="w-4 h-4" /> {t.menu.thuchanh}
           </Link>
 
-          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/tailieuso">
-            <MdOutlineLibraryBooks className="w-4 h-4" /> {t.menu.tailieuso}
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/tailieuonline">
+            <MdOutlineLibraryBooks className="w-4 h-4" /> {t.menu.tailieuonline}
           </Link>
         </nav>
 
@@ -163,8 +163,8 @@ const Header = ({ language, setLanguage }) => {
             {t.menu.thuchanh}
           </Link>
 
-          <Link to="/tailieuso" onClick={() => setIsMobileMenuOpen(false)}>
-            {t.menu.tailieuso}
+          <Link to="/tailieuonline" onClick={() => setIsMobileMenuOpen(false)}>
+            {t.menu.tailieuonline}
           </Link>
 
           <div className="flex flex-col gap-3 border-t border-white/20 pt-4">

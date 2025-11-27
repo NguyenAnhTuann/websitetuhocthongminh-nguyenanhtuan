@@ -69,7 +69,7 @@ const AppWrapper = () => {
             <Route path="/kynangsong" element={<KyNangSong language={language} />} />
             <Route path="/chatbot" element={<ChatBot language={language} />} />
             <Route path="/thuchanh" element={<ThucHanh language={language} />} />
-            <Route path="/tailieuso" element={<TaiNguyenOnline language={language} />} />
+            <Route path="/tailieuonline" element={<TaiNguyenOnline language={language} />} />
             <Route path="/dangnhap" element={<Login language={language} />} />
             <Route path="/dangky" element={<Register language={language} />} />
           </Routes>

@@ -106,9 +106,9 @@ const Home = ({ language }) => {
           ]
         },
         {
-          key: "tailieuso",
+          key: "tailieuonline",
           title: "5. Tài nguyên & thư viện nội dung",
-          route: "/tailieuso",
+          route: "/tailieuonline",
           icon: <MdOutlineLibraryBooks className="w-7 h-7" />,
           points: [
             "Kịch bản xử lý tình huống trên không gian mạng và đời sống",
@@ -210,9 +210,9 @@ const Home = ({ language }) => {
           ]
         },
         {
-          key: "tailieuso",
+          key: "tailieuonline",
           title: "5. Resources & digital library",
-          route: "/tailieuso",
+          route: "/tailieuonline",
           icon: <MdOutlineLibraryBooks className="w-7 h-7" />,
           points: [
             "Scenario scripts for handling online and offline situations",
