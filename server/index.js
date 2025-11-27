@@ -10,7 +10,6 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 
 const User = require("./models/User");
 
-const cors = require("cors");
 app.use(cors({
   origin: "*",
   credentials: true
