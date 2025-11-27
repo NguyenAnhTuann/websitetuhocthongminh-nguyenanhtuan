@@ -6,9 +6,16 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 // Dùng node-fetch để gọi API trực tiếp
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const User = require("./models/User");
+
+const cors = require("cors");
+app.use(cors({
+  origin: "*",
+  credentials: true
+}));
+
 
 const app = express();
 app.use(cors());
