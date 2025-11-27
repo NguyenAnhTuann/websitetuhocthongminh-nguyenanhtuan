@@ -244,7 +244,7 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               className={`p-3 rounded-lg cursor-pointer transition
         ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
             >
-              Kỹ năng sống khác
+              An toàn mạng
             </li>
 
             {/* NỘI DUNG HIỆN THEO FOLDER ĐƯỢC CHỌN */}
@@ -255,21 +255,14 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
                   onClick={() => setSelectedFolder("video_math")}
                 >
-                  Phát triển bản thân: Kỹ năng cứng & mềm
+                  Lợi ích, rủi ro và giải pháp an toàn trên không gian mạng
                 </li>
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
                   onClick={() => setSelectedFolder("video_real")}
                 >
-                  Kỹ năng ứng phó với tình huống khẩn cấp
-                </li>
-
-                <li
-                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_ai")}
-                >
-                  Định hướng nghề nghiệp
+                  Cẩm nang sử dụng mạng an toàn
                 </li>
               </ul>
             )}
@@ -289,12 +282,13 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 rounded-2xl p-8 text-center">
 
               <h2 className="text-2xl md:text-3xl font-extrabold text-[#1c7c76] mb-3">
-                Kỹ năng tự học là gì?
+                Tài nguyên online là gì?
               </h2>
 
               <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6">
-                Kỹ năng tự học giúp học sinh – sinh viên chủ động khám phá kiến thức, quản lý thời gian
-                hiệu quả, rèn luyện tư duy độc lập và thích ứng với sự thay đổi nhanh chóng của kỷ nguyên số.
+                Tài nguyên online cung cấp cho học sinh – sinh viên những tài liệu, video và
+                hình ảnh minh họa giúp rèn luyện kỹ năng ứng xử, phòng tránh rủi ro trên
+                không gian mạng và xây dựng hành vi văn minh trong cuộc sống.
               </p>
 
               {/* 3 FEATURE GRID */}
@@ -307,7 +301,7 @@ rounded-2xl p-8 text-center">
                   </div>
                   <h3 className="font-bold text-gray-800 mb-2">Tài liệu PDF</h3>
                   <p className="text-sm text-gray-600">
-                    Tổng hợp tài liệu Google Drive giúp rèn luyện tư duy, nắm phương pháp học tập hiện đại.
+                    Tổng hợp tài liệu PDF về an toàn mạng, bạo lực học đường và kỹ năng ứng xử trong đời sống.
                   </p>
                 </div>
 
@@ -318,7 +312,7 @@ rounded-2xl p-8 text-center">
                   </div>
                   <h3 className="font-bold text-gray-800 mb-2">Video – Hình ảnh</h3>
                   <p className="text-sm text-gray-600">
-                    Video minh họa, dự án thực tế giúp học sinh tiếp thu dễ dàng và vận dụng vào cuộc sống.
+                    Hình ảnh minh họa và video thực tế giúp học sinh dễ dàng nhận diện tình huống và cách xử lý.
                   </p>
                 </div>
 
@@ -327,9 +321,9 @@ rounded-2xl p-8 text-center">
                   <div className="w-12 h-12 mx-auto bg-[#A8DCD2] rounded-xl flex items-center justify-center mb-4">
                     <MessageCircle className="w-6 h-6 text-[#1c7c76]" />
                   </div>
-                  <h3 className="font-bold text-gray-800 mb-2">Công cụ hỗ trợ</h3>
+                  <h3 className="font-bold text-gray-800 mb-2">Tương tác & hỗ trợ</h3>
                   <p className="text-sm text-gray-600">
-                    Kết hợp AI ChatBot và phương pháp Pomodoro – Forest giúp học sinh học hiệu quả hơn.
+                    Công cụ chatbot hỗ trợ giải đáp thắc mắc và hướng dẫn học sinh ứng xử an toàn – văn minh.
                   </p>
                 </div>
 
@@ -337,9 +331,11 @@ rounded-2xl p-8 text-center">
 
               {/* FOOT TEXT */}
               <p className="mt-8 text-sm md:text-base text-gray-600 leading-relaxed">
-                Mục <span className="font-semibold text-[#1c7c76]">Kỹ năng tự học</span> được xây dựng nhằm
-                hỗ trợ học sinh – sinh viên hình thành thói quen học tập chủ động, linh hoạt và bền vững.
+                Mục <span className="font-semibold text-[#1c7c76]">Tài nguyên online</span> được
+                xây dựng nhằm hỗ trợ học sinh – sinh viên trang bị kiến thức, kỹ năng và thái độ
+                cần thiết để bảo vệ bản thân trong học tập và đời sống số.
               </p>
+
             </div>
 
           )}
@@ -427,20 +423,41 @@ rounded-2xl p-8 text-center">
 
                   {[
                     {
-                      name: "KỸ NĂNG SỐNG SỐNG CÓ KỶ LUẬT",
-                      link: "https://drive.google.com/file/d/1uo8Hk2B7qcFuaHMmyXiwFS_6GCDXvBxG/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135937/Gemini_Generated_Image_vt08xmvt08xmvt08_ptpkcb.png"
+                      name: "TIN GIẢ",
+                      link: "https://drive.google.com/file/d/1etugj85jn76wEu1B4dmeYnEdGV7MT2EB/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142491/Gemini_Generated_Image_76ecuj76ecuj76ec_vxenvr.png"
                     },
                     {
-                      name: "KỸ NĂNG PHÒNG CHỐNG MA TÚY TRONG TRƯỜNG HỌC",
-                      link: "https://drive.google.com/file/d/1f1sSR896SHD7KS2NjK6x0m40F8HgEkJ7/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135939/Gemini_Generated_Image_2ot0zo2ot0zo2ot0_w8w4o5.png"
+                      name: "NHẬN ĐƯỢC TIN NHẮN TRÚNG THƯỞNG",
+                      link: "https://drive.google.com/file/d/1pdJgMQvHE91Lm8J-yluWbelMHLhPnYbw/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142480/Gemini_Generated_Image_xtz6arxtz6arxtz6_sloi54.png"
                     },
                     {
-                      name: "KỸ NĂNG ĐỊNH HƯỚNG NGHỀ NGHIỆP",
-                      link: "https://drive.google.com/file/d/1Lj2xvuy7OeQdJsgaVRlQ2Yz9nQFln6Xw/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135936/Gemini_Generated_Image_f6fbyyf6fbyyf6fb_ddsfpe.png"
+                      name: "LỪA NẠP TIỀN, MẤT TÀI KHOẢN GAME",
+                      link: "https://drive.google.com/file/d/1cb5GryPeOGqXGL45x19K2p4ivSdGc1Ep/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142477/Gemini_Generated_Image_bqv3dgbqv3dgbqv3_vk86wv.png"
+                    },
+                    {
+                      name: "LỘ THÔNG TIN CÁ NHÂN, VỊ TRÍ, ẢNH",
+                      link: "https://drive.google.com/file/d/1t2hTPdcdA6KrI3v9a5qhw53nQFDm75cG/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142473/Gemini_Generated_Image_x846ycx846ycx846_btfsq0.png"
+                    },
+                    {
+                      name: "GÀI BẪY TÌNH, ĐE DỌA ĐĂNG ẢNH ĐỂ TỐNG TIỀN",
+                      link: "https://drive.google.com/file/d/1YRXKqPMnQRravqlY8OcIMS8IMr3QK_oz/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142467/Gemini_Generated_Image_etklp2etklp2etkl_ivqknn.png"
+                    },
+                    {
+                      name: "ĐĂNG HÀNH VI BẠO LỰC LÊN MẠNG ĐỂ CÂU LIKE",
+                      link: "https://drive.google.com/file/d/1lnk-MfznE3VoCgdeweMpvtPrUi8oiZXT/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142481/Gemini_Generated_Image_tlg041tlg041tlg0_bzbjyl.png"
+                    },
+                    {
+                      name: "ĐĂNG HÀNH VI BẠO LỰC ĐỂ CÂU LIKE",
+                      link: "https://drive.google.com/file/d/1lnk-MfznE3VoCgdeweMpvtPrUi8oiZXT/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142471/Gemini_Generated_Image_6ng6bt6ng6bt6ng6_i8ekfj.png"
                     }
+
                   ].map((v, i) => (
                     <a
                       key={i}
@@ -453,7 +470,7 @@ rounded-2xl p-8 text-center">
                       )}
                       <div className="p-4">
                         <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
-                        <p className="text-sm text-gray-500">Nhấn để mở tài liệu</p>
+                        <p className="text-sm text-gray-500">Nhấn để mở vieo</p>
                       </div>
                     </a>
                   ))}
@@ -461,57 +478,15 @@ rounded-2xl p-8 text-center">
                 </div>
               )}
 
-
-              {/* VIDEO GIẢI TOÁN */}
               {selectedFolder === "video_math" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
-                      name: "Khái Niệm Kỹ Năng Là Gì",
-                      link: "https://drive.google.com/file/d/1xL7vlGUbLVL-fN3pOv22_beeXJKHiOYS/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_w6r07ow6r07ow6r0_q9dhfq.png"
+                      name: "LỢI ÍCH, RỦI RO VÀ GIẢI PHÁP AN TOÀN TRÊN KHÔNG GIAN MẠNG",
+                      link: "https://drive.google.com/file/d/1z2P3QBo0GXelf2UqX_hXtGzGUNC7yGvB/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142473/Gemini_Generated_Image_58ragp58ragp58ra_jfd7t4.png"
                     },
-                    {
-                      name: "Top 10 Điều Thú Vị Về Tính Cách ISFJ Trong Trắc Nghiệm MBTI",
-                      link: "https://drive.google.com/file/d/1Q3Zouk2z67l4ds_7VGqO5rQ819K4Tq1J/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135937/Gemini_Generated_Image_3x9w343x9w343x9w_fi5duz.png"
-                    },
-                    {
-                      name: "Tính Cách ISTP Là Gì",
-                      link: "https://drive.google.com/file/d/1PlCjlrtvVw-mNx7OZqUQVq5R3sYqPfcn/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135936/Gemini_Generated_Image_dvhm34dvhm34dvhm_stgify.png"
-                    },
-                    {
-                      name: "Tính Cách INTJ Có Gì Khác Biệt",
-                      link: "https://drive.google.com/file/d/1reWoFcDRfkvmPoc3uHU7OvsafFbs6t8n/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_wccnvowccnvowccn_eozu9x.png"
-                    },
-                    {
-                      name: "Tìm Hiểu Nhóm Tính Cách ENTJ",
-                      link: "https://drive.google.com/file/d/1NZhvQs5ndzdfv5BV8cPnrMcnSdj1rZlE/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135933/Gemini_Generated_Image_4dzhxa4dzhxa4dzh_tdtl5q.png"
-                    },
-                    {
-                      name: "Những Kỹ Năng Làm Quen Với Người Lạ Trong Giao Tiếp Hiệu Quả",
-                      link: "https://drive.google.com/file/d/1eo6BqO2uydG6cEb2g3kPwDp7OsufKMZT/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_5nm1qu5nm1qu5nm1_ukq9yj.png"
-                    },
-                    {
-                      name: "Nhóm Tính Cách ESFP",
-                      link: "https://drive.google.com/file/d/1lGHpsmatecP8Jxit7d8ev6Jzo1qmZpEx/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135939/Gemini_Generated_Image_61f31y61f31y61f3_qjqtsz.png"
-                    },
-                    {
-                      name: "Kỹ Năng Giao Tiếp Qua Điện Thoại",
-                      link: "https://drive.google.com/file/d/1QjAR7Gw_nE6vN2IjE4b3TwxgEkzGCpIU/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135933/Gemini_Generated_Image_3r8bej3r8bej3r8b_vsscoj.png"
-                    },
-
-                    {
-                      name: "Cách Giải Quyết Vấn Đề Và Ra Quyết Định Chỉ Với 6 Bước 6 Kỹ Năng",
-                      link: "https://drive.google.com/file/d/1-bXAlyM91EyYP-jayijnkiw0dbIid4uy/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764135934/Gemini_Generated_Image_scp1vtscp1vtscp1_mgugge.png"
-                    }
+                  
                   ].map((v, i) => (
                     <a
                       key={i}
@@ -524,21 +499,20 @@ rounded-2xl p-8 text-center">
                       )}
                       <div className="p-4">
                         <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
-                        <p className="text-sm text-gray-500">Nhấn để mở video</p>
+                        <p className="text-sm text-gray-500">Nhấn để tài liệu</p>
                       </div>
                     </a>
                   ))}
                 </div>
               )}
 
-              {/* VIDEO TOÁN THỰC TẾ */}
               {selectedFolder === "video_real" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
-                      name: "KỸ NĂNG ỨNG PHÓ VỚI TÌNH HUỐNG KHẨN CẤP",
-                      link: "https://drive.google.com/file/d/1_IWl6ZXNR7Hz920MvM7CtE52JYrUcI0G/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764137145/Gemini_Generated_Image_g5c7l0g5c7l0g5c7_kgxfh4.png"
+                      name: "CHIA SẺ VỀ TÌNH HUỐNG MẤT KIỂM SOÁT AN TOÀN TRÊN KHÔNG GIAN MẠNG",
+                      link: "https://drive.google.com/file/d/1Zbet2-wOLsg9NKc43MeQbksqnjMQ3FZm/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142475/Gemini_Generated_Image_kjwz2pkjwz2pkjwz_jv8n7j.png"
                     },
                   ].map((v, i) => (
                     <a
