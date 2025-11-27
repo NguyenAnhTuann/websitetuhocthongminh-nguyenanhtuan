@@ -138,7 +138,7 @@ export default function Register() {
           />
         </div>
 
-        onChange={(e) => {
+        {(e) => {
           let v = e.target.value.replace(/\D/g, ""); // chỉ giữ số
 
           // Tự thêm dấu "/"
