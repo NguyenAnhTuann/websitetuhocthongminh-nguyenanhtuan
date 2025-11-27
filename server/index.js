@@ -5,43 +5,50 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-// Dùng node-fetch để gọi API trực tiếp
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+// Dùng node-fetch
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 const User = require("./models/User");
 
-app.use(cors({
-  origin: "*",
-  credentials: true
-}));
-
-
+// KHỞI TẠO APP — PHẢI ĐỂ Ở ĐÂY
 const app = express();
-app.use(cors());
+
+// MIDDLEWARE
 app.use(express.json());
 
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
+
+// ROUTES
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
+
 const adminRoutes = require("./routes/admin");
 app.use("/api/admin", adminRoutes);
-
 
 // ===============================
 // 1) KẾT NỐI MONGODB
 // ===============================
-mongoose.connect(process.env.MONGO_URI)
+mongoose
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB connected"))
-  .catch(err => console.error("❌ MongoDB error:", err));
+  .catch((err) => console.error("❌ MongoDB error:", err));
 
-
-
-
+// ===============================
+// TẠO ADMIN
+// ===============================
 app.get("/make-admin", async (req, res) => {
   try {
-    const email = "admin@gmail.com"; // sửa thành email bạn muốn
+    const email = "admin@gmail.com";
     await User.findOneAndUpdate(
       { email },
-      { role: "admin" }
+      { role: "admin" },
+      { new: true }
     );
     res.send("Đã chuyển tài khoản thành admin");
   } catch (err) {
@@ -49,16 +56,17 @@ app.get("/make-admin", async (req, res) => {
   }
 });
 
-
 // ===============================
-// 4) API Gemini Chat (ĐÃ SỬA VỀ MODEL CHUẨN)
+// 4) API Gemini Chat
 // ===============================
 app.post("/api/chat", async (req, res) => {
   const { message } = req.body;
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    return res.json({ reply: "⚠️ Lỗi: Chưa cấu hình API Key trong file .env" });
+    return res.json({
+      reply: "⚠️ Lỗi: Chưa cấu hình GEMINI_API_KEY trong Render",
+    });
   }
 
   try {
@@ -70,11 +78,7 @@ app.post("/api/chat", async (req, res) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          contents: [
-            {
-              parts: [{ text: message }]
-            }
-          ]
+          contents: [{ parts: [{ text: message }] }],
         }),
       }
     );
@@ -82,18 +86,17 @@ app.post("/api/chat", async (req, res) => {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("❌ Google API Error Detail:", JSON.stringify(data, null, 2));
-      return res.json({ reply: `⚠️ Lỗi từ Google: ${data.error?.message || "Không rõ nguyên nhân"}` });
+      console.error("❌ Google API Error:", data);
+      return res.json({
+        reply: `⚠️ Lỗi từ Google: ${data.error?.message || "Không rõ nguyên nhân"}`,
+      });
     }
 
     const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-    if (reply) {
-      res.json({ reply });
-    } else {
-      res.json({ reply: "⚠️ AI không trả lời (Phản hồi trống)." });
-    }
+    if (!reply) return res.json({ reply: "⚠️ AI không trả lời." });
 
+    res.json({ reply });
   } catch (err) {
     console.error("❌ Server Error:", err);
     res.json({ reply: "⚠️ Lỗi kết nối đến server." });
@@ -101,9 +104,9 @@ app.post("/api/chat", async (req, res) => {
 });
 
 // ===============================
-// 5) KHỞI ĐỘNG SERVER
+// 5) START SERVER
 // ===============================
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
+  console.log(`🚀 Server đang chạy trên PORT ${PORT}`);
 });
