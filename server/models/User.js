@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema(
   {
     fullName: { type: String, required: true },
-    dob: { type: String, required: true }, // format dd/mm/yyyy
+    dob: { type: String, required: true },
     school: { type: String, required: true },
     grade: { type: String, required: true },
 

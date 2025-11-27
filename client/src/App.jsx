@@ -33,7 +33,6 @@ import GlobalToastProvider from './components/GlobalToast';
 const AppWrapper = () => {
   const location = useLocation();
   const [language, setLanguage] = useState('vi');
-  // Ẩn Header cho trang admin
   const hideHeaderPages = ["/admin-dashboard"];
   const shouldHideHeader = hideHeaderPages.includes(location.pathname);
 
@@ -72,13 +71,10 @@ const AppWrapper = () => {
         <div className="pt-[50px]">
 <GlobalToastProvider>
           <Routes>
-            {/* Redirect root → /home */}
             <Route path="/" element={<Navigate to="/home" replace />} />
 
-            {/* Trang chủ */}
             <Route path="/home" element={<Home language={language} />} />
 
-            {/* 5 trang mới theo menu */}
             <Route
               path="/kynangtuhoc" element={<KyNangTuHoc language={language} />}
             />

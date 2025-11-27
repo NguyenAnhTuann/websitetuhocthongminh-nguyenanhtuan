@@ -9,13 +9,12 @@ router.post("/register", async (req, res) => {
   try {
     const { fullName, dob, school, grade, phone, email, password } = req.body;
 
-    // Kiểm tra tồn tại email hoặc số điện thoại
     const exists = await User.findOne({
       $or: [{ email }, { phone }]
     });
 
     if (exists) {
-      return res.status(409).json({          // 409 = Conflict
+      return res.status(409).json({   
         success: false,
         message: "Email hoặc số điện thoại đã được đăng ký. Vui lòng dùng thông tin khác."
       });
@@ -54,12 +53,10 @@ router.post("/register", async (req, res) => {
 
 
 
-// ĐĂNG NHẬP
 router.post("/login", async (req, res) => {
   try {
     const { emailOrPhone, password } = req.body;
 
-    // Tìm theo email hoặc số điện thoại
     const user = await User.findOne({
       $or: [{ email: emailOrPhone }, { phone: emailOrPhone }],
     });
@@ -73,9 +70,8 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ success: false, message: "Sai mật khẩu" });
     }
 
-    // Tạo token
     const token = jwt.sign(
-      { userId: user._id, role: user.role },  // 🔥 thêm role vào token
+      { userId: user._id, role: user.role }, 
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
