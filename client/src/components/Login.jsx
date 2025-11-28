@@ -122,7 +122,7 @@ export default function Login() {
 
         <p className="text-center text-gray-600 mt-6 text-sm">
           Chưa có tài khoản?
-          <a href="/dangnhap" className="text-[#1c7c76] font-medium underline"> Đăng ký ngay</a>
+          <a href="/dangky" className="text-[#1c7c76] font-medium underline"> Đăng ký ngay</a>
         </p>
       </motion.div>
     </section>

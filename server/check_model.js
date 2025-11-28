@@ -1,7 +1,5 @@
-// File: server/check_model.js
 require("dotenv").config();
 
-// Hàm wrapper để dùng fetch trong CommonJS (giống hệt index.js của bạn)
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 async function listModels() {
