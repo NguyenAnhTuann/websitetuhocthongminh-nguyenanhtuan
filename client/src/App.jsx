@@ -37,7 +37,7 @@ const AppWrapper = () => {
   const hideHeaderPages = ["/admin-dashboard"];
   const shouldHideHeader = hideHeaderPages.includes(location.pathname);
   const hideFooterPages = ["/admin-dashboard"];
-const shouldHideFooter = hideFooterPages.includes(location.pathname);
+  const shouldHideFooter = hideFooterPages.includes(location.pathname);
 
 
 
@@ -61,7 +61,7 @@ const shouldHideFooter = hideFooterPages.includes(location.pathname);
     <>
       <ScrollToTop />
 
-      <div className="font-sans">
+      <div className="font-sans min-h-screen flex flex-col">
         {!shouldHideHeader && (
           <Header
             language={language}
@@ -72,62 +72,62 @@ const shouldHideFooter = hideFooterPages.includes(location.pathname);
         )}
 
 
-        <div className="pt-[50px]">
-<GlobalToastProvider>
-          <Routes>
-            <Route path="/" element={<Navigate to="/home" replace />} />
+        <div className="pt-[50px] flex-grow">
+          <GlobalToastProvider>
+            <Routes>
+              <Route path="/" element={<Navigate to="/home" replace />} />
 
-            <Route path="/home" element={<Home language={language} />} />
+              <Route path="/home" element={<Home language={language} />} />
 
-            <Route
-              path="/kynangtuhoc" element={<KyNangTuHoc language={language} />}
-            />
-            <Route path="/kynangsong" element={<KyNangSong language={language} />} />
-            <Route path="/chatbot" element={<ChatBot language={language} />} />
-
-
-            <Route
-              path="/thuchanh"
-              element={
-                <ProtectedRoute>
-                  <ThucHanh />
-                </ProtectedRoute>
-              }
-            />
+              <Route
+                path="/kynangtuhoc" element={<KyNangTuHoc language={language} />}
+              />
+              <Route path="/kynangsong" element={<KyNangSong language={language} />} />
+              <Route path="/chatbot" element={<ChatBot language={language} />} />
 
 
-
-
-            <Route path="/tailieuonline" element={<TaiNguyenOnline language={language} />} />
-            <Route path="/admin-dashboard" element={<AdminDashboard />} />
-
-
-
-            <Route
-              path="/dangnhap"
-              element={
-                <RedirectIfLoggedIn>
-                  <Login />
-                </RedirectIfLoggedIn>
-              }
-            />
-
-            <Route
-              path="/dangky"
-              element={
-                <RedirectIfLoggedIn>
-                  <Register />
-                </RedirectIfLoggedIn>
-              }
-            />
+              <Route
+                path="/thuchanh"
+                element={
+                  <ProtectedRoute>
+                    <ThucHanh />
+                  </ProtectedRoute>
+                }
+              />
 
 
 
 
-          </Routes>
+              <Route path="/tailieuonline" element={<TaiNguyenOnline language={language} />} />
+              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+
+
+
+              <Route
+                path="/dangnhap"
+                element={
+                  <RedirectIfLoggedIn>
+                    <Login />
+                  </RedirectIfLoggedIn>
+                }
+              />
+
+              <Route
+                path="/dangky"
+                element={
+                  <RedirectIfLoggedIn>
+                    <Register />
+                  </RedirectIfLoggedIn>
+                }
+              />
+
+
+
+
+            </Routes>
           </GlobalToastProvider>
 
-{!shouldHideFooter && <Footer />}
+          {!shouldHideFooter && <Footer />}
 
 
         </div>
