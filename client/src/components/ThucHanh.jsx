@@ -35,7 +35,7 @@ const Typewriter = ({ text, speed = 40 }) => {
 };
 
 
-const ThucHanh = ({ language }) => {
+const ThucHanh = ({ language = "vi" }) => {
   const [openPDF, setOpenPDF] = useState(false);
   const [openVideo, setOpenVideo] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState(null);
@@ -188,14 +188,14 @@ const ThucHanh = ({ language }) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="mx-auto text-center block
-             text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
-             bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
+         text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
+         bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
       >
-        {t?.[language]?.title || ""}
+        {t[language].title}
       </motion.h1>
 
+      <Typewriter text={t[language].subtitle} />
 
-      <Typewriter text={t?.[language]?.subtitle || ""} />
 
 
       <div className="mt-10 w-full max-w-7xl mx-auto flex gap-6">
@@ -692,69 +692,69 @@ rounded-2xl p-8 text-center">
             </motion.div>
           )}
 
-{activeTab === "simulation" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
-                >
-                  <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
-                    <FileText className="text-[#3C9E8F] w-6 h-6" />
-                    Danh sách mô phỏng
-                  </h2>
+          {activeTab === "simulation" && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
+            >
+              <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
+                <FileText className="text-[#3C9E8F] w-6 h-6" />
+                Danh sách mô phỏng
+              </h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                    {[
-                      {
-                        name: "Quy hoạch tuyến tính (BPT bậc nhất 2 ẩn)",
-                        link: "https://chatgpt.com/canvas/shared/68e9fe0251dc81918d64619b92e1da1b",
-                        thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
-                      },
-                      {
-                        name: "Hàm Số Bậc Hai",
-                        link: "https://chatgpt.com/canvas/shared/68fd811a91c881918c7b182c8698f1fd",
-                        thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
-                      },
-                      {
-                        name: "Hàm Số Bậc Bậc Ba",
-                        link: "https://chatgpt.com/canvas/shared/68ff8e127bb88191ac2262c3d9d1b26d",
-                        thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
-                      },
-                      {
-                        name: "Quy Hoạch Tuyến Tính",
-                        link: "https://chatgpt.com/canvas/shared/68ffa2452ac48191892c7f0efec6977b",
-                        thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
-                      },
-                      {
-                        name: "Hệ số a, b, c",
-                        link: "https://chatgpt.com/canvas/shared/6902f506befc81918bb0d805f6778e09",
-                        thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
-                      },
-                      {
-                        name: "Dây neo thuyền & định lí Py-ta-go",
-                        link: "https://chatgpt.com/canvas/shared/6900de158f448191b192cb92de6d3056",
-                        thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
-                      }
-                    ].map((v, i) => (
-                      <a
-                        key={i}
-                        href={v.link}
-                        target="_blank"
-                        className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
-                      >
-                        {v.thumbnail && <img src={v.thumbnail} className="w-full object-cover" />}
-                        <div className="p-4">
-                          <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
-                          <p className="text-sm text-gray-500">Nhấn để xem mô phỏng</p>
-                        </div>
-                      </a>
-                    ))}
+                {[
+                  {
+                    name: "Quy hoạch tuyến tính (BPT bậc nhất 2 ẩn)",
+                    link: "https://chatgpt.com/canvas/shared/68e9fe0251dc81918d64619b92e1da1b",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
+                  },
+                  {
+                    name: "Hàm Số Bậc Hai",
+                    link: "https://chatgpt.com/canvas/shared/68fd811a91c881918c7b182c8698f1fd",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
+                  },
+                  {
+                    name: "Hàm Số Bậc Bậc Ba",
+                    link: "https://chatgpt.com/canvas/shared/68ff8e127bb88191ac2262c3d9d1b26d",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
+                  },
+                  {
+                    name: "Quy Hoạch Tuyến Tính",
+                    link: "https://chatgpt.com/canvas/shared/68ffa2452ac48191892c7f0efec6977b",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
+                  },
+                  {
+                    name: "Hệ số a, b, c",
+                    link: "https://chatgpt.com/canvas/shared/6902f506befc81918bb0d805f6778e09",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
+                  },
+                  {
+                    name: "Dây neo thuyền & định lí Py-ta-go",
+                    link: "https://chatgpt.com/canvas/shared/6900de158f448191b192cb92de6d3056",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234818/Gemini_Generated_Image_3nxl043nxl043nxl_f4j6lu.png"
+                  }
+                ].map((v, i) => (
+                  <a
+                    key={i}
+                    href={v.link}
+                    target="_blank"
+                    className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                  >
+                    {v.thumbnail && <img src={v.thumbnail} className="w-full object-cover" />}
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
+                      <p className="text-sm text-gray-500">Nhấn để xem mô phỏng</p>
+                    </div>
+                  </a>
+                ))}
 
-                  </div>
-                </motion.div>
-              )}
+              </div>
+            </motion.div>
+          )}
         </main>
       </div>
 
