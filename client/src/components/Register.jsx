@@ -146,43 +146,61 @@ export default function Register() {
             type="text"
             value={dob}
             onChange={(e) => {
-              let v = e.target.value.replace(/\D/g, ""); // chỉ giữ số
+              let v = e.target.value;
 
-              // tự thêm dấu "/"
-              if (v.length > 2 && v.length <= 4) {
-                v = v.replace(/(\d{2})(\d{1,2})/, "$1/$2");
-              } else if (v.length > 4) {
-                v = v.replace(/(\d{2})(\d{2})(\d{1,4})/, "$1/$2/$3");
-              }
+              // Chỉ cho nhập số và dấu "/"
+              v = v.replace(/[^\d/]/g, "");
 
-              const parts = v.split("/");
+              // Tách theo "/"
+              let parts = v.split("/").slice(0, 3); // chỉ lấy tối đa 3 phần
 
+              // ===== XỬ LÝ NGÀY =====
               if (parts[0]) {
-                let day = parseInt(parts[0]);
-                if (day > 31) day = 31;
-                if (day < 1) day = 1;
-                parts[0] = day.toString().padStart(2, "0");
+                let day = parts[0];
+
+                // Nếu người dùng nhập 2 số → apply limit
+                if (day.length === 2) {
+                  let d = parseInt(day);
+                  if (d > 31) d = 31;
+                  if (d < 1) d = 1;
+                  parts[0] = d.toString().padStart(2, "0");
+                }
+
+                // Nếu người dùng nhập 1 số và thêm "/" → vẫn giữ nguyên "8/"
+                if (day.length === 1 && v.includes("/")) {
+                  parts[0] = day;
+                }
               }
 
+              // ===== XỬ LÝ THÁNG =====
               if (parts[1]) {
-                let month = parseInt(parts[1]);
-                if (month > 12) month = 12;
-                if (month < 1) month = 1;
-                parts[1] = month.toString().padStart(2, "0");
+                let month = parts[1];
+
+                if (month.length === 2) {
+                  let m = parseInt(month);
+                  if (m > 12) m = 12;
+                  if (m < 1) m = 1;
+                  parts[1] = m.toString().padStart(2, "0");
+                }
+
+                if (month.length === 1 && v.split("/")[1]?.endsWith("/")) {
+                  parts[1] = month;
+                }
               }
 
-              if (parts[2]?.length === 4) {
-                let year = parseInt(parts[2]);
-                if (year < 1900) year = 1900;
-                if (year > 2025) year = 2025;
-                parts[2] = year.toString();
+              // ===== XỬ LÝ NĂM =====
+              if (parts[2]) {
+                let year = parts[2].slice(0, 4); // giới hạn 4 ký tự
+                parts[2] = year;
               }
 
+              // Ghép lại
               setDob(parts.join("/"));
             }}
             placeholder="VD: 12/08/2008"
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
+
         </div>
 
 
