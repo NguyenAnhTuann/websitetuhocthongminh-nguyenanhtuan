@@ -1,44 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
   useLocation,
-} from 'react-router-dom';
+} from "react-router-dom";
 
 // Components
-import Header from './components/Header';
-import Home from './components/Home';
-import ScrollToTop from './components/ScrollToTop';
-import Footer from './components/Footer';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
+import GlobalToastProvider from "./components/GlobalToast";
 
-// New pages
+// Pages
+import Home from "./components/Home";
 import KyNangTuHoc from "./components/KyNangTuHoc";
-import KyNangSong from './components/KyNangSong';
-import ChatBot from './components/ChatBot';
-import ThucHanh from './components/ThucHanh';
-import TaiNguyenOnline from './components/TaiNguyenOnline';
-import Login from './components/Login';
-import Register from './components/Register';
-import RedirectIfLoggedIn from "./utils/RedirectIfLoggedIn";
+import KyNangSong from "./components/KyNangSong";
+import ChatBot from "./components/ChatBot";
+import ThucHanh from "./components/ThucHanh";
+import TaiNguyenOnline from "./components/TaiNguyenOnline";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import AdminDashboard from "./components/AdminDashboard";
-import RequireAuth from "./utils/RequireAuth";
+
+// Utils
+import RedirectIfLoggedIn from "./utils/RedirectIfLoggedIn";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import GlobalToastProvider from './components/GlobalToast';
 
-
-
-
-
+// -----------------------------
+// APP WRAPPER
+// -----------------------------
 const AppWrapper = () => {
   const location = useLocation();
-  const [language, setLanguage] = useState('vi');
+  const [language, setLanguage] = useState("vi");
+
+  // Ẩn header cho trang admin
   const hideHeaderPages = ["/admin-dashboard"];
   const shouldHideHeader = hideHeaderPages.includes(location.pathname);
 
-
-
+  // Dark Mode settings
   const getInitialTheme = () => {
     const hour = new Date().getHours();
     return hour >= 18 || hour < 5;
@@ -48,18 +49,18 @@ const AppWrapper = () => {
 
   useEffect(() => {
     const root = window.document.documentElement;
-    if (isDarkMode) {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
+    if (isDarkMode) root.classList.add("dark");
+    else root.classList.remove("dark");
   }, [isDarkMode]);
 
   return (
     <>
       <ScrollToTop />
 
-      <div className="font-sans min-h-screen flex flex-col">
+      {/* Bố cục chính */}
+      <div className="min-h-screen flex flex-col font-sans">
+
+        {/* HEADER */}
         {!shouldHideHeader && (
           <Header
             language={language}
@@ -69,8 +70,8 @@ const AppWrapper = () => {
           />
         )}
 
-
-        <div className="pt-[50px] flex-grow">
+        {/* MAIN CONTENT */}
+        <main className="flex-grow pt-[50px]">
           <GlobalToastProvider>
             <Routes>
               <Route path="/" element={<Navigate to="/home" replace />} />
@@ -78,28 +79,35 @@ const AppWrapper = () => {
               <Route path="/home" element={<Home language={language} />} />
 
               <Route
-                path="/kynangtuhoc" element={<KyNangTuHoc language={language} />}
+                path="/kynangtuhoc"
+                element={<KyNangTuHoc language={language} />}
               />
-              <Route path="/kynangsong" element={<KyNangSong language={language} />} />
-              <Route path="/chatbot" element={<ChatBot language={language} />} />
 
+              <Route
+                path="/kynangsong"
+                element={<KyNangSong language={language} />}
+              />
+
+              <Route
+                path="/chatbot"
+                element={<ChatBot language={language} />}
+              />
 
               <Route
                 path="/thuchanh"
                 element={
                   <ProtectedRoute>
-                    <ThucHanh />
+                    <ThucHanh language={language} />
                   </ProtectedRoute>
                 }
               />
 
+              <Route
+                path="/tailieuonline"
+                element={<TaiNguyenOnline language={language} />}
+              />
 
-
-
-              <Route path="/tailieuonline" element={<TaiNguyenOnline language={language} />} />
               <Route path="/admin-dashboard" element={<AdminDashboard />} />
-
-
 
               <Route
                 path="/dangnhap"
@@ -118,22 +126,20 @@ const AppWrapper = () => {
                   </RedirectIfLoggedIn>
                 }
               />
-
-
-
-
             </Routes>
           </GlobalToastProvider>
+        </main>
 
+        {/* FOOTER — luôn nằm ở đáy trang */}
         <Footer />
-
-
-        </div>
       </div>
     </>
   );
 };
 
+// -----------------------------
+// MAIN APP
+// -----------------------------
 const App = () => {
   return (
     <Router>

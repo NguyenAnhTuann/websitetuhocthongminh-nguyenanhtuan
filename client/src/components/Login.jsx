@@ -2,59 +2,62 @@ import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+
 
 export default function Login() {
-  const [identifier, setIdentifier] = useState(""); // email hoặc phone
+  const [identifier, setIdentifier] = useState("");
   const [pass, setPass] = useState("");
   const [msg, setMsg] = useState("");
+  const [showPass, setShowPass] = useState(false);
+
 
   const handleLogin = async () => {
-  setMsg(""); // reset msg
+    setMsg("");
 
-  if (!identifier || !pass) {
-    setMsg("❌ Vui lòng nhập đầy đủ thông tin!");
-    return;
-  }
-
-  try {
-    const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        emailOrPhone: identifier,
-        password: pass,
-      }),
-    });
-
-    const data = await res.json();
-
-    if (!data.success) {
-      setMsg("❌ " + (data.message || "Đăng nhập thất bại!"));
+    if (!identifier || !pass) {
+      setMsg("❌ Vui lòng nhập đầy đủ thông tin!");
       return;
     }
 
-    // LƯU TOKEN
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
-    localStorage.setItem("role", data.user.role);
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          emailOrPhone: identifier,
+          password: pass,
+        }),
+      });
 
-    // THÔNG BÁO THÀNH CÔNG
-    setMsg("✅ Đăng nhập thành công! Đang chuyển hướng...");
+      const data = await res.json();
 
-    // Chuyển trang sau 1.2 giây
-    setTimeout(() => {
-      if (data.user.role === "admin") {
-        window.location.href = "/admin-dashboard";
-      } else {
-        window.location.href = "/home";
+      if (!data.success) {
+        setMsg("❌ " + (data.message || "Đăng nhập thất bại!"));
+        return;
       }
-    }, 1200);
 
-  } catch (err) {
-    console.error("Login error:", err);
-    setMsg("❌ Lỗi kết nối server!");
-  }
-};
+      // LƯU TOKEN
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("role", data.user.role);
+
+      setMsg("✅ Đăng nhập thành công! Đang chuyển hướng...");
+
+      // Chuyển trang sau 1.2 giây
+      setTimeout(() => {
+        if (data.user.role === "admin") {
+          window.location.href = "/admin-dashboard";
+        } else {
+          window.location.href = "/home";
+        }
+      }, 1200);
+
+    } catch (err) {
+      console.error("Login error:", err);
+      setMsg("❌ Lỗi kết nối server!");
+    }
+  };
 
 
 
@@ -75,14 +78,13 @@ export default function Login() {
         </p>
 
         {msg && (
-  <p
-    className={`text-center mb-4 ${
-      msg.includes("✅") ? "text-green-600" : "text-red-600"
-    }`}
-  >
-    {msg}
-  </p>
-)}
+          <p
+            className={`text-center mb-4 ${msg.includes("✅") ? "text-green-600" : "text-red-600"
+              }`}
+          >
+            {msg}
+          </p>
+        )}
 
         {/* Email or Phone */}
         <div className="mb-4">
@@ -99,18 +101,33 @@ export default function Login() {
         </div>
 
         {/* PASSWORD */}
-        <div className="mb-4">
+        <div className="mb-4 relative">
           <label className="block text-gray-700 font-medium mb-1">
             Mật khẩu
           </label>
+
           <input
-            type="password"
+            type={showPass ? "text" : "password"}
             value={pass}
             onChange={(e) => setPass(e.target.value)}
             placeholder="Nhập mật khẩu..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
+
+          {/* ICON */}
+          <span
+            className="absolute right-4 top-[45px] text-gray-600 cursor-pointer"
+            onClick={() => setShowPass(!showPass)}
+          >
+            {showPass ? (
+              <FiEyeOff size={22} />
+            ) : (
+              <FiEye size={22} />
+            )}
+          </span>
         </div>
+
+
 
         {/* LOGIN BUTTON */}
         <button

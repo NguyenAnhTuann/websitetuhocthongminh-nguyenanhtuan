@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 
@@ -17,48 +17,134 @@ export default function Register() {
   const [passAgain, setPassAgain] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [showPass2, setShowPass2] = useState(false);
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+
+  const [fullNameError, setFullNameError] = useState("");
+  const [schoolError, setSchoolError] = useState("");
+  const [gradeError, setGradeError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [dobError, setDobError] = useState("");
+  const [isComposing, setIsComposing] = useState(false);
+
+
+
+  useEffect(() => {
+    if (day && month && year) {
+      const formatted = `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${year}`;
+      setDob(formatted);
+    }
+  }, [day, month, year]);
+
+  // Kiểm tra độ khớp mật khẩu
+  useEffect(() => {
+    if (!passAgain) {
+      setMatchStatus(""); // chưa nhập gì
+    } else if (passAgain && passAgain !== pass) {
+      setMatchStatus("no"); // không khớp
+    } else if (pass.length > 0 && pass === passAgain) {
+      setMatchStatus("yes"); // khớp
+    }
+  }, [pass, passAgain]);
+
+
 
   const [msg, setMsg] = useState("");
+  const [strength, setStrength] = useState(null);
+  const [matchStatus, setMatchStatus] = useState("");
+
+
+
+  // Đánh giá độ mạnh mật khẩu
+  const checkStrength = (password) => {
+    let score = 0;
+
+    if (password.length >= 6) score++;
+    if (password.length >= 8) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/\d/.test(password)) score++;
+    if (/[@$!%*?&]/.test(password)) score++;
+
+    if (score <= 2) return { label: "Yếu", color: "bg-red-500", width: "w-1/4" };
+    if (score <= 4) return { label: "Trung bình", color: "bg-yellow-500", width: "w-2/4" };
+    if (score === 5) return { label: "Mạnh", color: "bg-blue-500", width: "w-3/4" };
+    if (score === 6) return { label: "Cực mạnh", color: "bg-green-600", width: "w-full" };
+  };
+
 
   const handleRegister = async () => {
-    if (pass !== passAgain) {
-      setMsg("❌ Mật khẩu nhập lại không khớp!");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
+    let hasError = false;
+
+    // --- KIỂM TRA LẠI TOÀN BỘ CÁC INPUT ---
+    if (!fullName.trim()) {
+      setFullNameError("Họ tên không được để trống!");
+      hasError = true;
+    }
+
+    // KIỂM TRA NGÀY SINH
+    if (!day || !month || !year) {
+      setDobError("Vui lòng chọn đầy đủ ngày - tháng - năm!");
+      hasError = true;
+    } else {
+      setDobError("");
+    }
+
+
+
+    if (!school.trim()) {
+      setSchoolError("Tên trường không được để trống!");
+      hasError = true;
+    }
+
+    if (!grade.trim()) {
+      setGradeError("Vui lòng nhập tên lớp!");
+      hasError = true;
+    }
+
+    if (!phone.trim()) {
+      setPhoneError("Vui lòng nhập số điện thoại!");
+      hasError = true;
+    } else if (phone.length !== 10) {
+      setPhoneError("Số điện thoại phải đúng 10 số!");
+      hasError = true;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setMsg("❌ Email không hợp lệ!");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    if (!email.trim()) {
+      setEmailError("Email không được để trống!");
+      hasError = true;
+    } else if (!emailRegex.test(email)) {
+      setEmailError("Email không hợp lệ!");
+      hasError = true;
+    }
 
+    if (hasError) {
+      setMsg("❌ Vui lòng sửa các lỗi bên dưới!");
       return;
     }
 
-    if (!/^\d{10}$/.test(phone)) {
-      setMsg("❌ Số điện thoại phải gồm đúng 10 số!");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-
+    // --- KIỂM TRA MẬT KHẨU ---
+    if (pass !== passAgain) {
+      setMsg("❌ Mật khẩu nhập lại không khớp!");
       return;
     }
+
     const strongPass =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
     if (!strongPass.test(pass)) {
       setMsg("❌ Mật khẩu phải tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt!");
-      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
-
-
-
+    // --- TIẾP TỤC GỬI API ---
     try {
-      const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/register", {
+      const res = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           fullName,
           dob,
@@ -74,31 +160,39 @@ export default function Register() {
 
       if (data.error) {
         setMsg("❌ " + data.error);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-
       } else {
         setMsg("✅ Tạo tài khoản thành công!");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-
-        // 🔥 Reset form
-        setFullName("");
-        setDob("");
-        setSchool("");
-        setGrade("");
-        setPhone("");
-        setEmail("");
-        setPass("");
-        setPassAgain("");
-        setShowPass(false);
-        setShowPass2(false);
+        resetForm();
       }
 
     } catch (err) {
       setMsg("❌ Lỗi kết nối server!");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-
     }
   };
+  const resetForm = () => {
+    setFullName("");
+    setDob("");
+    setSchool("");
+    setGrade("");
+    setPhone("");
+    setEmail("");
+    setPass("");
+    setPassAgain("");
+
+    setShowPass(false);
+    setShowPass2(false);
+
+    setDay("");
+    setMonth("");
+    setYear("");
+
+    setFullNameError("");
+    setSchoolError("");
+    setGradeError("");
+    setPhoneError("");
+    setEmailError("");
+  };
+
 
   return (
     <section className="min-h-screen flex items-start justify-center bg-white px-4 pt-32 pb-32">
@@ -133,82 +227,103 @@ export default function Register() {
           <input
             type="text"
             value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              setFullName(value);
+
+              if (!value.trim()) setFullNameError("Họ tên không được để trống!");
+              else if (value.length < 2) setFullNameError("Họ tên quá ngắn!");
+              else setFullNameError("");
+            }}
             placeholder="Nhập họ tên..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
+          {fullNameError && (
+            <p className="text-sm mt-1 font-medium text-red-500">{fullNameError}</p>
+          )}
         </div>
+
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-1">Ngày sinh</label>
+          <label className="block text-gray-700 font-medium mb-1">
+            Ngày sinh
+          </label>
 
-          <input
-  type="text"
-  value={dob}
-  onChange={(e) => {
-    let v = e.target.value;
+          <div className="grid grid-cols-3 gap-3">
 
-    // ❗ Cho phép nhập số + "/"
-    v = v.replace(/[^\d/]/g, "");
+            {/* Ngày */}
+            <div className="relative">
+              <select
+                value={day}
+                onChange={(e) => setDay(e.target.value)}
+                className="w-full appearance-none px-4 py-3 border rounded-xl outline-none 
+                 focus:border-[#1c7c76] bg-white text-gray-700"
+              >
+                <option value="">Ngày</option>
+                {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
 
-    // Tách theo "/"
-    let parts = v.split("/").slice(0, 3); // tối đa 3 phần
+              {/* Icon dropdown */}
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                ▼
+              </span>
+            </div>
 
-    // ======================
-    // 1) XỬ LÝ NGÀY
-    // ======================
-    if (parts[0]) {
-      let day = parts[0];
+            {/* Tháng */}
+            <div className="relative">
+              <select
+                value={month}
+                onChange={(e) => setMonth(e.target.value)}
+                className="w-full appearance-none px-4 py-3 border rounded-xl outline-none 
+                 focus:border-[#1c7c76] bg-white text-gray-700"
+              >
+                <option value="">Tháng</option>
+                {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+                  <option key={m} value={m}>
+                    {m}
+                  </option>
+                ))}
+              </select>
 
-      // Nếu nhập 2 số → tự chuẩn hoá
-      if (day.length === 2) {
-        let d = parseInt(day);
-        if (d > 31) d = 31;
-        if (d < 1) d = 1;
-        parts[0] = d.toString().padStart(2, "0");
-      }
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                ▼
+              </span>
+            </div>
 
-      // Nếu nhập 1 số + tự bấm "/" thì giữ nguyên
-      if (day.length === 1 && v.includes("/")) {
-        parts[0] = day;
-      }
-    }
+            {/* Năm */}
+            <div className="relative">
+              <select
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                className="w-full appearance-none px-4 py-3 border rounded-xl outline-none 
+                 focus:border-[#1c7c76] bg-white text-gray-700"
+              >
+                <option value="">Năm</option>
+                {Array.from({ length: 30 }, (_, i) => 2025 - i).map((y) => (
+                  <option key={y} value={y}>
+                    {y}
+                  </option>
+                ))}
+              </select>
 
-    // ======================
-    // 2) XỬ LÝ THÁNG
-    // ======================
-    if (parts[1]) {
-      let month = parts[1];
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                ▼
+              </span>
+            </div>
 
-      if (month.length === 2) {
-        let m = parseInt(month);
-        if (m > 12) m = 12;
-        if (m < 1) m = 1;
-        parts[1] = m.toString().padStart(2, "0");
-      }
+          </div>
 
-      // Nếu nhập 1 số và tự gõ "/" → giữ nguyên
-      if (month.length === 1 && v.split("/")[1]?.endsWith("/")) {
-        parts[1] = month;
-      }
-    }
 
-    // ======================
-    // 3) XỬ LÝ NĂM
-    // ======================
-    if (parts[2]) {
-      parts[2] = parts[2].slice(0, 4); // giới hạn 4 ký tự
-    }
-
-    // Ghép lại và hiển thị lên input
-    setDob(parts.join("/"));
-  }}
-  placeholder="12/08/2008"
-  className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
-/>
-
+          {dobError && (
+            <p className="text-sm mt-1 font-medium text-red-500">{dobError}</p>
+          )}
 
         </div>
+
 
 
 
@@ -217,11 +332,22 @@ export default function Register() {
           <input
             type="text"
             value={school}
-            onChange={(e) => setSchool(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              setSchool(value);
+
+              if (!value.trim()) setSchoolError("Tên trường không được trống!");
+              else setSchoolError("");
+            }}
             placeholder="Nhập tên trường..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
+          {schoolError && (
+            <p className="text-sm mt-1 font-medium text-red-500">{schoolError}</p>
+          )}
         </div>
+
+
 
         {/* GRADE */}
         <div className="mb-4">
@@ -229,11 +355,21 @@ export default function Register() {
           <input
             type="text"
             value={grade}
-            onChange={(e) => setGrade(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              setGrade(value);
+
+              if (!value.trim()) setGradeError("Vui lòng nhập tên lớp!");
+              else setGradeError("");
+            }}
             placeholder="10A1"
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
+          {gradeError && (
+            <p className="text-sm mt-1 font-medium text-red-500">{gradeError}</p>
+          )}
         </div>
+
 
         {/* PHONE */}
         <div className="mb-4">
@@ -241,10 +377,21 @@ export default function Register() {
           <input
             type="text"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => {
+              const v = e.target.value.replace(/\D/g, "");
+              setPhone(v);
+
+              if (v.length !== 10) setPhoneError("Số điện thoại phải đúng 10 số!");
+              else setPhoneError("");
+            }}
+
             placeholder="Nhập số điện thoại..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
+          {phoneError && (
+            <p className="text-sm mt-1 font-medium text-red-500">{phoneError}</p>
+          )}
+
         </div>
 
         {/* EMAIL */}
@@ -253,10 +400,23 @@ export default function Register() {
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              const v = e.target.value;
+              setEmail(v);
+
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+              if (!emailRegex.test(v)) setEmailError("Email không hợp lệ!");
+              else setEmailError("");
+            }}
+
             placeholder="Nhập email..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
+          {emailError && (
+            <p className="text-sm mt-1 font-medium text-red-500">{emailError}</p>
+          )}
+
         </div>
 
         {/* PASSWORD */}
@@ -266,10 +426,26 @@ export default function Register() {
           <input
             type={showPass ? "text" : "password"}
             value={pass}
-            onChange={(e) => setPass(e.target.value)}
+            onChange={(e) => {
+              setPass(e.target.value);
+              setStrength(checkStrength(e.target.value));
+            }}
             placeholder="Tạo mật khẩu..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
+
+          {pass && strength && (
+            <div className="mt-2">
+              <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  className={`h-full ${strength.color} ${strength.width} transition-all duration-300`}
+                ></div>
+              </div>
+              <p className="text-sm mt-1 font-medium text-gray-700">{strength.label}</p>
+            </div>
+          )}
+
+
 
           <span
             className="absolute right-4 top-[45px] text-gray-600 cursor-pointer"
@@ -298,12 +474,34 @@ export default function Register() {
           >
             {showPass2 ? <FiEyeOff size={22} /> : <FiEye size={22} />}
           </span>
+
+          {matchStatus === "no" && (
+            <p className="c">
+              ❌ Mật khẩu không khớp
+            </p>
+          )}
+
+          {matchStatus === "yes" && (
+            <p className="text-sm mt-1 font-medium text-green-600">
+              ✔ Mật khẩu khớp
+            </p>
+          )}
+
+          {matchStatus === "" && passAgain.length > 0 && (
+            <p className="text-sm mt-1 font-medium text-gray-500">
+              ...Đang kiểm tra
+            </p>
+          )}
+
+
         </div>
 
 
         {/* REGISTER BUTTON */}
         <button
+
           onClick={handleRegister}
+
           className="w-full bg-[#1c7c76] hover:bg-[#166662] text-white py-3 rounded-xl font-semibold shadow-md transition"
         >
           Tạo tài khoản
