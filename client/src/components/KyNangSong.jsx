@@ -69,110 +69,6 @@ const KyNangSong = ({ language }) => {
   };
 
 
-
-  //------------------------------------------------------
-
-  //------------------------------------------------------
-  const PdfFolder = ({ title, pdfs }) => {
-    const [open, setOpen] = useState(false);
-
-    return (
-      <div className="mt-8">
-        <div
-          onClick={() => setOpen(!open)}
-          className="p-4 rounded-xl bg-[#f3fafc] border flex justify-between items-center cursor-pointer hover:bg-[#e8f5f7] transition"
-        >
-          <span className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-            📁 {title}
-          </span>
-          <span className="text-xl text-gray-700">{open ? "−" : "+"}</span>
-        </div>
-
-        {open && (
-          <div className="mt-4 space-y-6">
-            {pdfs.map((pdf, i) => (
-              <a
-                key={i}
-                href={pdf.link}
-                target="_blank"
-                className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
-              >
-                {/* Ảnh to nằm trên */}
-                {pdf.thumbnail && (
-                  <img
-                    src={pdf.thumbnail}
-                    alt={pdf.name}
-                    className="w-full h-full object-cover"
-                  />
-                )}
-
-                <div className="p-4">
-                  <h4 className="text-lg font-semibold text-gray-900">
-                    {pdf.name}
-                  </h4>
-                  <p className="text-sm text-gray-500">Nhấn để mở PDF</p>
-                </div>
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  };
-
-
-
-  //------------------------------------------------------
-
-  //------------------------------------------------------
-  const VideoFolder = ({ title, videos }) => {
-    const [open, setOpen] = useState(false);
-
-    return (
-      <div className="mt-8">
-        <div
-          onClick={() => setOpen(!open)}
-          className="p-4 rounded-xl bg-[#e8f8f6] border flex justify-between items-center cursor-pointer hover:bg-[#dff3f1] transition"
-        >
-          <span className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-            📁 {title}
-          </span>
-          <span className="text-xl text-gray-700">{open ? "−" : "+"}</span>
-        </div>
-
-        {open && (
-          <div className="mt-4 space-y-6">
-            {videos.map((v, i) => (
-              <a
-                key={i}
-                href={v.link}
-                target="_blank"
-                className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
-              >
-                {/* Ảnh to nằm trên */}
-                {v.thumbnail && (
-                  <img
-                    src={v.thumbnail}
-                    alt={v.name}
-                    className="w-full h-full object-cover"
-                  />
-                )}
-
-                <div className="p-4">
-                  <h4 className="text-lg font-semibold text-gray-900">
-                    {v.name}
-                  </h4>
-                  <p className="text-sm text-gray-500">Nhấn để mở video</p>
-                </div>
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  };
-
-
   //-----------------------------------------------------------
 
   return (
@@ -216,32 +112,16 @@ const KyNangSong = ({ language }) => {
             {/* PDF */}
             <li
               onClick={() => {
-                setActiveTab("violence");
-                setSelectedFolder("violence_videos"); // auto load 4 videos
-                setOpenPDF(false);
-                setOpenVideo(false);
-              }}
-              className={`p-3 rounded-lg cursor-pointer transition
-${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
-            >
-              Kỹ năng sống phòng tránh bạo lực
-            </li>
-
-
-            {/* VIDEO */}
-            <li
-              onClick={() => {
                 setActiveTab("video");
-                setOpenVideo(true);
+                setSelectedFolder("video_home");
                 setOpenPDF(false);
-                setSelectedFolder("video_main"); // ✔ load 3 video mặc định
+                setOpenVideo(true);
               }}
 
-
               className={`p-3 rounded-lg cursor-pointer transition
-        ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
+${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
             >
-              Kỹ năng sống khác
+              Video
             </li>
 
             {/* NỘI DUNG HIỆN THEO FOLDER ĐƯỢC CHỌN */}
@@ -250,21 +130,69 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               <ul className="pl-5 space-y-2 text-sm">
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_math")}
+                  onClick={() => setSelectedFolder("baoluc")}
+                >
+                  Bạo lực học đường là gì?
+                </li>
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("video_violence")}
+                >
+                  Kỹ năng xử lý bạo lực học đường
+                </li>
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("video_main")}
+                >
+                  Kỹ năng khác
+                </li>
+
+
+
+
+              </ul>
+            )}
+
+
+            {/* PDF */}
+            <li
+              onClick={() => {
+                setActiveTab("pdf");
+                setOpenVideo(false);
+                setOpenPDF(true);
+                setSelectedFolder("pdf_home");
+              }}
+
+
+
+              className={`p-3 rounded-lg cursor-pointer transition
+        ${activeTab === "pdf" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
+            >
+              Tài liệu tham khảo PDF
+            </li>
+
+            {/* NỘI DUNG HIỆN THEO FOLDER ĐƯỢC CHỌN */}
+
+            {openPDF && activeTab === "pdf" && (
+
+              <ul className="pl-5 space-y-2 text-sm">
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("pdf_math")}
                 >
                   Phát triển bản thân: Kỹ năng cứng & mềm
                 </li>
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_real")}
+                  onClick={() => setSelectedFolder("pdf_real")}
                 >
                   Kỹ năng ứng phó với tình huống khẩn cấp
                 </li>
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_ai")}
+                  onClick={() => setSelectedFolder("pdf_ai")}
                 >
                   Định hướng nghề nghiệp
                 </li>
@@ -341,7 +269,30 @@ rounded-2xl p-8 text-center">
 
           )}
 
-          {activeTab === "violence" && (
+          {selectedFolder === "video_home" && (
+            <div className="w-full bg-white border rounded-2xl p-10 text-center shadow">
+              <h2 className="text-2xl font-bold text-gray-900 mb-3 flex items-center justify-center gap-2">
+                🎬 Danh sách video
+              </h2>
+              <p className="text-gray-500">Hãy chọn thư mục bên trái.</p>
+            </div>
+          )}
+
+
+          {selectedFolder === "pdf_home" && (
+            <div className="w-full bg-white border rounded-2xl p-10 text-center shadow">
+              <h2 className="text-2xl font-bold text-gray-900 mb-3 flex items-center justify-center gap-2">
+                📄 Tài liệu tham khảo PDF
+              </h2>
+
+              <p className="text-gray-500 text-base">
+                Hãy chọn thư mục bên trái
+              </p>
+            </div>
+          )}
+
+
+          {selectedFolder === "baoluc" && (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -349,8 +300,71 @@ rounded-2xl p-8 text-center">
               className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
             >
               <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
-                <FileText className="text-[#3C9E8F] w-6 h-6" />
-                Danh sách tài liệu
+                🎬 Danh sách video
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {[
+                  {
+                    name: "Tung tin xấu, bóc phốt bạn",
+                    link: "https://drive.google.com/file/d/1NU33RLcj4gzv51RiYJVzphrFtN5Xwf8k/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142505/Gemini_Generated_Image_70cipi70cipi70ci_hrxepw.png"
+                  },
+                  {
+                    name: "Tạo nhóm nói xấu, cô lập bạn",
+                    link: "https://drive.google.com/file/d/1e9v8zObtOKPavgyy87iD0hf4wqSa6DXb/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142494/Gemini_Generated_Image_7q8jhy7q8jhy7q8j_yhlrgp.png"
+                  },
+                  {
+                    name: "Nhận diện 5 dạng bạo lực học đường",
+                    link: "https://drive.google.com/file/d/1Z0HT4PRanI5mnfxalgf3Nb-jCZar8fXK/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142494/Gemini_Generated_Image_duksaaduksaaduks_oukx51.png"
+                  },
+                  {
+                    name: "Nghe được nhóm bạn chuẩn bị đánh nhau",
+                    link: "https://drive.google.com/file/d/19lSY9esepnWfd1HfS0BOnbj0-ttXwcuT/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142498/Gemini_Generated_Image_tg37uvtg37uvtg37_z1fr6o.png"
+                  },
+                  {
+                    name: "Đặt biệt danh nói xấu, đe dọa người khác",
+                    link: "https://drive.google.com/file/d/1D5S0Y1CgSPiHPDUDB9Ctlhw0xkfbcFJk/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142492/Gemini_Generated_Image_204ti2204ti2204t_myecy4.png"
+                  },
+                  {
+                    name: "Bạo lực học đường – Nhận biết & phòng tránh",
+                    link: "https://drive.google.com/file/d/175D78VNdOvxHOrn2FaEniqmtgus4cKhb/view?usp=sharing",
+                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142493/Gemini_Generated_Image_o6lxsso6lxsso6lx_qgshk7.png"
+                  }
+                ].map((v, i) => (
+                  <a
+                    key={i}
+                    href={v.link}
+                    target="_blank"
+                    className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
+                  >
+                    {v.thumbnail && <img src={v.thumbnail} className="w-full object-cover" />}
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
+                      <p className="text-sm text-gray-500">Nhấn để xem video</p>
+                    </div>
+                  </a>
+                ))}
+
+              </div>
+            </motion.div>
+          )}
+
+
+          {selectedFolder === "video_violence" && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
+            >
+              <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
+                🎬 Danh sách video
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -397,7 +411,8 @@ rounded-2xl p-8 text-center">
 
 
 
-          {activeTab === "video" && (
+
+          {selectedFolder === "video_main" && (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -405,8 +420,7 @@ rounded-2xl p-8 text-center">
               className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
             >
               <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
-                <FileText className="text-[#3C9E8F] w-6 h-6" />
-                Danh sách tài liệu
+                🎬 Danh sách video
               </h2>
 
               {selectedFolder === "video_main" && (
@@ -449,8 +463,30 @@ rounded-2xl p-8 text-center">
               )}
 
 
-              {/* VIDEO GIẢI TOÁN */}
-              {selectedFolder === "video_math" && (
+
+
+              {/* CHƯA CHỌN FOLDER */}
+              {!selectedFolder && (
+                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
+              )}
+            </motion.div>
+          )}
+
+
+          {activeTab === "pdf" && selectedFolder !== "pdf_home" && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
+            >
+              <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
+                📄 Danh sách tài liệu
+              </h2>
+
+
+
+              {selectedFolder === "pdf_math" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
@@ -519,7 +555,7 @@ rounded-2xl p-8 text-center">
               )}
 
               {/* VIDEO TOÁN THỰC TẾ */}
-              {selectedFolder === "video_real" && (
+              {selectedFolder === "pdf_real" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
@@ -549,7 +585,7 @@ rounded-2xl p-8 text-center">
 
 
               {/* VIDEO AI */}
-              {selectedFolder === "video_ai" && (
+              {selectedFolder === "pdf_ai" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
@@ -636,15 +672,8 @@ rounded-2xl p-8 text-center">
                   ))}
                 </div>
               )}
-
-              {/* CHƯA CHỌN FOLDER */}
-              {!selectedFolder && (
-                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
-              )}
             </motion.div>
           )}
-
-
         </main>
       </div>
 

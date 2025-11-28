@@ -430,8 +430,7 @@ rounded-2xl p-8 text-center">
               className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
             >
               <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
-                <FileText className="text-[#3C9E8F] w-6 h-6" />
-                Danh sách tài liệu
+                📄 Danh sách tài liệu
               </h2>
 
               {/* === HIỂN THỊ DANH SÁCH FILE THEO FOLDER === */}

@@ -340,69 +340,7 @@ rounded-2xl p-8 text-center">
 
           )}
 
-          {activeTab === "violence" && (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-md mb-12"
-            >
-              <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
-                <FileText className="text-[#3C9E8F] w-6 h-6" />
-                Video về bạo lực học đường
-              </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                {[
-                  {
-                    name: "Tung tin xấu, bóc phốt bạn",
-                    link: "https://drive.google.com/file/d/1NU33RLcj4gzv51RiYJVzphrFtN5Xwf8k/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142505/Gemini_Generated_Image_70cipi70cipi70ci_hrxepw.png"
-                  },
-                  {
-                    name: "Tạo nhóm nói xấu, cô lập bạn",
-                    link: "https://drive.google.com/file/d/1e9v8zObtOKPavgyy87iD0hf4wqSa6DXb/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142494/Gemini_Generated_Image_7q8jhy7q8jhy7q8j_yhlrgp.png"
-                  },
-                  {
-                    name: "Nhận diện 5 dạng bạo lực học đường",
-                    link: "https://drive.google.com/file/d/1Z0HT4PRanI5mnfxalgf3Nb-jCZar8fXK/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142494/Gemini_Generated_Image_duksaaduksaaduks_oukx51.png"
-                  },
-                  {
-                    name: "Nghe được nhóm bạn chuẩn bị đánh nhau",
-                    link: "https://drive.google.com/file/d/19lSY9esepnWfd1HfS0BOnbj0-ttXwcuT/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142498/Gemini_Generated_Image_tg37uvtg37uvtg37_z1fr6o.png"
-                  },
-                  {
-                    name: "Đặt biệt danh nói xấu, đe dọa người khác",
-                    link: "https://drive.google.com/file/d/1D5S0Y1CgSPiHPDUDB9Ctlhw0xkfbcFJk/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142492/Gemini_Generated_Image_204ti2204ti2204t_myecy4.png"
-                  },
-                  {
-                    name: "Bạo lực học đường – Nhận biết & phòng tránh",
-                    link: "https://drive.google.com/file/d/175D78VNdOvxHOrn2FaEniqmtgus4cKhb/view?usp=sharing",
-                    thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142493/Gemini_Generated_Image_o6lxsso6lxsso6lx_qgshk7.png"
-                  }
-                ].map((v, i) => (
-                  <a
-                    key={i}
-                    href={v.link}
-                    target="_blank"
-                    className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
-                  >
-                    {v.thumbnail && <img src={v.thumbnail} className="w-full object-cover" />}
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
-                      <p className="text-sm text-gray-500">Nhấn để xem video</p>
-                    </div>
-                  </a>
-                ))}
-
-              </div>
-            </motion.div>
-          )}
 
 
 
