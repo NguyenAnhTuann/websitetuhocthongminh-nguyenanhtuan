@@ -215,19 +215,6 @@ const TaiNguyenOnline = ({ language }) => {
               Giới thiệu
             </li>
 
-            {/* PDF */}
-            <li
-              onClick={() => {
-                setActiveTab("violence");
-                setSelectedFolder("violence_videos"); // auto load
-                setOpenPDF(false);
-                setOpenVideo(false);
-              }}
-              className={`p-3 rounded-lg cursor-pointer transition
-${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
-            >
-              Bạo lực học đường
-            </li>
 
 
 
@@ -244,7 +231,7 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               className={`p-3 rounded-lg cursor-pointer transition
         ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
             >
-              An toàn mạng
+              Video
             </li>
 
             {/* NỘI DUNG HIỆN THEO FOLDER ĐƯỢC CHỌN */}
@@ -255,20 +242,43 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
                   onClick={() => setSelectedFolder("video_math")}
                 >
-                  Lợi ích, rủi ro và giải pháp an toàn trên không gian mạng
+                  Xử lý tình huống để an toàn số
                 </li>
 
-                <li
-                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_real")}
-                >
-                  Cẩm nang sử dụng mạng an toàn
-                </li>
               </ul>
             )}
 
 
 
+
+            {/* PDF */}
+            <li
+              onClick={() => {
+                setActiveTab("violence");
+                setSelectedFolder("pdf_videos"); // auto load
+                setOpenPDF(false);
+                setOpenVideo(false);
+              }}
+              className={`p-3 rounded-lg cursor-pointer transition
+${activeTab === "pdf" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
+            >
+              Tài liệu tham khảo PDF
+            </li>
+
+
+            {/* NỘI DUNG HIỆN THEO FOLDER ĐƯỢC CHỌN */}
+
+            {openVideo && activeTab === "pdf" && (
+              <ul className="pl-5 space-y-2 text-sm">
+                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => setSelectedFolder("pdf_math")}
+                >
+                  An toàn mạng
+                </li>
+
+              </ul>
+            )}
 
           </ul>
         </aside>
@@ -424,7 +434,7 @@ rounded-2xl p-8 text-center">
                       link: "https://drive.google.com/file/d/1z2P3QBo0GXelf2UqX_hXtGzGUNC7yGvB/view?usp=sharing",
                       thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142473/Gemini_Generated_Image_58ragp58ragp58ra_jfd7t4.png"
                     },
-                  
+
                   ].map((v, i) => (
                     <a
                       key={i}
