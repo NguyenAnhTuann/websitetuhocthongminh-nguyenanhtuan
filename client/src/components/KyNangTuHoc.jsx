@@ -735,32 +735,32 @@ rounded-2xl p-8 text-center">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
-                      name: "Vecto và các phép toán vecto",
+                      name: "VECTO VÀ CÁC PHÉP TOÁN VECTO",
                       link: "https://drive.google.com/file/d/1eINt8AeeoPjS_LzZSLOIHgjOgx_Mq0um/view?usp=sharing",
                       thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png"
                     },
                     {
-                      name: "Tỷ số lượng giác của góc nhọn",
+                      name: "TỶ SỐ LƯỢNG GIÁC CỦA GÓC NHỌN",
                       link: "https://drive.google.com/file/d/1PwbM7WDA40FOh1eA4USWPNqlJCggfhfv/view?usp=sharing",
                       thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png"
                     },
                     {
-                      name: "Hình bình hành",
+                      name: "HÌNH BÌNH HÀNH",
                       link: "https://drive.google.com/file/d/1e62Dq_EwFAYWOd0yX79D4_renbo8KjxU/view?usp=sharing",
                       thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png"
                     },
                     {
-                      name: "Hệ thức lượng trong tam giác",
+                      name: "HỆ THỨC LƯỢNG TRONG TAM GIÁC",
                       link: "https://drive.google.com/file/d/1pZXfiw4jvLdpyXu6Fbf08uakzc2-0nOe/view?usp=sharing",
                       thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png"
                     },
                     {
-                      name: "Hệ thức lượng trong tam giác vuông",
+                      name: "HỆ THỨC LƯỢNG TRONG TAM GIÁC VUÔNG",
                       link: "https://drive.google.com/file/d/1oxE-cYc-e_2k-lnVlIJ39T4CXFjqXM4t/view?usp=sharing",
                       thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png"
                     },
                     {
-                      name: "Hàm số bậc hai",
+                      name: "HÀM SỐ BẬC HAI",
                       link: "https://drive.google.com/file/d/1MLkeSDTLhr8SUH62H3gEWybeGinzOA98/view?usp=sharing",
                       thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png"
                     }
