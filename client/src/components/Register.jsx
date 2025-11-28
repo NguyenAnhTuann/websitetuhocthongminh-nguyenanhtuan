@@ -41,14 +41,15 @@ export default function Register() {
 
       return;
     }
-    const strongPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const strongPass =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
     if (!strongPass.test(pass)) {
-      setMsg("❌ Mật khẩu phải 8 ký tự, có chữ hoa, thường, số và ký tự đặc biệt!");
+      setMsg("❌ Mật khẩu phải tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt!");
       window.scrollTo({ top: 0, behavior: "smooth" });
-
       return;
     }
+
 
 
 
