@@ -191,11 +191,11 @@ const ThucHanh = ({ language }) => {
              text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
              bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
       >
-        {t[language].title}
+        {t?.[language]?.title || ""}
       </motion.h1>
 
 
-      <Typewriter text={t[language].subtitle} />
+      <Typewriter text={t?.[language]?.subtitle || ""} />
 
 
       <div className="mt-10 w-full max-w-7xl mx-auto flex gap-6">
