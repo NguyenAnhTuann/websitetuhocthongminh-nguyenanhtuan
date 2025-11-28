@@ -180,7 +180,7 @@ const ThucHanh = ({ language }) => {
   //-----------------------------------------------------------
 
   return (
-    <section className="min-h-screen w-full px-4 py-20 bg-white max-w-7xl mx-auto">
+    <section className="w-full px-4 py-20 bg-white max-w-7xl mx-auto">
 
       {/* ======= TIÊU ĐỀ ======= */}
       <motion.h1
