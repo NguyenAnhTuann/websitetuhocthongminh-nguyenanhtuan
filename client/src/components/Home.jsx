@@ -83,7 +83,7 @@ const Home = ({ language }) => {
             "Video, hình ảnh minh họa tình huống thực tế"
           ]
         },
-                {
+        {
           key: "kynangmang",
           title: "3. Kỹ năng mạng",
           route: "/kynangmang",
@@ -267,7 +267,7 @@ const Home = ({ language }) => {
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-5xl lg:text-5xl font-extrabold text-white font-outfit leading-tight 
+            className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit leading-tight 
              bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm inline-block"
           >
             {t.heroTitle}
@@ -280,7 +280,16 @@ const Home = ({ language }) => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-3 max-w-xl text-gray-600  text-sm md:text-base leading-relaxed"
+            className="
+  w-full max-w-[95%]
+  text-center md:text-left
+  text-sm xs:text-base md:text-lg
+  px-2 md:px-4
+  pt-3 pb-2
+  break-words whitespace-normal
+  text-black
+"
+
           >
             {t.heroDesc}
           </motion.p>
@@ -294,13 +303,19 @@ const Home = ({ language }) => {
           >
             <button
               onClick={() => navigate("/kynangtuhoc")}
-              className="px-5 py-2.5 rounded-full bg-[#3C9E8F] text-white text-sm font-semibold shadow-md hover:bg-yellow-500 transition"
+              className="px-4 py-2 text-xs
+  xs:px-5 xs:py-2.5 xs:text-sm
+  md:px-6 md:py-3 md:text-base
+  rounded-full bg-[#3C9E8F] text-white text-sm font-semibold shadow-md hover:bg-yellow-500 transition"
             >
               {t.heroPrimaryBtn}
             </button>
             <button
               onClick={() => navigate("/dangnhap")} // route tạm, bạn sẽ tạo sau
-              className="px-5 py-2.5 rounded-full border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-300 transition flex items-center gap-2"
+              className="px-4 py-2 text-xs
+  xs:px-5 xs:py-2.5 xs:text-sm
+  md:px-6 md:py-3 md:text-base
+  rounded-full border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-300 transition flex items-center gap-2"
             >
               <LuUserRoundPen className="w-4 h-4" />
               {t.heroSecondaryBtn}
@@ -335,9 +350,16 @@ const Home = ({ language }) => {
           <div className="relative flex justify-center mb-6 mt-4">
             <img
               src={avatarImage}
-              alt="Learning Illustration"
-              className="w-[230px] h-[230px] object-cover rounded-full border-[5px] border-white shadow-lg"
+              className="
+    w-28 h-28          /* Mobile nhỏ */
+    xs:w-36 xs:h-36    /* Mobile lớn & iPhone Pro Max */
+    sm:w-40 sm:h-40    /* Tablet dọc */
+    md:w-52 md:h-52    /* iPad ngang & laptop */
+    lg:w-60 lg:h-60    /* PC rộng */
+    object-cover rounded-full border-4 border-white shadow-lg
+  "
             />
+
           </div>
 
 
@@ -369,14 +391,23 @@ const Home = ({ language }) => {
           {t.sectionsSubtitle}
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="
+  grid 
+  grid-cols-1               /* Mobile */
+  sm:grid-cols-2            /* iPhone ngang / tablet nhỏ */
+  md:grid-cols-2            /* Tablet */
+  lg:grid-cols-3            /* Laptop */
+  xl:grid-cols-3            /* PC */
+  gap-4 sm:gap-6
+">
+
           {t.sections.map((section, idx) => (
             <motion.div
               key={section.key}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
-              className="bg-white border border-gray-200 hover:border-[#3C9E8F] rounded-2xl p-5 shadow-sm hover:shadow-md transition cursor-pointer flex flex-col"
+              className="bg-white border border-gray-200 hover:border-[#3C9E8F] rounded-2xl p-4 xs:p-5 md:p-6 shadow-sm hover:shadow-md transition cursor-pointer flex flex-col"
               onClick={() => navigate(section.route)}
             >
               <div className="flex items-center gap-3 mb-3">
@@ -388,7 +419,7 @@ const Home = ({ language }) => {
                   {section.title}
                 </h3>
               </div>
-              <ul className="text-xs md:text-sm text-gray-600  space-y-1.5 flex-1">
+              <ul className="text-xs xs:text-sm md:text-base text-gray-600  space-y-1.5 flex-1">
                 {section.points.map((p, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <span className="mt-1 w-1.5 h-1.5 rounded-full bg-[#3C9E8F] flex-shrink-0" />
@@ -447,7 +478,7 @@ const Home = ({ language }) => {
                   {t.accountStudentTitle}
                 </h3>
               </div>
-              <ul className="text-xs md:text-sm text-gray-600  space-y-1.5">
+              <ul className="text-xs xs:text-sm md:text-base text-gray-600  space-y-1.5">
                 {t.accountStudentPoints.map((p, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <span className="mt-1 w-1.5 h-1.5 rounded-full bg-[#3C9E8F] flex-shrink-0" />
@@ -465,7 +496,7 @@ const Home = ({ language }) => {
                   {t.accountAdminTitle}
                 </h3>
               </div>
-              <ul className="text-xs md:text-sm text-gray-600  space-y-1.5">
+              <ul className="text-xs xs:text-sm md:text-base text-gray-600  space-y-1.5">
                 {t.accountAdminPoints.map((p, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <span className="mt-1 w-1.5 h-1.5 rounded-full bg-[#3C9E8F] flex-shrink-0" />
@@ -493,7 +524,7 @@ const Home = ({ language }) => {
         <h2 className="text-xl md:text-2xl font-extrabold text-gray-900  mb-3">
           {t.howTitle}
         </h2>
-        <ol className="list-decimal ml-5 text-xs md:text-sm text-gray-600  space-y-1.5">
+        <ol className="list-decimal ml-5 text-xs xs:text-sm md:text-base text-gray-600  space-y-1.5">
           {t.howSteps.map((step, i) => (
             <li key={i}>{step}</li>
           ))}
@@ -503,7 +534,10 @@ const Home = ({ language }) => {
           <div>
             <button
               onClick={() => navigate("/kynangtuhoc")}
-              className="px-5 py-2.5 rounded-full bg-[#3C9E8F] text-white text-sm font-semibold shadow-md hover:bg-yellow-500 transition inline-flex items-center gap-2"
+              className="px-4 py-2 text-xs
+  xs:px-5 xs:py-2.5 xs:text-sm
+  md:px-6 md:py-3 md:text-base
+  rounded-full bg-[#3C9E8F] text-white text-sm font-semibold shadow-md hover:bg-yellow-500 transition inline-flex items-center gap-2"
             >
               <BookOpen className="w-4 h-4" />
               {t.ctaBottom}
