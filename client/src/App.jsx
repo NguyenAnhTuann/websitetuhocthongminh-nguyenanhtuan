@@ -11,6 +11,7 @@ import {
 import Header from './components/Header';
 import Home from './components/Home';
 import ScrollToTop from './components/ScrollToTop';
+import Footer from './components/Footer';
 
 // New pages
 import KyNangTuHoc from "./components/KyNangTuHoc";
@@ -122,6 +123,8 @@ const AppWrapper = () => {
 
           </Routes>
           </GlobalToastProvider>
+
+          <Footer />
 
         </div>
       </div>
