@@ -6,12 +6,9 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 
 export default function Register() {
   const [fullName, setFullName] = useState("");
-  // const [dob, setDob] = useState("");
+  const [dob, setDob] = useState("");
   const [school, setSchool] = useState("");
   const [grade, setGrade] = useState("");
-  const [dob, setDob] = useState({ day: "", month: "", year: "" });
-
-
 
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -57,8 +54,7 @@ export default function Register() {
 
 
     try {
-      // const res = await fetch("http://localhost:5000/api/auth/register", {
-        const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/register", {
+      const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -143,66 +139,76 @@ export default function Register() {
           />
         </div>
 
-
-        {/* ---------------------------------------------- */}
-
-
-
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">Ngày sinh</label>
 
-          <div className="flex gap-2">
+          <input
+  type="text"
+  value={dob}
+  onChange={(e) => {
+    let v = e.target.value;
 
-            {/* NGÀY */}
-            <select
-              value={dob.day}
-              onChange={(e) => setDob({ ...dob, day: e.target.value })}
-              className="w-1/3 px-3 py-3 border rounded-xl focus:border-[#1c7c76]"
-            >
-              <option value="">Ngày</option>
-              {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
-                <option key={d} value={d}>
-                  {d}
-                </option>
-              ))}
-            </select>
+    // ❗ Cho phép nhập số + "/"
+    v = v.replace(/[^\d/]/g, "");
 
-            {/* THÁNG */}
-            <select
-              value={dob.month}
-              onChange={(e) => setDob({ ...dob, month: e.target.value })}
-              className="w-1/3 px-3 py-3 border rounded-xl focus:border-[#1c7c76]"
-            >
-              <option value="">Tháng</option>
-              {[
-                "01", "02", "03", "04", "05", "06",
-                "07", "08", "09", "10", "11", "12",
-              ].map((m, i) => (
-                <option key={m} value={i + 1}>
-                  {m}
-                </option>
-              ))}
-            </select>
+    // Tách theo "/"
+    let parts = v.split("/").slice(0, 3); // tối đa 3 phần
 
-            {/* NĂM */}
-            <select
-              value={dob.year}
-              onChange={(e) => setDob({ ...dob, year: e.target.value })}
-              className="w-1/3 px-3 py-3 border rounded-xl focus:border-[#1c7c76]"
-            >
-              <option value="">Năm</option>
-              {Array.from({ length: 100 }, (_, i) => 2025 - i).map((y) => (
-                <option key={y} value={y}>
-                  {y}
-                </option>
-              ))}
-            </select>
+    // ======================
+    // 1) XỬ LÝ NGÀY
+    // ======================
+    if (parts[0]) {
+      let day = parts[0];
 
-          </div>
+      // Nếu nhập 2 số → tự chuẩn hoá
+      if (day.length === 2) {
+        let d = parseInt(day);
+        if (d > 31) d = 31;
+        if (d < 1) d = 1;
+        parts[0] = d.toString().padStart(2, "0");
+      }
+
+      // Nếu nhập 1 số + tự bấm "/" thì giữ nguyên
+      if (day.length === 1 && v.includes("/")) {
+        parts[0] = day;
+      }
+    }
+
+    // ======================
+    // 2) XỬ LÝ THÁNG
+    // ======================
+    if (parts[1]) {
+      let month = parts[1];
+
+      if (month.length === 2) {
+        let m = parseInt(month);
+        if (m > 12) m = 12;
+        if (m < 1) m = 1;
+        parts[1] = m.toString().padStart(2, "0");
+      }
+
+      // Nếu nhập 1 số và tự gõ "/" → giữ nguyên
+      if (month.length === 1 && v.split("/")[1]?.endsWith("/")) {
+        parts[1] = month;
+      }
+    }
+
+    // ======================
+    // 3) XỬ LÝ NĂM
+    // ======================
+    if (parts[2]) {
+      parts[2] = parts[2].slice(0, 4); // giới hạn 4 ký tự
+    }
+
+    // Ghép lại và hiển thị lên input
+    setDob(parts.join("/"));
+  }}
+  placeholder="12/08/2008"
+  className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+/>
+
+
         </div>
-
-
-        {/* ---------------------------------------------- */}
 
 
 
