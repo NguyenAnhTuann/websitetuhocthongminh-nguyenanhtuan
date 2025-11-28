@@ -36,6 +36,9 @@ const AppWrapper = () => {
   const [language, setLanguage] = useState('vi');
   const hideHeaderPages = ["/admin-dashboard"];
   const shouldHideHeader = hideHeaderPages.includes(location.pathname);
+  const hideFooterPages = ["/admin-dashboard"];
+const shouldHideFooter = hideFooterPages.includes(location.pathname);
+
 
 
   const getInitialTheme = () => {
@@ -124,7 +127,8 @@ const AppWrapper = () => {
           </Routes>
           </GlobalToastProvider>
 
-          <Footer />
+{!shouldHideFooter && <Footer />}
+
 
         </div>
       </div>
