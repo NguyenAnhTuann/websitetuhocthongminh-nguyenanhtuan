@@ -16,7 +16,7 @@ export default function NhapOTP() {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/api/auth/otp", {
+    const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, code }),
@@ -34,7 +34,7 @@ export default function NhapOTP() {
     setMsgType("success");
 
     setTimeout(() => {
-      window.location.href = `/reset-password?email=${email}`;
+      window.location.href = `/datmatkhaumoi?email=${email}`;
     }, 1800);
   };
 

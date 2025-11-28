@@ -13,7 +13,7 @@ export default function QuenMatKhau() {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/api/auth/quenmatkhau", {
+    const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/quenmatkhau", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),

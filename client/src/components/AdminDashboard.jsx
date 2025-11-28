@@ -16,7 +16,7 @@ export default function AdminDashboard() {
     const token = localStorage.getItem("token");
 
     // 📌 Gọi API lấy danh sách user
-    fetch("http://localhost:5000/api/admin/users", {
+    fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/users", {
       headers: {
         Authorization: "Bearer " + token,
       },

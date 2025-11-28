@@ -14,7 +14,7 @@ router.post("/register", async (req, res) => {
     });
 
     if (exists) {
-      return res.status(409).json({   
+      return res.status(409).json({
         success: false,
         message: "Email hoặc số điện thoại đã được đăng ký. Vui lòng dùng thông tin khác."
       });
@@ -47,16 +47,16 @@ router.post("/register", async (req, res) => {
 
   } catch (err) {
 
-  if (err.code === 11000) {
-    return res.status(409).json({
-      success: false,
-      message: "Email hoặc số điện thoại đã tồn tại!"
-    });
-  }
+    if (err.code === 11000) {
+      return res.status(409).json({
+        success: false,
+        message: "Email hoặc số điện thoại đã tồn tại!"
+      });
+    }
 
-  console.error("Register error:", err);
-  res.status(500).json({ success: false, message: "Lỗi server" });
-}
+    console.error("Register error:", err);
+    res.status(500).json({ success: false, message: "Lỗi server" });
+  }
 
 });
 
@@ -80,7 +80,7 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign(
-      { userId: user._id, role: user.role }, 
+      { userId: user._id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
@@ -126,11 +126,58 @@ router.post("/quenmatkhau", async (req, res) => {
 
     await sendEmail(
       email,
-      "Mã đặt lại mật khẩu",
-      `<h2>Mã đặt lại mật khẩu của bạn:</h2>
-       <p style="font-size:22px; font-weight:bold;">${code}</p>
-       <p>Mã sẽ hết hạn sau 5 phút.</p>`
+      "Mã đặt lại mật khẩu – Tự Học Thông Minh",
+      `
+  <div style="font-family: Arial, sans-serif; background:#f4f6f8; padding:30px;">
+    <div style="max-width:520px; margin:auto; background:white; border-radius:14px; overflow:hidden; box-shadow:0 6px 14px rgba(0,0,0,0.08);">
+
+      <!-- HEADER -->
+      <div style="background:#1c7c76; padding:18px 0; text-align:center;">
+        <h2 style="color:white; margin:0; font-size:22px; font-weight:700;">
+          TỰ HỌC THÔNG MINH
+        </h2>
+      </div>
+
+      <!-- BODY -->
+      <div style="padding:28px;">
+        <p style="font-size:16px; color:#333;">
+          Xin chào, chúng tôi nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn.
+        </p>
+
+        <p style="font-size:16px; color:#333; margin-top:14px;">
+          Đây là mã xác nhận đặt lại mật khẩu:
+        </p>
+
+        <!-- OTP CODE BOX -->
+        <div style="
+          margin:22px auto;
+          text-align:center;
+          background:#e7f5f3;
+          border-left:6px solid #1c7c76;
+          padding:18px 0;
+          border-radius:10px;
+        ">
+          <span style="font-size:32px; font-weight:900; color:#1c7c76; letter-spacing:4px;">
+            ${code}
+          </span>
+        </div>
+
+        <p style="font-size:14px; color:#555;">
+          Mã sẽ hết hạn sau <b>5 phút</b>.  
+          Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này.
+        </p>
+      </div>
+
+      <!-- FOOTER -->
+      <div style="background:#fafafa; padding:16px; text-align:center; font-size:13px; color:#777;">
+        © ${new Date().getFullYear()} Tự Học Thông Minh – All rights reserved.
+      </div>
+
+    </div>
+  </div>
+  `
     );
+
 
     res.json({ success: true, message: "Đã gửi mã xác nhận về email!" });
 
