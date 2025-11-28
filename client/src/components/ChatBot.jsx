@@ -158,7 +158,7 @@ export default function ChatBot() {
         </div>
 
         <p className="mt-2 text-[11px] text-gray-400 text-center">
-          Powered by OpenAI GPT-4o.
+          Powered by GEMINI.
         </p>
       </div>
 
