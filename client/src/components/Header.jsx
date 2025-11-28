@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
-import { LuNotebookPen, LuSchool } from "react-icons/lu";
-import { PiGraduationCapBold } from "react-icons/pi";
-import { MdOutlineLibraryBooks } from "react-icons/md";
-import { Menu, X } from "lucide-react";
-import { BsSun } from "react-icons/bs";
+
 import React, { useState, useRef, useEffect } from "react";
+
+import {
+  GraduationCap,
+  HeartHandshake,
+  Shield,
+  Bot,
+  CheckSquare
+} from "lucide-react";
+
 
 
 const Header = ({ language, setLanguage }) => {
@@ -20,7 +25,7 @@ useEffect(() => {
   if (storedUser && storedToken) {
     setUser(JSON.parse(storedUser));
   } else {
-    setUser(null);   // 🔥 đảm bảo React update UI khi chưa login
+    setUser(null);
   }
 }, []);
 
@@ -52,7 +57,7 @@ useEffect(() => {
         kynangsong: "Kỹ năng sống",
         chatbot: "AI ChatBot",
         thuchanh: "Thực hành",
-        tailieuonline: "Tài nguyên online",
+        kynangmang: "Kỹ năng mạng",
       },
       auth: { login: "Đăng nhập", register: "Đăng ký" },
     },
@@ -64,7 +69,7 @@ useEffect(() => {
         kynangsong: "Life skills",
         chatbot: "AI ChatBot",
         thuchanh: "Practice",
-        tailieuonline: "Online resources",
+        kynangmang: "Online resources",
       },
       auth: { login: "Login", register: "Register" },
     },
@@ -93,24 +98,25 @@ useEffect(() => {
         {/* 🔥 MENU DESKTOP */}
         <nav className="hidden md:flex items-center gap-8 text-[15px] text-white/90 font-medium">
           <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/kynangtuhoc">
-            <LuNotebookPen className="w-4 h-4" /> {t.menu.kynangtuhoc}
+            <GraduationCap className="w-4 h-4" /> {t.menu.kynangtuhoc}
           </Link>
 
           <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/kynangsong">
-            <LuNotebookPen className="w-4 h-4" /> {t.menu.kynangsong}
+            <HeartHandshake className="w-4 h-4" /> {t.menu.kynangsong}
+          </Link>
+
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/kynangmang">
+            <Shield className="w-4 h-4" /> {t.menu.kynangmang}
           </Link>
 
           <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/chatbot">
-            <BsSun className="w-4 h-4" /> {t.menu.chatbot}
+            <Bot className="w-4 h-4" /> {t.menu.chatbot}
           </Link>
 
           <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/thuchanh">
-            <PiGraduationCapBold className="w-4 h-4" /> {t.menu.thuchanh}
+            <CheckSquare className="w-4 h-4" /> {t.menu.thuchanh}
           </Link>
 
-          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/tailieuonline">
-            <MdOutlineLibraryBooks className="w-4 h-4" /> {t.menu.tailieuonline}
-          </Link>
         </nav>
 
         {/* 🔥 ACTIONS */}
@@ -146,8 +152,8 @@ useEffect(() => {
                 onClick={() => {
                   localStorage.removeItem("user");
                   localStorage.removeItem("token");
-                  localStorage.removeItem("role");  // 🔥 thêm dòng này
-                  window.location.reload();         // reload lại UI
+                  localStorage.removeItem("role"); 
+                  window.location.reload();
                 }}
 
                 className="px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"

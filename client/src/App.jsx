@@ -103,7 +103,7 @@ const AppWrapper = () => {
               />
 
               <Route
-                path="/tailieuonline"
+                path="/kynangmang"
                 element={<TaiNguyenOnline language={language} />}
               />
 

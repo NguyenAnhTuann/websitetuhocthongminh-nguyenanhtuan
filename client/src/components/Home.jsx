@@ -83,9 +83,20 @@ const Home = ({ language }) => {
             "Video, hình ảnh minh họa tình huống thực tế"
           ]
         },
+                {
+          key: "kynangmang",
+          title: "3. Kỹ năng mạng",
+          route: "/kynangmang",
+          icon: <MdOutlineLibraryBooks className="w-7 h-7" />,
+          points: [
+            "Kịch bản xử lý tình huống trên không gian mạng và đời sống",
+            "Hướng dẫn an toàn mạng dành cho học sinh, sinh viên",
+            "Tài liệu, sách báo, bài viết tham khảo được lưu trên Google Drive"
+          ]
+        },
         {
           key: "chatbot",
-          title: "3. Tích hợp công cụ AI Gemini",
+          title: "4. Tích hợp công cụ AI Gemini",
           route: "/chatbot",
           icon: <MessageCircle className="w-7 h-7" />,
           points: [
@@ -96,7 +107,7 @@ const Home = ({ language }) => {
         },
         {
           key: "thuchanh",
-          title: "4. Trang thực hành",
+          title: "5. Trang thực hành",
           route: "/thuchanh",
           icon: <Laptop className="w-7 h-7" />,
           points: [
@@ -105,17 +116,6 @@ const Home = ({ language }) => {
             "Video tình huống để học sinh phân tích và trả lời"
           ]
         },
-        {
-          key: "tailieuonline",
-          title: "5. Tài nguyên & thư viện nội dung",
-          route: "/tailieuonline",
-          icon: <MdOutlineLibraryBooks className="w-7 h-7" />,
-          points: [
-            "Kịch bản xử lý tình huống trên không gian mạng và đời sống",
-            "Hướng dẫn an toàn mạng dành cho học sinh, sinh viên",
-            "Tài liệu, sách báo, bài viết tham khảo được lưu trên Google Drive"
-          ]
-        }
       ],
 
       accountTitle: "Tài khoản & Bảo mật",
@@ -210,9 +210,9 @@ const Home = ({ language }) => {
           ]
         },
         {
-          key: "tailieuonline",
+          key: "kynangmang",
           title: "5. Resources & digital library",
-          route: "/tailieuonline",
+          route: "/kynangmang",
           icon: <MdOutlineLibraryBooks className="w-7 h-7" />,
           points: [
             "Scenario scripts for handling online and offline situations",
