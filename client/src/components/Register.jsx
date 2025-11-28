@@ -139,41 +139,52 @@ export default function Register() {
           />
         </div>
 
-        {(e) => {
-          let v = e.target.value.replace(/\D/g, ""); // chỉ giữ số
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Ngày sinh</label>
 
-          // Tự thêm dấu "/"
-          if (v.length > 2 && v.length <= 4) {
-            v = v.replace(/(\d{2})(\d{1,2})/, "$1/$2");
-          } else if (v.length > 4) {
-            v = v.replace(/(\d{2})(\d{2})(\d{1,4})/, "$1/$2/$3");
-          }
+          <input
+            type="text"
+            value={dob}
+            onChange={(e) => {
+              let v = e.target.value.replace(/\D/g, ""); // chỉ giữ số
 
-          const parts = v.split("/");
+              // tự thêm dấu "/"
+              if (v.length > 2 && v.length <= 4) {
+                v = v.replace(/(\d{2})(\d{1,2})/, "$1/$2");
+              } else if (v.length > 4) {
+                v = v.replace(/(\d{2})(\d{2})(\d{1,4})/, "$1/$2/$3");
+              }
 
-          if (parts[0]) {
-            let day = parseInt(parts[0]);
-            if (day > 31) day = 31;
-            if (day < 1) day = 1;
-            parts[0] = day.toString().padStart(2, "0");
-          }
+              const parts = v.split("/");
 
-          if (parts[1]) {
-            let month = parseInt(parts[1]);
-            if (month > 12) month = 12;
-            if (month < 1) month = 1;
-            parts[1] = month.toString().padStart(2, "0");
-          }
+              if (parts[0]) {
+                let day = parseInt(parts[0]);
+                if (day > 31) day = 31;
+                if (day < 1) day = 1;
+                parts[0] = day.toString().padStart(2, "0");
+              }
 
-          if (parts[2]?.length === 4) {
-            let year = parseInt(parts[2]);
-            if (year < 1900) year = 1900;
-            if (year > 2025) year = 2025;
-            parts[2] = year.toString();
-          }
+              if (parts[1]) {
+                let month = parseInt(parts[1]);
+                if (month > 12) month = 12;
+                if (month < 1) month = 1;
+                parts[1] = month.toString().padStart(2, "0");
+              }
 
-          setDob(parts.join("/"));
-        }}
+              if (parts[2]?.length === 4) {
+                let year = parseInt(parts[2]);
+                if (year < 1900) year = 1900;
+                if (year > 2025) year = 2025;
+                parts[2] = year.toString();
+              }
+
+              setDob(parts.join("/"));
+            }}
+            placeholder="VD: 12/08/2008"
+            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+          />
+        </div>
+
 
 
         <div className="mb-4">
