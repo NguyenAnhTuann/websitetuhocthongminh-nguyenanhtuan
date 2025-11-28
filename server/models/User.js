@@ -18,6 +18,10 @@ const UserSchema = new mongoose.Schema(
 
 
     password: { type: String, required: true },
+
+    // ===== Thêm cho quên mật khẩu =====
+    resetCode: { type: String, default: null },
+    resetCodeExpire: { type: Number, default: null },
   },
   { timestamps: true }
 );

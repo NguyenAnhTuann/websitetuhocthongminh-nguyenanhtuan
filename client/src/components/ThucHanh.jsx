@@ -247,7 +247,7 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               className={`p-3 rounded-lg cursor-pointer transition
         ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
             >
-              Tương tác học tập
+              Tương tác bài tập
             </li>
 
             {openVideo && activeTab === "video" && (

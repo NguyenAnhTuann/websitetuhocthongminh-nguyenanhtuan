@@ -1,22 +1,20 @@
 import { motion } from "framer-motion";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-
 
 export default function Login() {
   const [identifier, setIdentifier] = useState("");
   const [pass, setPass] = useState("");
   const [msg, setMsg] = useState("");
   const [showPass, setShowPass] = useState(false);
-
+  const [msgType, setMsgType] = useState("");
 
   const handleLogin = async () => {
     setMsg("");
 
     if (!identifier || !pass) {
-      setMsg("❌ Vui lòng nhập đầy đủ thông tin!");
+      setMsg("Vui lòng nhập đầy đủ thông tin!");
+      setMsgType("error");
       return;
     }
 
@@ -33,33 +31,31 @@ export default function Login() {
       const data = await res.json();
 
       if (!data.success) {
-        setMsg("❌ " + (data.message || "Đăng nhập thất bại!"));
+        setMsg(data.message || "Đăng nhập thất bại!");
+        setMsgType("error");
         return;
       }
 
-      // LƯU TOKEN
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("role", data.user.role);
 
-      setMsg("✅ Đăng nhập thành công! Đang chuyển hướng...");
+      setMsg("Đăng nhập thành công! Đang chuyển hướng...");
+      setMsgType("success");
 
-      // Chuyển trang sau 1.2 giây
       setTimeout(() => {
         if (data.user.role === "admin") {
           window.location.href = "/admin-dashboard";
         } else {
           window.location.href = "/home";
         }
-      }, 1200);
+      }, 3000);
 
     } catch (err) {
       console.error("Login error:", err);
-      setMsg("❌ Lỗi kết nối server!");
+      setMsg("❌ Lỗi kết nối với hệ thống!");
     }
   };
-
-
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-white px-4">
@@ -77,15 +73,6 @@ export default function Login() {
           Chào mừng bạn trở lại! Vui lòng đăng nhập để tiếp tục.
         </p>
 
-        {msg && (
-          <p
-            className={`text-center mb-4 ${msg.includes("✅") ? "text-green-600" : "text-red-600"
-              }`}
-          >
-            {msg}
-          </p>
-        )}
-
         {/* Email or Phone */}
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">
@@ -101,7 +88,7 @@ export default function Login() {
         </div>
 
         {/* PASSWORD */}
-        <div className="mb-4 relative">
+        <div className="mb-2 relative">
           <label className="block text-gray-700 font-medium mb-1">
             Mật khẩu
           </label>
@@ -114,20 +101,23 @@ export default function Login() {
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
 
-          {/* ICON */}
           <span
             className="absolute right-4 top-[45px] text-gray-600 cursor-pointer"
             onClick={() => setShowPass(!showPass)}
           >
-            {showPass ? (
-              <FiEyeOff size={22} />
-            ) : (
-              <FiEye size={22} />
-            )}
+            {showPass ? <FiEyeOff size={22} /> : <FiEye size={22} />}
           </span>
         </div>
 
-
+        {/* FORGOT PASSWORD */}
+        <div className="flex justify-end mb-4">
+          <a
+            href="/quenmatkhau"
+            className="text-[#1c7c76] text-sm font-medium hover:underline"
+          >
+            Quên mật khẩu?
+          </a>
+        </div>
 
         {/* LOGIN BUTTON */}
         <button
@@ -139,9 +129,51 @@ export default function Login() {
 
         <p className="text-center text-gray-600 mt-6 text-sm">
           Chưa có tài khoản?
-          <a href="/dangky" className="text-[#1c7c76] font-medium underline"> Đăng ký ngay</a>
+          <a href="/dangky" className="text-[#1c7c76] font-medium underline">
+            {" "}
+            Đăng ký ngay
+          </a>
         </p>
       </motion.div>
+
+      {msg && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+          <motion.div
+            initial={{ scale: 0.6, opacity: 0, y: 40 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="bg-white w-[88%] max-w-sm p-7 rounded-3xl shadow-xl text-center relative"
+          >
+            <div className="flex justify-center mb-4">
+              {msgType === "success" ? (
+                <img src="/done.png" alt="success" className="w-24 h-24 drop-shadow-xl" />
+              ) : (
+                <img src="/error.png" alt="error" className="w-24 h-24 drop-shadow-xl" />
+              )}
+            </div>
+
+            <p
+              className={`text-lg leading-relaxed ${
+                msgType === "success"
+                  ? "text-[#1c7c76] font-bold"
+                  : "text-red-600 font-semibold"
+              }`}
+            >
+              {msg}
+            </p>
+
+            <button
+              onClick={() => {
+                setMsg("");
+                setMsgType("");
+              }}
+              className="mt-6 w-full bg-[#1c7c76] hover:bg-[#166662] text-white py-3 rounded-2xl font-semibold shadow-md transition"
+            >
+              Đóng
+            </button>
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 }

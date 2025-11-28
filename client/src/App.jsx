@@ -28,6 +28,11 @@ import AdminDashboard from "./components/AdminDashboard";
 import RedirectIfLoggedIn from "./utils/RedirectIfLoggedIn";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
+// Quên mật khẩu flow
+import QuenMatKhau from "./components/QuenMatKhau";
+import NhapOTP from "./components/NhapOTP";
+import DatMatKhauMoi from "./components/DatMatKhauMoi";
+
 // -----------------------------
 // APP WRAPPER
 // -----------------------------
@@ -126,6 +131,14 @@ const AppWrapper = () => {
                   </RedirectIfLoggedIn>
                 }
               />
+
+
+              {/* QUÊN MẬT KHẨU FLOW */}
+              <Route path="/quenmatkhau" element={<QuenMatKhau />} />
+              <Route path="/otp" element={<NhapOTP />} />
+              <Route path="/datmatkhaumoi" element={<DatMatKhauMoi />} />
+
+
             </Routes>
           </GlobalToastProvider>
         </main>
