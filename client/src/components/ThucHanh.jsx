@@ -269,7 +269,7 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
                   onClick={() => setSelectedFolder("math_12")}
                 >
-                  Toán 11
+                  Toán 12
                 </li>
 
 

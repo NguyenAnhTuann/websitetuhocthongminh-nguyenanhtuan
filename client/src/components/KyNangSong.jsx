@@ -454,7 +454,7 @@ rounded-2xl p-8 text-center">
                       )}
                       <div className="p-4">
                         <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
-                        <p className="text-sm text-gray-500">Nhấn để mở tài liệu</p>
+                        <p className="text-sm text-gray-500">Nhấn để xem video</p>
                       </div>
                     </a>
                   ))}

@@ -51,7 +51,6 @@ const TaiNguyenOnline = ({ language }) => {
         "Trang bị kiến thức – kỹ năng để sử dụng Internet an toàn, nhận diện rủi ro và bảo vệ bản thân trên không gian mạng.",
 
       pdfTitle: "Tài liệu PDF",
-      pdf1: "Lợi ích, rủi ro và giải pháp an toàn trên không gian mạng",
       pdf2: "Cẩm nang sử dụng mạng an toàn",
 
       mediaTitle: "Video – Tình huống minh họa",
@@ -169,12 +168,6 @@ ${activeTab === "pdf" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 
             {openPDF && activeTab === "pdf" && (
               <ul className="pl-5 space-y-2 text-sm">
-                <li
-                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("pdf1")}
-                >
-                  Lợi ích, rủi ro và giải pháp an toàn trên không gian mạng
-                </li>
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
@@ -358,33 +351,7 @@ ${activeTab === "pdf" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
                 📄 Danh sách tài liệu
               </h2>
-              {selectedFolder === "pdf1" && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {[
-                    {
-                      name: "LỢI ÍCH, RỦI RO VÀ GIẢI PHÁP AN TOÀN TRÊN KHÔNG GIAN MẠNG",
-                      link: "https://drive.google.com/file/d/1z2P3QBo0GXelf2UqX_hXtGzGUNC7yGvB/view?usp=sharing",
-                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142473/Gemini_Generated_Image_58ragp58ragp58ra_jfd7t4.png"
-                    },
-
-                  ].map((v, i) => (
-                    <a
-                      key={i}
-                      href={v.link}
-                      target="_blank"
-                      className="block bg-white rounded-xl border shadow-sm hover:shadow-md transition overflow-hidden"
-                    >
-                      {v.thumbnail && (
-                        <img src={v.thumbnail} className="w-full object-cover" />
-                      )}
-                      <div className="p-4">
-                        <h3 className="text-lg font-semibold text-gray-900">{v.name}</h3>
-                        <p className="text-sm text-gray-500">Nhấn để tài liệu</p>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              )}
+            
 
               {selectedFolder === "pdf2" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -394,6 +361,11 @@ ${activeTab === "pdf" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                       link: "https://drive.google.com/file/d/1Zbet2-wOLsg9NKc43MeQbksqnjMQ3FZm/view?usp=sharing",
                       thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142475/Gemini_Generated_Image_kjwz2pkjwz2pkjwz_jv8n7j.png"
                     },
+                    {
+                      name: "LỢI ÍCH, RỦI RO VÀ GIẢI PHÁP AN TOÀN TRÊN KHÔNG GIAN MẠNG",
+                      link: "https://drive.google.com/file/d/1z2P3QBo0GXelf2UqX_hXtGzGUNC7yGvB/view?usp=sharing",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764142473/Gemini_Generated_Image_58ragp58ragp58ra_jfd7t4.png"
+                    }
                   ].map((v, i) => (
                     <a
                       key={i}
