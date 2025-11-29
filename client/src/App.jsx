@@ -51,6 +51,9 @@ const AppWrapper = () => {
   };
 
   const [isDarkMode, setIsDarkMode] = useState(getInitialTheme);
+  const hideFooterPages = ["/admin-dashboard"];
+  const shouldHideFooter = hideFooterPages.includes(location.pathname);
+
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -143,8 +146,9 @@ const AppWrapper = () => {
           </GlobalToastProvider>
         </main>
 
-        {/* FOOTER — luôn nằm ở đáy trang */}
-        <Footer />
+        {/* FOOTER */}
+        {!shouldHideFooter && <Footer />}
+
       </div>
     </>
   );

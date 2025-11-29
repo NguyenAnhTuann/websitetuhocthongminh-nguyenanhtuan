@@ -4,6 +4,7 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
 
+
   useEffect(() => {
     const role = localStorage.getItem("role");
 
@@ -60,6 +61,30 @@ export default function AdminDashboard() {
 
       <h1 className="text-3xl font-bold mb-6">Danh sách học sinh</h1>
 
+      {/* MOBILE LIST (ẩn trên PC) */}
+      <div className="md:hidden space-y-3">
+        {users.length > 0 ? (
+          users.map((u) => (
+            <div
+              key={u._id}
+              className="bg-white rounded-xl shadow p-4 border"
+            >
+              <p className="font-semibold text-gray-900 text-base">{u.fullName}</p>
+
+              <div className="mt-2 text-sm text-gray-700 space-y-1">
+                <p><strong>Email:</strong> {u.email}</p>
+                <p><strong>SĐT:</strong> {u.phone}</p>
+                <p><strong>Trường:</strong> {u.school}</p>
+                <p><strong>Khối:</strong> {u.grade}</p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-600">Không có học sinh nào.</p>
+        )}
+      </div>
+
+
       {/* ❌ HIỆN LỖI NẾU 403 HOẶC API LỖI */}
       {error && (
         <div className="p-4 mb-4 bg-red-100 text-red-700 rounded">
@@ -69,7 +94,8 @@ export default function AdminDashboard() {
 
       {/* Chỉ render bảng nếu users là array */}
       {Array.isArray(users) && users.length > 0 && (
-        <table className="w-full border text-left">
+        <table className="hidden md:table w-full border text-left">
+
           <thead>
             <tr className="bg-gray-100">
               <th className="p-3 border">Họ tên</th>

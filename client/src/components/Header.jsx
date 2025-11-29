@@ -179,7 +179,7 @@ const Header = ({ language, setLanguage }) => {
       </div>
       {/* TÊN NGƯỜI DÙNG — CHỈ HIỆN TRÊN MOBILE */}
       {user && (
-        <div className="md:hidden w-full bg-[#1c7c76] text-white px-6 py-2 border-t border-white/20">
+        <div className="md:hidden w-full bg-[#1c7c76] text-white px-6 py-2 border-t border-white/20 mt-2">
           <span className="flex items-center justify-center gap-2 font-semibold">
             👋 {user.fullName}
           </span>

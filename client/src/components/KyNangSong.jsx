@@ -81,7 +81,7 @@ const KyNangSong = ({ language }) => {
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="mx-auto text-center block
+        className=" mt-6 md:mt-10 mx-auto text-center block
              text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
              bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
       >
@@ -92,7 +92,7 @@ const KyNangSong = ({ language }) => {
       <Typewriter text={t[language].subtitle} />
 
 
-      <div className="mt-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-6">
+      <div className=" mt-6 md:mt-10 mt-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-6">
 
         {/* NÚT MỞ SIDEBAR MOBILE */}
         <button

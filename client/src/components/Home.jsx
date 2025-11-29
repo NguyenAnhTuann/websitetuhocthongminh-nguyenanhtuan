@@ -267,7 +267,7 @@ const Home = ({ language }) => {
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit leading-tight 
+            className=" mt-6 md:mt-10 text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit leading-tight 
              bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm inline-block"
           >
             {t.heroTitle}
