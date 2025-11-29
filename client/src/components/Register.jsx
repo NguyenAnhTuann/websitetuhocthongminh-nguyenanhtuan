@@ -215,7 +215,7 @@ export default function Register() {
       >
         {/* HEADER */}
         <h1 className="text-3xl font-extrabold text-center mb-2 text-white bg-[#1c7c76] rounded-xl py-3">
-          Đăng Ký Tài Khoản
+          ĐĂNG KÝ TÀI KHOẢN
         </h1>
 
         <p className="text-center text-gray-600 mb-6">
@@ -487,7 +487,7 @@ export default function Register() {
           </span>
 
           {matchStatus === "no" && (
-            <p className="c">
+            <p className="text-sm mt-1 font-medium text-red-600">
               ❌ Mật khẩu không khớp
             </p>
           )}

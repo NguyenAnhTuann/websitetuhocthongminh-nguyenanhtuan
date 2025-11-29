@@ -41,7 +41,9 @@ const KyNangTuHoc = ({ language }) => {
   const [selectedFolder, setSelectedFolder] = useState(null);
 
   const [showFolder1, setShowFolder1] = useState(false);
-  const [activeTab, setActiveTab] = useState("intro"); // intro | pdf | video
+  const [activeTab, setActiveTab] = useState("intro");
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
 
 
   const t = {
@@ -193,11 +195,26 @@ const KyNangTuHoc = ({ language }) => {
       <Typewriter text={t[language].subtitle} />
 
 
-      <div className="mt-10 w-full max-w-7xl mx-auto flex gap-6">
+      <div className="mt-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-6">
+
+
+        {/* NÚT MỞ SIDEBAR MOBILE */}
+        <button
+          onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+          className="md:hidden w-full px-4 py-3 bg-[#1c7c76] text-white font-semibold rounded-xl shadow-sm"
+        >
+          ☰ Danh mục nội dung
+        </button>
 
         {/* SIDEBAR Trái */}
-        {/* SIDEBAR Trái */}
-        <aside className="w-64 h-fit bg-white border rounded-2xl shadow p-5">
+        <aside
+          className={`
+    w-full md:w-64 bg-white border rounded-2xl shadow p-5
+    transition-all duration-300
+    ${mobileSidebarOpen ? "block" : "hidden md:block"}
+  `}
+        >
+
           <ul className="space-y-3">
 
             {/* GIỚI THIỆU */}
@@ -205,6 +222,7 @@ const KyNangTuHoc = ({ language }) => {
               onClick={() => {
                 setActiveTab("intro");
                 setSelectedFolder(null);
+                setMobileSidebarOpen(false);
               }}
               className={`p-3 rounded-lg cursor-pointer transition
         ${activeTab === "intro" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
@@ -220,6 +238,7 @@ const KyNangTuHoc = ({ language }) => {
                 setOpenVideo(true);
                 setOpenPDF(false);
                 setSelectedFolder(null);
+                setMobileSidebarOpen(false);
               }}
 
               className={`p-3 rounded-lg cursor-pointer transition
@@ -234,21 +253,28 @@ const KyNangTuHoc = ({ language }) => {
               <ul className="pl-5 space-y-2 text-sm">
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_math")}
+                  onClick={() => {setSelectedFolder("video_math")
+                    setMobileSidebarOpen(false);
+                  }}
+                  
                 >
                   Video giải toán
                 </li>
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_real")}
+                  onClick={() => {setSelectedFolder("video_real")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Video Toán thực tế
                 </li>
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_ai")}
+                  onClick={() => { setSelectedFolder("video_ai")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Sáng tác nhạc bằng AI
                 </li>
@@ -266,6 +292,7 @@ const KyNangTuHoc = ({ language }) => {
                 setOpenVideo(false);
                 setOpenPDF(false);
                 setSelectedFolder(null);
+                setMobileSidebarOpen(false);
               }}
               className={`p-3 rounded-lg cursor-pointer transition
 ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
@@ -280,25 +307,33 @@ ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               <ul className="pl-5 space-y-2 text-sm">
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("anh1")}
+                  onClick={() => { setSelectedFolder("anh1")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Sơ đồ tư duy toán lớp 10
                 </li>
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("anh2")}
+                  onClick={() => { setSelectedFolder("anh2")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Sơ đồ tư duy toán lớp 11
                 </li>
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("anh3")}
+                  onClick={() => { setSelectedFolder("anh3")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Sơ đồ tư duy toán lớp 12
                 </li>
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("anh4")}
+                  onClick={() => {setSelectedFolder("anh4")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Kiến thức thú vị
                 </li>
@@ -313,6 +348,7 @@ ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                 setOpenPDF(true);      // luôn mở menu khi bấm
                 setOpenVideo(false);   // tắt menu video khi chọn PDF
                 setSelectedFolder(null);
+                setMobileSidebarOpen(false);
               }}
 
               className={`p-3 rounded-lg cursor-pointer transition
@@ -326,25 +362,33 @@ ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               <ul className="pl-5 space-y-2 text-sm">
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("pdf_ai")}
+                  onClick={() => { setSelectedFolder("pdf_ai")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Tài liệu AI
                 </li>
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("pdf_forest")}
+                  onClick={() => {setSelectedFolder("pdf_forest")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Forest – Trồng cây ảo
                 </li>
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("pdf_pomodoro")}
+                  onClick={() => { setSelectedFolder("pdf_pomodoro")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Pomodoro
                 </li>
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("pdf_calendar")}
+                  onClick={() => { setSelectedFolder("pdf_calendar")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Google Calendar
                 </li>
@@ -860,7 +904,7 @@ rounded-2xl p-8 text-center">
                     { name: "HỆ TỌA ĐỘ Oxyz", link: "https://drive.google.com/file/d/1QPQZrWQpQVUIWuahSd_EjpI-m-FW6XoY/view?usp=sharing", thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png" },
                     { name: "GIÁ TRỊ LỚN NHẤT, GIÁ TRỊ NHỎ NHẤT CỦA HÀM SỐ", link: "https://drive.google.com/file/d/1W_ZMjwRkxbn6AXGcxmzDPf8QH0kIVSIR/view?usp=sharing", thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png" },
                     { name: "ĐỊNH NGHĨA & TÍNH CHẤT TÍCH PHÂN", link: "https://drive.google.com/file/d/17aoWP3IxqkOj64gAvYlEs_TVh9MD4Lby/view?usp=sharing", thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png" },
-                    { name: "CÔNG THỨC TỌA ĐỘ VECTO TRONG KHÔNG GIAN", link: "https://drive.google.com/file/d/1dIgjdWk-FdA7fqfGtBHcpVJZOQ5rNiaz/view?usp=sharing", thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png"},
+                    { name: "CÔNG THỨC TỌA ĐỘ VECTO TRONG KHÔNG GIAN", link: "https://drive.google.com/file/d/1dIgjdWk-FdA7fqfGtBHcpVJZOQ5rNiaz/view?usp=sharing", thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png" },
                     { name: "CÔNG THỨC NGUYÊN HÀM", link: "https://drive.google.com/file/d/1w2QKuZ_d70GdegA-jyFJLdQiueXCyyxd/view?usp=sharing", thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png" },
                     { name: "CÔNG THỨC KHỐI TRỤ", link: "https://drive.google.com/file/d/1cLigbFQze1S2nFT23L86IjBy-Pi5aD27/view?usp=sharing", thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png" },
                     { name: "CÔNG THỨC KHỐI NÓN", link: "https://drive.google.com/file/d/1E6ABraZc5XPvE2M90okVQrtgT21p-Og_/view?usp=sharing", thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764367696/Gemini_Generated_Image_gcd5hcgcd5hcgcd5_x7wuy6.png" },

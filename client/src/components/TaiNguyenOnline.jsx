@@ -41,7 +41,8 @@ const TaiNguyenOnline = ({ language }) => {
   const [selectedFolder, setSelectedFolder] = useState(null);
 
   const [showFolder1, setShowFolder1] = useState(false);
-  const [activeTab, setActiveTab] = useState("intro"); // intro | pdf | video
+  const [activeTab, setActiveTab] = useState("intro");
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
 
   const t = {
@@ -97,10 +98,26 @@ const TaiNguyenOnline = ({ language }) => {
       <Typewriter text={t[language].subtitle} />
 
 
-      <div className="mt-10 w-full max-w-7xl mx-auto flex gap-6">
+      <div className="mt-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-6">
+
+
+        {/* NÚT MỞ SIDEBAR MOBILE */}
+        <button
+          onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+          className="md:hidden w-full px-4 py-3 bg-[#1c7c76] text-white font-semibold rounded-xl shadow-sm"
+        >
+          ☰ Danh mục nội dung
+        </button>
 
         {/* SIDEBAR Trái */}
-        <aside className="w-64 h-fit bg-white border rounded-2xl shadow p-5">
+        <aside
+          className={`
+    w-full md:w-64 bg-white border rounded-2xl shadow p-5
+    transition-all duration-300
+    ${mobileSidebarOpen ? "block" : "hidden md:block"}
+  `}
+        >
+
           <ul className="space-y-3">
 
             {/* GIỚI THIỆU */}
@@ -108,6 +125,8 @@ const TaiNguyenOnline = ({ language }) => {
               onClick={() => {
                 setActiveTab("intro");
                 setSelectedFolder(null);
+                setMobileSidebarOpen(false);
+
               }}
               className={`p-3 rounded-lg cursor-pointer transition
         ${activeTab === "intro" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
@@ -124,6 +143,8 @@ const TaiNguyenOnline = ({ language }) => {
                 setOpenVideo(true);
                 setOpenPDF(false);
                 setSelectedFolder(null);
+                setMobileSidebarOpen(false);
+
               }}
               className={`p-3 rounded-lg cursor-pointer transition
 ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
@@ -136,7 +157,10 @@ ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_main")}
+                  onClick={() => { setSelectedFolder("video_main")
+                    setMobileSidebarOpen(false);
+
+                  }}
                 >
                   Xử lý tình huống để an toàn số
                 </li>
@@ -155,6 +179,8 @@ ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                 setSelectedFolder("pdf_home");
                 setOpenPDF(true);
                 setOpenVideo(false);
+                setMobileSidebarOpen(false);
+
               }}
               className={`p-3 rounded-lg cursor-pointer transition
 ${activeTab === "pdf" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
@@ -171,7 +197,10 @@ ${activeTab === "pdf" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("pdf2")}
+                  onClick={() => { setSelectedFolder("pdf2")
+                    setMobileSidebarOpen(false);
+
+                  }}
                 >
                   Cẩm nang sử dụng mạng an toàn
                 </li>
@@ -351,7 +380,7 @@ ${activeTab === "pdf" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               <h2 className="text-2xl font-bold text-center text-gray-900 mb-6 flex items-center justify-center gap-2">
                 📄 Danh sách tài liệu
               </h2>
-            
+
 
               {selectedFolder === "pdf2" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

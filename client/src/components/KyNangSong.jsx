@@ -41,7 +41,9 @@ const KyNangSong = ({ language }) => {
   const [selectedFolder, setSelectedFolder] = useState(null);
 
   const [showFolder1, setShowFolder1] = useState(false);
-  const [activeTab, setActiveTab] = useState("intro"); // intro | pdf | video
+  const [activeTab, setActiveTab] = useState("intro");
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
 
 
   const t = {
@@ -90,11 +92,25 @@ const KyNangSong = ({ language }) => {
       <Typewriter text={t[language].subtitle} />
 
 
-      <div className="mt-10 w-full max-w-7xl mx-auto flex gap-6">
+      <div className="mt-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-6">
+
+        {/* NÚT MỞ SIDEBAR MOBILE */}
+        <button
+          onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+          className="md:hidden w-full px-4 py-3 bg-[#1c7c76] text-white font-semibold rounded-xl shadow-sm"
+        >
+          ☰ Danh mục nội dung
+        </button>
 
         {/* SIDEBAR Trái */}
-        {/* SIDEBAR Trái */}
-        <aside className="w-64 h-fit bg-white border rounded-2xl shadow p-5">
+        <aside
+          className={`
+    w-full md:w-64 bg-white border rounded-2xl shadow p-5
+    transition-all duration-300
+    ${mobileSidebarOpen ? "block" : "hidden md:block"}
+  `}
+        >
+
           <ul className="space-y-3">
 
             {/* GIỚI THIỆU */}
@@ -102,6 +118,7 @@ const KyNangSong = ({ language }) => {
               onClick={() => {
                 setActiveTab("intro");
                 setSelectedFolder(null);
+                setMobileSidebarOpen(false);
               }}
               className={`p-3 rounded-lg cursor-pointer transition
         ${activeTab === "intro" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
@@ -116,6 +133,7 @@ const KyNangSong = ({ language }) => {
                 setSelectedFolder("video_home");
                 setOpenPDF(false);
                 setOpenVideo(true);
+                setMobileSidebarOpen(false);
               }}
 
               className={`p-3 rounded-lg cursor-pointer transition
@@ -130,19 +148,25 @@ ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               <ul className="pl-5 space-y-2 text-sm">
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("baoluc")}
+                  onClick={() => { setSelectedFolder("baoluc")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Bạo lực học đường là gì?
                 </li>
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_violence")}
+                  onClick={() => {setSelectedFolder("video_violence")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Kỹ năng xử lý bạo lực học đường
                 </li>
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("video_main")}
+                  onClick={() => {setSelectedFolder("video_main")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Kỹ năng khác
                 </li>
@@ -161,6 +185,7 @@ ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                 setOpenVideo(false);
                 setOpenPDF(true);
                 setSelectedFolder("pdf_home");
+                setMobileSidebarOpen(false);
               }}
 
 
@@ -178,21 +203,27 @@ ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               <ul className="pl-5 space-y-2 text-sm">
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("pdf_math")}
+                  onClick={() => {setSelectedFolder("pdf_math")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Phát triển bản thân: Kỹ năng cứng & mềm
                 </li>
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("pdf_real")}
+                  onClick={() => {setSelectedFolder("pdf_real")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Kỹ năng ứng phó với tình huống khẩn cấp
                 </li>
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("pdf_ai")}
+                  onClick={() => {setSelectedFolder("pdf_ai")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Định hướng nghề nghiệp
                 </li>

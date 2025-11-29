@@ -66,7 +66,7 @@ export default function Login() {
         className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-lg p-8"
       >
         <h1 className="text-3xl font-extrabold text-center mb-2 text-white bg-[#1c7c76] rounded-xl py-3">
-          Đăng Nhập
+          ĐĂNG NHẬP
         </h1>
 
         <p className="text-center text-gray-600 mb-6">

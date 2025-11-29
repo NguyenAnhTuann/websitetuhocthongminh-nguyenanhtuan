@@ -42,6 +42,8 @@ const ThucHanh = ({ language = "vi" }) => {
 
   const [showFolder1, setShowFolder1] = useState(false);
   const [activeTab, setActiveTab] = useState("intro");
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
 
 
   const t = {
@@ -198,10 +200,27 @@ const ThucHanh = ({ language = "vi" }) => {
 
 
 
-      <div className="mt-10 w-full max-w-7xl mx-auto flex gap-6">
+      <div className="mt-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-6">
+
+
+        {/* MOBILE SIDEBAR BUTTON */}
+        <button
+          onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+          className="md:hidden w-full px-4 py-3 bg-[#1c7c76] text-white font-semibold rounded-xl shadow-sm"
+        >
+          ☰ Danh mục nội dung
+        </button>
+
 
         {/* SIDEBAR Trái */}
-        <aside className="w-64 h-fit bg-white border rounded-2xl shadow p-5">
+        <aside
+          className={`
+    w-full md:w-64 bg-white border rounded-2xl shadow p-5
+    transition-all duration-300
+    ${mobileSidebarOpen ? "block" : "hidden md:block"}
+  `}
+        >
+
           <ul className="space-y-3">
 
 
@@ -210,6 +229,8 @@ const ThucHanh = ({ language = "vi" }) => {
               onClick={() => {
                 setActiveTab("intro");
                 setSelectedFolder(null);
+                setMobileSidebarOpen(false);
+                setMobileSidebarOpen(false);
               }}
               className={`p-3 rounded-lg cursor-pointer transition
         ${activeTab === "intro" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
@@ -224,6 +245,7 @@ const ThucHanh = ({ language = "vi" }) => {
                 setSelectedFolder("violence_videos"); // auto load
                 setOpenPDF(false);
                 setOpenVideo(false);
+                setMobileSidebarOpen(false);
               }}
               className={`p-3 rounded-lg cursor-pointer transition
 ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
@@ -240,7 +262,8 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                 setActiveTab("video");
                 setOpenVideo(true);
                 setOpenPDF(false);
-                setSelectedFolder("video_main"); // ✔ load 3 video mặc định
+                setSelectedFolder("video_main");
+                setMobileSidebarOpen(false);
               }}
 
 
@@ -254,20 +277,29 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               <ul className="pl-5 space-y-2 text-sm">
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("math_10")}
+                  onClick={() => {
+                    setSelectedFolder("math_10")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Toán 10
                 </li>
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("math_11")}
+                  onClick={() => {
+                    setSelectedFolder("math_11")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Toán 11
                 </li>
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => setSelectedFolder("math_12")}
+                  onClick={() => {
+                    setSelectedFolder("math_12")
+                    setMobileSidebarOpen(false);
+                  }}
                 >
                   Toán 12
                 </li>
@@ -283,6 +315,7 @@ ${activeTab === "violence" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                 setSelectedFolder("simulation_links");
                 setOpenPDF(false);
                 setOpenVideo(false);
+                setMobileSidebarOpen(false);
               }}
               className={`p-3 rounded-lg cursor-pointer transition
 ${activeTab === "simulation" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}

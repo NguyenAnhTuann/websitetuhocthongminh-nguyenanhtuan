@@ -17,16 +17,16 @@ const Header = ({ language, setLanguage }) => {
   const lifeMenuRef = useRef(null);
   const [user, setUser] = useState(null);
 
-useEffect(() => {
-  const storedUser = localStorage.getItem("user");
-  const storedToken = localStorage.getItem("token");
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem("token");
 
-  if (storedUser && storedToken) {
-    setUser(JSON.parse(storedUser));
-  } else {
-    setUser(null);
-  }
-}, []);
+    if (storedUser && storedToken) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      setUser(null);
+    }
+  }, []);
 
 
 
@@ -142,7 +142,7 @@ useEffect(() => {
 
           {/* Nếu ĐÃ đăng nhập → hiện TÊN + ĐĂNG XUẤT */}
           {user && (
-            <div className="flex items-center gap-3 text-white">
+            <div className="hidden md:flex items-center gap-3 text-white">
               <span className="font-semibold flex items-center gap-2">
                 👋 {user.fullName}
               </span>
@@ -151,11 +151,12 @@ useEffect(() => {
                 onClick={() => {
                   localStorage.removeItem("user");
                   localStorage.removeItem("token");
-                  localStorage.removeItem("role"); 
+                  localStorage.removeItem("role");
                   window.location.reload();
                 }}
 
-                className="px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
+                className="hidden md:block px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
+
               >
                 Đăng xuất
               </button>
@@ -166,7 +167,117 @@ useEffect(() => {
 
         </div>
 
+        {/* 🔥 NÚT MENU MOBILE */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden text-white text-3xl"
+        >
+          ☰
+        </button>
+
+
       </div>
+      {/* TÊN NGƯỜI DÙNG — CHỈ HIỆN TRÊN MOBILE */}
+      {user && (
+        <div className="md:hidden w-full bg-[#1c7c76] text-white px-6 py-2 border-t border-white/20">
+          <span className="flex items-center justify-center gap-2 font-semibold">
+            👋 {user.fullName}
+          </span>
+        </div>
+      )}
+
+
+      {/* 🔥 MOBILE MENU DROPDOWN */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-[#1c7c76] text-white px-6 py-4 space-y-4 border-t border-white/20">
+
+          <Link
+            className="block hover:text-yellow-300"
+            to="/kynangtuhoc"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+
+            <GraduationCap className="inline w-4 h-4 mr-2" />
+            {t.menu.kynangtuhoc}
+          </Link>
+
+          <Link
+            className="block hover:text-yellow-300"
+            to="/kynangsong"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+
+            <HeartHandshake className="inline w-4 h-4 mr-2" />
+            {t.menu.kynangsong}
+          </Link>
+
+          <Link
+            className="block hover:text-yellow-300"
+            to="/kynangmang"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+
+            <Shield className="inline w-4 h-4 mr-2" />
+            {t.menu.kynangmang}
+          </Link>
+
+          <Link
+            className="block hover:text-yellow-300"
+            to="/chatbot"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+
+            <Bot className="inline w-4 h-4 mr-2" />
+            {t.menu.chatbot}
+          </Link>
+
+          <Link
+            className="block hover:text-yellow-300"
+            to="/thuchanh"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+
+            <CheckSquare className="inline w-4 h-4 mr-2" />
+            {t.menu.thuchanh}
+          </Link>
+
+          {/* 🔥 LOGIN / REGISTER CHO MOBILE */}
+          {!user && (
+            <div className="pt-4 border-t border-white/20 space-y-3">
+              <Link
+                to="/dangnhap"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-4 py-2 text-center border border-white/40 rounded-lg"
+              >
+
+                {t.auth.login}
+              </Link>
+
+              <Link
+                to="/dangky"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-4 py-2 text-center bg-yellow-400 text-[#1a2a2a] rounded-lg font-semibold"
+              >
+
+                {t.auth.register}
+              </Link>
+            </div>
+          )}
+
+          {/* 🔥 LOGOUT cho mobile */}
+          {user && (
+            <button
+              onClick={() => {
+                localStorage.clear();
+                window.location.reload();
+              }}
+              className="w-full px-4 py-2 mt-4 bg-red-500 rounded-lg"
+            >
+              Đăng xuất
+            </button>
+          )}
+        </div>
+      )}
 
 
     </header>
