@@ -79,25 +79,28 @@ app.get("/make-admin", async (req, res) => {
 // ===============================
 // 4) API ChatGPT
 // ===============================
-try {
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages: [
-      { role: "system", content: SYSTEM_PROMPT },
-      { role: "user", content: message },
-    ],
-  });
+app.post("/api/chat", async (req, res) => {
+  const { message } = req.body;
 
-  const reply =
-    completion.choices?.[0]?.message?.content ||
-    "Tôi chưa thể trả lời câu hỏi này.";
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: message },
+      ],
+    });
 
-  res.json({ reply });
-} catch (err) {
-  console.error("❌ OpenAI API error:", err);
-  res.status(500).json({ reply: "Lỗi server ChatBot. Vui lòng thử lại." });
-}
+    const reply =
+      completion.choices?.[0]?.message?.content ||
+      "Tôi chưa thể trả lời câu hỏi này.";
 
+    res.json({ reply });
+  } catch (err) {
+    console.error("❌ OpenAI API error:", err);
+    res.status(500).json({ reply: "Lỗi server ChatBot. Vui lòng thử lại." });
+  }
+});
 
 
 // ===============================
