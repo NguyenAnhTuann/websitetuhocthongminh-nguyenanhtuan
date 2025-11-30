@@ -6,6 +6,18 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const fetch = require("node-fetch");
 
+// ===== OpenAI ChatGPT =====
+const OpenAI = require("openai");
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const SYSTEM_PROMPT = `
+Bạn là trợ lý AI thông minh.
+Trả lời chính xác và ngắn gọn.
+`;
+
+
 const User = require("./models/User");
 
 // KHỞI TẠO APP — PHẢI ĐỂ Ở ĐÂY
@@ -67,30 +79,25 @@ app.get("/make-admin", async (req, res) => {
 // ===============================
 // 4) API ChatGPT
 // ===============================
-app.post("/api/chat", async (req, res) => {
-  const { message } = req.body;
+try {
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      { role: "system", content: SYSTEM_PROMPT },
+      { role: "user", content: message },
+    ],
+  });
 
-  try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: message },
-      ],
-    });
+  const reply =
+    completion.choices?.[0]?.message?.content ||
+    "Tôi chưa thể trả lời câu hỏi này.";
 
-    const reply =
-      completion.choices?.[0]?.message?.content ||
-      "Tôi chưa thể trả lời câu hỏi này.";
+  res.json({ reply });
+} catch (err) {
+  console.error("❌ OpenAI API error:", err);
+  res.status(500).json({ reply: "Lỗi server ChatBot. Vui lòng thử lại." });
+}
 
-    res.json({ reply });
-  } catch (err) {
-    console.error("❌ OpenAI API error:", err);
-    res.status(500).json({
-      reply: "Lỗi server ChatBot. Vui lòng thử lại.",
-    });
-  }
-});
 
 
 // ===============================
