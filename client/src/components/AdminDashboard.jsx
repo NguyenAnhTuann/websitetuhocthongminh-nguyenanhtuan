@@ -1,0 +1,232 @@
+import { useEffect, useState } from "react";
+
+export default function AdminDashboard() {
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 10;
+  const [loading, setLoading] = useState(true);
+
+
+
+  // ================================
+  // XÓA HỌC SINH VI PHẠM
+  // ================================
+  const handleDelete = async (id) => {
+    if (!window.confirm("Bạn có chắc muốn xóa học sinh này và cấm đăng ký lại?")) return;
+
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await fetch(
+        `https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/delete/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || "Xóa thất bại!");
+        return;
+      }
+
+      alert("Đã xóa học sinh và khóa email + SĐT khỏi hệ thống!");
+
+      setUsers((prev) => prev.filter((u) => u._id !== id));
+    } catch (err) {
+      alert("Lỗi kết nối server!");
+    }
+  };
+
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role !== "admin") {
+      window.location.href = "/home";
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+
+    fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/users", {
+      headers: { Authorization: "Bearer " + token },
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok || !Array.isArray(data)) {
+          setError(data.message || "Lỗi khi tải danh sách");
+          return;
+        }
+        setUsers(data);
+      })
+      .catch(() => setError("Không thể tải danh sách người dùng."))
+      .finally(() => {
+        setLoading(false); // ⬅ TẮT LOADING
+      });
+  }, []);
+
+
+
+  // ===============================
+  // PHÂN TRANG
+  // ===============================
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  const totalPages = Math.ceil(users.length / usersPerPage);
+
+  const prevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const nextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#f4f7f7]">
+        <div className="animate-spin rounded-full h-16 w-16 border-4 border-[#1c7c76] border-t-transparent"></div>
+      </div>
+    );
+  }
+
+
+  return (
+    <div className="min-h-screen bg-[#f4f7f7]">
+
+      {/* ====== HEADER ADMIN ====== */}
+      <header className="bg-[#1c7c76] text-white py-4 px-8 shadow-lg flex justify-between items-center">
+        <h1 className="text-2xl font-bold tracking-wide mt-0">BẢNG ĐIỀU KHIỂN ADMIN</h1>
+        <button
+          onClick={() => {
+            localStorage.clear();
+            window.location.href = "/dangnhap";
+          }}
+          className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-lg text-white font-semibold shadow-md"
+        >
+          Đăng xuất
+        </button>
+      </header>
+
+      {/* ====== CONTENT ====== */}
+      <div className="p-8 max-w-6xl mx-auto">
+
+        <h1
+          className="mt-6 md:mt-10 mx-auto text-center block
+             text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
+             bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
+        >
+          DỮ LIỆU HỌC SINH
+        </h1>
+
+
+        {error && (
+          <div className="p-4 mb-4 bg-red-100 text-red-700 rounded-xl shadow">
+            {error}
+          </div>
+        )}
+
+        {/* ===== MOBILE VIEW ===== */}
+        <div className="md:hidden space-y-3">
+          {currentUsers.map((u) => (
+            <div key={u._id} className="bg-white shadow-md rounded-xl p-4 border border-gray-200">
+              <p className="font-bold text-[#1c7c76] text-lg">{u.fullName}</p>
+
+              <div className="mt-2 text-sm text-gray-700 space-y-1">
+                <p><b>Email:</b> {u.email}</p>
+                <p><b>SĐT:</b> {u.phone}</p>
+                <p><b>Trường:</b> {u.school}</p>
+                <p><b>Khối:</b> {u.grade}</p>
+              </div>
+
+              <button
+                onClick={() => handleDelete(u._id)}
+                className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-semibold"
+              >
+                Xóa
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* ===== DESKTOP VIEW ===== */}
+        <div className="hidden md:block bg-white shadow-xl rounded-xl p-6 border border-gray-200">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-[#1c7c76] text-white">
+                <th className="p-3 text-sm font-semibold">Họ tên</th>
+                <th className="p-3 text-sm font-semibold">Email</th>
+                <th className="p-3 text-sm font-semibold">Số điện thoại</th>
+                <th className="p-3 text-sm font-semibold">Trường</th>
+                <th className="p-3 text-sm font-semibold">Khối</th>
+                <th className="p-3 text-sm font-semibold text-center">Hành động</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {currentUsers.map((u, index) => (
+                <tr
+                  key={u._id}
+                  className={`border-b hover:bg-gray-100 transition ${index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                    }`}
+                >
+                  <td className="p-3">{u.fullName}</td>
+                  <td className="p-3">{u.email}</td>
+                  <td className="p-3">{u.phone}</td>
+                  <td className="p-3">{u.school}</td>
+                  <td className="p-3">{u.grade}</td>
+
+                  <td className="p-3 text-center">
+                    <button
+                      onClick={() => handleDelete(u._id)}
+                      className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold shadow"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {/* PHÂN TRANG */}
+          <div className="flex justify-center items-center mt-6 gap-4">
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 rounded-lg text-white font-semibold shadow 
+      ${currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
+            >
+              Trang trước
+            </button>
+
+            <span className="font-bold text-lg text-[#1c7c76]">
+              {currentPage} / {totalPages}
+            </span>
+
+            <button
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 rounded-lg text-white font-semibold shadow 
+      ${currentPage === totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
+            >
+              Trang sau
+            </button>
+          </div>
+
+          {users.length === 0 && (
+            <p className="text-center py-6 text-gray-500">Không có học sinh nào.</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
