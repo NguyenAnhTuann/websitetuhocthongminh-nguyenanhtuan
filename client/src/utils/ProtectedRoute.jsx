@@ -12,7 +12,7 @@ export default function ProtectedRoute({ children }) {
   if (user && token) return children;
 
   return (
-    <div className="w-full min-h-[70vh] flex flex-col items-center justify-center px-4 mb-32">
+    <div className="w-full min-h-[70vh] flex flex-col items-center justify-center px-4 mt-20 mb-32">
 
       {/* CARD CẢNH BÁO - ANIMATION */}
       <motion.div
