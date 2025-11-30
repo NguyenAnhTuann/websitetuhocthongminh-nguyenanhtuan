@@ -66,7 +66,7 @@ export default function NhapOTP() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-lg p-8"
+        className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-lg p-6 sm:p-8"
       >
         <h1 className="text-3xl font-extrabold text-center mb-2 text-white bg-[#1c7c76] rounded-xl py-3">
           Nhập mã OTP
@@ -80,7 +80,7 @@ export default function NhapOTP() {
           <label className="block text-gray-700 font-medium mb-1">
             Mã OTP
           </label>
-          <div className="flex justify-between gap-2 mb-6">
+          <div className="grid grid-cols-6 gap-2 sm:gap-3 mb-6">
             {code.map((digit, index) => (
               <input
                 key={index}
@@ -91,14 +91,15 @@ export default function NhapOTP() {
                 onChange={(e) => handleChange(e.target.value, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 className="
-        w-12 h-12 text-center text-xl font-bold 
+        w-full h-12 sm:h-14 text-center text-xl sm:text-2xl font-bold 
         border rounded-xl outline-none
         focus:border-[#1c7c76] focus:ring-2 focus:ring-[#1c7c76]/40
-        transition
+        transition bg-gray-50
       "
               />
             ))}
           </div>
+
 
         </div>
 
