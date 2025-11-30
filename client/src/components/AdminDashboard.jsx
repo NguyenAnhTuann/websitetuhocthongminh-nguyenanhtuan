@@ -112,22 +112,22 @@ export default function AdminDashboard() {
 
 
 
-  {/* ======= THÔNG BÁO ======= */}
-{notify.message && (
-  <div className={`
-      fixed top-6 right-6 z-50 px-5 py-3 rounded-xl shadow-lg text-white
-      transform transition-all duration-500
-      ${notify.type === "success" ? "bg-green-600" : "bg-red-600"}
-    `}
-  >
-    <p className="font-semibold">{notify.message}</p>
-  </div>
-)}
-
 
 
   return (
     <div className="min-h-screen bg-[#f4f7f7]">
+
+      {/* ======= THÔNG BÁO ======= */}
+      {notify.message && (
+        <div className={`
+      fixed top-6 right-6 z-50 px-5 py-3 rounded-xl shadow-lg text-white
+      transform transition-all duration-500
+      ${notify.type === "success" ? "bg-green-600" : "bg-red-600"}
+    `}
+        >
+          <p className="font-semibold">{notify.message}</p>
+        </div>
+      )}
 
       {/* ====== HEADER ADMIN ====== */}
       <header className="bg-[#1c7c76] text-white py-4 px-8 shadow-lg flex justify-between items-center">
