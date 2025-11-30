@@ -55,6 +55,9 @@ export default function NhapOTP() {
     setMsg("Xác thực OTP thành công!");
     setMsgType("success");
 
+    localStorage.setItem("reset_step", "otp_verified");
+
+
     setTimeout(() => {
       window.location.href = `/datmatkhaumoi?email=${email}`;
     }, 1800);

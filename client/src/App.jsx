@@ -33,6 +33,8 @@ import QuenMatKhau from "./components/QuenMatKhau";
 import NhapOTP from "./components/NhapOTP";
 import DatMatKhauMoi from "./components/DatMatKhauMoi";
 import RequireAuth from "./utils/RequireAuth";
+import RequireFlowStep from "./utils/RequireFlowStep";
+
 
 
 // -----------------------------
@@ -167,19 +169,25 @@ const AppWrapper = () => {
                 path="/otp"
                 element={
                   <RedirectIfLoggedIn>
-                    <NhapOTP />
+                    <RequireFlowStep step={1}>
+                      <NhapOTP />
+                    </RequireFlowStep>
                   </RedirectIfLoggedIn>
                 }
               />
+
 
               <Route
                 path="/datmatkhaumoi"
                 element={
                   <RedirectIfLoggedIn>
-                    <DatMatKhauMoi />
+                    <RequireFlowStep step={2}>
+                      <DatMatKhauMoi />
+                    </RequireFlowStep>
                   </RedirectIfLoggedIn>
                 }
               />
+
 
 
 

@@ -30,6 +30,9 @@ export default function QuenMatKhau() {
     setMsg("Đã gửi mã OTP về email!");
     setMsgType("success");
 
+    localStorage.setItem("reset_step", "otp_sent");
+
+
     // chuyển sang trang OTP
     setTimeout(() => {
       window.location.href = `/otp?email=${email}`;

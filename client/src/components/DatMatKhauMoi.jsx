@@ -76,6 +76,9 @@ export default function DatMatKhauMoi() {
     setMsg("Đặt lại mật khẩu thành công!");
     setMsgType("success");
 
+    localStorage.removeItem("reset_step");
+
+
     setTimeout(() => {
       window.location.href = "/dangnhap";
     }, 2000);
