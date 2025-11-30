@@ -6,6 +6,18 @@ export default function AdminDashboard() {
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 10;
   const [loading, setLoading] = useState(true);
+  const [notify, setNotify] = useState({ type: "", message: "" });
+
+
+  const showNotify = (type, message) => {
+    setNotify({ type, message });
+
+    // Tự tắt sau 2.5 giây
+    setTimeout(() => {
+      setNotify({ type: "", message: "" });
+    }, 2500);
+  };
+
 
 
 
@@ -31,16 +43,18 @@ export default function AdminDashboard() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || "Xóa thất bại!");
+        showNotify("error", data.message || "Xóa thất bại!");
         return;
       }
 
-      alert("Đã xóa học sinh và khóa email + SĐT khỏi hệ thống!");
+      showNotify("success", "Đã xóa học sinh và khóa email + SĐT khỏi hệ thống!");
+
 
       setUsers((prev) => prev.filter((u) => u._id !== id));
     } catch (err) {
-      alert("Lỗi kết nối server!");
+      showNotify("error", "Lỗi kết nối server!");
     }
+
   };
 
   useEffect(() => {
@@ -95,6 +109,20 @@ export default function AdminDashboard() {
       </div>
     );
   }
+
+
+
+  {/* ======= THÔNG BÁO ======= */}
+{notify.message && (
+  <div className={`
+      fixed top-6 right-6 z-50 px-5 py-3 rounded-xl shadow-lg text-white
+      transform transition-all duration-500
+      ${notify.type === "success" ? "bg-green-600" : "bg-red-600"}
+    `}
+  >
+    <p className="font-semibold">{notify.message}</p>
+  </div>
+)}
 
 
 
