@@ -32,6 +32,8 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import QuenMatKhau from "./components/QuenMatKhau";
 import NhapOTP from "./components/NhapOTP";
 import DatMatKhauMoi from "./components/DatMatKhauMoi";
+import RequireAuth from "./utils/RequireAuth";
+
 
 // -----------------------------
 // APP WRAPPER
@@ -122,7 +124,15 @@ const AppWrapper = () => {
                 element={<TaiNguyenOnline language={language} />}
               />
 
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route
+                path="/admin-dashboard"
+                element={
+                  <RequireAuth>
+                    <AdminDashboard />
+                  </RequireAuth>
+                }
+              />
+
 
               <Route
                 path="/dangnhap"
@@ -144,9 +154,33 @@ const AppWrapper = () => {
 
 
               {/* QUÊN MẬT KHẨU FLOW */}
-              <Route path="/quenmatkhau" element={<QuenMatKhau />} />
-              <Route path="/otp" element={<NhapOTP />} />
-              <Route path="/datmatkhaumoi" element={<DatMatKhauMoi />} />
+              <Route
+                path="/quenmatkhau"
+                element={
+                  <RedirectIfLoggedIn>
+                    <QuenMatKhau />
+                  </RedirectIfLoggedIn>
+                }
+              />
+
+              <Route
+                path="/otp"
+                element={
+                  <RedirectIfLoggedIn>
+                    <NhapOTP />
+                  </RedirectIfLoggedIn>
+                }
+              />
+
+              <Route
+                path="/datmatkhaumoi"
+                element={
+                  <RedirectIfLoggedIn>
+                    <DatMatKhauMoi />
+                  </RedirectIfLoggedIn>
+                }
+              />
+
 
 
             </Routes>

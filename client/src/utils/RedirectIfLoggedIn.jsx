@@ -1,17 +1,13 @@
 import { Navigate } from "react-router-dom";
 
 export default function RedirectIfLoggedIn({ children }) {
+  const token = localStorage.getItem("token");
   const user = localStorage.getItem("user");
-  const role = localStorage.getItem("role");
 
-  // Nếu đã đăng nhập
-  if (user && role) {
-    if (role === "admin") {
-      return <Navigate to="/admin-dashboard" replace />;
-    }
+  // Nếu đã đăng nhập → không cho vào các trang này
+  if (token && user) {
     return <Navigate to="/home" replace />;
   }
 
-  // Nếu chưa đăng nhập → cho vào trang Login/Register
   return children;
 }
