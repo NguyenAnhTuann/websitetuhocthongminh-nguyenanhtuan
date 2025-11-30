@@ -65,51 +65,33 @@ app.get("/make-admin", async (req, res) => {
 });
 
 // ===============================
-// 4) API Gemini Chat
+// 4) API ChatGPT
 // ===============================
 app.post("/api/chat", async (req, res) => {
   const { message } = req.body;
-  const apiKey = process.env.GEMINI_API_KEY;
-
-  if (!apiKey) {
-    return res.json({
-      reply: "⚠️ Lỗi: Chưa cấu hình GEMINI_API_KEY trong Render",
-    });
-  }
 
   try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: message }] }],
-        }),
-      }
-    );
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: message },
+      ],
+    });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error("❌ Google API Error:", data);
-      return res.json({
-        reply: `⚠️ Lỗi từ Google: ${data.error?.message || "Không rõ nguyên nhân"}`,
-      });
-    }
-
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (!reply) return res.json({ reply: "⚠️ AI không trả lời." });
+    const reply =
+      completion.choices?.[0]?.message?.content ||
+      "Tôi chưa thể trả lời câu hỏi này.";
 
     res.json({ reply });
   } catch (err) {
-    console.error("❌ Server Error:", err);
-    res.json({ reply: "⚠️ Lỗi kết nối đến server." });
+    console.error("❌ OpenAI API error:", err);
+    res.status(500).json({
+      reply: "Lỗi server ChatBot. Vui lòng thử lại.",
+    });
   }
 });
+
 
 // ===============================
 // 5) START SERVER

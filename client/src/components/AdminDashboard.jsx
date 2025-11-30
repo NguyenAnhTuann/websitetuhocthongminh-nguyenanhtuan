@@ -88,8 +88,6 @@ export default function AdminDashboard() {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
-
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#f4f7f7]">
@@ -97,6 +95,7 @@ export default function AdminDashboard() {
       </div>
     );
   }
+
 
 
   return (
@@ -120,7 +119,7 @@ export default function AdminDashboard() {
       <div className="p-8 max-w-6xl mx-auto">
 
         <h1
-          className="mt-6 md:mt-10 mx-auto text-center block
+          className=" mx-auto text-center block
              text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
              bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
         >
@@ -203,7 +202,7 @@ export default function AdminDashboard() {
               onClick={prevPage}
               disabled={currentPage === 1}
               className={`px-4 py-2 rounded-lg text-white font-semibold shadow 
-      ${currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
+            ${currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
             >
               Trang trước
             </button>
@@ -216,7 +215,7 @@ export default function AdminDashboard() {
               onClick={nextPage}
               disabled={currentPage === totalPages}
               className={`px-4 py-2 rounded-lg text-white font-semibold shadow 
-      ${currentPage === totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
+            ${currentPage === totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
             >
               Trang sau
             </button>
