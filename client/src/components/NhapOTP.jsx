@@ -5,21 +5,43 @@ export default function NhapOTP() {
   const params = new URLSearchParams(window.location.search);
   const email = params.get("email");
 
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [msg, setMsg] = useState("");
   const [msgType, setMsgType] = useState("");
 
+
+  const handleChange = (value, index) => {
+    if (isNaN(value)) return;
+
+    const newCode = [...code];
+    newCode[index] = value;
+    setCode(newCode);
+
+    if (value && index < 5) {
+      document.getElementById(`otp-${index + 1}`).focus();
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && !code[index] && index > 0) {
+      document.getElementById(`otp-${index - 1}`).focus();
+    }
+  };
+
+
   const handleVerify = async () => {
-    if (!code) {
-      setMsg("Vui lòng nhập mã OTP!");
+    const otp = code.join("");
+    if (otp.length !== 6) {
+      setMsg("Mã OTP phải gồm 6 số!");
       setMsgType("error");
       return;
     }
 
+
     const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, code }),
+      body: JSON.stringify({ email, code: otp }),
     });
 
     const data = await res.json();
@@ -58,14 +80,26 @@ export default function NhapOTP() {
           <label className="block text-gray-700 font-medium mb-1">
             Mã OTP
           </label>
-          <input
-            type="text"
-            value={code}
-            maxLength={6}
-            onChange={(e) => setCode(e.target.value)}
-            placeholder="Nhập mã 6 số..."
-            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
-          />
+          <div className="flex justify-between gap-2 mb-6">
+            {code.map((digit, index) => (
+              <input
+                key={index}
+                id={`otp-${index}`}
+                type="text"
+                maxLength={1}
+                value={digit}
+                onChange={(e) => handleChange(e.target.value, index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                className="
+        w-12 h-12 text-center text-xl font-bold 
+        border rounded-xl outline-none
+        focus:border-[#1c7c76] focus:ring-2 focus:ring-[#1c7c76]/40
+        transition
+      "
+              />
+            ))}
+          </div>
+
         </div>
 
         <button
@@ -93,11 +127,10 @@ export default function NhapOTP() {
             </div>
 
             <p
-              className={`text-lg leading-relaxed ${
-                msgType === "success"
-                  ? "text-[#1c7c76] font-bold"
-                  : "text-red-600 font-semibold"
-              }`}
+              className={`text-lg leading-relaxed ${msgType === "success"
+                ? "text-[#1c7c76] font-bold"
+                : "text-red-600 font-semibold"
+                }`}
             >
               {msg}
             </p>
