@@ -29,6 +29,40 @@ export default function NhapOTP() {
   };
 
 
+
+  const handleResendOTP = async () => {
+    setMsg(""); // tắt popup cũ
+
+    const res = await fetch(
+      "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/quenmatkhau",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!data.success) {
+      setMsg(data.message);
+      setMsgType("error");
+      return;
+    }
+
+    // Reset lại các ô nhập OTP
+    setCode(["", "", "", "", "", ""]);
+
+    setMsg("Đã gửi lại mã OTP mới!");
+    setMsgType("success");
+
+    // Flow vẫn ở bước 1
+    localStorage.setItem("reset_step", "otp_sent");
+  };
+
+
+
+
   const handleVerify = async () => {
     const otp = code.join("");
     if (otp.length !== 6) {
@@ -139,12 +173,24 @@ export default function NhapOTP() {
               {msg}
             </p>
 
+            {msgType === "error" && (
+              <button
+                onClick={handleResendOTP}
+                className="mt-4 w-full bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-2xl font-semibold shadow-md transition"
+              >
+                Gửi lại mã OTP
+              </button>
+            )}
+
             <button
               onClick={() => setMsg("")}
-              className="mt-6 w-full bg-[#1c7c76] hover:bg-[#166662] text-white py-3 rounded-2xl font-semibold shadow-md transition"
+              className="mt-3 w-full bg-[#1c7c76] hover:bg-[#166662] text-white py-3 rounded-2xl font-semibold shadow-md transition"
             >
               Đóng
             </button>
+
+
+
           </motion.div>
         </div>
       )}

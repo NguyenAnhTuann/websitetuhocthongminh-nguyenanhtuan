@@ -24,6 +24,7 @@ export default function QuenMatKhau() {
     if (!data.success) {
       setMsg(data.message);
       setMsgType("error");
+      localStorage.removeItem("reset_step");
       return;
     }
 
