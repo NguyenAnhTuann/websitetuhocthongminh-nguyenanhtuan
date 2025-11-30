@@ -644,7 +644,7 @@ ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 
               {/* CHƯA CHỌN FOLDER */}
               {!selectedFolder && (
-                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
+                <p className="text-center text-gray-500">Hãy chọn file.</p>
               )}
 
             </motion.div>
@@ -890,7 +890,7 @@ ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 
               {/* CHƯA CHỌN FOLDER */}
               {!selectedFolder && (
-                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
+                <p className="text-center text-gray-500">Hãy chọn tài liệu.</p>
               )}
 
 
@@ -910,7 +910,7 @@ ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               </h2>
               {/* CHƯA CHỌN FOLDER */}
               {!selectedFolder && (
-                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
+                <p className="text-center text-gray-500">Hãy chọn tài liệu.</p>
               )}
 
               {selectedFolder === "anh1" && (
@@ -1284,7 +1284,7 @@ ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 
               {/* CHƯA CHỌN FOLDER */}
               {!selectedFolder && (
-                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
+                <p className="text-center text-gray-500">Hãy chọn tài liệu.</p>
               )}
 
             </motion.div>

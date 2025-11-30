@@ -305,7 +305,7 @@ rounded-2xl p-8 text-center">
               <h2 className="text-2xl font-bold text-gray-900 mb-3 flex items-center justify-center gap-2">
                 🎬 Danh sách video
               </h2>
-              <p className="text-gray-500">Hãy chọn thư mục bên trái.</p>
+              <p className="text-gray-500">Hãy chọn tài liệu.</p>
             </div>
           )}
 
@@ -317,7 +317,7 @@ rounded-2xl p-8 text-center">
               </h2>
 
               <p className="text-gray-500 text-base">
-                Hãy chọn thư mục bên trái
+                Hãy chọn tài liệu
               </p>
             </div>
           )}
@@ -498,7 +498,7 @@ rounded-2xl p-8 text-center">
 
               {/* CHƯA CHỌN FOLDER */}
               {!selectedFolder && (
-                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
+                <p className="text-center text-gray-500">Hãy chọn tài liệu.</p>
               )}
             </motion.div>
           )}

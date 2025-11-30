@@ -283,7 +283,7 @@ ${activeTab === "pdf" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                 📄 Tài liệu tham khảo PDF
               </h2>
               <p className="text-gray-500 text-base">
-                Hãy chọn thư mục bên trái
+                Hãy chọn tài liệu
               </p>
             </div>
           )}
@@ -363,7 +363,7 @@ ${activeTab === "pdf" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 
               {/* CHƯA CHỌN FOLDER */}
               {!selectedFolder && (
-                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
+                <p className="text-center text-gray-500">Hãy chọn tài liệu.</p>
               )}
             </motion.div>
           )}
@@ -418,7 +418,7 @@ ${activeTab === "pdf" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 
               {/* CHƯA CHỌN FOLDER */}
               {!selectedFolder && (
-                <p className="text-center text-gray-500">Hãy chọn thư mục bên trái.</p>
+                <p className="text-center text-gray-500">Hãy chọn tài liệu.</p>
               )}
             </motion.div>
           )}
