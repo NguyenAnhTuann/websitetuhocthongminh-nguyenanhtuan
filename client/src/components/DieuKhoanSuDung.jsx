@@ -43,7 +43,7 @@ export default function DieuKhoanSuDung() {
         </p>
 
         <p className="text-gray-600 text-sm">
-          Mọi yêu cầu hỗ trợ: <strong>nguyenanhtuan.profile@gmail.com</strong>
+          Mọi yêu cầu hỗ trợ: <strong>httngan.work1@gmail.com</strong>
         </p>
       </div>
     </section>

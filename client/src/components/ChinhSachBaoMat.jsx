@@ -44,7 +44,7 @@ export default function ChinhSachBaoMat() {
 
         <p className="text-gray-600 text-sm">
           Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ:{" "}
-          <strong>nguyenanhtuan.profile@gmail.com</strong>
+          <strong>httngan.work1@gmail.com</strong>
         </p>
       </div>
     </section>
