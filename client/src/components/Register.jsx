@@ -236,25 +236,25 @@ export default function Register() {
   };
 
   const scrollToError = () => {
-  const errorOrder = [
-    { err: fullNameError, ref: refFullName },
-    { err: dobError, ref: refDob },
-    { err: schoolError, ref: refSchool },
-    { err: gradeError, ref: refGrade },
-    { err: phoneError, ref: refPhone },
-    { err: emailError, ref: refEmail },
-  ];
+    const errorOrder = [
+      { err: fullNameError, ref: refFullName },
+      { err: dobError, ref: refDob },
+      { err: schoolError, ref: refSchool },
+      { err: gradeError, ref: refGrade },
+      { err: phoneError, ref: refPhone },
+      { err: emailError, ref: refEmail },
+    ];
 
-  for (let item of errorOrder) {
-    if (item.err) {
-      item.ref.current.scrollIntoView({ behavior: "smooth", block: "center" });
-      return;
+    for (let item of errorOrder) {
+      if (item.err) {
+        item.ref.current.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
     }
-  }
 
-  // lỗi chung → scroll lên đầu
-  refTop.current.scrollIntoView({ behavior: "smooth", block: "start" });
-};
+    // lỗi chung → scroll lên đầu
+    refTop.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
 
 
@@ -622,7 +622,7 @@ export default function Register() {
               {msg}
             </p>
 
-            {/* BUTTON */}
+            {/* BUTTON — Đóng */}
             <button
               onClick={() => {
                 setMsg("");
@@ -632,6 +632,17 @@ export default function Register() {
             >
               Đóng
             </button>
+
+            {/* BUTTON — Đăng nhập ngay (chỉ hiện khi thành công) */}
+            {msgType === "success" && (
+              <button
+                onClick={() => window.location.href = "/dangnhap"}
+                className="mt-3 w-full bg-yellow-400 hover:bg-yellow-300 text-[#1a2a2a] py-3 rounded-2xl font-bold shadow-md transition"
+              >
+                Đăng nhập ngay
+              </button>
+            )}
+
           </motion.div>
         </div>
       )}
