@@ -130,10 +130,15 @@ export default function AdminDashboard() {
       )}
 
       {/* ====== HEADER ADMIN ====== */}
-      <header className="bg-[#1c7c76] text-white py-4 px-8 shadow-lg flex justify-between items-center">
-        <h1 className="text-2xl font-bold tracking-wide mt-0">QUẢN LÝ DỮ LIỆU HỆ THỐNG</h1>
+      {/* ====== HEADER ADMIN ====== */}
+      <header className="bg-[#1c7c76] text-white py-4 px-4 shadow-lg flex justify-between items-center">
+        {/* TIÊU ĐỀ */}
+        <h1 className="text-xl md:text-2xl font-bold tracking-wide mt-0">
+          QUẢN LÝ DỮ LIỆU HỆ THỐNG
+        </h1>
 
-        <div className="flex items-center gap-3">
+        {/* NÚT CHỈ HIỆN TRÊN DESKTOP */}
+        <div className="hidden md:flex items-center gap-3">
           <button
             onClick={() => (window.location.href = "/trangchu")}
             className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md"
@@ -151,7 +156,41 @@ export default function AdminDashboard() {
             Đăng xuất
           </button>
         </div>
+
+        {/* NÚT MENU 3 GẠCH CHỈ CHO MOBILE */}
+        <button
+          className="md:hidden text-3xl"
+          onClick={() => setShowMobileMenu(prev => !prev)}
+        >
+          ☰
+        </button>
       </header>
+
+      {/* MENU ẨN HIỆN TRÊN MOBILE */}
+      {showMobileMenu && (
+        <div className="md:hidden bg-white shadow-lg border-b border-gray-200 p-4 space-y-3">
+          <button
+            onClick={() => {
+              setShowMobileMenu(false);
+              window.location.href = "/trangchu";
+            }}
+            className="block w-full bg-yellow-500 text-white font-semibold py-2 rounded-lg"
+          >
+            Về trang chủ
+          </button>
+
+          <button
+            onClick={() => {
+              localStorage.clear();
+              window.location.href = "/dangnhap";
+            }}
+            className="block w-full bg-red-500 text-white font-semibold py-2 rounded-lg"
+          >
+            Đăng xuất
+          </button>
+        </div>
+      )}
+
 
 
       {/* ====== CONTENT ====== */}
@@ -176,7 +215,7 @@ export default function AdminDashboard() {
         <div className="md:hidden space-y-3">
           {currentUsers.map((u) => (
             <div key={u._id} className="bg-white shadow-md rounded-xl p-4 border border-gray-200">
-              <p className="font-bold text-[#1c7c76] text-lg">{u.fullName}</p>
+              <p className="font-bold text-black text-lg">{u.fullName}</p>
 
               <div className="mt-2 text-sm text-gray-700 space-y-1">
                 <p><b>Email:</b> {u.email}</p>

@@ -18,6 +18,8 @@ const Header = ({ language, setLanguage }) => {
   const [user, setUser] = useState(null);
   const mobileMenuRef = useRef(null);
   const [role, setRole] = useState(null);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
