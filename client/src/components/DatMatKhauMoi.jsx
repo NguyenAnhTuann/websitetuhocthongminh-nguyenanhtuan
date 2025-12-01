@@ -87,7 +87,7 @@ export default function DatMatKhauMoi({ email, onNext }) {
 
 
     setTimeout(() => {
-      onNext();
+      window.location.href = "/dangnhap";
     }, 2000);
   };
 
