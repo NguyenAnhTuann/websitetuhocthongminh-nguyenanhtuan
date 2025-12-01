@@ -202,8 +202,8 @@ const AppWrapper = () => {
               />
 
               
-            <Route path="/chinhsach-baomat" element={<ChinhSachBaoMat />} />
-            <Route path="/dieukhoan-sudung" element={<DieuKhoanSuDung />} />
+            <Route path="/chinhsachbaomat" element={<ChinhSachBaoMat />} />
+            <Route path="/dieukhoansudung" element={<DieuKhoanSuDung />} />
 
             </Routes>
 
