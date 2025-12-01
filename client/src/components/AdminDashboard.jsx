@@ -136,7 +136,7 @@ export default function AdminDashboard() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => (window.location.href = "/trangchu")}
-            className="px-4 py-2 bg-yellow-600 hover:bg-yellow-400 text-white font-semibold rounded-lg shadow-md"
+            className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md"
           >
             Về trang chủ
           </button>
