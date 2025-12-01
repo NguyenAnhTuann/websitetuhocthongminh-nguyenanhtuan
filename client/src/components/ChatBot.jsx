@@ -110,9 +110,10 @@ export default function ChatBot() {
                   </div>
 
                   <div className="max-w-[75%] bg-gray-50 text-gray-900 px-4 py-3 rounded-2xl rounded-tl-sm border border-gray-200 shadow-sm">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
                       {m.text}
                     </ReactMarkdown>
+
                   </div>
                 </div>
               )}
