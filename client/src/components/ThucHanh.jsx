@@ -369,6 +369,13 @@ rounded-2xl p-8 text-center">
 
               </h2>
 
+              {selectedFolder === "video_main" && (
+                <p className="text-center text-gray-500 text-lg mt-4">
+                  Hãy chọn tài liệu.
+                </p>
+              )}
+
+
 
               {selectedFolder === "math_10" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -618,15 +625,10 @@ rounded-2xl p-8 text-center">
 
                 </div>
               )}
-
-              {/* CHƯA CHỌN FOLDER */}
-              {!selectedFolder && (
-                <p className="text-center text-gray-500">Hãy chọn tài liệu.</p>
-              )}
             </motion.div>
           )}
 
-          
+
           {activeTab === "simulation" && (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -688,6 +690,8 @@ rounded-2xl p-8 text-center">
                 ))}
 
               </div>
+
+
             </motion.div>
           )}
         </main>
