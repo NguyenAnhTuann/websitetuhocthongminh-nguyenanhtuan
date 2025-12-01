@@ -34,7 +34,6 @@ import NhapOTP from "./components/NhapOTP";
 import DatMatKhauMoi from "./components/DatMatKhauMoi";
 import RequireAuth from "./utils/RequireAuth";
 import RequireFlowStep from "./utils/RequireFlowStep";
-import LoginFlow from "./components/LoginFlow";
 
 
 
@@ -99,6 +98,29 @@ const AppWrapper = () => {
           <GlobalToastProvider>
 
 
+            {/* QUÊN MẬT KHẨU FLOW */}
+            {step === 1 && (
+              <QuenMatKhau
+                onNext={(email) => {
+                  setResetEmail(email);
+                  setStep(2);
+                }}
+              />
+            )}
+
+            {step === 2 && (
+              <NhapOTP
+                email={resetEmail}
+                onNext={() => setStep(3)}
+              />
+            )}
+
+            {step === 3 && (
+              <DatMatKhauMoi
+                email={resetEmail}
+                onNext={() => setStep(0)}
+              />
+            )}
 
 
 
@@ -150,16 +172,10 @@ const AppWrapper = () => {
                 path="/dangnhap"
                 element={
                   <RedirectIfLoggedIn>
-                    <LoginFlow
-                      step={step}
-                      setStep={setStep}
-                      resetEmail={resetEmail}
-                      setResetEmail={setResetEmail}
-                    />
+                    <Login openForget={() => setStep(1)} />
                   </RedirectIfLoggedIn>
                 }
               />
-
 
               <Route
                 path="/dangky"
