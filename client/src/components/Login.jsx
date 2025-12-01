@@ -51,7 +51,7 @@ export default function Login({openForget }) {
       setMsgType("success");
 
       setTimeout(() => {
-        window.location.href = data.user.role === "admin" ? "/admin-dashboard" : "/home";
+        window.location.href = data.user.role === "admin" ? "/admin-dashboard" : "/trangchu";
       }, 3000);
 
     } catch (err) {
