@@ -200,10 +200,12 @@ const AppWrapper = () => {
                   </RedirectIfLoggedIn>
                 }
               />
-            </Routes>
 
+              
             <Route path="/chinhsachbaomat" element={<ChinhSachBaoMat />} />
             <Route path="/dieukhoansudung" element={<DieuKhoanSuDung />} />
+            
+            </Routes>
 
 
           </GlobalToastProvider>
