@@ -31,25 +31,25 @@ export default function ChatBot() {
       const full = data.reply || "";
 
       let cur = "";
-      let i = 0;
 
-      const interval = setInterval(() => {
-        if (i < full.length) {
-          cur += full[i];
-          i++;
+      for (let i = 0; i < full.length; i++) {
+        cur += full[i];
 
-          setMessages((prev) => {
-            const last = prev[prev.length - 1];
-            if (last?.sender === "bot") {
-              return [...prev.slice(0, -1), { sender: "bot", text: cur }];
-            }
-            return [...prev, { sender: "bot", text: cur }];
-          });
-        } else {
-          clearInterval(interval);
-          setIsTyping(false);
-        }
-      }, 8);
+        setMessages((prev) => {
+          const last = prev[prev.length - 1];
+          if (last?.sender === "bot") {
+            return [...prev.slice(0, -1), { sender: "bot", text: cur }];
+          }
+          return [...prev, { sender: "bot", text: cur }];
+        });
+
+        await new Promise((resolve) => setTimeout(resolve, 12)); // ← iOS chạy mượt
+      }
+
+      setIsTyping(false);
+
+
+
     } catch (err) {
       setIsTyping(false);
       setMessages((prev) => [
