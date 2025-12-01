@@ -17,18 +17,22 @@ const Header = ({ language, setLanguage }) => {
   const lifeMenuRef = useRef(null);
   const [user, setUser] = useState(null);
   const mobileMenuRef = useRef(null);
-
+  const [role, setRole] = useState(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedToken = localStorage.getItem("token");
+    const storedRole = localStorage.getItem("role");
 
     if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
+      setRole(storedRole);
     } else {
       setUser(null);
+      setRole(null);
     }
   }, []);
+
 
 
 
@@ -93,21 +97,7 @@ const Header = ({ language, setLanguage }) => {
   };
 
   const t = translations[language];
-  const [role, setRole] = useState(null);
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const storedToken = localStorage.getItem("token");
-    const storedRole = localStorage.getItem("role");
-
-    if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser));
-      setRole(storedRole);
-    } else {
-      setUser(null);
-      setRole(null);
-    }
-  }, []);
 
 
   return (
@@ -176,23 +166,33 @@ const Header = ({ language, setLanguage }) => {
           {/* Nếu ĐÃ đăng nhập → hiện TÊN + ĐĂNG XUẤT */}
           {user && (
             <div className="hidden md:flex items-center gap-3 text-white">
+
               <span className="font-semibold flex items-center gap-2">
                 👋 {user.fullName}
               </span>
 
+              {/* Nút ADMIN — chỉ admin mới thấy */}
+              {role === "admin" && (
+                <Link
+                  to="/admin-dashboard"
+                  className="px-3 py-1 bg-yellow-400 text-[#1a2a2a] rounded-lg shadow hover:bg-yellow-300 font-semibold"
+                >
+                  ADMIN
+                </Link>
+              )}
+
               <button
                 onClick={() => {
-                  localStorage.removeItem("user");
-                  localStorage.removeItem("token");
-                  localStorage.removeItem("role");
+                  localStorage.clear();
                   window.location.reload();
                 }}
-                className="hidden md:block px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
+                className="px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
               >
                 Đăng xuất
               </button>
             </div>
           )}
+
 
 
 
