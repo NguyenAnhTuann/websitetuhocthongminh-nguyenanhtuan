@@ -45,7 +45,7 @@ export default function Footer() {
           <p className="text-sm text-white/80">
             <strong>Trường THPT Tô Văn Ơn</strong>
             <br />
-            Người phát triển & quản lý hệ thống: <strong>Nguyễn Anh Tuấn</strong>
+            Giáo viên: <strong>Huỳnh Thị Thanh Ngân</strong>
             <br />Email liên hệ:{" "}
             <a
               href="mailto:httngan.work1@gmail.com"
