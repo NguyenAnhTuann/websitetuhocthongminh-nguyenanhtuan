@@ -35,6 +35,10 @@ import DatMatKhauMoi from "./components/DatMatKhauMoi";
 import RequireAuth from "./utils/RequireAuth";
 import RequireFlowStep from "./utils/RequireFlowStep";
 
+import ChinhSachBaoMat from "./components/ChinhSachBaoMat";
+import DieuKhoanSuDung from "./components/DieuKhoanSuDung";
+
+
 
 
 // -----------------------------
@@ -197,6 +201,10 @@ const AppWrapper = () => {
                 }
               />
             </Routes>
+
+            <Route path="/chinhsachbaomat" element={<ChinhSachBaoMat />} />
+            <Route path="/dieukhoansudung" element={<DieuKhoanSuDung />} />
+
 
           </GlobalToastProvider>
         </main>

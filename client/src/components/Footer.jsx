@@ -71,9 +71,9 @@ export default function Footer() {
         <div>
           <h3 className="font-semibold text-lg mb-3">Chính sách</h3>
           <ul className="space-y-2 text-white/80 text-sm">
-            <li><Link className="hover:text-yellow-300" to="#">Chính sách bảo mật</Link></li>
-            <li><Link className="hover:text-yellow-300" to="#">Điều khoản sử dụng</Link></li>
-            <li><Link className="hover:text-yellow-300" to="#">Hỗ trợ kỹ thuật</Link></li>
+            <li><Link className="hover:text-yellow-300" to="/chinhsachbaomat">Chính sách bảo mật</Link></li>
+            <li><Link className="hover:text-yellow-300" to="/dieukhoansudung">Điều khoản sử dụng</Link></li>
+
           </ul>
         </div>
 
