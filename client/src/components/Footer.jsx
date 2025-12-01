@@ -44,8 +44,9 @@ export default function Footer() {
           <h3 className="font-semibold text-lg mb-3">Thông tin liên hệ</h3>
           <p className="text-sm text-white/80">
             <strong>Trường THPT Tô Văn Ơn</strong>
+            <br />
             Người phát triển & quản lý hệ thống: <strong>Nguyễn Anh Tuấn</strong>
-            <br />Email:{" "}
+            <br />Email liên hệ:{" "}
             <a
               href="mailto:httngan.work1@gmail.com"
               className="underline hover:text-yellow-300"
