@@ -371,7 +371,7 @@ rounded-2xl p-8 text-center">
 
               {selectedFolder === "video_main" && (
                 <p className="text-center text-gray-500 text-lg mt-4">
-                  Hãy chọn tài liệu.
+                  Hãy chọn bài tập.
                 </p>
               )}
 
