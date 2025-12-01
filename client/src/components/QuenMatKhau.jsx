@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export default function QuenMatKhau() {
+export default function QuenMatKhau({ onNext }) {
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
   const [msgType, setMsgType] = useState("");
@@ -36,7 +36,7 @@ export default function QuenMatKhau() {
 
     // chuyển sang trang OTP
     setTimeout(() => {
-      window.location.href = `/otp?email=${email}`;
+      onNext(email);
     }, 1800);
   };
 

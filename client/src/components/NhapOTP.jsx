@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export default function NhapOTP() {
+export default function NhapOTP({ email, onNext }) {
   const params = new URLSearchParams(window.location.search);
   const email = params.get("email");
 
@@ -93,7 +93,7 @@ export default function NhapOTP() {
 
 
     setTimeout(() => {
-      window.location.href = `/datmatkhaumoi?email=${email}`;
+      onNext(email);
     }, 1800);
   };
 

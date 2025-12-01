@@ -2,9 +2,8 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
-export default function DatMatKhauMoi() {
-  const params = new URLSearchParams(window.location.search);
-  const email = params.get("email");
+export default function DatMatKhauMoi({ email, onNext }) {
+
 
   const [pass, setPass] = useState("");
   const [pass2, setPass2] = useState("");
@@ -80,7 +79,7 @@ export default function DatMatKhauMoi() {
 
 
     setTimeout(() => {
-      window.location.href = "/dangnhap";
+      onNext();
     }, 2000);
   };
 
@@ -196,11 +195,10 @@ export default function DatMatKhauMoi() {
             </div>
 
             <p
-              className={`text-lg leading-relaxed ${
-                msgType === "success"
-                  ? "text-[#1c7c76] font-bold"
-                  : "text-red-600 font-semibold"
-              }`}
+              className={`text-lg leading-relaxed ${msgType === "success"
+                ? "text-[#1c7c76] font-bold"
+                : "text-red-600 font-semibold"
+                }`}
             >
               {msg}
             </p>
