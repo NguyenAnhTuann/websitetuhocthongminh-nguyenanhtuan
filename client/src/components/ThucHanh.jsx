@@ -355,7 +355,10 @@ rounded-2xl p-8 text-center">
             </motion.div>
           )}
 
-
+              {/* CHƯA CHỌN FOLDER */}
+              {!selectedFolder && (
+                <p className="text-center text-gray-500">Hãy chọn tài liệu.</p>
+              )}
 
           {activeTab === "video" && (
             <motion.div
