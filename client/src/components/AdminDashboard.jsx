@@ -7,6 +7,8 @@ export default function AdminDashboard() {
   const usersPerPage = 10;
   const [loading, setLoading] = useState(true);
   const [notify, setNotify] = useState({ type: "", message: "" });
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
 
 
   const showNotify = (type, message) => {
