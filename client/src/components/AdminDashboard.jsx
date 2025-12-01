@@ -132,7 +132,6 @@ export default function AdminDashboard() {
       )}
 
       {/* ====== HEADER ADMIN ====== */}
-      {/* ====== HEADER ADMIN ====== */}
       <header className="bg-[#1c7c76] text-white py-4 px-4 shadow-lg flex justify-between items-center">
         {/* TIÊU ĐỀ */}
         <h1 className="text-xl md:text-2xl font-bold tracking-wide mt-0">
@@ -143,7 +142,7 @@ export default function AdminDashboard() {
         <div className="hidden md:flex items-center gap-3">
           <button
             onClick={() => (window.location.href = "/trangchu")}
-            className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md"
+            className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-[#1a2a2a] font-semibold rounded-lg shadow-md"
           >
             Về trang chủ
           </button>
