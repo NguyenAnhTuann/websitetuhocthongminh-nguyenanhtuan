@@ -58,6 +58,8 @@ const AppWrapper = () => {
   const hideFooterPages = ["/admin-dashboard"];
   const shouldHideFooter = hideFooterPages.includes(location.pathname);
   const [step, setStep] = useState(0);
+  const [resetEmail, setResetEmail] = useState("");
+
 
 
 
@@ -95,13 +97,33 @@ const AppWrapper = () => {
 
           <GlobalToastProvider>
 
-            
-          {/* QUÊN MẬT KHẨU FLOW */}
-          {step === 1 && <QuenMatKhau onNext={() => setStep(2)} />}
-          {step === 2 && <NhapOTP onNext={() => setStep(3)} />}
-          {step === 3 && <DatMatKhauMoi onNext={() => setStep(0)} />}
 
-            
+            {/* QUÊN MẬT KHẨU FLOW */}
+            {step === 1 && (
+              <QuenMatKhau
+                onNext={(email) => {
+                  setResetEmail(email);
+                  setStep(2);
+                }}
+              />
+            )}
+
+            {step === 2 && (
+              <NhapOTP
+                email={resetEmail}
+                onNext={() => setStep(3)}
+              />
+            )}
+
+            {step === 3 && (
+              <DatMatKhauMoi
+                email={resetEmail}
+                onNext={() => setStep(0)}
+              />
+            )}
+
+
+
             <Routes>
               <Route path="/" element={<Navigate to="/home" replace />} />
 
