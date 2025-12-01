@@ -33,7 +33,7 @@ export default function NhapOTP({ email, onNext }) {
   const handleResendOTP = async () => {
     setMsg(""); // tắt popup cũ
 
-    setLoading(true);
+    setLoading(true);  
 
     const res = await fetch(
       "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/quenmatkhau",
@@ -161,7 +161,7 @@ export default function NhapOTP({ email, onNext }) {
       </motion.div>
 
       {msg && (
-        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-[500] pointer-events-auto">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
           <motion.div
             initial={{ scale: 0.6, opacity: 0, y: 40 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -208,11 +208,10 @@ export default function NhapOTP({ email, onNext }) {
       )}
 
       {loading && (
-        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-[500]">
-
-          <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
+  <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+  </div>
+)}
 
     </section>
   );
