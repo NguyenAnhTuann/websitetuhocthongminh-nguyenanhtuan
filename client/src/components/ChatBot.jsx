@@ -9,8 +9,6 @@ export default function ChatBot() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [debugLog, setDebugLog] = useState("");
-
 
   const messagesEndRef = useRef(null);
 
@@ -31,31 +29,27 @@ export default function ChatBot() {
 
       const data = await res.json();
       const full = data.reply || "";
-      setDebugLog(
-  `Reply length: ${full.length}\nUserAgent: ${navigator.userAgent}`
-);
-
 
       let cur = "";
+      let i = 0;
 
-      // TẠO BONG BÓNG BOT RỖNG — BẮT BUỘC CHO SAFARI iOS
-      setMessages((prev) => [...prev, { sender: "bot", text: "" }]);
+      const interval = setInterval(() => {
+        if (i < full.length) {
+          cur += full[i];
+          i++;
 
-      for (let i = 0; i < full.length; i++) {
-        cur += full[i];
-
-        setMessages((prev) => {
-          const last = prev[prev.length - 1];
-          return [...prev.slice(0, -1), { sender: "bot", text: cur }];
-        });
-
-        await new Promise((resolve) => setTimeout(resolve, 12)); // iOS friendly
-      }
-
-      setIsTyping(false);
-
-
-
+          setMessages((prev) => {
+            const last = prev[prev.length - 1];
+            if (last?.sender === "bot") {
+              return [...prev.slice(0, -1), { sender: "bot", text: cur }];
+            }
+            return [...prev, { sender: "bot", text: cur }];
+          });
+        } else {
+          clearInterval(interval);
+          setIsTyping(false);
+        }
+      }, 8);
     } catch (err) {
       setIsTyping(false);
       setMessages((prev) => [
@@ -160,12 +154,6 @@ export default function ChatBot() {
           >
             ➤
           </motion.button>
-          {debugLog && (
-  <pre className="w-full max-w-4xl mt-3 p-3 text-xs bg-black text-green-400 rounded-lg overflow-x-auto">
-    {debugLog}
-  </pre>
-)}
-
         </div>
 
         <p className="mt-2 text-[11px] text-gray-400 text-center">
