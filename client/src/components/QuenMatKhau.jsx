@@ -5,7 +5,7 @@ export default function QuenMatKhau({ onNext }) {
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
   const [msgType, setMsgType] = useState("");
-  const [loading, setLoading] = useState(false);   // ⭐ vị trí 1
+  const [loading, setLoading] = useState(false);  // ⭐ loading
 
   const handleSendCode = async () => {
     if (!email) {
@@ -14,7 +14,7 @@ export default function QuenMatKhau({ onNext }) {
       return;
     }
 
-    setLoading(true);  // ⭐ vị trí 2
+    setLoading(true);   // ⭐ bật loading
 
     const res = await fetch(
       "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/quenmatkhau",
@@ -26,7 +26,7 @@ export default function QuenMatKhau({ onNext }) {
     );
 
     const data = await res.json();
-    setLoading(false); // ⭐ vị trí 3
+    setLoading(false);  // ⭐ tắt loading
 
     if (!data.success) {
       setMsg(data.message);
@@ -42,7 +42,7 @@ export default function QuenMatKhau({ onNext }) {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-white px-4">
-      
+
       {/* FORM */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -53,6 +53,10 @@ export default function QuenMatKhau({ onNext }) {
         <h1 className="text-3xl font-extrabold text-center mb-2 text-white bg-[#1c7c76] rounded-xl py-3">
           Quên Mật Khẩu
         </h1>
+
+        <p className="text-center text-gray-600 mb-6">
+          Nhập email để nhận mã khôi phục.
+        </p>
 
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">Email</label>
@@ -71,24 +75,43 @@ export default function QuenMatKhau({ onNext }) {
         >
           Gửi mã OTP
         </button>
+
+        <p className="text-center text-gray-600 mt-6 text-sm">
+          Trở lại{" "}
+          <a href="/dangnhap" className="text-[#1c7c76] font-medium underline">
+            Đăng nhập
+          </a>
+        </p>
       </motion.div>
 
-      {/* POPUP MESSAGE */}
+      {/* POPUP */}
       {msg && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
           <motion.div
             initial={{ scale: 0.6, opacity: 0, y: 40 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
+            transition={{ duration: 0.35 }}
             className="bg-white w-[88%] max-w-sm p-7 rounded-3xl shadow-xl text-center"
           >
-            <p className={`text-lg ${msgType === "success" ? "text-[#1c7c76]" : "text-red-600"}`}>
+            <div className="flex justify-center mb-4">
+              {msgType === "success" ? (
+                <img src="/done.png" className="w-24 h-24 drop-shadow-xl" />
+              ) : (
+                <img src="/error.png" className="w-24 h-24 drop-shadow-xl" />
+              )}
+            </div>
+            <p
+              className={`text-lg ${
+                msgType === "success"
+                  ? "text-[#1c7c76] font-bold"
+                  : "text-red-600 font-semibold"
+              }`}
+            >
               {msg}
             </p>
-
             <button
               onClick={() => setMsg("")}
-              className="mt-6 w-full bg-[#1c7c76] text-white py-3 rounded-2xl font-semibold"
+              className="mt-6 w-full bg-[#1c7c76] hover:bg-[#166662] text-white py-3 rounded-2xl font-semibold"
             >
               Đóng
             </button>
@@ -96,8 +119,8 @@ export default function QuenMatKhau({ onNext }) {
         </div>
       )}
 
-      {/* LOADING SPINNER */}
-      {loading && (  // ⭐ vị trí 4
+      {/* ⭐ LOADING OVERLAY */}
+      {loading && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
         </div>
