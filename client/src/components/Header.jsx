@@ -44,19 +44,19 @@ const Header = ({ language, setLanguage }) => {
   }, []);
 
   useEffect(() => {
-  function handleClickOutsideMenu(e) {
-    if (
-      isMobileMenuOpen &&
-      mobileMenuRef.current &&
-      !mobileMenuRef.current.contains(e.target)
-    ) {
-      setIsMobileMenuOpen(false);
+    function handleClickOutsideMenu(e) {
+      if (
+        isMobileMenuOpen &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(e.target)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
     }
-  }
 
-  document.addEventListener("mousedown", handleClickOutsideMenu);
-  return () => document.removeEventListener("mousedown", handleClickOutsideMenu);
-}, [isMobileMenuOpen]);
+    document.addEventListener("mousedown", handleClickOutsideMenu);
+    return () => document.removeEventListener("mousedown", handleClickOutsideMenu);
+  }, [isMobileMenuOpen]);
 
 
 
@@ -93,12 +93,27 @@ const Header = ({ language, setLanguage }) => {
   };
 
   const t = translations[language];
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem("token");
+    const storedRole = localStorage.getItem("role");
+
+    if (storedUser && storedToken) {
+      setUser(JSON.parse(storedUser));
+      setRole(storedRole);
+    } else {
+      setUser(null);
+      setRole(null);
+    }
+  }, []);
+
 
   return (
     <header className="w-full fixed top-0 z-[9999] backdrop-blur-md bg-[#1c7c76] shadow-sm border-b border-white/20">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
-        {/* 🔥 LOGO kiểu Landing Page như ảnh */}
         <Link
           to="/trangchu"
           className="group flex flex-col leading-tight select-none"
@@ -172,14 +187,13 @@ const Header = ({ language, setLanguage }) => {
                   localStorage.removeItem("role");
                   window.location.reload();
                 }}
-
                 className="hidden md:block px-3 py-1 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
-
               >
                 Đăng xuất
               </button>
             </div>
           )}
+
 
 
 
@@ -288,16 +302,31 @@ const Header = ({ language, setLanguage }) => {
 
           {/* 🔥 LOGOUT cho mobile */}
           {user && (
-            <button
-              onClick={() => {
-                localStorage.clear();
-                window.location.reload();
-              }}
-              className="w-full px-4 py-2 mt-4 bg-red-500 rounded-lg"
-            >
-              Đăng xuất
-            </button>
+            <>
+              {/* 👇 Nút Quản lý dữ liệu (chỉ admin) */}
+              {role === "admin" && (
+                <Link
+                  to="/admin-dashboard"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block w-full px-4 py-2 mt-2 bg-yellow-400 text-[#1a2a2a] text-center rounded-lg font-semibold hover:bg-yellow-300 transition"
+                >
+                  Quản lý dữ liệu
+                </Link>
+              )}
+
+              {/* 👇 Nút Đăng xuất */}
+              <button
+                onClick={() => {
+                  localStorage.clear();
+                  window.location.reload();
+                }}
+                className="w-full px-4 py-2 mt-4 bg-red-500 rounded-lg"
+              >
+                Đăng xuất
+              </button>
+            </>
           )}
+
         </div>
       )}
 
