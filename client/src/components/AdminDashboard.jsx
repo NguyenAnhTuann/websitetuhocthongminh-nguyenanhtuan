@@ -132,16 +132,27 @@ export default function AdminDashboard() {
       {/* ====== HEADER ADMIN ====== */}
       <header className="bg-[#1c7c76] text-white py-4 px-8 shadow-lg flex justify-between items-center">
         <h1 className="text-2xl font-bold tracking-wide mt-0">BẢNG ĐIỀU KHIỂN ADMIN</h1>
-        <button
-          onClick={() => {
-            localStorage.clear();
-            window.location.href = "/dangnhap";
-          }}
-          className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-lg text-white font-semibold shadow-md"
-        >
-          Đăng xuất
-        </button>
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => (window.location.href = "/trangchu")}
+            className="px-4 py-2 bg-yellow-400 hover:bg-yellow-300 text-[#1c7c76] font-semibold rounded-lg shadow-md"
+          >
+            Về trang chủ
+          </button>
+
+          <button
+            onClick={() => {
+              localStorage.clear();
+              window.location.href = "/dangnhap";
+            }}
+            className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-lg text-white font-semibold shadow-md"
+          >
+            Đăng xuất
+          </button>
+        </div>
       </header>
+
 
       {/* ====== CONTENT ====== */}
       <div className="p-8 max-w-6xl mx-auto">

@@ -60,7 +60,7 @@ export default function Footer() {
             </a>
             <br />
             <br />
-            Người phát triển & quản lý hệ thống: <strong>Nguyễn Anh Tuấn</strong>
+            Người quản lý hệ thống: <strong>Nguyễn Anh Tuấn</strong>
             <br />Email hỗ trợ kỹ thuật:{" "}
             <a
               href="mailto:nguyenanhtuan.profile@gmail.com"
