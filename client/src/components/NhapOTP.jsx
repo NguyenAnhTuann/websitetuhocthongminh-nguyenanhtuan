@@ -33,7 +33,7 @@ export default function NhapOTP({ email, onNext }) {
   const handleResendOTP = async () => {
     setMsg(""); // tắt popup cũ
 
-    setLoading(true);  
+    setLoading(true);
 
     const res = await fetch(
       "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/quenmatkhau",
@@ -161,11 +161,17 @@ export default function NhapOTP({ email, onNext }) {
 
         <p className="text-center text-gray-600 mt-6 text-sm">
           Trở lại{" "}
-          <a href="/dangnhap" className="text-[#1c7c76] font-medium underline">
-            Đăng nhập
-          </a>
+          <button
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent("go_back_forgot"));
+            }}
+            className="text-[#1c7c76] font-medium underline"
+          >
+            Quên mật khẩu
+          </button>
         </p>
-        
+
+
       </motion.div>
 
       {msg && (
@@ -216,10 +222,10 @@ export default function NhapOTP({ email, onNext }) {
       )}
 
       {loading && (
-  <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-    <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-  </div>
-)}
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
 
     </section>
   );

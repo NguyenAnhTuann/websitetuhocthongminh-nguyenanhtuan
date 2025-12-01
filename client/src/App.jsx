@@ -61,6 +61,17 @@ const AppWrapper = () => {
   const [resetEmail, setResetEmail] = useState("");
 
 
+  useEffect(() => {
+    function goBackForgot() {
+      setStep(1);
+    }
+
+    window.addEventListener("go_back_forgot", goBackForgot);
+
+    return () => {
+      window.removeEventListener("go_back_forgot", goBackForgot);
+    };
+  }, []);
 
 
   useEffect(() => {
