@@ -131,7 +131,7 @@ export default function AdminDashboard() {
 
       {/* ====== HEADER ADMIN ====== */}
       <header className="bg-[#1c7c76] text-white py-4 px-8 shadow-lg flex justify-between items-center">
-        <h1 className="text-2xl font-bold tracking-wide mt-0">BẢNG ĐIỀU KHIỂN ADMIN</h1>
+        <h1 className="text-2xl font-bold tracking-wide mt-0">QUẢN LÝ DỮ LIỆU HỆ THỐNG</h1>
 
         <div className="flex items-center gap-3">
           <button
