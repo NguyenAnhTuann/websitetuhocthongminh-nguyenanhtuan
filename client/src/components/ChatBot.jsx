@@ -9,6 +9,8 @@ export default function ChatBot() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [debugLog, setDebugLog] = useState("");
+
 
   const messagesEndRef = useRef(null);
 
@@ -29,6 +31,10 @@ export default function ChatBot() {
 
       const data = await res.json();
       const full = data.reply || "";
+      setDebugLog(
+  `Reply length: ${full.length}\nUserAgent: ${navigator.userAgent}`
+);
+
 
       let cur = "";
 
@@ -154,6 +160,12 @@ export default function ChatBot() {
           >
             ➤
           </motion.button>
+          {debugLog && (
+  <pre className="w-full max-w-4xl mt-3 p-3 text-xs bg-black text-green-400 rounded-lg overflow-x-auto">
+    {debugLog}
+  </pre>
+)}
+
         </div>
 
         <p className="mt-2 text-[11px] text-gray-400 text-center">
