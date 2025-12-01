@@ -12,6 +12,8 @@ export default function DatMatKhauMoi({ email, onNext }) {
 
   const [msg, setMsg] = useState("");
   const [msgType, setMsgType] = useState("");
+  const [loading, setLoading] = useState(false);   // ⭐ THÊM Ở ĐÂY
+
 
   const [strength, setStrength] = useState(null);
   const [matchStatus, setMatchStatus] = useState("");
@@ -58,6 +60,9 @@ export default function DatMatKhauMoi({ email, onNext }) {
       return;
     }
 
+      setLoading(true);   // ⭐ BẬT LOADING Ở ĐÂY
+
+
     const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/datmatkhaumoi", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -65,6 +70,9 @@ export default function DatMatKhauMoi({ email, onNext }) {
     });
 
     const data = await res.json();
+
+      setLoading(false);  // ⭐ TẮT LOADING Ở ĐÂY
+
 
     if (!data.success) {
       setMsg(data.message);
@@ -212,6 +220,13 @@ export default function DatMatKhauMoi({ email, onNext }) {
           </motion.div>
         </div>
       )}
+
+      {loading && (
+  <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+  </div>
+)}
+
     </section>
   );
 }

@@ -6,6 +6,8 @@ export default function NhapOTP({ email, onNext }) {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [msg, setMsg] = useState("");
   const [msgType, setMsgType] = useState("");
+  const [loading, setLoading] = useState(false);   // ⭐ THÊM Ở ĐÂY
+
 
 
   const handleChange = (value, index) => {
@@ -31,6 +33,8 @@ export default function NhapOTP({ email, onNext }) {
   const handleResendOTP = async () => {
     setMsg(""); // tắt popup cũ
 
+    setLoading(true);
+
     const res = await fetch(
       "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/quenmatkhau",
       {
@@ -41,6 +45,9 @@ export default function NhapOTP({ email, onNext }) {
     );
 
     const data = await res.json();
+
+    setLoading(false);  // ⭐ THÊM Ở ĐÂY
+
 
     if (!data.success) {
       setMsg(data.message);
@@ -70,11 +77,18 @@ export default function NhapOTP({ email, onNext }) {
     }
 
 
+    setLoading(true);   // ⭐ THÊM Ở ĐÂY
+
+
     const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, code: otp }),
     });
+
+
+    setLoading(false);   // ⭐ THÊM Ở ĐÂY
+
 
     const data = await res.json();
 
@@ -113,7 +127,7 @@ export default function NhapOTP({ email, onNext }) {
 
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">
-            Mã OTP
+            Nhập OTP
           </label>
           <div className="grid grid-cols-6 gap-2 sm:gap-3 mb-6">
             {code.map((digit, index) => (
@@ -192,6 +206,13 @@ export default function NhapOTP({ email, onNext }) {
           </motion.div>
         </div>
       )}
+
+      {loading && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
+
     </section>
   );
 }
