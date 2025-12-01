@@ -100,7 +100,7 @@ const Header = ({ language, setLanguage }) => {
 
         {/* 🔥 LOGO kiểu Landing Page như ảnh */}
         <Link
-          to="/home"
+          to="/trangchu"
           className="group flex flex-col leading-tight select-none"
         >
           <span className="text-[20px] md:text-[22px] font-bold text-white tracking-tight group-hover:text-yellow-200 transition">

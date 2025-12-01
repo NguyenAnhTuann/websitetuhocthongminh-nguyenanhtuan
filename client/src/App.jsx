@@ -125,9 +125,9 @@ const AppWrapper = () => {
 
 
             <Routes>
-              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route path="/" element={<Navigate to="/trangchu" replace />} />
 
-              <Route path="/home" element={<Home language={language} />} />
+              <Route path="/trangchu" element={<Home language={language} />} />
 
               <Route
                 path="/kynangtuhoc"
