@@ -18,9 +18,10 @@ export default function Footer() {
           </p>
 
           <p className="mt-4 text-white/70 text-sm">
+            <br />Trường THPT Tô Văn Ơn
             © 2025 • Nội dung học thuật: GV. Huỳnh Thị Thanh Ngân
             <br />Thiết kế và xây dựng hệ thống: Nguyễn Anh Tuấn - TVU
-            <br />Trường THPT Tô Văn Ơn
+
           </p>
 
         </div>
@@ -43,7 +44,7 @@ export default function Footer() {
           <h3 className="font-semibold text-lg mb-3">Thông tin liên hệ</h3>
           <p className="text-sm text-white/80">
             <strong>Trường THPT Tô Văn Ơn</strong>
-            <br />Giáo viên phụ trách nội dung: GV. Huỳnh Thị Thanh Ngân
+            Người phát triển & quản lý hệ thống: <strong>Nguyễn Anh Tuấn</strong>
             <br />Email:{" "}
             <a
               href="mailto:httngan.work1@gmail.com"
