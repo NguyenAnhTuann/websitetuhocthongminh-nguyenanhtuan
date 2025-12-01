@@ -158,6 +158,14 @@ export default function NhapOTP({ email, onNext }) {
         >
           Xác nhận
         </button>
+
+        <p className="text-center text-gray-600 mt-6 text-sm">
+          Trở lại{" "}
+          <a href="/dangnhap" className="text-[#1c7c76] font-medium underline">
+            Đăng nhập
+          </a>
+        </p>
+        
       </motion.div>
 
       {msg && (
