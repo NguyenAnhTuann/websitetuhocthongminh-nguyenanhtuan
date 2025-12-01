@@ -36,8 +36,6 @@ export default function ChatBot() {
       let cur = "";
       let i = 0;
 
-      let cur = "";
-let i = 0;
 
 const interval = setInterval(() => {
   if (i < full.length) {
