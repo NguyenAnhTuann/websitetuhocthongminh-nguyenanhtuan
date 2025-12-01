@@ -9,7 +9,7 @@ export default function ChinhSachBaoMat() {
         transition={{ duration: 0.8 }}
         className="text-center text-3xl md:text-5xl font-extrabold text-white bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
       >
-        Chính sách bảo mật
+        CHÍNH SÁCH BẢO MẬT
       </motion.h1>
 
       <div className="mt-10 bg-white border border-gray-200 rounded-2xl shadow-md p-8 space-y-6 leading-relaxed text-gray-700">
