@@ -32,18 +32,18 @@ export default function ChatBot() {
 
       let cur = "";
 
+      // TẠO BONG BÓNG BOT RỖNG — BẮT BUỘC CHO SAFARI iOS
+      setMessages((prev) => [...prev, { sender: "bot", text: "" }]);
+
       for (let i = 0; i < full.length; i++) {
         cur += full[i];
 
         setMessages((prev) => {
           const last = prev[prev.length - 1];
-          if (last?.sender === "bot") {
-            return [...prev.slice(0, -1), { sender: "bot", text: cur }];
-          }
-          return [...prev, { sender: "bot", text: cur }];
+          return [...prev.slice(0, -1), { sender: "bot", text: cur }];
         });
 
-        await new Promise((resolve) => setTimeout(resolve, 12)); // ← iOS chạy mượt
+        await new Promise((resolve) => setTimeout(resolve, 12)); // iOS friendly
       }
 
       setIsTyping(false);
