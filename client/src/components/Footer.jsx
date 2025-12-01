@@ -17,18 +17,6 @@ export default function Footer() {
             và ứng dụng công nghệ AI trong học tập.
           </p>
 
-          <p className="mt-4 text-white/70 text-sm">
-            <br />Trường THPT Tô Văn Ơn
-            <br />
-            © 2025 • Nội dung học thuật:
-            <br/>
-            <strong>Huỳnh Thị Thanh Ngân</strong>
-            <br />Thiết kế và xây dựng hệ thống:
-            <br/>
-            <strong>Nguyễn Anh Tuấn - TVU</strong>
-
-          </p>
-
         </div>
 
         {/* 2) Liên kết nhanh */}
@@ -58,16 +46,7 @@ export default function Footer() {
             >
               httngan.work1@gmail.com
             </a>
-            <br />
-            <br />
-            Người quản lý hệ thống: <strong>Nguyễn Anh Tuấn</strong>
-            <br />Email hỗ trợ kỹ thuật:{" "}
-            <a
-              href="mailto:nguyenanhtuan.profile@gmail.com"
-              className="underline hover:text-yellow-300"
-            >
-              nguyenanhtuan.profile@gmail.com
-            </a>
+            
           </p>
         </div>
 
