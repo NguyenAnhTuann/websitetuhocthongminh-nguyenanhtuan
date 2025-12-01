@@ -95,7 +95,7 @@ const Header = ({ language, setLanguage }) => {
   const t = translations[language];
 
   return (
-    <header className="w-full fixed top-0 z-50 backdrop-blur-md bg-[#1c7c76] shadow-sm border-b border-white/20">
+    <header className="w-full fixed top-0 z-[9999] backdrop-blur-md bg-[#1c7c76] shadow-sm border-b border-white/20">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
         {/* 🔥 LOGO kiểu Landing Page như ảnh */}
