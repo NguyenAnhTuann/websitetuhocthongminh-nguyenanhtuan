@@ -352,11 +352,6 @@ rounded-2xl p-8 text-center">
                 ))}
 
               </div>
-
-              {/* CHƯA CHỌN FOLDER */}
-              {!selectedFolder && (
-                <p className="text-center text-gray-500">Hãy chọn tài liệu.</p>
-              )}
             </motion.div>
           )}
 
@@ -620,14 +615,18 @@ rounded-2xl p-8 text-center">
                       </div>
                     </a>
                   ))}
+
                 </div>
               )}
 
-
-
+              {/* CHƯA CHỌN FOLDER */}
+              {!selectedFolder && (
+                <p className="text-center text-gray-500">Hãy chọn tài liệu.</p>
+              )}
             </motion.div>
           )}
 
+          
           {activeTab === "simulation" && (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
