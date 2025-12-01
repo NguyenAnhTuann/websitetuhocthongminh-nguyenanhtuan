@@ -13,14 +13,16 @@ export default function Footer() {
         <div>
           <h2 className="text-2xl font-bold">TỰ HỌC THÔNG MINH</h2>
           <p className="mt-3 text-white/80 text-sm leading-relaxed">
-            Nền tảng hỗ trợ học sinh phát triển kỹ năng tự học, kỹ năng sống 
+            Nền tảng hỗ trợ học sinh phát triển kỹ năng tự học, kỹ năng sống
             và ứng dụng công nghệ AI trong học tập.
           </p>
 
           <p className="mt-4 text-white/70 text-sm">
-            © 2025 • GV. Huỳnh Thị Thanh Ngân  
+            © 2025 • Nội dung học thuật: GV. Huỳnh Thị Thanh Ngân
+            <br />Thiết kế và xây dựng hệ thống: Nguyễn Anh Tuấn - TVU
             <br />Trường THPT Tô Văn Ơn
           </p>
+
         </div>
 
         {/* 2) Liên kết nhanh */}
@@ -41,10 +43,27 @@ export default function Footer() {
           <h3 className="font-semibold text-lg mb-3">Thông tin liên hệ</h3>
           <p className="text-sm text-white/80">
             <strong>Trường THPT Tô Văn Ơn</strong>
-            <br />Giáo viên phụ trách: GV. Huỳnh Thị Thanh Ngân
-            <br />Email: <a href="mailto:" className="underline hover:text-yellow-300">httngan.work1@gmail.com</a>
+            <br />Giáo viên phụ trách nội dung: GV. Huỳnh Thị Thanh Ngân
+            <br />Email:{" "}
+            <a
+              href="mailto:httngan.work1@gmail.com"
+              className="underline hover:text-yellow-300"
+            >
+              httngan.work1@gmail.com
+            </a>
+            <br />
+            <br />
+            Người phát triển & quản lý hệ thống: <strong>Nguyễn Anh Tuấn</strong>
+            <br />Email hỗ trợ kỹ thuật:{" "}
+            <a
+              href="mailto:nguyenanhtuan.profile@gmail.com"
+              className="underline hover:text-yellow-300"
+            >
+              nguyenanhtuan.profile@gmail.com
+            </a>
           </p>
         </div>
+
 
         {/* 4) Chính sách */}
         <div>
