@@ -4,14 +4,11 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { motion } from "framer-motion";
 
-
 export default function ChatBot() {
 
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
 
   const messagesEndRef = useRef(null);
 
@@ -36,29 +33,23 @@ export default function ChatBot() {
       let cur = "";
       let i = 0;
 
+      const interval = setInterval(() => {
+        if (i < full.length) {
+          cur += full[i];
+          i++;
 
-const interval = setInterval(() => {
-  if (i < full.length) {
-    cur += full[i];
-    i++;
-
-    // chỉ render khi đủ 2 ký tự – giảm tải 50%
-    if (i % 2 === 0) {
-      setMessages((prev) => {
-        const last = prev[prev.length - 1];
-        if (last?.sender === "bot") {
-          return [...prev.slice(0, -1), { sender: "bot", text: cur }];
+          setMessages((prev) => {
+            const last = prev[prev.length - 1];
+            if (last?.sender === "bot") {
+              return [...prev.slice(0, -1), { sender: "bot", text: cur }];
+            }
+            return [...prev, { sender: "bot", text: cur }];
+          });
+        } else {
+          clearInterval(interval);
+          setIsTyping(false);
         }
-        return [...prev, { sender: "bot", text: cur }];
-      });
-    }
-
-  } else {
-    clearInterval(interval);
-    setIsTyping(false);
-  }
-}, 45);
-
+      }, 8);
     } catch (err) {
       setIsTyping(false);
       setMessages((prev) => [
@@ -119,10 +110,9 @@ const interval = setInterval(() => {
                   </div>
 
                   <div className="max-w-[75%] bg-gray-50 text-gray-900 px-4 py-3 rounded-2xl rounded-tl-sm border border-gray-200 shadow-sm">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                       {m.text}
                     </ReactMarkdown>
-
                   </div>
                 </div>
               )}
