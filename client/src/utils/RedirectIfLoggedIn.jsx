@@ -6,7 +6,7 @@ export default function RedirectIfLoggedIn({ children }) {
 
   // Nếu đã đăng nhập → không cho vào các trang này
   if (token && user) {
-    return <Navigate to="/home" replace />;
+    return <Navigate to="/trangchu" replace />;
   }
 
   return children;

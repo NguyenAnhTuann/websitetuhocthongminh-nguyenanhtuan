@@ -60,7 +60,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const role = localStorage.getItem("role");
     if (role !== "admin") {
-      window.location.href = "/home";
+      window.location.href = "/trangchu";
       return;
     }
 
