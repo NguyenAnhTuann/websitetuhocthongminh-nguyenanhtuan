@@ -57,6 +57,8 @@ const AppWrapper = () => {
   const [isDarkMode, setIsDarkMode] = useState(getInitialTheme);
   const hideFooterPages = ["/admin-dashboard"];
   const shouldHideFooter = hideFooterPages.includes(location.pathname);
+  const [step, setStep] = useState(0);
+
 
 
   useEffect(() => {
@@ -92,6 +94,14 @@ const AppWrapper = () => {
         >
 
           <GlobalToastProvider>
+
+            
+          {/* QUÊN MẬT KHẨU FLOW */}
+          {step === 1 && <QuenMatKhau onNext={() => setStep(2)} />}
+          {step === 2 && <NhapOTP onNext={() => setStep(3)} />}
+          {step === 3 && <DatMatKhauMoi onNext={() => setStep(0)} />}
+
+            
             <Routes>
               <Route path="/" element={<Navigate to="/home" replace />} />
 
@@ -140,7 +150,7 @@ const AppWrapper = () => {
                 path="/dangnhap"
                 element={
                   <RedirectIfLoggedIn>
-                    <Login />
+                    <Login openForget={() => setStep(1)} />
                   </RedirectIfLoggedIn>
                 }
               />
@@ -153,45 +163,8 @@ const AppWrapper = () => {
                   </RedirectIfLoggedIn>
                 }
               />
-
-
-              {/* QUÊN MẬT KHẨU FLOW */}
-              <Route
-                path="/quenmatkhau"
-                element={
-                  <RedirectIfLoggedIn>
-                    <QuenMatKhau />
-                  </RedirectIfLoggedIn>
-                }
-              />
-
-              <Route
-                path="/otp"
-                element={
-                  <RedirectIfLoggedIn>
-                    <RequireFlowStep step={1}>
-                      <NhapOTP />
-                    </RequireFlowStep>
-                  </RedirectIfLoggedIn>
-                }
-              />
-
-
-              <Route
-                path="/datmatkhaumoi"
-                element={
-                  <RedirectIfLoggedIn>
-                    <RequireFlowStep step={2}>
-                      <DatMatKhauMoi />
-                    </RequireFlowStep>
-                  </RedirectIfLoggedIn>
-                }
-              />
-
-
-
-
             </Routes>
+
           </GlobalToastProvider>
         </main>
 

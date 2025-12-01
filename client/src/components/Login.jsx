@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
-export default function Login() {
+export default function Login({openForget }) {
   const [identifier, setIdentifier] = useState("");
   const [pass, setPass] = useState("");
   const [msg, setMsg] = useState("");
@@ -122,13 +122,15 @@ export default function Login() {
 
         {/* FORGOT PASSWORD */}
         <div className="flex justify-end mb-4">
-          <a
-            href="/quenmatkhau"
+          <button
+            type="button"
+            onClick={openForget}   // ❗ Quan trọng
             className="text-[#1c7c76] text-sm font-medium hover:underline"
           >
             Quên mật khẩu?
-          </a>
+          </button>
         </div>
+
 
         {/* LOGIN BUTTON */}
         <button
