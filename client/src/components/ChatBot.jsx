@@ -4,7 +4,8 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { motion } from "framer-motion";
 
-export default function ChatBot() {
+export default function ChatBot({ subject }) {
+
 
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
@@ -24,8 +25,11 @@ export default function ChatBot() {
       const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: input, subject }), // gửi môn học
       });
+
+
+
 
       const data = await res.json();
       const full = data.reply || "";
