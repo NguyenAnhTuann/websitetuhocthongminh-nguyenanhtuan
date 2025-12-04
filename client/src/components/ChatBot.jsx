@@ -61,7 +61,7 @@ export default function ChatBotHub() {
         <h1 className=" mt-6 md:mt-10 mx-auto text-center block
              text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
              bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm">
-          Trợ Lý Học Tập <span className="text-white">AI ChatBot</span>
+          TRỢ LÍ HỌC TẬP AI CHATBOT
         </h1>
         <p className="text-gray-500 mt-2 max-w-2xl mx-auto text-lg">
           Chọn môn học bạn cần hỗ trợ. Hệ thống AI sẽ giải đáp thắc mắc, 

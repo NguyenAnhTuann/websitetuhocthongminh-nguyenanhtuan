@@ -3,30 +3,74 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { motion } from "framer-motion";
-import { PiMathOperationsFill } from "react-icons/pi";
+import { PiMathOperationsFill, PiImage, PiX } from "react-icons/pi";
 
 export default function ChatToan() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
 
-  const sendMessage = async () => {
-    if (!input.trim()) return;
+  // --- CODE MỚI: State quản lý ảnh ---
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const fileInputRef = useRef(null);
 
-    const userMsg = { sender: "user", text: input };
+  // Hàm chuyển file sang Base64
+  const convertFileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
+  const clearImage = () => {
+    setSelectedFile(null);
+    setPreviewUrl(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+  // ----------------------------------
+
+
+  const sendMessage = async () => {
+    if (!input.trim() && !selectedFile) return; // Chặn nếu không có gì để gửi
+
+    // Hiển thị ngay lên giao diện chat
+    const userMsg = { sender: "user", text: input, image: previewUrl };
     setMessages((prev) => [...prev, userMsg]);
+
+    const currentInput = input; // Lưu lại text
+    const currentImage = selectedFile; // Lưu lại file
+
     setInput("");
+    clearImage(); // Xóa ảnh ở ô nhập liệu sau khi ấn gửi
     setIsTyping(true);
 
     try {
+      // Chuyển ảnh sang Base64 nếu có
+      let base64Image = null;
+      if (currentImage) {
+        base64Image = await convertFileToBase64(currentImage);
+      }
+
       const res = await fetch(
         "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/chat",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            message: input,
-            subject: "toan", // Quan trọng: gửi đúng môn
+            message: currentInput,
+            subject: "toan",
+            image: base64Image, // Gửi ảnh lên server
           }),
         }
       );
@@ -34,14 +78,13 @@ export default function ChatToan() {
       const data = await res.json();
       const full = data.reply || "";
 
+      // ... (Đoạn code hiệu ứng chữ chạy gõ máy giữ nguyên như cũ) ...
       let cur = "";
       let i = 0;
-
       const interval = setInterval(() => {
         if (i < full.length) {
           cur += full[i];
           i++;
-
           setMessages((prev) => {
             const last = prev[prev.length - 1];
             if (last?.sender === "bot") {
@@ -54,15 +97,10 @@ export default function ChatToan() {
           setIsTyping(false);
         }
       }, 10);
+
     } catch (err) {
       setIsTyping(false);
-      setMessages((prev) => [
-        ...prev,
-        {
-          sender: "bot",
-          text: "Xin lỗi, hệ thống đang gặp lỗi. Vui lòng thử lại.",
-        },
-      ]);
+      setMessages((prev) => [...prev, { sender: "bot", text: "Lỗi hệ thống." }]);
     }
   };
 
@@ -86,7 +124,7 @@ export default function ChatToan() {
         </h1>
 
         <p className="text-gray-600 mt-3 max-w-2xl mx-auto text-base md:text-lg">
-          Trợ lý AI giải Toán nhanh – chính xác – từng bước.  
+          Trợ lý AI giải Toán nhanh – chính xác – từng bước.
           Hỗ trợ Đại số, Hình học, Lý thuyết, bài tập SGK – nâng cao.
         </p>
       </motion.div>
@@ -143,11 +181,42 @@ export default function ChatToan() {
       </motion.div>
 
       {/* ===== INPUT ===== */}
+      {/* ===== INPUT AREA ===== */}
       <div className="w-full max-w-4xl mt-4">
+
+        {/* Hiển thị ảnh Preview nhỏ bên trên ô nhập liệu */}
+        {previewUrl && (
+          <div className="relative inline-block mb-2 ml-2">
+            <img src={previewUrl} alt="Preview" className="h-16 rounded border border-gray-300" />
+            <button
+              onClick={clearImage}
+              className="absolute -top-2 -right-2 bg-gray-200 rounded-full p-1 hover:bg-red-200"
+            >
+              <PiX size={12} />
+            </button>
+          </div>
+        )}
+
         <div className="bg-white border border-gray-300 rounded-2xl px-4 py-3 shadow-sm flex items-center gap-3">
+
+          {/* Nút chọn ảnh mới thêm vào */}
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept="image/*"
+            hidden
+          />
+          <button
+            onClick={() => fileInputRef.current.click()}
+            className="text-gray-400 hover:text-[#1c7c76] transition-colors"
+          >
+            <PiImage size={24} />
+          </button>
+
           <input
             value={input}
-            placeholder="Nhập bài toán hoặc câu hỏi Toán..."
+            placeholder="Nhập bài toán hoặc tải ảnh lên..."
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             className="flex-1 bg-transparent outline-none text-[15px] text-gray-800"

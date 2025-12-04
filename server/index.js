@@ -23,8 +23,9 @@ const User = require("./models/User");
 // KHỞI TẠO APP — PHẢI ĐỂ Ở ĐÂY
 const app = express();
 
-// MIDDLEWARE
-app.use(express.json());
+// Tăng giới hạn lên 50mb để nhận được ảnh base64
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(
   cors({
@@ -155,19 +156,31 @@ app.get("/make-admin", async (req, res) => {
 // ===============================
 
 app.post("/api/chat", async (req, res) => {
-  const { message, subject } = req.body;
+  // Lấy thêm biến 'image' từ Frontend gửi lên
+  const { message, subject, image } = req.body;
 
-  // Kiểm tra môn học có hợp lệ không
   if (!subject || !SUBJECT_PROMPTS[subject]) {
-    return res.json({ reply: "Lỗi: Môn học không hợp lệ hoặc chưa được hỗ trợ." });
+    return res.json({ reply: "Lỗi: Môn học không hợp lệ." });
   }
 
   try {
+    let userContent;
+
+    // === LOGIC MỚI: Xử lý nếu có ảnh ===
+    if (image) {
+      userContent = [
+        { type: "text", text: message || "Giải bài này giúp tôi" }, // Text mặc định nếu user chỉ gửi ảnh
+        { type: "image_url", image_url: { url: image } } // Ảnh dạng Base64
+      ];
+    } else {
+      userContent = message; // Nếu không có ảnh thì giữ nguyên như cũ
+    }
+
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         { role: "system", content: SUBJECT_PROMPTS[subject] },
-        { role: "user", content: message }
+        { role: "user", content: userContent } // Truyền content đã xử lý
       ],
     });
 
@@ -175,8 +188,8 @@ app.post("/api/chat", async (req, res) => {
     res.json({ reply });
 
   } catch (err) {
-    console.error("❌ API ChatGPT error:", err);
-    res.status(500).json({ reply: "Lỗi server ChatBot. Vui lòng thử lại." });
+    console.error("❌ API Error:", err);
+    res.status(500).json({ reply: "Lỗi server ChatBot." });
   }
 });
 
