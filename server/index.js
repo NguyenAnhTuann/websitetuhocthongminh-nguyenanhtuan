@@ -156,8 +156,8 @@ app.get("/make-admin", async (req, res) => {
 // ===============================
 
 app.post("/api/chat", async (req, res) => {
-  // Lấy thêm biến 'image' từ Frontend gửi lên
-  const { message, subject, image } = req.body;
+  // 1. Nhận thêm biến 'history'
+  const { message, subject, image, history } = req.body;
 
   if (!subject || !SUBJECT_PROMPTS[subject]) {
     return res.json({ reply: "Lỗi: Môn học không hợp lệ." });
@@ -166,30 +166,39 @@ app.post("/api/chat", async (req, res) => {
   try {
     let userContent;
 
-    // === LOGIC MỚI: Xử lý nếu có ảnh ===
+    // Xử lý nội dung tin nhắn hiện tại (Text hoặc Text + Ảnh)
     if (image) {
       userContent = [
-        { type: "text", text: message || "Giải bài này giúp tôi" }, // Text mặc định nếu user chỉ gửi ảnh
-        { type: "image_url", image_url: { url: image } } // Ảnh dạng Base64
+        { type: "text", text: message || "Giải bài tập trong ảnh này giúp tôi." },
+        { type: "image_url", image_url: { url: image } }
       ];
     } else {
-      userContent = message; // Nếu không có ảnh thì giữ nguyên như cũ
+      userContent = message;
     }
+
+    // 2. Xử lý LỊCH SỬ chat
+    // Đảm bảo history là một mảng, nếu không thì là mảng rỗng
+    const previousMessages = Array.isArray(history) ? history : [];
+
+    // 3. Gộp: [System Prompt] + [Lịch sử cũ] + [Câu hỏi mới]
+    const fullConversation = [
+      { role: "system", content: SUBJECT_PROMPTS[subject] },
+      ...previousMessages, // Chèn lịch sử vào giữa
+      { role: "user", content: userContent }
+    ];
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: SUBJECT_PROMPTS[subject] },
-        { role: "user", content: userContent } // Truyền content đã xử lý
-      ],
+      messages: fullConversation, // Gửi toàn bộ hội thoại
+      max_tokens: 1000,
     });
 
     const reply = completion.choices?.[0]?.message?.content;
     res.json({ reply });
 
   } catch (err) {
-    console.error("❌ API Error:", err);
-    res.status(500).json({ reply: "Lỗi server ChatBot." });
+    console.error("❌ Error:", err);
+    res.status(500).json({ reply: "Lỗi server." });
   }
 });
 

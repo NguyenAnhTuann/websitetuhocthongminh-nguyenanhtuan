@@ -43,19 +43,22 @@ export default function ChatToan() {
   const sendMessage = async () => {
     if (!input.trim() && !selectedFile) return;
 
-    // --- CẬP NHẬT: Lưu cả text và image vào tin nhắn ---
-    const userMsg = { 
-      sender: "user", 
-      text: input, 
-      image: previewUrl // Lưu link ảnh để hiển thị
-    };
-    
+    // 1. Cập nhật giao diện ngay lập tức
+    const userMsg = { sender: "user", text: input, image: previewUrl };
     setMessages((prev) => [...prev, userMsg]);
 
     const currentInput = input;
     const currentImage = selectedFile;
 
-    // Reset input và ảnh sau khi gửi
+    // 2. CHUẨN BỊ LỊCH SỬ (QUAN TRỌNG)
+    // Lấy 10 tin nhắn gần nhất để AI nhớ ngữ cảnh (tránh gửi quá nhiều tốn tiền/token)
+    // Map từ sender "user"/"bot" sang role "user"/"assistant"
+    const historyToSend = messages.slice(-10).map((msg) => ({
+      role: msg.sender === "user" ? "user" : "assistant",
+      content: msg.text || "" // Chỉ gửi text của lịch sử để tiết kiệm, bỏ qua ảnh cũ
+    }));
+
+    // Reset input
     setInput("");
     clearImage(); 
     setIsTyping(true);
@@ -75,6 +78,7 @@ export default function ChatToan() {
             message: currentInput,
             subject: "toan",
             image: base64Image,
+            history: historyToSend, // <--- Gửi kèm lịch sử tại đây
           }),
         }
       );
