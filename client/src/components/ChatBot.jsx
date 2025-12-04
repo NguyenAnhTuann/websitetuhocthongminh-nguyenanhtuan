@@ -3,10 +3,9 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-export default function ChatBot({ subject }) {
-
-
+export default function ChatBot() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
@@ -25,11 +24,8 @@ export default function ChatBot({ subject }) {
       const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input, subject }), // gửi môn học
+        body: JSON.stringify({ message: input }),
       });
-
-
-
 
       const data = await res.json();
       const full = data.reply || "";
@@ -62,68 +58,92 @@ export default function ChatBot({ subject }) {
       ]);
     }
   };
+
   return (
-    <section className="min-h-screen w-full flex flex-col items-center px-4 py-24 bg-white">
+    <section className="min-h-screen w-full flex flex-col items-center px-4 py-16">
 
-      {/* ====== TIÊU ĐỀ ====== */}
-      <motion.h1
-        initial={{ opacity: 0, y: -40 }}
+      {/* ===== HERO ===== */}
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className=" text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
-                   bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm inline-block"
+        className="text-center mb-10"
       >
-        AI ChatBot
-      </motion.h1>
+        <h1 className="text-4xl md:text-5xl font-extrabold text-[#1c7c76]">
+          AI ChatBot – Trợ Lý Học Tập
+        </h1>
+        <p className="text-gray-600 mt-3 max-w-xl mx-auto">
+          Hỏi đáp mọi lĩnh vực, giải thích kiến thức, hỗ trợ bài tập nhanh chóng.
+        </p>
+      </motion.div>
 
-      <motion.p
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-gray-600 text-center max-w-2xl mt-3 text-sm md:text-base"
+      {/* ===== DANH SÁCH CHAT THEO MÔN ===== */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-3 mb-10"
       >
-        Trợ lý học tập thông minh – Hỏi đáp mọi lĩnh vực.
-      </motion.p>
+        {[
+          { name: "Toán", link: "/chatbot/toan" },
+          { name: "Ngữ Văn", link: "/chatbot/nguvan" },
+          { name: "Tiếng Anh", link: "/chatbot/tienganh" },
+          { name: "Vật Lý", link: "/chatbot/vatly" },
+          { name: "Hoá Học", link: "/chatbot/hoahoc" },
+          { name: "Sinh Học", link: "/chatbot/sinhhoc" },
+          { name: "Địa Lý", link: "/chatbot/dialy" },
+          { name: "Lịch Sử", link: "/chatbot/lichsu" },
+          { name: "Tin Học", link: "/chatbot/tinhoc" },
+          { name: "Công Nghệ", link: "/chatbot/congnghe" },
+          { name: "Quốc Phòng", link: "/chatbot/quocphong" },
+          { name: "Thể Dục", link: "/chatbot/theduc" },
+          { name: "Hướng Nghiệp", link: "/chatbot/huongnghiep" },
+          { name: "Kinh Tế – Pháp Luật", link: "/chatbot/kinhtephapluat" },
+        ].map((item) => (
+          <Link
+            key={item.link}
+            to={item.link}
+            className="p-3 bg-[#1c7c76] text-white rounded-xl shadow hover:bg-[#166662] text-center text-sm md:text-base"
+          >
+            {item.name}
+          </Link>
+        ))}
+      </motion.div>
 
       {/* ===== KHUNG CHAT ===== */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl shadow-md p-6 mt-12"
+        className="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl shadow-md p-6"
       >
         <div className="h-[450px] overflow-y-auto space-y-4 pr-2">
 
+          {/* Hiển thị tin nhắn */}
           {messages.map((m, idx) => (
             <div key={idx}>
-
-              {/* USER */}
               {m.sender === "user" && (
                 <div className="flex justify-end">
-                  <div className="max-w-[75%] bg-[#3C9E8F] text-white px-4 py-2.5 rounded-2xl rounded-br-sm shadow">
+                  <div className="max-w-[75%] bg-[#3C9E8F] text-white px-4 py-2.5 rounded-2xl shadow">
                     {m.text}
                   </div>
                 </div>
               )}
 
-              {/* BOT */}
               {m.sender === "bot" && (
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#A8DCD2] flex items-center justify-center shadow-inner">
+                  <div className="w-8 h-8 rounded-full bg-[#A8DCD2] flex items-center justify-center">
                     <span className="text-[#1c7c76] font-bold text-xs">AI</span>
                   </div>
 
-                  <div className="max-w-[75%] bg-gray-50 text-gray-900 px-4 py-3 rounded-2xl rounded-tl-sm border border-gray-200 shadow-sm">
+                  <div className="max-w-[75%] bg-gray-50 text-gray-900 px-4 py-3 rounded-2xl border shadow-sm">
                     <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                       {m.text}
                     </ReactMarkdown>
                   </div>
                 </div>
               )}
-
             </div>
           ))}
 
+          {/* Hiệu ứng gõ */}
           {isTyping && (
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[#A8DCD2]" />
@@ -154,7 +174,7 @@ export default function ChatBot({ subject }) {
           <motion.button
             onClick={sendMessage}
             whileTap={{ scale: 0.85 }}
-            className="bg-[#1c7c76] text-white px-5 py-2 rounded-lg hover:bg-[#166662] transition shadow"
+            className="bg-[#1c7c76] text-white px-5 py-2 rounded-lg hover:bg-[#166662]"
           >
             ➤
           </motion.button>
