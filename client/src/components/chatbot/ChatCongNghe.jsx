@@ -80,7 +80,7 @@ export default function ChatCongNghe() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             message: currentInput,
-            subject: "cong-nghe", // Vẫn giữ subject là công nghệ
+            subject: "congnghe", // Vẫn giữ subject là công nghệ
             image: base64Image,   // Gửi ảnh
             history: historyToSend, // Gửi lịch sử
           }),
