@@ -1,146 +1,134 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { 
+  LuSettings, LuHammer, LuArrowLeft, LuRefreshCcw, 
+  LuServer, LuShieldCheck, LuDatabase, LuCpu 
+} from "react-icons/lu";
 
-// Icon SVG Components (để không phụ thuộc thư viện ngoài)
-const GearIcon = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-    <circle cx="12" cy="12" r="3"></circle>
-  </svg>
-);
-
-const LockIcon = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-  </svg>
-);
-
-export default function ChatBotMaintenance() {
-  // Giả lập thanh tiến trình (Progress Bar)
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress >= 85) return 85; // Dừng ở 85% để chờ thực tế
-        const diff = Math.random() * 10;
-        return Math.min(oldProgress + diff, 85);
-      });
-    }, 800);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const subjects = [
-    { name: "Toán", link: "/chatbot/toan" },
-    { name: "Ngữ Văn", link: "/chatbot/nguvan" },
-    { name: "Tiếng Anh", link: "/chatbot/tienganh" },
-    { name: "Vật Lý", link: "/chatbot/vatly" },
-    { name: "Hoá Học", link: "/chatbot/hoahoc" },
-    { name: "Sinh Học", link: "/chatbot/sinhhoc" },
-    { name: "Địa Lý", link: "/chatbot/dialy" },
-    { name: "Lịch Sử", link: "/chatbot/lichsu" },
-    { name: "Tin Học", link: "/chatbot/tinhoc" },
-    { name: "Công Nghệ", link: "/chatbot/congnghe" },
-    { name: "Quốc Phòng", link: "/chatbot/quocphong" },
-    { name: "Thể Dục", link: "/chatbot/theduc" },
-    { name: "Hướng Nghiệp", link: "/chatbot/huongnghiep" },
-    { name: "Kinh Tế – Pháp Luật", link: "/chatbot/kinhtephapluat" },
+export default function MaintenancePage() {
+  
+  // Danh sách các trạng thái giả lập để hiển thị
+  const statusMessages = [
+    { text: "Đang kết nối đến máy chủ dữ liệu...", icon: <LuServer /> },
+    { text: "Đang tối ưu hóa các thuật toán AI...", icon: <LuCpu /> },
+    { text: "Đang kiểm tra bảo mật hệ thống...", icon: <LuShieldCheck /> },
+    { text: "Đang dọn dẹp bộ nhớ đệm...", icon: <LuDatabase /> },
+    { text: "Đang cập nhật giao diện người dùng...", icon: <LuSettings /> },
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Hiệu ứng chuyển đổi status mỗi 2.5 giây
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % statusMessages.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const spinTransition = {
+    loop: Infinity,
+    ease: "linear",
+    duration: 8, // Quay chậm hơn cho điềm tĩnh
+    repeat: Infinity
+  };
+
   return (
-    <section className="min-h-screen w-full flex flex-col items-center justify-center px-4 py-16 bg-gray-50 relative overflow-hidden">
+    <section className="min-h-screen w-full flex flex-col items-center justify-center px-4 bg-white from-slate-50 to-gray-100 relative overflow-hidden">
       
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-         <div className="absolute top-10 left-10 w-32 h-32 bg-[#1c7c76] rounded-full blur-3xl"></div>
-         <div className="absolute bottom-10 right-10 w-40 h-40 bg-[#1c7c76] rounded-full blur-3xl"></div>
+      {/* ===== BACKGROUND DECOR ===== */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute -top-[10%] -left-[10%] w-96 h-96 bg-[#1c7c76] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+        <div className="absolute top-[20%] -right-[10%] w-96 h-96 bg-teal-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-[10%] left-[20%] w-96 h-96 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
       </div>
 
-      {/* ===== HERO MAINTENANCE ===== */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-12 z-10 max-w-2xl"
-      >
-        <div className="flex justify-center mb-6">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
-            className="text-[#1c7c76]"
-          >
-            <GearIcon className="w-20 h-20 md:w-24 md:h-24" />
-          </motion.div>
-        </div>
-
-        <h1 className="text-3xl md:text-5xl font-extrabold text-[#1c7c76] mb-4">
-          Hệ thống đang nâng cấp
-        </h1>
-        <p className="text-gray-600 text-lg mb-8">
-          Chúng tôi đang cập nhật AI ChatBot để thông minh hơn và phản hồi nhanh hơn. 
-          <br className="hidden md:block"/> Vui lòng quay lại sau ít phút!
-        </p>
-
-        {/* Fake Progress Bar */}
-        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-2 overflow-hidden">
-          <motion.div 
-            className="bg-[#1c7c76] h-2.5 rounded-full" 
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            transition={{ ease: "easeOut" }}
-          ></motion.div>
-        </div>
-        <p className="text-xs text-gray-500 text-right font-mono">Loading modules... {Math.floor(progress)}%</p>
-      </motion.div>
-
-      {/* ===== DANH SÁCH MÔN HỌC (LOCKED STATE) ===== */}
-      <motion.div
+      {/* ===== MAIN CONTENT ===== */}
+      <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="w-full max-w-4xl"
+        className="relative z-10 bg-white/80 backdrop-blur-xl border border-white/50 shadow-2xl rounded-3xl p-8 md:p-12 max-w-lg w-full text-center"
       >
-        <div className="flex items-center gap-2 mb-4 text-gray-500 font-semibold text-sm uppercase tracking-wide">
-          <LockIcon className="w-4 h-4" /> Các tính năng đang bảo trì:
-        </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {subjects.map((item) => (
-            <div
-              key={item.link}
-              className="relative p-3 bg-white border border-gray-200 text-gray-400 rounded-xl shadow-sm text-center text-sm md:text-base cursor-not-allowed select-none overflow-hidden group"
+        {/* Animated Main Icon */}
+        <div className="relative flex justify-center items-center mb-8">
+            {/* Vòng lan tỏa (Pulse effect) thay vì thanh loading */}
+            <span className="absolute inline-flex h-32 w-32 rounded-full bg-teal-400 opacity-20 animate-ping"></span>
+            <div className="absolute w-28 h-28 bg-teal-50 rounded-full"></div>
+            
+            <motion.div 
+              animate={{ rotate: 360 }} 
+              transition={spinTransition}
+              className="relative z-10 text-[#1c7c76] text-6xl"
             >
-              {/* Overlay Lock Effect */}
-              <div className="absolute inset-0 bg-gray-100/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <LockIcon className="w-5 h-5 text-gray-500" />
-              </div>
-              
-              <span className="relative z-10 group-hover:blur-[1px] transition-all">
-                {item.name}
-              </span>
-            </div>
-          ))}
+              <LuSettings />
+            </motion.div>
+
+            {/* Icon búa nhỏ trang trí */}
+            <motion.div 
+              animate={{ rotate: [0, -15, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute -right-1 -top-1 text-orange-400 text-2xl z-20 bg-white rounded-full p-1 shadow-sm"
+            >
+              <LuHammer />
+            </motion.div>
         </div>
-      </motion.div>
 
-      {/* ===== FOOTER ACTION ===== */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="mt-12"
-      >
-        <Link 
-          to="/" 
-          className="px-8 py-3 bg-white border-2 border-[#1c7c76] text-[#1c7c76] font-bold rounded-full hover:bg-[#1c7c76] hover:text-white transition-all shadow-md"
-        >
-          Quay về Trang chủ
-        </Link>
-      </motion.div>
+        <h1 className="text-3xl font-extrabold text-gray-800 mb-3 font-outfit">
+          Đang Nâng Cấp Hệ Thống
+        </h1>
+        
+        <p className="text-gray-500 mb-8">
+          Chúng tôi đang thực hiện một số cải tiến quan trọng.
+          <br/>
+          Vui lòng quay lại sau ít phút.
+        </p>
 
+        {/* ===== THAY THẾ THANH LOADING Ở ĐÂY ===== */}
+        {/* Khu vực hiển thị trạng thái "AI đang làm việc" */}
+        <div className="bg-gray-50 rounded-2xl p-4 mb-8 border border-gray-100 flex items-center justify-center min-h-[60px] relative overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="flex items-center gap-3 text-[#1c7c76] font-medium text-sm md:text-base"
+            >
+              <span className="text-xl">{statusMessages[currentIndex].icon}</span>
+              {statusMessages[currentIndex].text}
+            </motion.div>
+          </AnimatePresence>
+          
+          {/* Hiệu ứng 3 chấm nhảy nhảy (Typing dots) */}
+          <div className="absolute bottom-1 right-3 flex gap-1">
+             <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0 }} className="w-1 h-1 bg-teal-300 rounded-full"></motion.span>
+             <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }} className="w-1 h-1 bg-teal-300 rounded-full"></motion.span>
+             <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }} className="w-1 h-1 bg-teal-300 rounded-full"></motion.span>
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex flex-col gap-3">
+          <button 
+            onClick={() => window.location.reload()} 
+            className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#1c7c76] text-white rounded-xl font-semibold hover:bg-[#15635e] hover:shadow-lg transition-all shadow-md active:scale-95"
+          >
+            <LuRefreshCcw />
+            Kiểm tra trạng thái
+          </button>
+          
+          <Link to="/" className="w-full">
+            <button className="flex items-center justify-center gap-2 w-full py-3.5 bg-transparent text-gray-500 rounded-xl font-medium hover:bg-gray-50 hover:text-[#1c7c76] transition-all">
+              <LuArrowLeft />
+              Quay về trang chủ
+            </button>
+          </Link>
+        </div>
+
+      </motion.div>
     </section>
   );
 }
