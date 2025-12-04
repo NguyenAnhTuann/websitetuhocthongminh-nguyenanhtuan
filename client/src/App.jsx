@@ -52,6 +52,7 @@ import ChatQuocPhong from "./components/chatbot/ChatQuocPhong";
 import ChatTheDuc from "./components/chatbot/ChatTheDuc";
 import ChatHuongngNghiep from "./components/chatbot/ChatHuongNghiep";
 import ChatKinhTePhapLuat from "./components/chatbot/ChatKinhTePhapLuat";
+import ChatBotUpgate from "./components/ChatBotUpgrate"
 
 
 
@@ -235,6 +236,7 @@ const AppWrapper = () => {
               <Route path="/chatbot/theduc" element={<ChatTheDuc />} />
               <Route path="/chatbot/huongnghiep" element={<ChatHuongngNghiep />} />
               <Route path="/chatbot/kinhtephapluat" element={<ChatKinhTePhapLuat />} />
+              <Route path="/chatbot/chatbotupgrate" element={<ChatBotUpgate />} />
 
             </Routes>
 
