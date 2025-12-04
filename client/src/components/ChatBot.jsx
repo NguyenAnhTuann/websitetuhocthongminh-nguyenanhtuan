@@ -1,144 +1,120 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+// Import các icon phù hợp từ thư viện react-icons
+import { 
+  LuCalculator, LuBookOpen, LuLanguages, LuAtom, LuFlaskConical, 
+  LuLeaf, LuGlobe, LuHourglass, LuMonitor, LuCpu, 
+  LuShield, LuDumbbell, LuCompass, LuScale 
+} from "react-icons/lu";
 
-// Icon SVG Components (để không phụ thuộc thư viện ngoài)
-const GearIcon = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-    <circle cx="12" cy="12" r="3"></circle>
-  </svg>
-);
-
-const LockIcon = ({ className }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-  </svg>
-);
-
-export default function ChatBotMaintenance() {
-  // Giả lập thanh tiến trình (Progress Bar)
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress >= 85) return 85; // Dừng ở 85% để chờ thực tế
-        const diff = Math.random() * 10;
-        return Math.min(oldProgress + diff, 85);
-      });
-    }, 800);
-
-    return () => clearInterval(timer);
-  }, []);
-
+export default function ChatBotHub() {
+  // Danh sách môn học kèm Icon và Màu sắc (nếu muốn colorful hơn)
   const subjects = [
-    { name: "Toán", link: "/chatbot/toan" },
-    { name: "Ngữ Văn", link: "/chatbot/nguvan" },
-    { name: "Tiếng Anh", link: "/chatbot/tienganh" },
-    { name: "Vật Lý", link: "/chatbot/vatly" },
-    { name: "Hoá Học", link: "/chatbot/hoahoc" },
-    { name: "Sinh Học", link: "/chatbot/sinhhoc" },
-    { name: "Địa Lý", link: "/chatbot/dialy" },
-    { name: "Lịch Sử", link: "/chatbot/lichsu" },
-    { name: "Tin Học", link: "/chatbot/tinhoc" },
-    { name: "Công Nghệ", link: "/chatbot/congnghe" },
-    { name: "Quốc Phòng", link: "/chatbot/quocphong" },
-    { name: "Thể Dục", link: "/chatbot/theduc" },
-    { name: "Hướng Nghiệp", link: "/chatbot/huongnghiep" },
-    { name: "Kinh Tế – Pháp Luật", link: "/chatbot/kinhtephapluat" },
+    { name: "Toán", link: "/chatbot/toan", icon: <LuCalculator />, desc: "Đại số, Hình học" },
+    { name: "Ngữ Văn", link: "/chatbot/nguvan", icon: <LuBookOpen />, desc: "Phân tích, Soạn bài" },
+    { name: "Tiếng Anh", link: "/chatbot/tienganh", icon: <LuLanguages />, desc: "Từ vựng, Ngữ pháp" },
+    { name: "Vật Lý", link: "/chatbot/vatly", icon: <LuAtom />, desc: "Cơ, Nhiệt, Điện" },
+    { name: "Hoá Học", link: "/chatbot/hoahoc", icon: <LuFlaskConical />, desc: "Hữu cơ, Vô cơ" },
+    { name: "Sinh Học", link: "/chatbot/sinhhoc", icon: <LuLeaf />, desc: "Di truyền, Sinh thái" },
+    { name: "Địa Lý", link: "/chatbot/dialy", icon: <LuGlobe />, desc: "Tự nhiên, Kinh tế" },
+    { name: "Lịch Sử", link: "/chatbot/lichsu", icon: <LuHourglass />, desc: "Việt Nam, Thế giới" },
+    { name: "Tin Học", link: "/chatbot/tinhoc", icon: <LuMonitor />, desc: "Lập trình, Office" },
+    { name: "Công Nghệ", link: "/chatbot/congnghe", icon: <LuCpu />, desc: "Kỹ thuật, Trồng trọt" },
+    { name: "Quốc Phòng", link: "/chatbot/quocphong", icon: <LuShield />, desc: "An ninh, Quân sự" },
+    { name: "Thể Dục", link: "/chatbot/theduc", icon: <LuDumbbell />, desc: "Vận động, Sức khỏe" },
+    { name: "Hướng Nghiệp", link: "/chatbot/huongnghiep", icon: <LuCompass />, desc: "Tư vấn chọn nghề" },
+    { name: "Kinh Tế – PL", link: "/chatbot/kinhtephapluat", icon: <LuScale />, desc: "Luật, Tài chính" },
   ];
 
+  // Cấu hình hiệu ứng xuất hiện lần lượt
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1 // Mỗi item hiện cách nhau 0.1s
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
-    <section className="min-h-screen w-full flex flex-col items-center justify-center px-4 py-16 bg-gray-50 relative overflow-hidden">
+    <section className="min-h-screen w-full flex flex-col items-center px-4 py-16 bg-white from-slate-50 to-gray-100 relative overflow-hidden">
       
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-         <div className="absolute top-10 left-10 w-32 h-32 bg-[#1c7c76] rounded-full blur-3xl"></div>
-         <div className="absolute bottom-10 right-10 w-40 h-40 bg-[#1c7c76] rounded-full blur-3xl"></div>
+      {/* Background Decor (Trang trí nền) */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute -top-[10%] -left-[10%] w-96 h-96 bg-[#1c7c76] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+        <div className="absolute top-[20%] -right-[10%] w-96 h-96 bg-teal-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
       </div>
 
-      {/* ===== HERO MAINTENANCE ===== */}
+      {/* ===== HERO SECTION ===== */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-12 z-10 max-w-2xl"
-      >
-        <div className="flex justify-center mb-6">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
-            className="text-[#1c7c76]"
-          >
-            <GearIcon className="w-20 h-20 md:w-24 md:h-24" />
-          </motion.div>
-        </div>
-
-        <h1 className="text-3xl md:text-5xl font-extrabold text-[#1c7c76] mb-4">
-          Hệ thống đang nâng cấp
-        </h1>
-        <p className="text-gray-600 text-lg mb-8">
-          Chúng tôi đang cập nhật AI ChatBot để thông minh hơn và phản hồi nhanh hơn. 
-          <br className="hidden md:block"/> Vui lòng quay lại sau ít phút!
-        </p>
-
-        {/* Fake Progress Bar */}
-        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-2 overflow-hidden">
-          <motion.div 
-            className="bg-[#1c7c76] h-2.5 rounded-full" 
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            transition={{ ease: "easeOut" }}
-          ></motion.div>
-        </div>
-        <p className="text-xs text-gray-500 text-right font-mono">Loading modules... {Math.floor(progress)}%</p>
-      </motion.div>
-
-      {/* ===== DANH SÁCH MÔN HỌC (LOCKED STATE) ===== */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="w-full max-w-4xl"
+        transition={{ duration: 0.6 }}
+        className="text-center mb-12 z-10 relative"
       >
-        <div className="flex items-center gap-2 mb-4 text-gray-500 font-semibold text-sm uppercase tracking-wide">
-          <LockIcon className="w-4 h-4" /> Các tính năng đang bảo trì:
-        </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {subjects.map((item) => (
-            <div
-              key={item.link}
-              className="relative p-3 bg-white border border-gray-200 text-gray-400 rounded-xl shadow-sm text-center text-sm md:text-base cursor-not-allowed select-none overflow-hidden group"
-            >
-              {/* Overlay Lock Effect */}
-              <div className="absolute inset-0 bg-gray-100/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <LockIcon className="w-5 h-5 text-gray-500" />
-              </div>
-              
-              <span className="relative z-10 group-hover:blur-[1px] transition-all">
-                {item.name}
-              </span>
-            </div>
-          ))}
-        </div>
+        <h1 className=" mt-6 md:mt-10 mx-auto text-center block
+             text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
+             bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm">
+          Trợ Lý Học Tập <span className="text-white">AI ChatBot</span>
+        </h1>
+        <p className="text-gray-500 mt-2 max-w-2xl mx-auto text-lg">
+          Chọn môn học bạn cần hỗ trợ. Hệ thống AI sẽ giải đáp thắc mắc, 
+          hướng dẫn giải bài tập và ôn thi 24/7.
+        </p>
       </motion.div>
 
-      {/* ===== FOOTER ACTION ===== */}
+      {/* ===== GRID DANH SÁCH MÔN ===== */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="w-full max-w-6xl grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 z-10 relative"
+      >
+        {subjects.map((item) => (
+          <motion.div key={item.link} variants={itemVariants}>
+            <Link
+              to={item.link}
+              className="group relative flex flex-col items-center p-6 bg-white rounded-2xl border border-[#1c7c76]/50 shadow-sm hover:shadow-xl hover:border-[#1c7c76]/30 transition-all duration-300 h-full overflow-hidden"
+            >
+              {/* Hiệu ứng hover background */}
+              <div className="absolute inset-0 bg-[#1c7c76] opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+
+              {/* Icon Container */}
+              <div className="w-14 h-14 mb-4 rounded-xl bg-teal-50 text-[#1c7c76] flex items-center justify-center text-3xl group-hover:scale-110 group-hover:bg-[#1c7c76] group-hover:text-white transition-all duration-300 shadow-inner">
+                {item.icon}
+              </div>
+
+              {/* Text Info */}
+              <h3 className="text-lg font-bold text-gray-800 group-hover:text-[#1c7c76] transition-colors">
+                {item.name}
+              </h3>
+              <p className="text-xs text-gray-400 mt-1 text-center font-medium">
+                {item.desc}
+              </p>
+
+              {/* Arrow Indicator (Chỉ hiện khi hover) */}
+              <div className="mt-4 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 text-[#1c7c76] text-sm font-semibold flex items-center gap-1">
+                Bắt đầu <span>→</span>
+              </div>
+            </Link>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* ===== FOOTER NOTE ===== */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="mt-12"
+        transition={{ delay: 1 }}
+        className="mt-16 text-center text-gray-400 text-sm"
       >
-        <Link 
-          to="/" 
-          className="px-8 py-3 bg-white border-2 border-[#1c7c76] text-[#1c7c76] font-bold rounded-full hover:bg-[#1c7c76] hover:text-white transition-all shadow-md"
-        >
-          Quay về Trang chủ
-        </Link>
+        © 2025 TuHocThongMinh AI. Powered by Advanced Language Models.
       </motion.div>
 
     </section>
