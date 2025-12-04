@@ -1,4 +1,4 @@
 import ChatBot from "./ChatBot";
-export default function ChatToan() {
-  return <ChatBot subject="toan" />;
+export default function ChatCongNghe() {
+  return <ChatBot subject="congnghe" />;
 }
