@@ -141,7 +141,7 @@ export default function ChatToan() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl shadow-md p-6"
       >
-        <div className="h-[450px] overflow-y-auto space-y-6 pr-2">
+        <div className="h-[700px] overflow-y-auto space-y-6 pr-2">
           {messages.map((m, idx) => (
             <div key={idx}>
               {m.sender === "user" ? (

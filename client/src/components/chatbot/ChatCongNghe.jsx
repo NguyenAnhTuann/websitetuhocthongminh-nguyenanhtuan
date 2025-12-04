@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react"; // Thêm useRef
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion"; // Thêm AnimatePresence
+// Thêm các icon cần thiết cho upload ảnh
+import { PiPaperclip, PiX } from "react-icons/pi";
 import { LuCpu } from "react-icons/lu";
 
 export default function ChatCongNghe() {
@@ -10,23 +12,77 @@ export default function ChatCongNghe() {
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
 
-  const sendMessage = async () => {
-    if (!input.trim()) return;
+  // --- State quản lý ảnh (MỚI) ---
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const fileInputRef = useRef(null);
 
-    const userMsg = { sender: "user", text: input };
+  // Hàm chuyển file sang Base64 (MỚI)
+  const convertFileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  // Xử lý khi chọn file (MỚI)
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
+  // Xóa ảnh đang chọn (MỚI)
+  const clearImage = () => {
+    setSelectedFile(null);
+    setPreviewUrl(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const sendMessage = async () => {
+    // Cho phép gửi nếu có text HOẶC có ảnh
+    if (!input.trim() && !selectedFile) return;
+
+    // 1. Cập nhật giao diện ngay lập tức (Text + Ảnh)
+    const userMsg = { sender: "user", text: input, image: previewUrl };
     setMessages((prev) => [...prev, userMsg]);
+
+    const currentInput = input;
+    const currentImage = selectedFile;
+
+    // 2. CHUẨN BỊ LỊCH SỬ (MỚI - Giống ChatToan)
+    // Lấy 10 tin nhắn gần nhất để AI nhớ ngữ cảnh
+    const historyToSend = messages.slice(-10).map((msg) => ({
+      role: msg.sender === "user" ? "user" : "assistant",
+      content: msg.text || "" 
+    }));
+
+    // Reset input
     setInput("");
+    clearImage();
     setIsTyping(true);
 
     try {
+      // Xử lý ảnh base64 nếu có
+      let base64Image = null;
+      if (currentImage) {
+        base64Image = await convertFileToBase64(currentImage);
+      }
+
       const res = await fetch(
         "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/chat",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            message: input,
-            subject: "cong-nghe", // nhớ khớp với SUBJECT_PROMPTS ở backend
+            message: currentInput,
+            subject: "cong-nghe", // Vẫn giữ subject là công nghệ
+            image: base64Image,   // Gửi ảnh
+            history: historyToSend, // Gửi lịch sử
           }),
         }
       );
@@ -96,22 +152,38 @@ export default function ChatCongNghe() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl shadow-md p-6"
       >
-        <div className="h-[450px] overflow-y-auto space-y-4 pr-2">
+        {/* Tăng chiều cao lên 700px cho giống ChatToan */}
+        <div className="h-[700px] overflow-y-auto space-y-6 pr-2">
           {messages.map((m, idx) => (
             <div key={idx}>
               {m.sender === "user" ? (
-                <div className="flex justify-end">
-                  <div className="max-w-[75%] bg-[#3C9E8F] text-white px-4 py-2.5 rounded-2xl shadow">
-                    {m.text}
-                  </div>
+                // --- User Message (Cập nhật hiển thị cả ảnh) ---
+                <div className="flex flex-col items-end">
+                   {/* Hiển thị ảnh user gửi nếu có */}
+                   {m.image && (
+                    <div className="mb-2">
+                        <img 
+                          src={m.image} 
+                          alt="Uploaded content" 
+                          className="max-w-[200px] max-h-[200px] rounded-lg border border-gray-200 shadow-sm object-contain bg-gray-50"
+                        />
+                    </div>
+                  )}
+                  {/* Hiển thị text */}
+                  {m.text && (
+                    <div className="max-w-[75%] bg-[#3C9E8F] text-white px-4 py-2.5 rounded-2xl shadow">
+                      {m.text}
+                    </div>
+                  )}
                 </div>
               ) : (
+                // --- Bot Message ---
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#A8DCD2] flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-[#A8DCD2] flex items-center justify-center flex-shrink-0">
                     <span className="text-[#1c7c76] font-bold text-xs">AI</span>
                   </div>
 
-                  <div className="max-w-[75%] bg-gray-50 text-gray-900 px-4 py-3 rounded-2xl border shadow-sm">
+                  <div className="max-w-[85%] bg-gray-50 text-gray-900 px-4 py-3 rounded-2xl border shadow-sm overflow-hidden">
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
                       rehypePlugins={[rehypeRaw]}
@@ -139,24 +211,78 @@ export default function ChatCongNghe() {
         </div>
       </motion.div>
 
-      {/* ===== INPUT ===== */}
+      {/* ===== INPUT AREA (Cập nhật giống ChatToan) ===== */}
       <div className="w-full max-w-4xl mt-4">
-        <div className="bg-white border border-gray-300 rounded-2xl px-4 py-3 shadow-sm flex items-center gap-3">
+        
+        {/* Preview ảnh nhỏ TRƯỚC khi gửi */}
+        <AnimatePresence>
+          {previewUrl && (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className="mb-2 ml-2 relative inline-block"
+            >
+              <div className="relative group">
+                <img src={previewUrl} alt="Preview" className="h-16 rounded-lg border border-gray-300 shadow-sm" />
+                <button 
+                  onClick={clearImage}
+                  className="absolute -top-2 -right-2 bg-gray-200 text-gray-600 rounded-full p-1 hover:bg-red-500 hover:text-white transition-colors shadow-sm"
+                >
+                  <PiX size={12} />
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="bg-white border border-gray-300 rounded-2xl px-4 py-3 shadow-sm flex items-center gap-2">
+          
+          {/* 1. Ô nhập liệu */}
           <input
             value={input}
             placeholder="Nhập câu hỏi về Công Nghệ..."
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            className="flex-1 bg-transparent outline-none text-[15px] text-gray-800"
+            className="flex-1 bg-transparent outline-none text-[15px] text-gray-800 placeholder-gray-400"
           />
 
-          <motion.button
-            onClick={sendMessage}
-            whileTap={{ scale: 0.85 }}
-            className="bg-[#1c7c76] text-white px-5 py-2 rounded-lg hover:bg-[#166662]"
-          >
-            ➤
-          </motion.button>
+          <div className="flex items-center gap-1 border-l pl-2 border-gray-200">
+             {/* Input file ẩn */}
+             <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              accept="image/*"
+              hidden
+            />
+            
+            {/* 2. Nút Kẹp Giấy (Chọn ảnh) */}
+            <button
+              onClick={() => fileInputRef.current.click()}
+              className={`p-2 rounded-full transition-colors ${
+                selectedFile ? "text-[#1c7c76] bg-teal-50" : "text-gray-400 hover:text-[#1c7c76] hover:bg-gray-100"
+              }`}
+              title="Đính kèm hình ảnh"
+            >
+              <PiPaperclip size={22} />
+            </button>
+
+            {/* 3. Nút Gửi */}
+            <motion.button
+              onClick={sendMessage}
+              whileTap={{ scale: 0.9 }}
+              disabled={!input.trim() && !selectedFile}
+              className={`p-2 rounded-lg transition-colors flex items-center justify-center ${
+                (!input.trim() && !selectedFile) 
+                  ? "text-gray-300 cursor-not-allowed" 
+                  : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
+              }`}
+            >
+              <span className="px-2 font-bold text-sm">GỬI</span>
+            </motion.button>
+          </div>
+
         </div>
 
         <p className="mt-2 text-xs text-gray-400 text-center">
