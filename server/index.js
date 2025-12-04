@@ -52,7 +52,7 @@ app.use("/api/admin", adminRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    console.log("🔗 Connected to DB:", mongoose.connection.name);
+    console.log("🔗 Đã kết nối với DATABSE:", mongoose.connection.name);
   })
   .catch((err) => {
     console.error("❌ MongoDB error:", err);
