@@ -236,7 +236,7 @@ const AppWrapper = () => {
               <Route path="/chatbot/theduc" element={<ChatTheDuc />} />
               <Route path="/chatbot/huongnghiep" element={<ChatHuongngNghiep />} />
               <Route path="/chatbot/kinhtephapluat" element={<ChatKinhTePhapLuat />} />
-              <Route path="/chatbot/chatbotupgrate" element={<ChatBotUpgate />} />
+              <Route path="chatbotupgrate" element={<ChatBotUpgate />} />
 
             </Routes>
 
