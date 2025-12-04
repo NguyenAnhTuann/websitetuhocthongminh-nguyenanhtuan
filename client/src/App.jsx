@@ -38,20 +38,20 @@ import RequireFlowStep from "./utils/RequireFlowStep";
 import ChinhSachBaoMat from "./components/ChinhSachBaoMat";
 import DieuKhoanSuDung from "./components/DieuKhoanSuDung";
 
-import ChatToan from "./components/ChatToan";
-import ChatNguVan from "./components/ChatNguVan";
-import ChatTiengAnh from "./components/ChatTiengAnh";
-import ChatVatLy from "./components/ChatVatLy";
-import ChatHoaHoc from "./components/ChatHoaHoc";
-import ChatSinhHoc from "./components/ChatSinhHoc";
-import ChatDiaLy from "./components/ChatDiaLy";
-import ChatLichSu from "./components/ChatLichSu";
-import ChatTinHoc from "./components/ChatTinHoc";
-import ChatCongNghe from "./components/ChatCongNghe";
-import ChatQuocPhong from "./components/ChatQuocPhong";
-import ChatTheDuc from "./components/ChatTheDuc";
-import ChatHuongngNghiep from "./components/ChatHuongNghiep";
-import ChatKinhTePhapLuat from "./components/ChatKinhTePhapLuat";
+import ChatToan from "./components/chatbot/ChatToan";
+import ChatNguVan from "./components/chatbot/ChatNguVan";
+import ChatTiengAnh from "./components/chatbot/ChatTiengAnh";
+import ChatVatLy from "./components/chatbot/ChatVatLy";
+import ChatHoaHoc from "./components/chatbot/ChatHoaHoc";
+import ChatSinhHoc from "./components/chatbot/ChatSinhHoc";
+import ChatDiaLy from "./components/chatbot/ChatDiaLy";
+import ChatLichSu from "./components/chatbot/ChatLichSu";
+import ChatTinHoc from "./components/chatbot/ChatTinHoc";
+import ChatCongNghe from "./components/chatbot/ChatCongNghe";
+import ChatQuocPhong from "./components/chatbot/ChatQuocPhong";
+import ChatTheDuc from "./components/chatbot/ChatTheDuc";
+import ChatHuongngNghiep from "./components/chatbot/ChatHuongNghiep";
+import ChatKinhTePhapLuat from "./components/chatbot/ChatKinhTePhapLuat";
 
 
 
@@ -233,7 +233,7 @@ const AppWrapper = () => {
               <Route path="/chatbot/congnghe" element={<ChatCongNghe />} />
               <Route path="/chatbot/quocphong" element={<ChatQuocPhong />} />
               <Route path="/chatbot/theduc" element={<ChatTheDuc />} />
-              <Route path="/chatbot/huongnghiep" element={<ChatHướngNghiep />} />
+              <Route path="/chatbot/huongnghiep" element={<ChatHuongngNghiep />} />
               <Route path="/chatbot/kinhtephapluat" element={<ChatKinhTePhapLuat />} />
 
             </Routes>
