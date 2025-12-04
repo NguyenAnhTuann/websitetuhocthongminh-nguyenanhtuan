@@ -2,15 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { motion } from "framer-motion";
-import { PiMathOperationsFill, PiImage, PiX } from "react-icons/pi";
+import { motion, AnimatePresence } from "framer-motion";
+// Thay PiImage bằng PiPaperclip
+import { PiMathOperationsFill, PiPaperclip, PiX } from "react-icons/pi";
 
 export default function ChatToan() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
 
-  // --- CODE MỚI: State quản lý ảnh ---
+  // --- State quản lý ảnh ---
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const fileInputRef = useRef(null);
@@ -38,25 +39,28 @@ export default function ChatToan() {
     setPreviewUrl(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
-  // ----------------------------------
-
 
   const sendMessage = async () => {
-    if (!input.trim() && !selectedFile) return; // Chặn nếu không có gì để gửi
+    if (!input.trim() && !selectedFile) return;
 
-    // Hiển thị ngay lên giao diện chat
-    const userMsg = { sender: "user", text: input, image: previewUrl };
+    // --- CẬP NHẬT: Lưu cả text và image vào tin nhắn ---
+    const userMsg = { 
+      sender: "user", 
+      text: input, 
+      image: previewUrl // Lưu link ảnh để hiển thị
+    };
+    
     setMessages((prev) => [...prev, userMsg]);
 
-    const currentInput = input; // Lưu lại text
-    const currentImage = selectedFile; // Lưu lại file
+    const currentInput = input;
+    const currentImage = selectedFile;
 
+    // Reset input và ảnh sau khi gửi
     setInput("");
-    clearImage(); // Xóa ảnh ở ô nhập liệu sau khi ấn gửi
+    clearImage(); 
     setIsTyping(true);
 
     try {
-      // Chuyển ảnh sang Base64 nếu có
       let base64Image = null;
       if (currentImage) {
         base64Image = await convertFileToBase64(currentImage);
@@ -70,7 +74,7 @@ export default function ChatToan() {
           body: JSON.stringify({
             message: currentInput,
             subject: "toan",
-            image: base64Image, // Gửi ảnh lên server
+            image: base64Image,
           }),
         }
       );
@@ -78,7 +82,6 @@ export default function ChatToan() {
       const data = await res.json();
       const full = data.reply || "";
 
-      // ... (Đoạn code hiệu ứng chữ chạy gõ máy giữ nguyên như cũ) ...
       let cur = "";
       let i = 0;
       const interval = setInterval(() => {
@@ -124,8 +127,7 @@ export default function ChatToan() {
         </h1>
 
         <p className="text-gray-600 mt-3 max-w-2xl mx-auto text-base md:text-lg">
-          Trợ lý AI giải Toán nhanh – chính xác – từng bước.
-          Hỗ trợ Đại số, Hình học, Lý thuyết, bài tập SGK – nâng cao.
+          Trợ lý AI giải Toán nhanh – chính xác.
         </p>
       </motion.div>
 
@@ -135,23 +137,36 @@ export default function ChatToan() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl shadow-md p-6"
       >
-        <div className="h-[450px] overflow-y-auto space-y-4 pr-2">
-
+        <div className="h-[450px] overflow-y-auto space-y-6 pr-2">
           {messages.map((m, idx) => (
             <div key={idx}>
               {m.sender === "user" ? (
-                <div className="flex justify-end">
-                  <div className="max-w-[75%] bg-[#3C9E8F] text-white px-4 py-2.5 rounded-2xl shadow">
-                    {m.text}
-                  </div>
+                // --- CẬP NHẬT: Hiển thị User Message (Text + Ảnh) ---
+                <div className="flex flex-col items-end">
+                  {/* Nếu có ảnh thì hiển thị ảnh trước */}
+                  {m.image && (
+                    <div className="mb-2">
+                       <img 
+                         src={m.image} 
+                         alt="Uploaded content" 
+                         className="max-w-[200px] max-h-[200px] rounded-lg border border-gray-200 shadow-sm object-contain bg-gray-50"
+                       />
+                    </div>
+                  )}
+                  {/* Nếu có text thì hiển thị text */}
+                  {m.text && (
+                    <div className="max-w-[75%] bg-[#3C9E8F] text-white px-4 py-2.5 rounded-2xl shadow">
+                      {m.text}
+                    </div>
+                  )}
                 </div>
               ) : (
+                // --- Bot Message ---
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#A8DCD2] flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-[#A8DCD2] flex items-center justify-center flex-shrink-0">
                     <span className="text-[#1c7c76] font-bold text-xs">AI</span>
                   </div>
-
-                  <div className="max-w-[75%] bg-gray-50 text-gray-900 px-4 py-3 rounded-2xl border shadow-sm">
+                  <div className="max-w-[85%] bg-gray-50 text-gray-900 px-4 py-3 rounded-2xl border shadow-sm overflow-hidden">
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
                       rehypePlugins={[rehypeRaw]}
@@ -176,59 +191,82 @@ export default function ChatToan() {
               </div>
             </div>
           )}
-
         </div>
       </motion.div>
 
-      {/* ===== INPUT ===== */}
       {/* ===== INPUT AREA ===== */}
       <div className="w-full max-w-4xl mt-4">
-
-        {/* Hiển thị ảnh Preview nhỏ bên trên ô nhập liệu */}
-        {previewUrl && (
-          <div className="relative inline-block mb-2 ml-2">
-            <img src={previewUrl} alt="Preview" className="h-16 rounded border border-gray-300" />
-            <button
-              onClick={clearImage}
-              className="absolute -top-2 -right-2 bg-gray-200 rounded-full p-1 hover:bg-red-200"
+        
+        {/* Preview ảnh nhỏ TRƯỚC khi gửi (để user biết mình đã chọn) */}
+        <AnimatePresence>
+          {previewUrl && (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className="mb-2 ml-2 relative inline-block"
             >
-              <PiX size={12} />
-            </button>
-          </div>
-        )}
+              <div className="relative group">
+                <img src={previewUrl} alt="Preview" className="h-16 rounded-lg border border-gray-300 shadow-sm" />
+                <button 
+                  onClick={clearImage}
+                  className="absolute -top-2 -right-2 bg-gray-200 text-gray-600 rounded-full p-1 hover:bg-red-500 hover:text-white transition-colors shadow-sm"
+                >
+                  <PiX size={12} />
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        <div className="bg-white border border-gray-300 rounded-2xl px-4 py-3 shadow-sm flex items-center gap-3">
-
-          {/* Nút chọn ảnh mới thêm vào */}
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            accept="image/*"
-            hidden
-          />
-          <button
-            onClick={() => fileInputRef.current.click()}
-            className="text-gray-400 hover:text-[#1c7c76] transition-colors"
-          >
-            <PiImage size={24} />
-          </button>
-
+        <div className="bg-white border border-gray-300 rounded-2xl px-4 py-3 shadow-sm flex items-center gap-2">
+          
+          {/* 1. Ô nhập liệu (Input) */}
           <input
             value={input}
-            placeholder="Nhập bài toán hoặc tải ảnh lên..."
+            placeholder="Nhập bài toán..."
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            className="flex-1 bg-transparent outline-none text-[15px] text-gray-800"
+            className="flex-1 bg-transparent outline-none text-[15px] text-gray-800 placeholder-gray-400"
           />
 
-          <motion.button
-            onClick={sendMessage}
-            whileTap={{ scale: 0.85 }}
-            className="bg-[#1c7c76] text-white px-5 py-2 rounded-lg hover:bg-[#166662]"
-          >
-            ➤
-          </motion.button>
+          <div className="flex items-center gap-1 border-l pl-2 border-gray-200">
+             {/* Input file ẩn */}
+             <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              accept="image/*"
+              hidden
+            />
+            
+            {/* 2. Nút Kẹp Giấy (Chọn ảnh) nằm cạnh nút gửi */}
+            <button
+              onClick={() => fileInputRef.current.click()}
+              className={`p-2 rounded-full transition-colors ${
+                selectedFile ? "text-[#1c7c76] bg-teal-50" : "text-gray-400 hover:text-[#1c7c76] hover:bg-gray-100"
+              }`}
+              title="Đính kèm hình ảnh"
+            >
+              <PiPaperclip size={22} />
+            </button>
+
+            {/* 3. Nút Gửi */}
+            <motion.button
+              onClick={sendMessage}
+              whileTap={{ scale: 0.9 }}
+              disabled={!input.trim() && !selectedFile}
+              className={`p-2 rounded-lg transition-colors flex items-center justify-center ${
+                (!input.trim() && !selectedFile) 
+                  ? "text-gray-300 cursor-not-allowed" 
+                  : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
+              }`}
+            >
+              {/* Icon mũi tên gửi hoặc chữ Gửi */}
+              <span className="px-2 font-bold text-sm">GỬI</span>
+            </motion.button>
+          </div>
+
         </div>
 
         <p className="mt-2 text-xs text-gray-400 text-center">
