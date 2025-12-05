@@ -17,6 +17,8 @@ export default function ChatToan() {
   // [MỚI 2] Ref để hủy request mạng khi bấm Dừng
   const abortControllerRef = useRef(null);
 
+  const scrollRef = useRef(null);
+
   // [MỚI 3] Load lịch sử chat từ LocalStorage khi mở web
   useEffect(() => {
     const saved = localStorage.getItem("chat_history");
