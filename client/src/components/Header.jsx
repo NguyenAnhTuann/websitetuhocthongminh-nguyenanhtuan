@@ -133,7 +133,7 @@ const Header = ({ language, setLanguage }) => {
             <Shield className="w-4 h-4" /> {t.menu.kynangmang}
           </Link>
 
-          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/chatbotupgrate">
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/chatbot">
             <Bot className="w-4 h-4" /> {t.menu.chatbot}
           </Link>
 
