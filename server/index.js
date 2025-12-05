@@ -152,44 +152,36 @@ app.get("/make-admin", async (req, res) => {
 });
 
 // ===============================
-// 4) API ChatGPT
+// ===============================
+// 4) API ChatGPT (ĐÃ SỬA: CHỈ NHẬN TEXT)
 // ===============================
 
 app.post("/api/chat", async (req, res) => {
-  // 1. Nhận thêm biến 'history'
-  const { message, subject, image, history } = req.body;
+  // 1. Bỏ nhận biến 'image' từ req.body
+  const { message, subject, history } = req.body;
 
   if (!subject || !SUBJECT_PROMPTS[subject]) {
     return res.json({ reply: "Lỗi: Môn học không hợp lệ." });
   }
 
   try {
-    let userContent;
+    // 2. SỬA ĐOẠN NÀY: Luôn gán nội dung là text
+    // (Đã xóa đoạn kiểm tra if (image) để tránh gửi ảnh lên OpenAI)
+    const userContent = message;
 
-    // Xử lý nội dung tin nhắn hiện tại (Text hoặc Text + Ảnh)
-    if (image) {
-      userContent = [
-        { type: "text", text: message || "Giải bài tập trong ảnh này giúp tôi." },
-        { type: "image_url", image_url: { url: image } }
-      ];
-    } else {
-      userContent = message;
-    }
-
-    // 2. Xử lý LỊCH SỬ chat
-    // Đảm bảo history là một mảng, nếu không thì là mảng rỗng
+    // 3. Xử lý LỊCH SỬ chat (Giữ nguyên)
     const previousMessages = Array.isArray(history) ? history : [];
 
-    // 3. Gộp: [System Prompt] + [Lịch sử cũ] + [Câu hỏi mới]
+    // 4. Gộp: [System Prompt] + [Lịch sử cũ] + [Câu hỏi mới]
     const fullConversation = [
       { role: "system", content: SUBJECT_PROMPTS[subject] },
-      ...previousMessages, // Chèn lịch sử vào giữa
-      { role: "user", content: userContent }
+      ...previousMessages, 
+      { role: "user", content: userContent } // Lúc này content là chuỗi text, rất nhẹ
     ];
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
-      messages: fullConversation, // Gửi toàn bộ hội thoại
+      messages: fullConversation,
       max_tokens: 1000,
     });
 
@@ -198,6 +190,10 @@ app.post("/api/chat", async (req, res) => {
 
   } catch (err) {
     console.error("❌ Error:", err);
+    // Log chi tiết lỗi để dễ kiểm tra nếu có vấn đề khác
+    if (err.response) {
+        console.error(err.response.status, err.response.data);
+    }
     res.status(500).json({ reply: "Lỗi server." });
   }
 });

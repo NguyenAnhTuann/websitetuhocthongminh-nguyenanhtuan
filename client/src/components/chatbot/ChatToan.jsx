@@ -1,74 +1,35 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { motion, AnimatePresence } from "framer-motion";
-// Thay PiImage bằng PiPaperclip
-import { PiMathOperationsFill, PiPaperclip, PiX } from "react-icons/pi";
+import { motion } from "framer-motion";
+import { PiMathOperationsFill } from "react-icons/pi";
 
 export default function ChatToan() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
 
-  // --- State quản lý ảnh ---
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState(null);
-  const fileInputRef = useRef(null);
-
-  // Hàm chuyển file sang Base64
-  const convertFileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setSelectedFile(file);
-      setPreviewUrl(URL.createObjectURL(file));
-    }
-  };
-
-  const clearImage = () => {
-    setSelectedFile(null);
-    setPreviewUrl(null);
-    if (fileInputRef.current) fileInputRef.current.value = "";
-  };
-
   const sendMessage = async () => {
-    if (!input.trim() && !selectedFile) return;
+    if (!input.trim()) return;
 
-    // 1. Cập nhật giao diện ngay lập tức
-    const userMsg = { sender: "user", text: input, image: previewUrl };
+    // 1. Cập nhật giao diện (Chỉ text)
+    const userMsg = { sender: "user", text: input };
     setMessages((prev) => [...prev, userMsg]);
 
     const currentInput = input;
-    const currentImage = selectedFile;
 
-    // 2. CHUẨN BỊ LỊCH SỬ (QUAN TRỌNG)
-    // Lấy 10 tin nhắn gần nhất để AI nhớ ngữ cảnh (tránh gửi quá nhiều tốn tiền/token)
-    // Map từ sender "user"/"bot" sang role "user"/"assistant"
+    // 2. CHUẨN BỊ LỊCH SỬ
     const historyToSend = messages.slice(-10).map((msg) => ({
       role: msg.sender === "user" ? "user" : "assistant",
-      content: msg.text || "" // Chỉ gửi text của lịch sử để tiết kiệm, bỏ qua ảnh cũ
+      content: msg.text || ""
     }));
 
     // Reset input
     setInput("");
-    clearImage(); 
     setIsTyping(true);
 
     try {
-      let base64Image = null;
-      if (currentImage) {
-        base64Image = await convertFileToBase64(currentImage);
-      }
-
       const res = await fetch(
         "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/chat",
         {
@@ -77,8 +38,8 @@ export default function ChatToan() {
           body: JSON.stringify({
             message: currentInput,
             subject: "toan",
-            image: base64Image,
-            history: historyToSend, // <--- Gửi kèm lịch sử tại đây
+            // image: null, // Đã bỏ gửi ảnh
+            history: historyToSend,
           }),
         }
       );
@@ -145,24 +106,11 @@ export default function ChatToan() {
           {messages.map((m, idx) => (
             <div key={idx}>
               {m.sender === "user" ? (
-                // --- CẬP NHẬT: Hiển thị User Message (Text + Ảnh) ---
+                // --- User Message (Chỉ Text) ---
                 <div className="flex flex-col items-end">
-                  {/* Nếu có ảnh thì hiển thị ảnh trước */}
-                  {m.image && (
-                    <div className="mb-2">
-                       <img 
-                         src={m.image} 
-                         alt="Uploaded content" 
-                         className="max-w-[200px] max-h-[200px] rounded-lg border border-gray-200 shadow-sm object-contain bg-gray-50"
-                       />
-                    </div>
-                  )}
-                  {/* Nếu có text thì hiển thị text */}
-                  {m.text && (
-                    <div className="max-w-[75%] bg-[#3C9E8F] text-white px-4 py-2.5 rounded-2xl shadow">
-                      {m.text}
-                    </div>
-                  )}
+                  <div className="max-w-[75%] bg-[#3C9E8F] text-white px-4 py-2.5 rounded-2xl shadow">
+                    {m.text}
+                  </div>
                 </div>
               ) : (
                 // --- Bot Message ---
@@ -198,34 +146,12 @@ export default function ChatToan() {
         </div>
       </motion.div>
 
-      {/* ===== INPUT AREA ===== */}
+      {/* ===== INPUT AREA (Đã đơn giản hóa) ===== */}
       <div className="w-full max-w-4xl mt-4">
         
-        {/* Preview ảnh nhỏ TRƯỚC khi gửi (để user biết mình đã chọn) */}
-        <AnimatePresence>
-          {previewUrl && (
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              className="mb-2 ml-2 relative inline-block"
-            >
-              <div className="relative group">
-                <img src={previewUrl} alt="Preview" className="h-16 rounded-lg border border-gray-300 shadow-sm" />
-                <button 
-                  onClick={clearImage}
-                  className="absolute -top-2 -right-2 bg-gray-200 text-gray-600 rounded-full p-1 hover:bg-red-500 hover:text-white transition-colors shadow-sm"
-                >
-                  <PiX size={12} />
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
         <div className="bg-white border border-gray-300 rounded-2xl px-4 py-3 shadow-sm flex items-center gap-2">
           
-          {/* 1. Ô nhập liệu (Input) */}
+          {/* Ô nhập liệu */}
           <input
             value={input}
             placeholder="Nhập bài toán..."
@@ -235,38 +161,17 @@ export default function ChatToan() {
           />
 
           <div className="flex items-center gap-1 border-l pl-2 border-gray-200">
-             {/* Input file ẩn */}
-             <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              accept="image/*"
-              hidden
-            />
-            
-            {/* 2. Nút Kẹp Giấy (Chọn ảnh) nằm cạnh nút gửi */}
-            <button
-              onClick={() => fileInputRef.current.click()}
-              className={`p-2 rounded-full transition-colors ${
-                selectedFile ? "text-[#1c7c76] bg-teal-50" : "text-gray-400 hover:text-[#1c7c76] hover:bg-gray-100"
-              }`}
-              title="Đính kèm hình ảnh"
-            >
-              <PiPaperclip size={22} />
-            </button>
-
-            {/* 3. Nút Gửi */}
+            {/* Nút Gửi */}
             <motion.button
               onClick={sendMessage}
               whileTap={{ scale: 0.9 }}
-              disabled={!input.trim() && !selectedFile}
+              disabled={!input.trim()}
               className={`p-2 rounded-lg transition-colors flex items-center justify-center ${
-                (!input.trim() && !selectedFile) 
+                !input.trim()
                   ? "text-gray-300 cursor-not-allowed" 
                   : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
               }`}
             >
-              {/* Icon mũi tên gửi hoặc chữ Gửi */}
               <span className="px-2 font-bold text-sm">GỬI</span>
             </motion.button>
           </div>
