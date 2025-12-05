@@ -1,31 +1,44 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react"; // Thêm useRef
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { motion } from "framer-motion";
-import { PiMathOperationsFill } from "react-icons/pi";
+// Thêm icon Stop (PiStopCircleBold)
+import { PiMathOperationsFill, PiStopCircleBold, PiPaperPlaneRightFill } from "react-icons/pi";
 
 export default function ChatToan() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  
+  // Dùng useRef để lưu ID của interval, giúp có thể clear nó ở bất cứ đâu
+  const intervalRef = useRef(null);
+
+  // Hàm dừng trả lời
+  const handleStop = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current); // Xóa bộ đếm thời gian
+      intervalRef.current = null;
+    }
+    setIsTyping(false); // Mở khóa giao diện
+  };
 
   const sendMessage = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || isTyping) return; // Chặn nếu đang gõ
 
-    // 1. Cập nhật giao diện (Chỉ text)
+    // 1. Cập nhật giao diện (User message)
     const userMsg = { sender: "user", text: input };
     setMessages((prev) => [...prev, userMsg]);
 
     const currentInput = input;
 
-    // 2. CHUẨN BỊ LỊCH SỬ
+    // 2. Chuẩn bị lịch sử
     const historyToSend = messages.slice(-10).map((msg) => ({
       role: msg.sender === "user" ? "user" : "assistant",
       content: msg.text || ""
     }));
 
-    // Reset input
+    // Reset input và KHÓA giao diện ngay lập tức
     setInput("");
     setIsTyping(true);
 
@@ -38,7 +51,6 @@ export default function ChatToan() {
           body: JSON.stringify({
             message: currentInput,
             subject: "toan",
-            // image: null, // Đã bỏ gửi ảnh
             history: historyToSend,
           }),
         }
@@ -49,7 +61,12 @@ export default function ChatToan() {
 
       let cur = "";
       let i = 0;
-      const interval = setInterval(() => {
+
+      // Xóa interval cũ nếu còn tồn tại (đề phòng)
+      if (intervalRef.current) clearInterval(intervalRef.current);
+
+      // Bắt đầu hiệu ứng gõ chữ
+      intervalRef.current = setInterval(() => {
         if (i < full.length) {
           cur += full[i];
           i++;
@@ -61,16 +78,23 @@ export default function ChatToan() {
             return [...prev, { sender: "bot", text: cur }];
           });
         } else {
-          clearInterval(interval);
-          setIsTyping(false);
+          // Khi chạy xong thì tự động dừng
+          handleStop();
         }
       }, 10);
 
     } catch (err) {
-      setIsTyping(false);
+      handleStop();
       setMessages((prev) => [...prev, { sender: "bot", text: "Lỗi hệ thống." }]);
     }
   };
+
+  // Cleanup khi component unmount
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
 
   return (
     <section className="min-h-screen w-full flex flex-col items-center px-4 py-16 bg-white">
@@ -106,7 +130,7 @@ export default function ChatToan() {
           {messages.map((m, idx) => (
             <div key={idx}>
               {m.sender === "user" ? (
-                // --- User Message (Chỉ Text) ---
+                // --- User Message ---
                 <div className="flex flex-col items-end">
                   <div className="max-w-[75%] bg-[#3C9E8F] text-white px-4 py-2.5 rounded-2xl shadow">
                     {m.text}
@@ -146,34 +170,50 @@ export default function ChatToan() {
         </div>
       </motion.div>
 
-      {/* ===== INPUT AREA (Đã đơn giản hóa) ===== */}
+      {/* ===== INPUT AREA ===== */}
       <div className="w-full max-w-4xl mt-4">
         
         <div className="bg-white border border-gray-300 rounded-2xl px-4 py-3 shadow-sm flex items-center gap-2">
           
-          {/* Ô nhập liệu */}
+          {/* Ô nhập liệu: Bị disable khi isTyping = true */}
           <input
             value={input}
-            placeholder="Nhập bài toán..."
+            placeholder={isTyping ? "AI đang trả lời..." : "Nhập bài toán..."}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            className="flex-1 bg-transparent outline-none text-[15px] text-gray-800 placeholder-gray-400"
+            onKeyDown={(e) => e.key === "Enter" && !isTyping && sendMessage()}
+            disabled={isTyping} // <--- KHÓA INPUT
+            className={`flex-1 bg-transparent outline-none text-[15px] ${
+              isTyping ? "text-gray-400 cursor-not-allowed" : "text-gray-800 placeholder-gray-400"
+            }`}
           />
 
           <div className="flex items-center gap-1 border-l pl-2 border-gray-200">
-            {/* Nút Gửi */}
-            <motion.button
-              onClick={sendMessage}
-              whileTap={{ scale: 0.9 }}
-              disabled={!input.trim()}
-              className={`p-2 rounded-lg transition-colors flex items-center justify-center ${
-                !input.trim()
-                  ? "text-gray-300 cursor-not-allowed" 
-                  : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
-              }`}
-            >
-              <span className="px-2 font-bold text-sm">GỬI</span>
-            </motion.button>
+            {/* Logic hiển thị Nút: Nếu đang typing thì hiện nút STOP, ngược lại hiện nút GỬI */}
+            {isTyping ? (
+              // --- NÚT DỪNG ---
+              <motion.button
+                onClick={handleStop}
+                whileTap={{ scale: 0.9 }}
+                className="p-2 rounded-lg bg-red-500 text-white hover:bg-red-600 shadow-sm flex items-center gap-1"
+              >
+                <PiStopCircleBold size={20} />
+                <span className="px-1 font-bold text-sm">DỪNG</span>
+              </motion.button>
+            ) : (
+              // --- NÚT GỬI ---
+              <motion.button
+                onClick={sendMessage}
+                whileTap={{ scale: 0.9 }}
+                disabled={!input.trim()}
+                className={`p-2 rounded-lg transition-colors flex items-center justify-center ${
+                  !input.trim()
+                    ? "text-gray-300 cursor-not-allowed" 
+                    : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
+                }`}
+              >
+                <span className="px-2 font-bold text-sm">GỬI</span>
+              </motion.button>
+            )}
           </div>
 
         </div>
