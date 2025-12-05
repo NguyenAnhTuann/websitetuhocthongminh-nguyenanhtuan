@@ -254,7 +254,7 @@ export default function ChatToan() {
 
       >
 
-        <div className="h-[700px] overflow-y-auto space-y-6 pr-2">
+        <div className="h-[550px] overflow-y-auto space-y-6 pr-2">
 
           {messages.map((m, idx) => (
 
