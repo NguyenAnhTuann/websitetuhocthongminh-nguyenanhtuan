@@ -39,14 +39,16 @@ export default function Footer() {
             <strong>Trường THPT Tô Văn Ơn</strong>
             <br />
             Giáo viên: <strong>Huỳnh Thị Thanh Ngân</strong>
-            <br />Email liên hệ:{" "}
+            <br />
+            Đội ngũ Admin: <strong>Nguyễn Thanh Đoan, Thái Chí Nhân</strong>
+            <br />
+            Email liên hệ:{" "}
             <a
               href="mailto:httngan.work1@gmail.com"
               className="underline hover:text-yellow-300"
             >
               httngan.work1@gmail.com
             </a>
-            
           </p>
         </div>
 
