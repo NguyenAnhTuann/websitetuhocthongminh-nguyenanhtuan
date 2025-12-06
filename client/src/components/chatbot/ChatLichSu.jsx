@@ -186,7 +186,6 @@ useEffect(() => {
               </div>
             </div>
           )}
-          <div ref={messagesEndRef} />
         </div>
       </motion.div>
 
