@@ -1,67 +1,30 @@
 import { useState, useRef, useEffect } from "react"; // Thêm useRef
-
 import ReactMarkdown from "react-markdown";
-
 import remarkGfm from "remark-gfm";
-
 import rehypeRaw from "rehype-raw";
-
 import { motion } from "framer-motion";
-
 // Thêm icon Stop (PiStopCircleBold)
-
 import { PiMathOperationsFill, PiStopCircleBold, PiPaperPlaneRightFill } from "react-icons/pi";
-
-
-
 export default function ChatToan() {
-
   const [input, setInput] = useState("");
-
   const [messages, setMessages] = useState([]);
-
   const [isTyping, setIsTyping] = useState(false);
-
-
-
-  // Dùng useRef để lưu ID của interval, giúp có thể clear nó ở bất cứ đâu
+  const chatContainerRef = useRef(null);
 
   const intervalRef = useRef(null);
 
-
-
-  // Hàm dừng trả lời
-
   const handleStop = () => {
-
     if (intervalRef.current) {
-
       clearInterval(intervalRef.current); // Xóa bộ đếm thời gian
-
       intervalRef.current = null;
-
     }
-
     setIsTyping(false); // Mở khóa giao diện
-
   };
-
-
-
   const sendMessage = async () => {
-
     if (!input.trim() || isTyping) return; // Chặn nếu đang gõ
-
-
-
     // 1. Cập nhật giao diện (User message)
-
     const userMsg = { sender: "user", text: input };
-
     setMessages((prev) => [...prev, userMsg]);
-
-
-
     const currentInput = input;
 
 
@@ -254,8 +217,9 @@ export default function ChatToan() {
 
       >
 
-        <div className="h-[550px] overflow-y-auto space-y-6 pr-2">
-
+        <div
+          ref={chatContainerRef}
+          className="h-[550px] overflow-y-auto space-y-6 pr-2">
           {messages.map((m, idx) => (
 
             <div key={idx}>
@@ -412,9 +376,9 @@ export default function ChatToan() {
 
                 className={`p-2 rounded-lg transition-colors flex items-center justify-center ${!input.trim()
 
-                    ? "text-gray-300 cursor-not-allowed"
+                  ? "text-gray-300 cursor-not-allowed"
 
-                    : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
+                  : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
 
                   }`}
 

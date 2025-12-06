@@ -12,7 +12,8 @@ import { LuCompass } from "react-icons/lu";
 export default function ChatHuongNghiep() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-  const [isTyping, setIsTyping] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
+  const chatContainerRef = useRef(null);
 
   // Dùng useRef để lưu ID của interval
   const intervalRef = useRef(null);
@@ -97,6 +98,20 @@ export default function ChatHuongNghiep() {
     };
   }, []);
 
+useEffect(() => {
+    if (chatContainerRef.current) {
+      // Cách 1: Cuộn mượt (smooth) - Dùng cái này nhìn đẹp hơn
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+
+      // Cách 2: Nếu thấy AI gõ nhanh mà bị giật màn hình, 
+      // hãy comment Cách 1 và dùng dòng dưới đây (cuộn tức thì):
+      // chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages, isTyping]);
+
   return (
     <section className="min-h-screen w-full flex flex-col items-center px-4 py-16 bg-white">
 
@@ -128,7 +143,9 @@ export default function ChatHuongNghiep() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl shadow-md p-6"
       >
-        <div className="h-[550px] overflow-y-auto space-y-6 pr-2">
+        <div
+          ref={chatContainerRef}
+          className="h-[550px] overflow-y-auto space-y-6 pr-2">
           {messages.map((m, idx) => (
             <div key={idx}>
               {m.sender === "user" ? (
