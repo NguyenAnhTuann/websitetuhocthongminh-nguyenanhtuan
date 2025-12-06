@@ -13,6 +13,7 @@ export default function ChatLichSu() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef(null);
 
   // Dùng useRef để lưu ID của interval
   const intervalRef = useRef(null);
@@ -97,6 +98,10 @@ export default function ChatLichSu() {
     };
   }, []);
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isTyping]);
+
   return (
     <section className="min-h-screen w-full flex flex-col items-center px-4 py-16 bg-white">
 
@@ -169,6 +174,7 @@ export default function ChatLichSu() {
               </div>
             </div>
           )}
+          <div ref={messagesEndRef} />
         </div>
       </motion.div>
 
@@ -203,8 +209,8 @@ export default function ChatLichSu() {
                 whileTap={{ scale: 0.9 }}
                 disabled={!input.trim()}
                 className={`p-2 rounded-lg transition-colors flex items-center justify-center ${!input.trim()
-                    ? "text-gray-300 cursor-not-allowed"
-                    : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
+                  ? "text-gray-300 cursor-not-allowed"
+                  : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
                   }`}
               >
                 <span className="px-2 font-bold text-sm">GỬI</span>
