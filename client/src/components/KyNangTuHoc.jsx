@@ -82,7 +82,7 @@ const KyNangTuHoc = ({ language }) => {
         className=" mt-6 md:mt-10 mx-auto text-center block
              text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
              bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
-      >
+             >
         {t[language].title}
       </motion.h1>
 

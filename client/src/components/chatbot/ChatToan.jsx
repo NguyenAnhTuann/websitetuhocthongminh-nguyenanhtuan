@@ -15,10 +15,10 @@ export default function ChatToan() {
 
   const handleStop = () => {
     if (intervalRef.current) {
-      clearInterval(intervalRef.current); // Xóa bộ đếm thời gian
+      clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
-    setIsTyping(false); // Mở khóa giao diện
+    setIsTyping(false);
   };
   const sendMessage = async () => {
     if (!input.trim() || isTyping) return; // Chặn nếu đang gõ
@@ -27,44 +27,22 @@ export default function ChatToan() {
     setMessages((prev) => [...prev, userMsg]);
     const currentInput = input;
 
-
-
     // 2. Chuẩn bị lịch sử
-
     const historyToSend = messages.slice(-10).map((msg) => ({
-
       role: msg.sender === "user" ? "user" : "assistant",
-
       content: msg.text || ""
-
     }));
 
-
-
-    // Reset input và KHÓA giao diện ngay lập tức
-
     setInput("");
-
     setIsTyping(true);
-
-
-
     try {
-
       const res = await fetch(
-
         "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/chat",
-
         {
-
           method: "POST",
-
           headers: { "Content-Type": "application/json" },
-
           body: JSON.stringify({
-
             message: currentInput,
-
             subject: "toan",
 
             history: historyToSend,
