@@ -37,20 +37,19 @@ export default function ThucHanh() {
       desc: "Mô hình trực quan, Đồ thị",
       highlight: true
     },
-
     // --- CÁC MÔN HỌC (Giữ nguyên) ---
-    { name: "Toán", link: "/chatbot/toan", icon: <LuCalculator />, desc: "Đại số, Hình học" },
-    { name: "Ngữ Văn", link: "/chatbot/nguvan", icon: <LuBookOpen />, desc: "Phân tích, Soạn bài" },
-    { name: "Tiếng Anh", link: "/chatbot/tienganh", icon: <LuLanguages />, desc: "Từ vựng, Ngữ pháp" },
-    { name: "Vật Lý", link: "/chatbot/vatly", icon: <LuAtom />, desc: "Cơ, Nhiệt, Điện" },
-    { name: "Hoá Học", link: "/chatbot/hoahoc", icon: <LuFlaskConical />, desc: "Hữu cơ, Vô cơ" },
-    { name: "Sinh Học", link: "/chatbot/sinhhoc", icon: <LuLeaf />, desc: "Di truyền, Sinh thái" },
-    { name: "Địa Lý", link: "/chatbot/dialy", icon: <LuGlobe />, desc: "Tự nhiên, Kinh tế" },
-    { name: "Lịch Sử", link: "/chatbot/lichsu", icon: <LuHourglass />, desc: "Việt Nam, Thế giới" },
-    { name: "Tin Học", link: "/chatbot/tinhoc", icon: <LuMonitor />, desc: "Lập trình, Office" },
-    { name: "Công Nghệ", link: "/chatbot/congnghe", icon: <LuCpu />, desc: "Kỹ thuật, Trồng trọt" },
-    { name: "Hướng Nghiệp", link: "/chatbot/huongnghiep", icon: <LuCompass />, desc: "Tư vấn chọn nghề" },
-    { name: "Kinh Tế – PL", link: "/chatbot/kinhtephapluat", icon: <LuScale />, desc: "Luật, Tài chính" },
+    { name: "Toán", link: "/thuchanh/toan", icon: <LuCalculator />, desc: "Đại số, Hình học" },
+    { name: "Ngữ Văn", link: "/thuchanh/nguvan", icon: <LuBookOpen />, desc: "Phân tích, Soạn bài" },
+    { name: "Tiếng Anh", link: "/thuchanh/tienganh", icon: <LuLanguages />, desc: "Từ vựng, Ngữ pháp" },
+    { name: "Vật Lý", link: "/thuchanh/vatly", icon: <LuAtom />, desc: "Cơ, Nhiệt, Điện" },
+    { name: "Hoá Học", link: "/thuchanh/hoahoc", icon: <LuFlaskConical />, desc: "Hữu cơ, Vô cơ" },
+    { name: "Sinh Học", link: "/thuchanh/sinhhoc", icon: <LuLeaf />, desc: "Di truyền, Sinh thái" },
+    { name: "Địa Lý", link: "/thuchanh/dialy", icon: <LuGlobe />, desc: "Tự nhiên, Kinh tế" },
+    { name: "Lịch Sử", link: "/thuchanh/lichsu", icon: <LuHourglass />, desc: "Việt Nam, Thế giới" },
+    { name: "Tin Học", link: "/thuchanh/tinhoc", icon: <LuMonitor />, desc: "Lập trình, Office" },
+    { name: "Công Nghệ", link: "/thuchanh/congnghe", icon: <LuCpu />, desc: "Kỹ thuật, Trồng trọt" },
+    { name: "Hướng Nghiệp", link: "/thuchanh/huongnghiep", icon: <LuCompass />, desc: "Tư vấn chọn nghề" },
+    { name: "Kinh Tế – PL", link: "/thuchanh/kinhtephapluat", icon: <LuScale />, desc: "Luật, Tài chính" },
   ];
 
   // Hiệu ứng xuất hiện
