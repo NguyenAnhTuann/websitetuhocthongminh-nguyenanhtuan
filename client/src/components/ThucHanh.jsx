@@ -5,9 +5,9 @@ import {
   LuCalculator, LuBookOpen, LuLanguages, LuAtom, LuFlaskConical, 
   LuLeaf, LuGlobe, LuHourglass, LuMonitor, LuCpu, 
   LuCompass, LuScale, 
-  LuBrainCircuit, // Icon cho Tương tác kỹ năng
-  LuFileEdit,     // Icon cho Tương tác bài tập
-  LuLayers        // Icon cho Mô phỏng
+  LuBrainCircuit,   // Icon cho Tương tác kỹ năng
+  LuFileSignature,  // ĐÃ SỬA: Thay LuFileEdit bằng LuFileSignature
+  LuLayers          // Icon cho Mô phỏng
 } from "react-icons/lu";
 
 export default function ThucHanh() {
@@ -20,12 +20,12 @@ export default function ThucHanh() {
       link: "/thuchanh/kynang", // Bạn sẽ điền link thật sau
       icon: <LuBrainCircuit />, 
       desc: "Xử lý tình huống, Kỹ năng mềm",
-      highlight: true // Đánh dấu để hiển thị màu khác biệt (nếu muốn)
+      highlight: true // Đánh dấu để hiển thị màu khác biệt
     },
     { 
       name: "Tương tác bài tập", 
       link: "/thuchanh/baitap", 
-      icon: <LuFileEdit />, 
+      icon: <LuFileSignature />, // ĐÃ SỬA: Dùng icon mới
       desc: "Luyện tập, Trắc nghiệm",
       highlight: true
     },
@@ -69,7 +69,7 @@ export default function ThucHanh() {
   return (
     <section className="min-h-screen w-full flex flex-col items-center px-4 py-16 bg-white from-slate-50 to-gray-100 relative overflow-hidden">
       
-      {/* Background Decor (Giống trang ChatBot) */}
+      {/* Background Decor */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute -top-[10%] -left-[10%] w-96 h-96 bg-[#1c7c76] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
         <div className="absolute top-[20%] -right-[10%] w-96 h-96 bg-teal-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
