@@ -85,7 +85,7 @@ export default function ThucHanh() {
         <h1 className="mt-6 md:mt-10 mx-auto text-center block
              text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
              bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm">
-          THỰC HÀNH & MÔ PHỎNG
+          BÀI TẬP TƯƠNG TÁC
         </h1>
         <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-lg bg-white/80 backdrop-blur-sm p-2 rounded-lg">
           Không gian rèn luyện kỹ năng, tương tác bài tập thực tế và trải nghiệm các mô hình mô phỏng trực quan.
