@@ -1,14 +1,13 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 // Import bộ icon từ thư viện react-icons/lu
-// CHÚ Ý: Sử dụng các icon cơ bản để tránh lỗi version
 import { 
   LuCalculator, LuBookOpen, LuLanguages, LuAtom, LuFlaskConical, 
   LuLeaf, LuGlobe, LuHourglass, LuMonitor, LuCpu, 
   LuCompass, LuScale, 
-  LuLightbulb,  // Thay cho LuBrainCircuit (An toàn hơn)
-  LuFileText,   // Thay cho LuFileSignature (An toàn hơn)
-  LuLayers      // Icon cho Mô phỏng
+  LuBrain,    // Icon Mới: Kỹ năng sống (Tư duy)
+  LuWifi,     // Icon Mới: Kỹ năng mạng (Kết nối/Internet)
+  LuCuboid    // Icon Mới: Mô phỏng (Mô hình 3D)
 } from "react-icons/lu";
 
 export default function ThucHanh() {
@@ -19,24 +18,25 @@ export default function ThucHanh() {
     { 
       name: "Kỹ năng sống", 
       link: "/thuchanh/kynangsong", 
-      icon: <LuLightbulb />, // Icon Bóng đèn (Tư duy/Kỹ năng)
-      desc: "Xử lý tình huống, Kỹ năng mềm",
+      icon: <LuBrain />, // Icon Bộ não: Rèn luyện tư duy & kỹ năng mềm
+      desc: "Xử lý tình huống, Tư duy",
       highlight: true 
     },
     { 
       name: "Kỹ năng mạng", 
       link: "/thuchanh/kynangmang", 
-      icon: <LuFileText />, // Icon Văn bản (Bài tập/Tài liệu)
-      desc: "Luyện tập, Trắc nghiệm",
+      icon: <LuWifi />, // Icon Wifi: Kỹ năng số & An toàn mạng
+      desc: "An toàn số, Công dân số",
       highlight: true
     },
     { 
       name: "Mô phỏng", 
       link: "/thuchanh/mophong", 
-      icon: <LuLayers />, // Icon Lớp (Mô hình/Cấu trúc)
+      icon: <LuCuboid />, // Icon Khối 3D: Mô hình trực quan
       desc: "Mô hình trực quan, Đồ thị",
       highlight: true
     },
+
     // --- CÁC MÔN HỌC (Giữ nguyên) ---
     { name: "Toán", link: "/thuchanh/toan", icon: <LuCalculator />, desc: "Đại số, Hình học" },
     { name: "Ngữ Văn", link: "/thuchanh/nguvan", icon: <LuBookOpen />, desc: "Phân tích, Soạn bài" },
