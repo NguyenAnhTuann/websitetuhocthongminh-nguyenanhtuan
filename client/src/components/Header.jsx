@@ -138,7 +138,7 @@ const Header = ({ language, setLanguage }) => {
           </Link>
 
           <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/thuchanh">
-            <CheckSquare className="w-4 h-4" /> {t.menu.thuchanhupgrade}
+            <CheckSquare className="w-4 h-4" /> {t.menu.thuchanh}
           </Link>
 
         </nav>
@@ -271,7 +271,7 @@ const Header = ({ language, setLanguage }) => {
 
           <Link
             className="block hover:text-yellow-300"
-            to="/thuchanh"
+            to="/thuchanhupgrade"
             onClick={() => setIsMobileMenuOpen(false)}
           >
 
