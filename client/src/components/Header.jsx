@@ -137,6 +137,9 @@ const Header = ({ language, setLanguage }) => {
             <Bot className="w-4 h-4" /> {t.menu.chatbot}
           </Link>
 
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/thuchanh">
+            <CheckSquare className="w-4 h-4" /> {t.menu.thuchanh}
+          </Link>
           <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/thuchanhupgrade">
             <CheckSquare className="w-4 h-4" /> {t.menu.thuchanh}
           </Link>
@@ -267,6 +270,16 @@ const Header = ({ language, setLanguage }) => {
 
             <Bot className="inline w-4 h-4 mr-2" />
             {t.menu.chatbot}
+          </Link>
+
+          <Link
+            className="block hover:text-yellow-300"
+            to="/thuchanh"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+
+            <CheckSquare className="inline w-4 h-4 mr-2" />
+            {t.menu.thuchanh}
           </Link>
 
           <Link
