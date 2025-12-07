@@ -177,6 +177,14 @@ const AppWrapper = () => {
               />
 
               <Route
+                path="/thuchanh"
+                element={
+                  <ProtectedRoute>
+                    <ThucHanhUpgrade language={language} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
                 path="/thuchanhupgrade"
                 element={
                   <ProtectedRoute>
