@@ -17,15 +17,15 @@ export default function ThucHanh() {
   const items = [
     // --- 3 MỤC MỚI (ƯU TIÊN HIỂN THỊ ĐẦU) ---
     { 
-      name: "Tương tác kỹ năng", 
-      link: "/thuchanh/kynang", 
+      name: "Kỹ năng sống", 
+      link: "/thuchanh/kynangsong", 
       icon: <LuLightbulb />, // Icon Bóng đèn (Tư duy/Kỹ năng)
       desc: "Xử lý tình huống, Kỹ năng mềm",
       highlight: true 
     },
     { 
-      name: "Tương tác bài tập", 
-      link: "/thuchanh/baitap", 
+      name: "Kỹ năng mạng", 
+      link: "/thuchanh/kynangmang", 
       icon: <LuFileText />, // Icon Văn bản (Bài tập/Tài liệu)
       desc: "Luyện tập, Trắc nghiệm",
       highlight: true

@@ -53,6 +53,10 @@ import ChatTheDuc from "./components/chatbot/ChatTheDuc";
 import ChatHuongngNghiep from "./components/chatbot/ChatHuongNghiep";
 import ChatKinhTePhapLuat from "./components/chatbot/ChatKinhTePhapLuat";
 import ChatBotUpgate from "./components/ChatBotUpgrate"
+import KyNang from "./components/thuchanh/KyNang";
+import KyNangMang from "./components/thuchanh/KyNangMang";
+import MoPhong from "./components/thuchanh/MoPhong";
+import BaiTapToan from "./components/thuchanh/BaiTapToan";
 
 
 
@@ -237,6 +241,11 @@ const AppWrapper = () => {
               <Route path="/chatbot/huongnghiep" element={<ChatHuongngNghiep />} />
               <Route path="/chatbot/kinhtephapluat" element={<ChatKinhTePhapLuat />} />
               <Route path="chatbotupgrate" element={<ChatBotUpgate />} />
+
+              <Route path="/thuchanh/kynangsong" element={<KyNang />} />
+              <Route path="/thuchanh/kynangmang" element={<KyNangMang />} />
+              <Route path="/thuchanh/mophong" element={<MoPhong />} />
+              <Route path="/thuchanh/toan" element={<BaiTapToan />} />
 
             </Routes>
 
