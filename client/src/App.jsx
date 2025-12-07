@@ -53,7 +53,7 @@ import ChatTheDuc from "./components/chatbot/ChatTheDuc";
 import ChatHuongngNghiep from "./components/chatbot/ChatHuongNghiep";
 import ChatKinhTePhapLuat from "./components/chatbot/ChatKinhTePhapLuat";
 import ChatBotUpgate from "./components/ChatBotUpgrate"
-
+import ThucHanhUpgrade from "./components/ThucHanhUpgrade"
 
 
 
@@ -177,10 +177,10 @@ const AppWrapper = () => {
               />
 
               <Route
-                path="/thuchanh"
+                path="/thuchanhupgrade"
                 element={
                   <ProtectedRoute>
-                    <ThucHanh language={language} />
+                    <ThucHanhUpgrade language={language} />
                   </ProtectedRoute>
                 }
               />
