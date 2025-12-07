@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 // Import bộ icon từ thư viện react-icons/lu
+// CHÚ Ý: Sử dụng các icon cơ bản để tránh lỗi version
 import { 
   LuCalculator, LuBookOpen, LuLanguages, LuAtom, LuFlaskConical, 
   LuLeaf, LuGlobe, LuHourglass, LuMonitor, LuCpu, 
   LuCompass, LuScale, 
-  LuBrainCircuit,   // Icon cho Tương tác kỹ năng
-  LuFileSignature,  // ĐÃ SỬA: Thay LuFileEdit bằng LuFileSignature
-  LuLayers          // Icon cho Mô phỏng
+  LuLightbulb,  // Thay cho LuBrainCircuit (An toàn hơn)
+  LuFileText,   // Thay cho LuFileSignature (An toàn hơn)
+  LuLayers      // Icon cho Mô phỏng
 } from "react-icons/lu";
 
 export default function ThucHanh() {
@@ -17,27 +18,27 @@ export default function ThucHanh() {
     // --- 3 MỤC MỚI (ƯU TIÊN HIỂN THỊ ĐẦU) ---
     { 
       name: "Tương tác kỹ năng", 
-      link: "/thuchanh/kynang", // Bạn sẽ điền link thật sau
-      icon: <LuBrainCircuit />, 
+      link: "/thuchanh/kynang", 
+      icon: <LuLightbulb />, // Icon Bóng đèn (Tư duy/Kỹ năng)
       desc: "Xử lý tình huống, Kỹ năng mềm",
-      highlight: true // Đánh dấu để hiển thị màu khác biệt
+      highlight: true 
     },
     { 
       name: "Tương tác bài tập", 
       link: "/thuchanh/baitap", 
-      icon: <LuFileSignature />, // ĐÃ SỬA: Dùng icon mới
+      icon: <LuFileText />, // Icon Văn bản (Bài tập/Tài liệu)
       desc: "Luyện tập, Trắc nghiệm",
       highlight: true
     },
     { 
       name: "Mô phỏng", 
       link: "/thuchanh/mophong", 
-      icon: <LuLayers />, 
+      icon: <LuLayers />, // Icon Lớp (Mô hình/Cấu trúc)
       desc: "Mô hình trực quan, Đồ thị",
       highlight: true
     },
 
-    // --- CÁC MÔN HỌC (Đã bỏ Thể Dục & Quốc Phòng) ---
+    // --- CÁC MÔN HỌC (Giữ nguyên) ---
     { name: "Toán", link: "/chatbot/toan", icon: <LuCalculator />, desc: "Đại số, Hình học" },
     { name: "Ngữ Văn", link: "/chatbot/nguvan", icon: <LuBookOpen />, desc: "Phân tích, Soạn bài" },
     { name: "Tiếng Anh", link: "/chatbot/tienganh", icon: <LuLanguages />, desc: "Từ vựng, Ngữ pháp" },
