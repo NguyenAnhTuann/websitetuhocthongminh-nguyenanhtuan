@@ -137,7 +137,7 @@ const Header = ({ language, setLanguage }) => {
             <Bot className="w-4 h-4" /> {t.menu.chatbot}
           </Link>
 
-          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/thuchanh">
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/thuchanhupgrade">
             <CheckSquare className="w-4 h-4" /> {t.menu.thuchanh}
           </Link>
 
