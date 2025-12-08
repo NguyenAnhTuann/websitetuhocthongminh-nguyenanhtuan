@@ -203,7 +203,7 @@ export default function ChatTest() {
 
           {isTyping && (
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-yellow-400 to-orange-500 flex items-center justify-center text-white shadow-sm">
+              <div className="w-9 h-9 rounded-full bg-[#1c7c76] flex items-center justify-center text-white shadow-sm">
                  <LuSparkles size={16} />
               </div>
               <div className="bg-gray-100 border border-gray-200 rounded-xl py-2 px-3">
