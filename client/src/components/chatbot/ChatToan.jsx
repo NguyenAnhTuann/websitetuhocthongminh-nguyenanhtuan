@@ -5,6 +5,12 @@ import rehypeRaw from "rehype-raw";
 import { motion } from "framer-motion";
 // Thêm icon Stop (PiStopCircleBold)
 import { PiMathOperationsFill, PiStopCircleBold, PiPaperPlaneRightFill } from "react-icons/pi";
+
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
+
+
 export default function ChatToan() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
@@ -231,15 +237,10 @@ export default function ChatToan() {
                   <div className="max-w-[85%] bg-gray-50 text-gray-900 px-4 py-3 rounded-2xl border shadow-sm overflow-hidden">
 
                     <ReactMarkdown
-
-                      remarkPlugins={[remarkGfm]}
-
-                      rehypePlugins={[rehypeRaw]}
-
+                      remarkPlugins={[remarkGfm, remarkMath]}
+                      rehypePlugins={[rehypeRaw, rehypeKatex]}
                     >
-
                       {m.text}
-
                     </ReactMarkdown>
 
                   </div>
