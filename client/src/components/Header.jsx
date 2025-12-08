@@ -121,23 +121,23 @@ const Header = ({ language, setLanguage }) => {
 
         {/* 🔥 MENU DESKTOP */}
         <nav className="hidden md:flex items-center gap-8 text-[15px] text-white/90 font-medium">
-          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/kynangtuhoc">
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center hover:-translate-y-1" to="/kynangtuhoc">
             <GraduationCap className="w-4 h-4" /> {t.menu.kynangtuhoc}
           </Link>
 
-          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/kynangsong">
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center hover:-translate-y-1" to="/kynangsong">
             <HeartHandshake className="w-4 h-4" /> {t.menu.kynangsong}
           </Link>
 
-          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/kynangmang">
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center hover:-translate-y-1" to="/kynangmang">
             <Shield className="w-4 h-4" /> {t.menu.kynangmang}
           </Link>
 
-          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/chatbot">
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center hover:-translate-y-1" to="/chatbot">
             <Bot className="w-4 h-4" /> {t.menu.chatbot}
           </Link>
 
-          <Link className="hover:text-yellow-400 transition flex gap-1 items-center" to="/thuchanh">
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center hover:-translate-y-1" to="/thuchanh">
             <CheckSquare className="w-4 h-4" /> {t.menu.thuchanh}
           </Link>
 
