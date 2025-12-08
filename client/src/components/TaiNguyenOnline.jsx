@@ -83,21 +83,19 @@ const TaiNguyenOnline = ({ language }) => {
     <section className="min-h-screen w-full px-4 py-20 bg-white max-w-7xl mx-auto">
 
       {/* ======= TIÊU ĐỀ ======= */}
-      <motion.h1
-        initial={{ opacity: 0, y: -40 }}
+    <motion.h1
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="w-fit mt-6 md:mt-10 mx-auto text-center
-             text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
-             bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
+        transition={{ duration: 0.6 }}
+        className="text-center mb-10 z-10 relative"
       >
-        {t[language].title}
+        <h1 className="mt-6 md:mt-10 mx-auto text-center block text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm">
+          KỸ NĂNG MẠNG
+        </h1>
+        <p className="text-gray-500 mt-2 max-w-2xl mx-auto text-lg">
+          Trang bị kiến thức – kỹ năng để sử dụng Internet an toàn, nhận diện rủi ro và bảo vệ bản thân trên không gian mạng.
+        </p>
       </motion.h1>
-
-
-<div className="text-center mt-4">
-  <Typewriter text={t[language].subtitle} />
-</div>
 
 
       <div className="mt-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-6 md:items-start">

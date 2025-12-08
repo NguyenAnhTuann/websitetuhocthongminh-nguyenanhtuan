@@ -78,20 +78,19 @@ const KyNangSong = ({ language }) => {
 
       {/* ======= TIÊU ĐỀ ======= */}
       <motion.h1
-        initial={{ opacity: 0, y: -40 }}
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className=" w-fit mt-6 md:mt-10 mx-auto text-center
-             text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
-             bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
+        transition={{ duration: 0.6 }}
+        className="text-center mb-10 z-10 relative"
       >
-        {t[language].title}
+        <h1 className="mt-6 md:mt-10 mx-auto text-center block text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm">
+          KỸ NĂNG SỐNG
+        </h1>
+        <p className="text-gray-500 mt-2 max-w-2xl mx-auto text-lg">
+          Rèn luyện ứng xử – Ứng phó an toàn – Xây dựng nhân cách văn minh.
+        </p>
       </motion.h1>
 
-
-<div className="text-center mt-4">
-  <Typewriter text={t[language].subtitle} />
-</div>
 
 
       <div className=" mt-6 md:mt-10 mt-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-6 md:items-start">
@@ -150,7 +149,8 @@ ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               <ul className="pl-5 space-y-2 text-sm">
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => { setSelectedFolder("baoluc")
+                  onClick={() => {
+                    setSelectedFolder("baoluc")
                     setMobileSidebarOpen(false);
                   }}
                 >
@@ -158,7 +158,8 @@ ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                 </li>
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => {setSelectedFolder("video_violence")
+                  onClick={() => {
+                    setSelectedFolder("video_violence")
                     setMobileSidebarOpen(false);
                   }}
                 >
@@ -166,7 +167,8 @@ ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                 </li>
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => {setSelectedFolder("video_main")
+                  onClick={() => {
+                    setSelectedFolder("video_main")
                     setMobileSidebarOpen(false);
                   }}
                 >
@@ -205,7 +207,8 @@ ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
               <ul className="pl-5 space-y-2 text-sm">
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => {setSelectedFolder("pdf_math")
+                  onClick={() => {
+                    setSelectedFolder("pdf_math")
                     setMobileSidebarOpen(false);
                   }}
                 >
@@ -214,7 +217,8 @@ ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => {setSelectedFolder("pdf_real")
+                  onClick={() => {
+                    setSelectedFolder("pdf_real")
                     setMobileSidebarOpen(false);
                   }}
                 >
@@ -223,7 +227,8 @@ ${activeTab === "video" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
 
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
-                  onClick={() => {setSelectedFolder("pdf_ai")
+                  onClick={() => {
+                    setSelectedFolder("pdf_ai")
                     setMobileSidebarOpen(false);
                   }}
                 >

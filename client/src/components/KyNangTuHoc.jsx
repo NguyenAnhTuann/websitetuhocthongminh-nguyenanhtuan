@@ -74,21 +74,40 @@ const KyNangTuHoc = ({ language }) => {
   return (
     <section className="min-h-screen w-full px-4 py-20 bg-white max-w-7xl mx-auto">
 
-      {/* ======= TIÊU ĐỀ ======= */}
-{/* --- TIÊU ĐỀ CHÍNH --- */}
-      <motion.h1
-        initial={{ opacity: 0, y: -40 }}
+      {/* --- TIÊU ĐỀ CHÍNH --- */}
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="w-fit mt-6 md:mt-10 mx-auto text-center
-             text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
-             bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
+        transition={{ duration: 0.6 }}
+        className="text-center mb-10 z-10 relative"
       >
-        {t[language].title}
-      </motion.h1>
+        <h1 className="mt-6 md:mt-10 mx-auto text-center block text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm">
+          KỸ NĂNG TỰ HỌC
+        </h1>
+        <p className="text-gray-500 mt-2 max-w-2xl mx-auto text-lg">
+          Nâng cao tư duy – Rèn luyện tinh thần tự chủ – Phát triển bản thân trong Kỷ nguyên số.
+        </p>
+      </motion.div>
+
+
+      {/* <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-10 z-10 relative"
+            >
+              <h1 className="mt-6 md:mt-10 mx-auto text-center block text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm">
+                TRỢ LÍ HỌC TẬP AI CHATBOT
+              </h1>
+              <p className="text-gray-500 mt-2 max-w-2xl mx-auto text-lg">
+                Chọn môn học bạn cần hỗ trợ. Hệ thống AI sẽ giải đáp thắc mắc,
+                hướng dẫn giải bài tập và ôn thi 24/7.
+              </p>
+            </motion.div>
+             */}
 
       {/* --- PHỤ ĐỀ (SUBTITLE) --- */}
-          <Typewriter text={t[language].subtitle} />
+      {/* <Typewriter text={t[language].subtitle} /> */}
 
 
       <div className="mt-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-6 md:items-start">
@@ -349,7 +368,7 @@ ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                   Ielts-fighter
                 </li>
 
-                                <li
+                <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
                   onClick={() => {
                     setSelectedFolder("khampha2")
@@ -359,7 +378,7 @@ ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                   Geogebra
                 </li>
 
-                                <li
+                <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
                   onClick={() => {
                     setSelectedFolder("khampha4")
