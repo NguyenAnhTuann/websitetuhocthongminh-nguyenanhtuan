@@ -12,8 +12,17 @@ import { LuCpu } from "react-icons/lu";
 export default function ChatCongNghe() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-    const [isTyping, setIsTyping] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const chatContainerRef = useRef(null);
+
+  useEffect(() => {
+    setMessages([
+      {
+        sender: "bot",
+        text: "Xin chào! 👋 Tôi là trợ lý AI chuyên về Công Nghệ. \n\nBạn cần tìm hiểu về kỹ thuật điện, điện tử, cơ khí hay các quy trình nông nghiệp công nghệ cao không?",
+      },
+    ]);
+  }, []);
 
   // Dùng useRef để lưu ID của interval
   const intervalRef = useRef(null);
@@ -98,7 +107,7 @@ export default function ChatCongNghe() {
     };
   }, []);
 
-useEffect(() => {
+  useEffect(() => {
     if (chatContainerRef.current) {
       // Cách 1: Cuộn mượt (smooth) - Dùng cái này nhìn đẹp hơn
       chatContainerRef.current.scrollTo({
@@ -220,8 +229,8 @@ useEffect(() => {
                 whileTap={{ scale: 0.9 }}
                 disabled={!input.trim()}
                 className={`p-2 rounded-lg transition-colors flex items-center justify-center ${!input.trim()
-                    ? "text-gray-300 cursor-not-allowed"
-                    : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
+                  ? "text-gray-300 cursor-not-allowed"
+                  : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
                   }`}
               >
                 <span className="px-2 font-bold text-sm">GỬI</span>

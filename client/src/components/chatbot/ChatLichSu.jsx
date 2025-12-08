@@ -12,8 +12,17 @@ import { LuHourglass } from "react-icons/lu";
 export default function ChatLichSu() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-    const [isTyping, setIsTyping] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const chatContainerRef = useRef(null);
+
+  useEffect(() => {
+    setMessages([
+      {
+        sender: "bot",
+        text: "Xin chào! 👋 Tôi là trợ lý AI chuyên về Lịch Sử. \n\nBạn muốn tìm hiểu về các triều đại phong kiến, các cuộc kháng chiến hay sự kiện lịch sử thế giới nào không?",
+      },
+    ]);
+  }, []);
 
   // Dùng useRef để lưu ID của interval
   const intervalRef = useRef(null);
@@ -98,7 +107,7 @@ export default function ChatLichSu() {
     };
   }, []);
 
-useEffect(() => {
+  useEffect(() => {
     if (chatContainerRef.current) {
       // Cách 1: Cuộn mượt (smooth) - Dùng cái này nhìn đẹp hơn
       chatContainerRef.current.scrollTo({
@@ -112,7 +121,7 @@ useEffect(() => {
     }
   }, [messages, isTyping]);
 
-useEffect(() => {
+  useEffect(() => {
     if (chatContainerRef.current) {
       // Cách 1: Cuộn mượt (smooth) - Dùng cái này nhìn đẹp hơn
       chatContainerRef.current.scrollTo({

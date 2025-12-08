@@ -19,6 +19,15 @@ export default function ChatVatLy() {
   const [isTyping, setIsTyping] = useState(false);
   const chatContainerRef = useRef(null);
 
+  useEffect(() => {
+  setMessages([
+    {
+      sender: "bot",
+      text: "Xin chào! 👋 Tôi là trợ lý AI chuyên về Vật Lý. \n\nBạn cần giải bài tập về Cơ học, Điện học, Quang học hay thắc mắc hiện tượng vật lý nào không?",
+    },
+  ]);
+}, []);
+
   // Dùng useRef để lưu ID của interval
   const intervalRef = useRef(null);
 
