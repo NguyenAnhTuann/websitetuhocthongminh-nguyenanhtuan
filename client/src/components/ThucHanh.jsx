@@ -12,32 +12,35 @@ import {
 
 export default function ThucHanh() {
   
-  // Cấu hình danh sách các mục hiển thị
-  const items = [
-    // --- 3 MỤC MỚI (ƯU TIÊN HIỂN THỊ ĐẦU) ---
+  // --- TÁCH THÀNH 2 DANH SÁCH RIÊNG BIỆT ---
+
+  // 1. Danh sách 3 mục nổi bật (Sẽ căn giữa, 1 hàng)
+  const highlightItems = [
     { 
       name: "Kỹ năng sống", 
       link: "/thuchanh/kynangsong", 
-      icon: <LuBrain />, // Icon Bộ não: Rèn luyện tư duy & kỹ năng mềm
+      icon: <LuBrain />, 
       desc: "Xử lý tình huống, Tư duy",
       highlight: true 
     },
     { 
       name: "Kỹ năng mạng", 
       link: "/thuchanh/kynangmang", 
-      icon: <LuWifi />, // Icon Wifi: Kỹ năng số & An toàn mạng
+      icon: <LuWifi />, 
       desc: "An toàn số, Công dân số",
       highlight: true
     },
     { 
       name: "Mô phỏng", 
       link: "/thuchanh/mophong", 
-      icon: <LuCuboid />, // Icon Khối 3D: Mô hình trực quan
+      icon: <LuCuboid />, 
       desc: "Mô hình trực quan, Đồ thị",
       highlight: true
     },
+  ];
 
-    // --- CÁC MÔN HỌC (Giữ nguyên) ---
+  // 2. Danh sách các môn học (Sẽ nằm dưới, dàn trải)
+  const subjectItems = [
     { name: "Toán", link: "/thuchanh/toan", icon: <LuCalculator />, desc: "Đại số, Hình học" },
     { name: "Ngữ Văn", link: "/thuchanh/nguvan", icon: <LuBookOpen />, desc: "Phân tích, Soạn bài" },
     { name: "Tiếng Anh", link: "/thuchanh/tienganh", icon: <LuLanguages />, desc: "Từ vựng, Ngữ pháp" },
@@ -66,6 +69,51 @@ export default function ThucHanh() {
     show: { opacity: 1, y: 0 }
   };
 
+  // Component Card để tái sử dụng cho gọn code
+  const CardItem = ({ item }) => (
+    <motion.div variants={itemVariants} className="h-full">
+      <Link
+        to={item.link}
+        className={`group relative flex flex-col items-center p-6 bg-white rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 h-full overflow-hidden
+          ${item.highlight 
+            ? "border-[#1c7c76] shadow-md ring-1 ring-[#1c7c76]/20" 
+            : "border-gray-200 hover:border-[#1c7c76]/30"
+          }
+        `}
+      >
+        {/* Hiệu ứng hover nền */}
+        <div className="absolute inset-0 bg-[#1c7c76] opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+
+        {/* Icon Container */}
+        <div className={`w-14 h-14 mb-4 rounded-xl flex items-center justify-center text-3xl transition-all duration-300 shadow-inner
+          ${item.highlight
+            ? "bg-[#1c7c76] text-white group-hover:scale-110"
+            : "bg-teal-50 text-[#1c7c76] group-hover:bg-[#1c7c76] group-hover:text-white group-hover:scale-110"
+          }
+        `}>
+          {item.icon}
+        </div>
+
+        {/* Tên mục */}
+        <h3 className={`text-lg font-bold transition-colors text-center
+          ${item.highlight ? "text-[#1c7c76]" : "text-gray-800 group-hover:text-[#1c7c76]"}
+        `}>
+          {item.name}
+        </h3>
+
+        {/* Mô tả ngắn */}
+        <p className="text-xs text-gray-400 mt-1 text-center font-medium">
+          {item.desc}
+        </p>
+
+        {/* Mũi tên chỉ hiện khi hover */}
+        <div className="mt-4 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 text-[#1c7c76] text-sm font-semibold flex items-center gap-1">
+          Truy cập <span>→</span>
+        </div>
+      </Link>
+    </motion.div>
+  );
+
   return (
     <section className="min-h-screen w-full flex flex-col items-center px-4 py-16 bg-white from-slate-50 to-gray-100 relative overflow-hidden">
       
@@ -92,55 +140,32 @@ export default function ThucHanh() {
         </p>
       </motion.div>
 
-      {/* ===== GRID DANH SÁCH ===== */}
+      {/* ===== PHẦN 1: 3 MỤC NỔI BẬT (CĂN GIỮA, 1 HÀNG) ===== */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="show"
+        // Grid 3 cột trên tablet/desktop, max-w-5xl và mx-auto để căn giữa nguyên khối
+        className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 z-10 relative"
+      >
+        {highlightItems.map((item, index) => (
+          <CardItem key={`hl-${index}`} item={item} />
+        ))}
+      </motion.div>
+
+      {/* ===== ĐƯỜNG PHÂN CÁCH NHẸ (Tùy chọn) ===== */}
+      <div className="w-24 h-1 bg-gray-200 rounded-full mb-10 z-10"></div>
+
+      {/* ===== PHẦN 2: CÁC MÔN HỌC (GRID BÌNH THƯỜNG) ===== */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        // Grid 2-4 cột tùy màn hình, full width theo max-w-6xl
         className="w-full max-w-6xl grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 z-10 relative"
       >
-        {items.map((item, index) => (
-          <motion.div key={index} variants={itemVariants}>
-            <Link
-              to={item.link}
-              className={`group relative flex flex-col items-center p-6 bg-white rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 h-full overflow-hidden
-                ${item.highlight 
-                  ? "border-[#1c7c76] shadow-md ring-1 ring-[#1c7c76]/20" 
-                  : "border-gray-200 hover:border-[#1c7c76]/30"
-                }
-              `}
-            >
-              {/* Hiệu ứng hover nền */}
-              <div className="absolute inset-0 bg-[#1c7c76] opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
-
-              {/* Icon Container */}
-              <div className={`w-14 h-14 mb-4 rounded-xl flex items-center justify-center text-3xl transition-all duration-300 shadow-inner
-                ${item.highlight
-                  ? "bg-[#1c7c76] text-white group-hover:scale-110"
-                  : "bg-teal-50 text-[#1c7c76] group-hover:bg-[#1c7c76] group-hover:text-white group-hover:scale-110"
-                }
-              `}>
-                {item.icon}
-              </div>
-
-              {/* Tên mục */}
-              <h3 className={`text-lg font-bold transition-colors text-center
-                ${item.highlight ? "text-[#1c7c76]" : "text-gray-800 group-hover:text-[#1c7c76]"}
-              `}>
-                {item.name}
-              </h3>
-
-              {/* Mô tả ngắn */}
-              <p className="text-xs text-gray-400 mt-1 text-center font-medium">
-                {item.desc}
-              </p>
-
-              {/* Mũi tên chỉ hiện khi hover */}
-              <div className="mt-4 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 text-[#1c7c76] text-sm font-semibold flex items-center gap-1">
-                Truy cập <span>→</span>
-              </div>
-            </Link>
-          </motion.div>
+        {subjectItems.map((item, index) => (
+           <CardItem key={`sub-${index}`} item={item} />
         ))}
       </motion.div>
 
