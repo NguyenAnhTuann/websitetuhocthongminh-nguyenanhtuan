@@ -16,8 +16,16 @@ export default function ChatToan() {
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const chatContainerRef = useRef(null);
-
   const intervalRef = useRef(null);
+
+  useEffect(() => {
+    setMessages([
+      {
+        sender: "bot",
+        text: "Xin chào! 👋 Tôi là trợ lý AI chuyên về Toán học. \n\nBạn cần giải bài tập Đại số, Hình học hay thắc mắc công thức nào không?",
+      },
+    ]);
+  }, []);
 
 
   const preprocessMath = (content) => {
