@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
 import { motion } from "framer-motion";
 
 import remarkMath from "remark-math";
@@ -177,10 +176,10 @@ export default function ChatVatLy() {
                   </div>
                   <div className="max-w-[85%] bg-gray-50 text-gray-900 px-4 py-3 rounded-2xl border shadow-sm overflow-hidden">
                     <ReactMarkdown
-                      remarkPlugins={[remarkGfm, remarkMath]}     // Thêm remarkMath
-                      rehypePlugins={[rehypeRaw, rehypeKatex]}     // Thêm rehypeKatex
+                      remarkPlugins={[remarkGfm, remarkMath]}
+                      rehypePlugins={[rehypeKatex]}
                     >
-                      {preprocessMath(m.text)}                     {/* Dùng hàm xử lý text */}
+                      {preprocessMath(m.text)}
                     </ReactMarkdown>
                   </div>
                 </div>
