@@ -19,6 +19,16 @@ export default function ChatToan() {
 
   const intervalRef = useRef(null);
 
+
+  const preprocessMath = (content) => {
+    if (!content) return "";
+    return content
+      .replace(/\\\[/g, "$$")  // Đổi \[ thành $$
+      .replace(/\\\]/g, "$$")  // Đổi \] thành $$
+      .replace(/\\\(/g, "$$")  // Đổi \( thành $
+      .replace(/\\\)/g, "$$"); // Đổi \) thành $
+  };
+
   const handleStop = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -113,42 +123,22 @@ export default function ChatToan() {
 
       }, 10);
 
-
-
     } catch (err) {
-
       handleStop();
-
       setMessages((prev) => [...prev, { sender: "bot", text: "Lỗi hệ thống." }]);
-
     }
-
   };
 
-
-
-  // Cleanup khi component unmount
-
   useEffect(() => {
-
     return () => {
-
       if (intervalRef.current) clearInterval(intervalRef.current);
-
     };
-
   }, []);
 
 
-
   return (
-
     <section className="min-h-screen w-full flex flex-col items-center px-4 py-16 bg-white">
-
-
-
       {/* ===== TIÊU ĐỀ ===== */}
-
       <motion.div
 
         initial={{ opacity: 0, y: -30 }}
@@ -240,7 +230,8 @@ export default function ChatToan() {
                       remarkPlugins={[remarkGfm, remarkMath]}
                       rehypePlugins={[rehypeRaw, rehypeKatex]}
                     >
-                      {m.text}
+                      {/* Gọi hàm preprocessMath để xử lý trước khi hiển thị */}
+                      {preprocessMath(m.text)}
                     </ReactMarkdown>
 
                   </div>
