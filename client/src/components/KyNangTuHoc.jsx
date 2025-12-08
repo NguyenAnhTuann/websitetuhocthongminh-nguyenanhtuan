@@ -75,19 +75,20 @@ const KyNangTuHoc = ({ language }) => {
     <section className="min-h-screen w-full px-4 py-20 bg-white max-w-7xl mx-auto">
 
       {/* ======= TIÊU ĐỀ ======= */}
+{/* --- TIÊU ĐỀ CHÍNH --- */}
       <motion.h1
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className=" mt-6 md:mt-10 mx-auto text-center block
+        className="w-fit mt-6 md:mt-10 mx-auto text-center
              text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit
              bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm"
-             >
+      >
         {t[language].title}
       </motion.h1>
 
-
-      <Typewriter text={t[language].subtitle} />
+      {/* --- PHỤ ĐỀ (SUBTITLE) --- */}
+          <Typewriter text={t[language].subtitle} />
 
 
       <div className="mt-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-6 md:items-start">
@@ -341,11 +342,31 @@ ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                 <li
                   className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
                   onClick={() => {
+                    setSelectedFolder("khampha3")
+                    setMobileSidebarOpen(false);
+                  }}
+                >
+                  Ielts-fighter
+                </li>
+
+                                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => {
                     setSelectedFolder("khampha2")
                     setMobileSidebarOpen(false);
                   }}
                 >
                   Geogebra
+                </li>
+
+                                <li
+                  className="cursor-pointer p-2 hover:bg-gray-100 rounded-xl"
+                  onClick={() => {
+                    setSelectedFolder("khampha4")
+                    setMobileSidebarOpen(false);
+                  }}
+                >
+                  Moon VN
                 </li>
               </ul>
             )}
@@ -1254,6 +1275,98 @@ ${activeTab === "hinhanh" ? "bg-[#1c7c76] text-white" : "hover:bg-gray-100"}`}
                       name: "GEOGABRA",
                       link: "https://geogebra.be/",
                       thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764476697/Gemini_Generated_Image_eniexgeniexgenie_q0fhnt.png"
+                    }
+                  ].map((pdf, i) => (
+                    <a
+                      key={i}
+                      target="_blank"
+                      href={pdf.link}
+                      className="block bg-white border rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {pdf.thumbnail && (
+                        <motion.img
+                          src={pdf.thumbnail}
+                          className="w-full object-cover"
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      )}
+
+                      <div className="p-4">
+                        <h3 className="font-semibold text-gray-900">{pdf.name}</h3>
+                        <p className="text-gray-500 text-sm">Nhấn để mở tư liệu</p>
+                      </div>
+                    </a>
+                  ))}
+                </motion.div>
+              )}
+
+              {selectedFolder === "khampha3" && (
+                <motion.div
+                  initial="hidden"
+                  animate="show"
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    show: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { staggerChildren: 0.1 }
+                    }
+                  }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                >
+                  {[
+                    {
+                      name: "IELTS-FIGHTER",
+                      link: "https://ielts-fighter.com/",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765167232/Gemini_Generated_Image_3mv8733mv8733mv8_w77lno.png"
+                    }
+                  ].map((pdf, i) => (
+                    <a
+                      key={i}
+                      target="_blank"
+                      href={pdf.link}
+                      className="block bg-white border rounded-xl shadow-sm hover:shadow-md transition overflow-hidden"
+                    >
+                      {pdf.thumbnail && (
+                        <motion.img
+                          src={pdf.thumbnail}
+                          className="w-full object-cover"
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      )}
+
+                      <div className="p-4">
+                        <h3 className="font-semibold text-gray-900">{pdf.name}</h3>
+                        <p className="text-gray-500 text-sm">Nhấn để mở tư liệu</p>
+                      </div>
+                    </a>
+                  ))}
+                </motion.div>
+              )}
+
+              {selectedFolder === "khampha4" && (
+                <motion.div
+                  initial="hidden"
+                  animate="show"
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    show: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { staggerChildren: 0.1 }
+                    }
+                  }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                >
+                  {[
+                    {
+                      name: "MOON VN",
+                      link: "https://moon.vn/",
+                      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765167234/Gemini_Generated_Image_bpd2ozbpd2ozbpd2_no4yj0.png"
                     }
                   ].map((pdf, i) => (
                     <a
