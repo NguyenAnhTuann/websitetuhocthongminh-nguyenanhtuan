@@ -4,19 +4,33 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { motion } from "framer-motion";
 
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
+
 // Import icon UI
 import { PiStopCircleBold } from "react-icons/pi";
 // Import icon môn Vật Lý từ react-icons/lu
 import { LuAtom } from "react-icons/lu";
 
+
 export default function ChatVatLy() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-    const [isTyping, setIsTyping] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const chatContainerRef = useRef(null);
 
   // Dùng useRef để lưu ID của interval
   const intervalRef = useRef(null);
+
+  const preprocessMath = (content) => {
+    if (!content) return "";
+    return content
+      .replace(/\\\[/g, "$$")
+      .replace(/\\\]/g, "$$")
+      .replace(/\\\(/g, "$$")
+      .replace(/\\\)/g, "$$");
+  };
 
   // Hàm dừng trả lời
   const handleStop = () => {
@@ -98,7 +112,7 @@ export default function ChatVatLy() {
     };
   }, []);
 
-useEffect(() => {
+  useEffect(() => {
     if (chatContainerRef.current) {
       // Cách 1: Cuộn mượt (smooth) - Dùng cái này nhìn đẹp hơn
       chatContainerRef.current.scrollTo({
@@ -163,10 +177,10 @@ useEffect(() => {
                   </div>
                   <div className="max-w-[85%] bg-gray-50 text-gray-900 px-4 py-3 rounded-2xl border shadow-sm overflow-hidden">
                     <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      rehypePlugins={[rehypeRaw]}
+                      remarkPlugins={[remarkGfm, remarkMath]}     // Thêm remarkMath
+                      rehypePlugins={[rehypeRaw, rehypeKatex]}     // Thêm rehypeKatex
                     >
-                      {m.text}
+                      {preprocessMath(m.text)}                     {/* Dùng hàm xử lý text */}
                     </ReactMarkdown>
                   </div>
                 </div>
@@ -220,8 +234,8 @@ useEffect(() => {
                 whileTap={{ scale: 0.9 }}
                 disabled={!input.trim()}
                 className={`p-2 rounded-lg transition-colors flex items-center justify-center ${!input.trim()
-                    ? "text-gray-300 cursor-not-allowed"
-                    : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
+                  ? "text-gray-300 cursor-not-allowed"
+                  : "text-white bg-[#1c7c76] hover:bg-[#166662] shadow-sm"
                   }`}
               >
                 <span className="px-2 font-bold text-sm">GỬI</span>
