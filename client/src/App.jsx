@@ -189,6 +189,41 @@ const AppWrapper = () => {
                 }
               />
 
+              {/* CÁC TRANG CON CỦA THỰC HÀNH - BỌC LẠI BẰNG PROTECTEDROUTE */}
+              <Route
+                path="/thuchanh/kynangsong"
+                element={
+                  <ProtectedRoute>
+                    <KyNang />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/thuchanh/kynangmang"
+                element={
+                  <ProtectedRoute>
+                    <KyNangMang />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/thuchanh/mophong"
+                element={
+                  <ProtectedRoute>
+                    <MoPhong />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/thuchanh/toan"
+                element={
+                  <ProtectedRoute>
+                    <BaiTapToan />
+                  </ProtectedRoute>
+                }
+              />
+
+
               <Route
                 path="/kynangmang"
                 element={<TaiNguyenOnline language={language} />}
