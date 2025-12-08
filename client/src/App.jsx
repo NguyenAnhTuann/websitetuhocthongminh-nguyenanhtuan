@@ -268,7 +268,6 @@ const AppWrapper = () => {
               <Route path="/ChatTest" element={<ChatTest />} />
 
               {/* --- 2. CÁC MÔN HỌC (Riêng tư - Phải đăng nhập mới vào được) --- */}
-              {/* Bọc tất cả các môn vào trong ProtectedRoute + Outlet */}
               <Route element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
                 <Route path="/chatbot/toan" element={<ChatToan />} />
                 <Route path="/chatbot/nguvan" element={<ChatNguVan />} />
