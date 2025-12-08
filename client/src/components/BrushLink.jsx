@@ -1,29 +1,34 @@
-// Component link với hiệu ứng vệt sơn
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 const BrushLink = ({ to, icon: Icon, children }) => {
   return (
     <Link 
       to={to} 
-      className="group relative flex items-center justify-center px-3 py-1"
+      className="group relative flex items-center justify-center px-3 py-2"
     >
-      {/* --- LỚP NỀN: Vệt sơn SVG --- */}
-      {/* Mặc định ẩn (opacity-0), hiện lên khi hover (opacity-100) */}
-      <div className="absolute inset-0 -z-10 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      {/* --- LỚP NỀN: Đám mây SVG --- */}
+      {/* THAY ĐỔI: 
+         - Tăng w-[130%] lên w-[180%] -> Để đám mây dài hẳn ra 2 bên.
+         - Tăng h-[140%] lên h-[160%] -> Để đám mây phồng to hơn 1 chút cho cân đối.
+      */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[180%] h-[160%] -z-10 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110">
         <svg 
           viewBox="0 0 200 60" 
-          preserveAspectRatio="none" 
-          className="h-full w-full fill-yellow-400"
+          className="h-full w-full fill-white/25 drop-shadow-sm"
+          preserveAspectRatio="none"
         >
-          {/* Đây là path vẽ hình vệt sơn nguệch ngoạc */}
-          <path d="M5.3,47.8c12.3-10.3,55.4-23.7,112.9-15.6c23.7,3.3,64.9,9.3,77.9,5.2c6-1.9,1.6-6-2.6-7.5c-16.1-5.7-88.9-12.7-133.4-6.3C27.9,28.7,4.6,35.6,5.3,47.8z"/>
+          <path d="M158,45 H42 c-15,0 -22,-10 -15,-20 c2,-3 6,-5 10,-5 c2,-10 12,-15 22,-12 c5,-8 18,-8 24,-2 c5,-8 18,-8 24,0 c10,-4 20,2 22,12 c4,0 8,2 10,5 c7,10 0,20 -15,20 Z" />
         </svg>
       </div>
 
-      {/* --- LỚP NỘI DUNG: Text & Icon --- */}
-      {/* Chuyển màu chữ sang đen khi hover để nổi trên nền vàng */}
-      <span className="relative z-10 flex items-center gap-1 font-medium text-white/90 transition-colors duration-300 group-hover:text-slate-900 group-hover:-translate-y-0.5">
-        <Icon className="h-4 w-4" /> 
+      {/* --- LỚP NỘI DUNG --- */}
+      <span className="relative z-10 flex items-center gap-1.5 font-medium text-white/90 transition-colors duration-300 group-hover:text-white group-hover:-translate-y-0.5 shadow-sm">
+        {Icon && <Icon className="h-4 w-4" />}
         {children}
       </span>
     </Link>
   );
 };
+
+export default BrushLink;

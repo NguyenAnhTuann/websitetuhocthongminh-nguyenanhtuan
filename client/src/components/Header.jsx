@@ -120,27 +120,23 @@ const Header = ({ language, setLanguage }) => {
         </Link>
 
         {/* 🔥 MENU DESKTOP */}
-        <nav className="hidden md:flex items-center gap-4 text-[15px]"> {/* Giảm gap xuống một chút vì vệt sơn chiếm diện tích */}
+        <nav className="hidden md:flex items-center gap-8 text-[15px] text-white/90 font-medium">
 
-          <BrushLink to="/kynangtuhoc" icon={GraduationCap}>
-            {t.menu.kynangtuhoc}
-          </BrushLink>
-
-          <BrushLink to="/kynangsong" icon={HeartHandshake}>
-            {t.menu.kynangsong}
-          </BrushLink>
-
-          <BrushLink to="/kynangmang" icon={Shield}>
-            {t.menu.kynangmang}
-          </BrushLink>
-
-          <BrushLink to="/chatbot" icon={Bot}>
-            {t.menu.chatbot}
-          </BrushLink>
-
-          <BrushLink to="/thuchanh" icon={CheckSquare}>
-            {t.menu.thuchanh}
-          </BrushLink>
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center hover:-translate-y-1" to="/kynangtuhoc">
+            <GraduationCap className="w-4 h-4" /> {t.menu.kynangtuhoc}
+          </Link>
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center hover:-translate-y-1" to="/kynangsong">
+            <HeartHandshake className="w-4 h-4" /> {t.menu.kynangsong}
+          </Link>
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center hover:-translate-y-1" to="/kynangmang">
+            <Shield className="w-4 h-4" /> {t.menu.kynangmang}
+          </Link>
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center hover:-translate-y-1" to="/chatbot">
+            <Bot className="w-4 h-4" /> {t.menu.chatbot}
+          </Link>
+          <Link className="hover:text-yellow-400 transition flex gap-1 items-center hover:-translate-y-1" to="/thuchanh">
+            <CheckSquare className="w-4 h-4" /> {t.menu.thuchanh}
+          </Link>
 
         </nav>
 
