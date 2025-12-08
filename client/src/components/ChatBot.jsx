@@ -1,15 +1,21 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 // Import các icon phù hợp từ thư viện react-icons
-import { 
-  LuCalculator, LuBookOpen, LuLanguages, LuAtom, LuFlaskConical, 
-  LuLeaf, LuGlobe, LuHourglass, LuMonitor, LuCpu, 
-  LuShield, LuDumbbell, LuCompass, LuScale 
+import {
+  LuCalculator, LuBookOpen, LuLanguages, LuAtom, LuFlaskConical,
+  LuLeaf, LuGlobe, LuHourglass, LuMonitor, LuCpu,
+  LuShield, LuDumbbell, LuCompass, LuScale, LuSparkles
 } from "react-icons/lu";
 
 export default function ChatBotHub() {
   // Danh sách môn học kèm Icon và Màu sắc (nếu muốn colorful hơn)
   const subjects = [
+    {
+      name: "Dùng Thử AI",
+      link: "/ChatTest",
+      icon: <LuSparkles />,
+      desc: "Trải nghiệm ngay (Không cần Login)"
+    },
     { name: "Toán", link: "/chatbot/toan", icon: <LuCalculator />, desc: "Đại số, Hình học" },
     { name: "Ngữ Văn", link: "/chatbot/nguvan", icon: <LuBookOpen />, desc: "Phân tích, Soạn bài" },
     { name: "Tiếng Anh", link: "/chatbot/tienganh", icon: <LuLanguages />, desc: "Từ vựng, Ngữ pháp" },
@@ -44,7 +50,7 @@ export default function ChatBotHub() {
 
   return (
     <section className="min-h-screen w-full flex flex-col items-center px-4 py-16 bg-white from-slate-50 to-gray-100 relative overflow-hidden">
-      
+
       {/* Background Decor (Trang trí nền) */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute -top-[10%] -left-[10%] w-96 h-96 bg-[#1c7c76] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
@@ -64,7 +70,7 @@ export default function ChatBotHub() {
           TRỢ LÍ HỌC TẬP AI CHATBOT
         </h1>
         <p className="text-gray-500 mt-2 max-w-2xl mx-auto text-lg">
-          Chọn môn học bạn cần hỗ trợ. Hệ thống AI sẽ giải đáp thắc mắc, 
+          Chọn môn học bạn cần hỗ trợ. Hệ thống AI sẽ giải đáp thắc mắc,
           hướng dẫn giải bài tập và ôn thi 24/7.
         </p>
       </motion.div>
@@ -108,7 +114,7 @@ export default function ChatBotHub() {
       </motion.div>
 
       {/* ===== FOOTER NOTE ===== */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
