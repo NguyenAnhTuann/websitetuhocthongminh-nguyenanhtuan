@@ -60,6 +60,7 @@ import MoPhong from "./components/thuchanh/MoPhong";
 import BaiTapToan from "./components/thuchanh/BaiTapToan";
 
 import ChatTest from "./components/chatbot/ChatTest";
+import BrushLink from "./components/BrushLink";
 
 
 
