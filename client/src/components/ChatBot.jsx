@@ -17,7 +17,7 @@ export default function ChatBotHub() {
   const allSubjects = [
     {
       name: "Dùng Thử AI",
-      link: "/chattest",
+      link: "/ChatTest",
       icon: <LuSparkles />,
       desc: "Trải nghiệm ngay (Không cần đăng nhập)"
     },

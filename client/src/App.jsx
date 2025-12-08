@@ -265,7 +265,7 @@ const AppWrapper = () => {
               <Route path="/dieukhoansudung" element={<DieuKhoanSuDung />} />
 
               {/* --- 1. CHAT THỬ NGHIỆM (Công khai - Ai cũng vào được) --- */}
-              <Route path="/chattest" element={<ChatTest />} />
+              <Route path="/ChatTest" element={<ChatTest />} />
 
               {/* --- 2. CÁC MÔN HỌC (Riêng tư - Phải đăng nhập mới vào được) --- */}
               <Route element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
