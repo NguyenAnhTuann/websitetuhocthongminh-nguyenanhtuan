@@ -58,6 +58,8 @@ import KyNangMang from "./components/thuchanh/KyNangMang";
 import MoPhong from "./components/thuchanh/MoPhong";
 import BaiTapToan from "./components/thuchanh/BaiTapToan";
 
+import ChatTest from "./components/chatbot/ChatTest";
+
 
 
 
@@ -260,6 +262,7 @@ const AppWrapper = () => {
 
               <Route path="/chinhsachbaomat" element={<ChinhSachBaoMat />} />
               <Route path="/dieukhoansudung" element={<DieuKhoanSuDung />} />
+              <Route path="/ChatTest" element={<ChatTest />} />
 
               <Route path="/chatbot/toan" element={<ChatToan />} />
               <Route path="/chatbot/nguvan" element={<ChatNguVan />} />
