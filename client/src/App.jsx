@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
   useLocation,
+  Outlet
 } from "react-router-dom";
 
 // Components
@@ -262,23 +263,29 @@ const AppWrapper = () => {
 
               <Route path="/chinhsachbaomat" element={<ChinhSachBaoMat />} />
               <Route path="/dieukhoansudung" element={<DieuKhoanSuDung />} />
+
+              {/* --- 1. CHAT THỬ NGHIỆM (Công khai - Ai cũng vào được) --- */}
               <Route path="/ChatTest" element={<ChatTest />} />
 
-              <Route path="/chatbot/toan" element={<ChatToan />} />
-              <Route path="/chatbot/nguvan" element={<ChatNguVan />} />
-              <Route path="/chatbot/tienganh" element={<ChatTiengAnh />} />
-              <Route path="/chatbot/vatly" element={<ChatVatLy />} />
-              <Route path="/chatbot/hoahoc" element={<ChatHoaHoc />} />
-              <Route path="/chatbot/sinhhoc" element={<ChatSinhHoc />} />
-              <Route path="/chatbot/dialy" element={<ChatDiaLy />} />
-              <Route path="/chatbot/lichsu" element={<ChatLichSu />} />
-              <Route path="/chatbot/tinhoc" element={<ChatTinHoc />} />
-              <Route path="/chatbot/congnghe" element={<ChatCongNghe />} />
-              <Route path="/chatbot/quocphong" element={<ChatQuocPhong />} />
-              <Route path="/chatbot/theduc" element={<ChatTheDuc />} />
-              <Route path="/chatbot/huongnghiep" element={<ChatHuongngNghiep />} />
-              <Route path="/chatbot/kinhtephapluat" element={<ChatKinhTePhapLuat />} />
-              <Route path="chatbotupgrate" element={<ChatBotUpgate />} />
+              {/* --- 2. CÁC MÔN HỌC (Riêng tư - Phải đăng nhập mới vào được) --- */}
+              {/* Bọc tất cả các môn vào trong ProtectedRoute + Outlet */}
+              <Route element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
+                <Route path="/chatbot/toan" element={<ChatToan />} />
+                <Route path="/chatbot/nguvan" element={<ChatNguVan />} />
+                <Route path="/chatbot/tienganh" element={<ChatTiengAnh />} />
+                <Route path="/chatbot/vatly" element={<ChatVatLy />} />
+                <Route path="/chatbot/hoahoc" element={<ChatHoaHoc />} />
+                <Route path="/chatbot/sinhhoc" element={<ChatSinhHoc />} />
+                <Route path="/chatbot/dialy" element={<ChatDiaLy />} />
+                <Route path="/chatbot/lichsu" element={<ChatLichSu />} />
+                <Route path="/chatbot/tinhoc" element={<ChatTinHoc />} />
+                <Route path="/chatbot/congnghe" element={<ChatCongNghe />} />
+                <Route path="/chatbot/quocphong" element={<ChatQuocPhong />} />
+                <Route path="/chatbot/theduc" element={<ChatTheDuc />} />
+                <Route path="/chatbot/huongnghiep" element={<ChatHuongngNghiep />} />
+                <Route path="/chatbot/kinhtephapluat" element={<ChatKinhTePhapLuat />} />
+                <Route path="chatbotupgrate" element={<ChatBotUpgate />} />
+              </Route>
 
               <Route path="/thuchanh/kynangsong" element={<KyNang />} />
               <Route path="/thuchanh/kynangmang" element={<KyNangMang />} />
