@@ -74,13 +74,13 @@ export default function BaiTapSinhHoc() {
             to="/thuchanh" 
             className={`w-fit flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-[${primaryColor}] hover:border-[${primaryColor}] transition shadow-sm font-semibold`}
           >
-            <LuArrowLeft /> Quay l?i
+            <LuArrowLeft /> Quay lại
           </Link>
           
           <div className="flex-1 text-center md:text-left">
-            <h1 className={`text-3xl font-extrabold text-[${primaryColor}]`}>TUONG TÁC SINH H?C</h1>
+            <h1 className={`text-3xl font-extrabold text-[${primaryColor}]`}>TUONG TÁC SINH HỌC</h1>
             <p className="text-gray-500 text-sm mt-1">
-              T?ng h?p bài t?p th?c hành các chuyên d? Sinh H?c
+              Tổng hợp bài tập thực hành các chuyên đề Sinh học
             </p>
           </div>
         </div>
