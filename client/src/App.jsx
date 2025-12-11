@@ -66,12 +66,12 @@ import BaiTapTiengAnh from "./components/thuchanh/BaiTapTiengAnh";
 import BaiTapHoaHoc from "./components/thuchanh/BaiTapHoaHoc";
 import BaiTapVatLy from "./components/thuchanh/BaiTapVatLy";
 import BaiTapSinhHoc from "./components/thuchanh/BaiTapSinhHoc";
-// import BaiTapDiaLy from "./components/thuchanh/BaiTapDiaLy";
+import BaiTapDiaLy from "./components/thuchanh/BaiTapDiaLy";
 import BaiTapLichSu from "./components/thuchanh/BaiTapLichSu";
 // import BaiTapTinHoc from "./components/thuchanh/BaiTapTinHoc";
-// import BaiTapCongNghe from "./components/thuchanh/BaiTapCongNghe";
-// import BaiTapHuongNghiep from "./components/thuchanh/BaiTapHuongNghiep";
-// import BaiTapKinhTePhapLuat from "./components/thuchanh/BaiTapKinhTePhapLuat";
+import BaiTapCongNghe from "./components/thuchanh/BaiTapCongNghe";
+import BaiTapHuongNghiep from "./components/thuchanh/BaiTapHuongNghiep";
+import BaiTapKinhTePhapLuat from "./components/thuchanh/BaiTapKinhTePhapLuat";
 
 
 
@@ -307,12 +307,12 @@ const AppWrapper = () => {
               <Route path="/thuchanh/hoahoc" element={<BaiTapHoaHoc />} />
               <Route path="/thuchanh/vatly" element={<BaiTapVatLy />} />
               <Route path="/thuchanh/sinhhoc" element={<BaiTapSinhHoc />} />
-              {/* <Route path="/thuchanh/dialy" element={<BaiTapDiaLy />} /> */}
-              {/* <Route path="/thuchanh/congnghe" element={<BaiTapCongNghe />} /> */}
+              <Route path="/thuchanh/dialy" element={<BaiTapDiaLy />} />
+              <Route path="/thuchanh/congnghe" element={<BaiTapCongNghe />} />
               <Route path="/thuchanh/lichsu" element={<BaiTapLichSu />} />
               {/* <Route path="/thuchanh/tinhoc" element={<BaiTapTinHoc />} /> */}
-              {/* <Route path="/thuchanh/huongnghiep" element={<BaiTapHuongNghiep />} /> */}
-              {/* <Route path="/thuchanh/kinhtephapluat" element={<BaiTapKinhTePhapLuat />} /> */}
+              <Route path="/thuchanh/huongnghiep" element={<BaiTapHuongNghiep />} />
+              <Route path="/thuchanh/kinhtephapluat" element={<BaiTapKinhTePhapLuat />} />
 
             </Routes>
 
