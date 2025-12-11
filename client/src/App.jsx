@@ -312,7 +312,7 @@ const AppWrapper = () => {
               <Route path="/thuchanh/lichsu" element={<BaiTapLichSu />} />
               {/* <Route path="/thuchanh/tinhoc" element={<BaiTapTinHoc />} /> */}
               {/* <Route path="/thuchanh/huongnghiep" element={<BaiTapHuongNghiep />} /> */}
-              {/* <Route path="/thuchanh/kinhtephapluat" element={<BaiTapKinhTePhapLuat />} /> */} */}
+              {/* <Route path="/thuchanh/kinhtephapluat" element={<BaiTapKinhTePhapLuat />} /> */}
 
             </Routes>
 
