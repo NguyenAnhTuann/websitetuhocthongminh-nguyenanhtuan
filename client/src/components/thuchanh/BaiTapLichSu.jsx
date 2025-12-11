@@ -1,27 +1,21 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-// Import các icon c?n thi?t
+// Import các icon cần thiết
 import { LuArrowLeft, LuLink, LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
-export default function BaiTapSinhHoc() {
-  // === D? LI?U BÀI T?P SINH H?C ===
+export default function BaiTapLichSu() {
+  // === DỮ LIỆU BÀI TẬP LỊCH SỬ ===
   const allExercises = [
-    // --- BÀI T?P SINH H?C ---
+    // --- BÀI TẬP LỊCH SỬ ---
     {
-      name: "Thành phần của DNA",
-      link: "https://gemini.google.com/share/0fb69abc9424",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234977/Gemini_Generated_Image_j2p1fsj2p1fsj2p6_z1y7x4.png",
-      category: "Sinh học Tế bào",
+      name: "Phong trào cách mạng 1930–1945",
+      link: "https://gemini.google.com/share/15e97b21ce9e",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764235077/Gemini_Generated_Image_j2p1fsj2p1fsj2p7_t3r9h0.png",
+      category: "Lịch sử Việt Nam",
       source: "Tài liệu/Quiz"
     },
-{
-      name: "Chu trình tế bào",
-      link: "https://nguyenthanhthan.my.canva.site/chu-tr-nh-t-b-o-quiz",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234977/Gemini_Generated_Image_j2p1fsj2p1fsj2p6_z1y7x4.png",
-      category: "Sinh học Tế bào",
-      source: "Tài liệu/Quiz"
-    },
+    // Thêm các bài tập Lịch Sử khác nếu cần...
   ];
 
   // === LOGIC PHÂN TRANG ===
@@ -50,42 +44,44 @@ export default function BaiTapSinhHoc() {
     show: { opacity: 1, y: 0 }
   };
   
-  // Màu ch? d?o m?i cho Sinh H?c: Xanh lá cây (Emerald)
-  const primaryColor = "#10b981"; // Màu xanh lá cây (emerald-500)
-  const lightAccentColor = "bg-emerald-50";
+  // Màu chủ đạo mới cho Lịch Sử: Nâu Đỏ (Maroon/Red Clay)
+  const primaryColor = "#a30000"; // Màu đỏ sậm/nâu đỏ
+  const lightAccentColor = "bg-red-100";
+  const hoverColorClass = "hover:border-[#a30000]/50";
+  const textPrimaryColorClass = `text-[${primaryColor}]`;
 
   return (
-    // Padding-top l?n d? tránh b? Header che
+    // Padding-top lớn để tránh bị Header che
     <section className="min-h-screen w-full bg-slate-50 relative overflow-hidden px-4 pt-32 pb-10">
       
-      {/* Background Decor: Màu xanh lá cây */}
+      {/* Background Decor: Màu Nâu Đỏ */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        {/* Màu xanh d?m */}
+        {/* Màu đỏ sậm */}
         <div className={`absolute -top-[10%] -left-[10%] w-96 h-96 bg-[${primaryColor}] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob`}></div>
-        {/* Màu xanh nh?t */}
-        <div className="absolute top-[20%] -right-[10%] w-96 h-96 bg-lime-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+        {/* Màu nâu vàng */}
+        <div className="absolute top-[20%] -right-[10%] w-96 h-96 bg-amber-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         
-        {/* Header: Nút quay l?i & Tiêu d? */}
+        {/* Header: Nút quay lại & Tiêu đề */}
         <div className="flex flex-col md:flex-row md:items-center gap-4 mb-10">
           <Link 
             to="/thuchanh" 
-            className={`w-fit flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:text-[${primaryColor}] hover:border-[${primaryColor}] transition shadow-sm font-semibold`}
+            className={`w-fit flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:${textPrimaryColorClass} hover:border-[${primaryColor}] transition shadow-sm font-semibold`}
           >
             <LuArrowLeft /> Quay lại
           </Link>
           
           <div className="flex-1 text-center md:text-left">
-            <h1 className={`text-3xl font-extrabold text-[${primaryColor}]`}>TUONG TÁC SINH HỌC</h1>
+            <h1 className={`text-3xl font-extrabold ${textPrimaryColorClass}`}>TƯƠNG TÁC LỊCH SỬ</h1>
             <p className="text-gray-500 text-sm mt-1">
-              Tổng hợp bài tập thực hành các chuyên đề Sinh học
+              Tổng hợp tài liệu và bài tập về các sự kiện Lịch sử
             </p>
           </div>
         </div>
 
-        {/* Grid hi?n th? danh sách bài t?p */}
+        {/* Grid hiển thị danh sách bài tập */}
         <motion.div 
           key={currentPage} 
           variants={containerVariants}
@@ -100,10 +96,10 @@ export default function BaiTapSinhHoc() {
               target="_blank"
               rel="noreferrer"
               variants={itemVariants}
-              // Thay d?i hover color
-              className={`group block bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-[${primaryColor}]/50 transition-all duration-300 transform hover:-translate-y-1`}
+              // Thay đổi hover color
+              className={`group block bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl ${hoverColorClass} transition-all duration-300 transform hover:-translate-y-1`}
             >
-              {/* Ph?n hình ?nh Thumbnail */}
+              {/* Phần hình ảnh Thumbnail */}
               <div className="relative w-full h-48 overflow-hidden bg-gray-100 border-b border-gray-100">
                 {item.thumbnail ? (
                   <img 
@@ -112,10 +108,10 @@ export default function BaiTapSinhHoc() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : (
-                    // Th? div placeholder
+                    // Thẻ div placeholder
                    <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-400 text-sm">No Image</div>
                 )}
-                {/* Hi?n th? Category lên trên hình ?nh */}
+                {/* Hiển thị Category lên trên hình ảnh */}
                 {item.category && (
                     <span className="absolute top-3 left-3 bg-white/90 text-gray-800 text-xs font-semibold px-2.5 py-1 rounded-full shadow-md backdrop-blur-sm">
                         {item.category}
@@ -123,19 +119,19 @@ export default function BaiTapSinhHoc() {
                 )}
               </div>
 
-              {/* Ph?n thông tin tên bài */}
+              {/* Phần thông tin tên bài */}
               <div className="p-5">
-                <h3 className={`text-lg font-bold text-gray-800 group-hover:text-[${primaryColor}] transition-colors line-clamp-2 min-h-[3.5rem]`}>
+                <h3 className={`text-lg font-bold text-gray-800 group-hover:${textPrimaryColorClass} transition-colors line-clamp-2 min-h-[3.5rem]`}>
                   {item.name}
                 </h3>
                 
                 <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
-                  {/* Hi?n th? Ngu?n/Lo?i hình bài t?p */}
-                  <span className={`${lightAccentColor} text-[${primaryColor}] px-2 py-1 rounded-md font-medium text-xs`}>
-                    {item.source || 'Online Quiz'}
+                  {/* Hiển thị Nguồn/Loại hình bài tập */}
+                  <span className={`${lightAccentColor} ${textPrimaryColorClass} px-2 py-1 rounded-md font-medium text-xs`}>
+                    {item.source || 'Tài liệu tham khảo'}
                   </span>
-                  <span className={`flex items-center gap-1 group-hover:text-[${primaryColor}] transition-colors font-medium`}>
-                    Làm bài ngay <LuLink />
+                  <span className={`flex items-center gap-1 group-hover:${textPrimaryColorClass} transition-colors font-medium`}>
+                    Xem ngay <LuLink />
                   </span>
                 </div>
               </div>
@@ -160,7 +156,7 @@ export default function BaiTapSinhHoc() {
               <LuChevronLeft size={20} />
             </button>
 
-            {/* Các s? trang */}
+            {/* Các số trang */}
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}
@@ -168,7 +164,7 @@ export default function BaiTapSinhHoc() {
                 className={`w-10 h-10 rounded-lg font-semibold transition shadow-sm border ${
                   currentPage === page
                     ? `bg-[${primaryColor}] text-white border-[${primaryColor}]`
-                    : `bg-white text-gray-700 border-gray-300 hover:bg-emerald-50 hover:text-[${primaryColor}]`
+                    : `bg-white text-gray-700 border-gray-300 hover:bg-red-50 hover:${textPrimaryColorClass}`
                 }`}
               >
                 {page}
