@@ -11,7 +11,7 @@ export default function BaiTapLichSu() {
     {
       name: "Phong trào cách mạng 1930–1945",
       link: "https://gemini.google.com/share/15e97b21ce9e",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764235077/Gemini_Generated_Image_j2p1fsj2p1fsj2p7_t3r9h0.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433208/Gemini_Generated_Image_x5d8aux5d8aux5d8_r8afm2.png",
       category: "Lịch sử Việt Nam",
       source: "Tài liệu/Quiz"
     },

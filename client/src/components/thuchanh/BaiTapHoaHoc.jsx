@@ -11,7 +11,7 @@ export default function BaiTapHoaHoc() {
     {
       name: "Phản ứng oxi hóa – khử",
       link: "https://nguyenthanhthan.my.canva.site/quiz-game-thpt",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234777/Gemini_Generated_Image_j2p1fsj2p1fsj2p4_c6v0d2.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433053/Gemini_Generated_Image_d8dpa0d8dpa0d8dp_uztgvq.png",
       category: "Hóa THPT",
       source: "Quiz Game"
     },

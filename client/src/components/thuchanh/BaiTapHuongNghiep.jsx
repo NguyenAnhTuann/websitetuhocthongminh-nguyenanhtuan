@@ -11,21 +11,21 @@ export default function BaiTapHuongNghiep() {
     {
       name: "Kỹ năng định hướng và tư duy",
       link: "https://nguyenthanhthan.my.canva.site/quiz-k-n-ng-s-ng-thpt",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764235377/Gemini_Generated_Image_j2p1fsj2p1fsj2p10_r7x3w2.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433315/Gemini_Generated_Image_6a0ekr6a0ekr6a0e_izsoqw.png",
       category: "Kỹ năng sống",
       source: "Interactive Quiz"
     },
     {
       name: "Kỹ năng thuyết trình – diễn đạt ý tưởng",
       link: "https://gemini.google.com/share/dfeae59fabc7",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764235377/Gemini_Generated_Image_j2p1fsj2p1fsj2p10_r7x3w2.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433315/Gemini_Generated_Image_6a0ekr6a0ekr6a0e_izsoqw.png",
       category: "Kỹ năng mềm",
       source: "Tài liệu tham khảo"
     },
     {
       name: "Kỹ năng lựa chọn nghề nghiệp",
       link: "https://gemini.google.com/share/06854db5e96d",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764235377/Gemini_Generated_Image_j2p1fsj2p1fsj2p10_r7x3w2.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433315/Gemini_Generated_Image_6a0ekr6a0ekr6a0e_izsoqw.png",
       category: "Định hướng tương lai",
       source: "Tài liệu tham khảo"
     },

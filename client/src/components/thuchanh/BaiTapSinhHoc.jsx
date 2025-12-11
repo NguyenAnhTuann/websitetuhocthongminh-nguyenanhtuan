@@ -11,14 +11,14 @@ export default function BaiTapSinhHoc() {
     {
       name: "Thành phần của DNA",
       link: "https://gemini.google.com/share/0fb69abc9424",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234977/Gemini_Generated_Image_j2p1fsj2p1fsj2p6_z1y7x4.png",
+      thumbnail: "hthttps://res.cloudinary.com/duk8odqun/image/upload/v1765433129/Gemini_Generated_Image_q9htiiq9htiiq9ht_adeyw5.png",
       category: "Sinh học Tế bào",
       source: "Tài liệu/Quiz"
     },
 {
       name: "Chu trình tế bào",
       link: "https://nguyenthanhthan.my.canva.site/chu-tr-nh-t-b-o-quiz",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234977/Gemini_Generated_Image_j2p1fsj2p1fsj2p6_z1y7x4.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433129/Gemini_Generated_Image_q9htiiq9htiiq9ht_adeyw5.png",
       category: "Sinh học Tế bào",
       source: "Tài liệu/Quiz"
     },

@@ -11,42 +11,42 @@ export default function BaiTapTiengAnh() {
     {
       name: "Bài tập tổng hợp Tiếng Anh",
       link: "https://nguyenthanhthan.my.canva.site/untitled-app",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234677/Gemini_Generated_Image_j2p1fsj2p1fsj2p3_q8r1x5.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765432951/Gemini_Generated_Image_ecpcdsecpcdsecpc_cfowhm.png",
       category: "Tổng hợp",
       source: "Interactive App"
     },
     {
       name: "Từ loại – Word form",
       link: "https://nguyenthanhthan.my.canva.site/word-form-quiz-game",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234677/Gemini_Generated_Image_j2p1fsj2p1fsj2p3_q8r1x5.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765432951/Gemini_Generated_Image_ecpcdsecpcdsecpc_cfowhm.png",
       category: "Ngữ pháp",
       source: "Quiz Game"
     },
     {
       name: "Câu bị động (Passive Voice)",
       link: "https://nguyenthanhthan.my.canva.site/tr-ch-i-c-u-b-ng",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234677/Gemini_Generated_Image_j2p1fsj2p1fsj2p3_q8r1x5.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765432951/Gemini_Generated_Image_ecpcdsecpcdsecpc_cfowhm.png",
       category: "Ngữ pháp",
       source: "Trò chơi"
     },
     {
       name: "Chia thì trong tiếng Anh",
       link: "https://gemini.google.com/share/91fe7028a5b9",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234677/Gemini_Generated_Image_j2p1fsj2p1fsj2p3_q8r1x5.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765432951/Gemini_Generated_Image_ecpcdsecpcdsecpc_cfowhm.png",
       category: "Ngữ pháp",
       source: "Tài liệu/Quiz"
     },
     {
       name: "Mệnh đề quan hệ (Relative Clauses)",
       link: "https://gemini.google.com/share/0555969408c4",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234677/Gemini_Generated_Image_j2p1fsj2p1fsj2p3_q8r1x5.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765432951/Gemini_Generated_Image_ecpcdsecpcdsecpc_cfowhm.png",
       category: "Ngữ pháp",
       source: "Tài liệu/Quiz"
     },
     {
       name: "Từ vựng chủ đề giáo dục – environment",
       link: "https://nguyenthanhthan.my.canva.site/environment-quiz-game",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234677/Gemini_Generated_Image_j2p1fsj2p1fsj2p3_q8r1x5.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765432951/Gemini_Generated_Image_ecpcdsecpcdsecpc_cfowhm.png",
       category: "Từ vựng",
       source: "Quiz Game"
     },

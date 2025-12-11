@@ -11,28 +11,28 @@ export default function BaiTapCongNghe() {
     {
       name: "Kỹ năng học tập trực tuyến",
       link: "https://nguyenthanhthan.my.canva.site/k-n-ng-h-c-t-p-tr-c-tuy-n",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764235477/Gemini_Generated_Image_j2p1fsj2p1fsj2p11_q0a5y4.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433290/Gemini_Generated_Image_5sh25r5sh25r5sh2_zcwekx.png",
       category: "Kỹ năng số",
       source: "Interactive Quiz"
     },
     {
       name: "Kỹ năng sáng tạo nội dung số",
       link: "https://gemini.google.com/share/54d9fa154f1c",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764235477/Gemini_Generated_Image_j2p1fsj2p1fsj2p11_q0a5y4.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433290/Gemini_Generated_Image_5sh25r5sh25r5sh2_zcwekx.png",
       category: "Sáng tạo",
       source: "Tài liệu tham khảo"
     },
     {
       name: "Kỹ năng sử dụng công nghệ hiệu quả",
       link: "https://gemini.google.com/share/82c83be581b6",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764235477/Gemini_Generated_Image_j2p1fsj2p1fsj2p11_q0a5y4.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433290/Gemini_Generated_Image_5sh25r5sh25r5sh2_zcwekx.png",
       category: "Kỹ năng số",
       source: "Tài liệu tham khảo"
     },
     {
       name: "Kỹ năng tìm kiếm thông tin",
       link: "https://gemini.google.com/share/0496a0387039",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764235477/Gemini_Generated_Image_j2p1fsj2p1fsj2p11_q0a5y4.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433290/Gemini_Generated_Image_5sh25r5sh25r5sh2_zcwekx.png",
       category: "Kỹ năng số",
       source: "Tài liệu tham khảo"
     },

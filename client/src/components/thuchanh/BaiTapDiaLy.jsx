@@ -11,7 +11,7 @@ export default function BaiTapDiaLy() {
     {
       name: "Địa lý các châu lục",
       link: "https://nguyenthanhthan.my.canva.site/a-l-c-c-ch-u-l-c",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764235177/Gemini_Generated_Image_j2p1fsj2p1fsj2p8_g0a4c5.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433175/Gemini_Generated_Image_67885x67885x6788_q6dnej.png",
       category: "Địa lý Thế giới",
       source: "Interactive Quiz"
     },
