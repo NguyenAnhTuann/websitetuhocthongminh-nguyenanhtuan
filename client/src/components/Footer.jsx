@@ -26,8 +26,8 @@ export default function Footer() {
             <li><Link className="hover:text-yellow-300" to="/trangchu">Trang chủ</Link></li>
             <li><Link className="hover:text-yellow-300" to="/kynangtuhoc">Kỹ năng tự học</Link></li>
             <li><Link className="hover:text-yellow-300" to="/kynangsong">Kỹ năng sống</Link></li>
+            <li><Link className="hover:text-yellow-300" to="/kynangmang">Kỹ năng mạng</Link></li>
             <li><Link className="hover:text-yellow-300" to="/chatbot">AI ChatBot</Link></li>
-            <li><Link className="hover:text-yellow-300" to="/kynangmang">Tài nguyên online</Link></li>
             <li><Link className="hover:text-yellow-300" to="/thuchanh">Thực hành</Link></li>
           </ul>
         </div>
