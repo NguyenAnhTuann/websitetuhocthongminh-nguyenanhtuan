@@ -11,21 +11,21 @@ export default function BaiTapVatLy() {
     {
       name: "Lực và Véc-tơ lực",
       link: "https://nguyenthanhthan.my.canva.site/tr-ch-i-v-t-l-l-c-v-vecto-l-c",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234877/Gemini_Generated_Image_j2p1fsj2p1fsj2p5_w0x9c3.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433621/Gemini_Generated_Image_ixsy6yixsy6yixsy_zhrr8x.png",
       category: "Cơ học",
       source: "Quiz Game"
     },
     {
       name: "Định luật Ohm",
       link: "https://nguyenthanhthan.my.canva.site/tr-ch-i-nh-lu-t-ohm",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234877/Gemini_Generated_Image_j2p1fsj2p1fsj2p5_w0x9c3.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433621/Gemini_Generated_Image_ixsy6yixsy6yixsy_zhrr8x.png",
       category: "Điện học",
       source: "Quiz Game"
     },
     {
       name: "Công và Công suất",
       link: "https://nguyenthanhthan.my.canva.site/tr-ch-i-v-t-l",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234877/Gemini_Generated_Image_j2p1fsj2p1fsj2p5_w0x9c3.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433621/Gemini_Generated_Image_ixsy6yixsy6yixsy_zhrr8x.png",
       category: "Cơ học",
       source: "Trò chơi"
     },

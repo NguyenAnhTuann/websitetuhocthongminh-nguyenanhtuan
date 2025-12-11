@@ -11,14 +11,14 @@ export default function BaiTapKinhTePhapLuat() {
     {
       name: "Công dân với pháp luật",
       link: "https://gemini.google.com/share/8089144b0760",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433327/Gemini_Generated_Image_awxoodawxoodawxo_te4rxu.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433652/Gemini_Generated_Image_dvu3hodvu3hodvu3_vxmqeh.png",
       category: "Pháp luật",
       source: "Tài liệu/Quiz"
     },
     {
       name: "Quyền con người",
       link: "https://gemini.google.com/share/e0067dc085f9",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433327/Gemini_Generated_Image_awxoodawxoodawxo_te4rxu.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765433652/Gemini_Generated_Image_dvu3hodvu3hodvu3_vxmqeh.png",
       category: "Pháp luật",
       source: "Tài liệu/Quiz"
     },
