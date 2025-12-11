@@ -237,7 +237,7 @@ export default function BaiTapToan() {
           </Link>
           
           <div className="flex-1 text-center md:text-left">
-            <h1 className="text-3xl font-extrabold text-[#1c7c76]">TƯƠNG TÁC TOÁN HỌC</h1>
+            <h1 className="text-3xl font-extrabold text-black">TƯƠNG TÁC TOÁN HỌC</h1>
             <p className="text-gray-500 text-sm mt-1">
               Tổng hợp bài tập trắc nghiệm và tự luận Toán 10, 11, 12
             </p>
@@ -282,7 +282,7 @@ export default function BaiTapToan() {
                 </h3>
                 
                 <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
-                  <span className="bg-teal-50 text-[#1c7c76] px-2 py-1 rounded-md font-medium text-xs">Interactive Canva</span>
+                  <span className="bg-teal-50 text-[#1c7c76] px-2 py-1 rounded-md font-medium text-xs">Bài tập Canva</span>
                   <span className="flex items-center gap-1 group-hover:text-[#1c7c76] transition-colors font-medium">
                     Làm bài ngay <LuLink />
                   </span>

@@ -11,28 +11,28 @@ export default function BaiTapNguVan() {
     {
       name: "Biện pháp tu từ trong thơ hiện đại",
       link: "https://nguyenthanhthan.my.canva.site/bi-n-ph-p-tu-t-trong-th-hi-n-i",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234577/Gemini_Generated_Image_j2p1fsj2p1fsj2p2_s6l7z9.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428877/Gemini_Generated_Image_5m2q4j5m2q4j5m2q_hcuj8g.png",
       category: "Ngữ Văn 10-12",
       source: "Interactive Canva"
     },
     {
       name: "Thử tài văn học – CHÍ PHÈO",
       link: "https://gemini.google.com/share/38793a74b7e7",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234577/Gemini_Generated_Image_j2p1fsj2p1fsj2p2_s6l7z9.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428877/Gemini_Generated_Image_5m2q4j5m2q4j5m2q_hcuj8g.png",
       category: "Văn xuôi Hiện đại",
       source: "Interactive Quiz"
     },
     {
       name: "Lập dàn ý nghị luận xã hội",
       link: "https://gemini.google.com/share/879556a2b59a",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234577/Gemini_Generated_Image_j2p1fsj2p1fsj2p2_s6l7z9.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428877/Gemini_Generated_Image_5m2q4j5m2q4j5m2q_hcuj8g.png",
       category: "Nghị luận",
       source: "Tài liệu tham khảo"
     },
     {
       name: "Phân tích nhân vật văn học",
       link: "https://gemini.google.com/share/4a9e93c98d89",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234577/Gemini_Generated_Image_j2p1fsj2p1fsj2p2_s6l7z9.png",
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428877/Gemini_Generated_Image_5m2q4j5m2q4j5m2q_hcuj8g.png",
       category: "Kỹ năng làm văn",
       source: "Tài liệu tham khảo"
     },
