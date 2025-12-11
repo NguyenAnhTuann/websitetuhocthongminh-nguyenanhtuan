@@ -11,181 +11,181 @@ export default function BaiTapToan() {
     {
       name: "Giải phương trình bậc hai - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/gi-i-ph-ng-tr-nh-b-c-hai",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Bài tập trắc nghiệm mệnh đề - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-m-nh",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Trắc nghiệm toán tập hợp - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/tr-c-nghi-m-to-n-l-p-10-t-p-h-p",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Các phép toán trên tập hợp - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-to-n-l-p-10",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Mệnh đề và tập hợp - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/btrfj6548pzbsqqy",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Bất phương trình bậc nhất hai ẩn - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/btrfxg29jzj1k4ka",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Hệ bất phương trình bậc nhất hai ẩn - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/btrg7rw07zjshcpy",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Bất phương trình và Hệ bất phương trình bậc nhất hai ẩn - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-to-n-l-p-10",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Hàm số và đồ thị - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/btrh3zahbgta381h",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Hàm số bậc hai - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/tr-c-nghi-m-h-m-s-b-c-hai",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Đồ thị và hàm số - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/btrhhq70c6wjvw71",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Số gần đúng và sai số - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/btrkgb2rcy16jb7h",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Tích vô hướng của hai véc-tơ - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-to-n-10",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Tích của một số với một véc-tơ - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/btrjw3h2kvsjyttz",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Tổng và hiệu của hai véc-tơ - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/btrjp36yy81f22vh",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Véc-tơ - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-vecto",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Tam giác - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-gi-i-tam-gi-c",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Cosin và Sin - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/btrhwpsz34k9qsxh",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Giá trị lượng giác của một góc từ 0° đến 180° - Lớp 10",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-gi-tr-l-ng-gi-c",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
 
     // --- LỚP 11 ---
     {
       name: "Trung vị và Tứ phân vị của mẫu số liệu ghép nhóm - Lớp 11",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-to-n-h-c",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Số Trung Bình & Mốt - Mẫu Số Liệu Ghép Nhóm - Lớp 11",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-to-n-th-ng-k",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Phương trình lượng giác cơ bản - Lớp 11",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-l-ng-gi-c-l-p-11",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Hàm Số Lượng Giác - Lớp 11",
       link: "https://nguyenthanhthan.my.canva.site/quiz-h-m-s-l-ng-gi-c",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "CÔNG THỨC LƯỢNG GIÁC - Lớp 11",
       link: "https://nguyenthanhthan.my.canva.site/tr-c-nghi-m-l-ng-gi-c",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Giá Trị Lượng Giác - Lớp 11",
       link: "https://nguyenthanhthan.my.canva.site/b-i-quiz-gi-tr-l-ng-gi-c",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Góc Lượng Giác - Lớp 11",
       link: "https://nguyenthanhthan.my.canva.site/b-i-ki-m-tra-g-c-l-ng-gi-c",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
 
     // --- LỚP 12 ---
     {
       name: "Tính đơn điệu và cực trị của hàm số - Lớp 12",
       link: "https://nguyenthanhthan.my.canva.site/b-i-ki-m-tra-to-n-l-p-12",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Giá Trị Lớn Nhất, Giá Trị Nhỏ Nhất Của Hàm Số - Lớp 12",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-to-n-12",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Đường Tiệm Cận của Đồ Thị Hàm Số - Lớp 12",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-to-n-ng-ti-m-c-n",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Khảo sát và vẽ đồ thị hàm số cơ bản - Lớp 12",
       link: "https://nguyenthanhthan.my.canva.site/tr-c-nghi-m-to-n-l-p-12",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Vecto và Các phép toán trên vecto - Lớp 12",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-tr-c-nghi-m-to-n",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Tọa độ của vectơ trong không gian - Lớp 12",
       link: "https://nguyenthanhthan.my.canva.site/bv38q85w5z8qy4ts",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Tổng hợp - Lớp 12",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-to-n-h-c-tr-c-nghi-m",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Khoảng biến thiên và khoảng tứ phân vị - Lớp 12",
       link: "https://nguyenthanhthan.my.canva.site/b-i-t-p-to-n-l-p-12",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     },
     {
       name: "Phương Sai và Độ Lệch Chuẩn của Mẫu Số Liệu Ghép Nhóm - Lớp 12",
       link: "https://nguyenthanhthan.my.canva.site/quiz-to-n-h-c-l-p-12",
-      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1764234477/Gemini_Generated_Image_j2p1fsj2p1fsj2p1_ui2dit.png"
+      thumbnail: "https://res.cloudinary.com/duk8odqun/image/upload/v1765428972/Gemini_Generated_Image_nh6295nh6295nh62_uwtwuv.png"
     }
   ];
 
