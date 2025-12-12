@@ -23,38 +23,42 @@ const isAdmin = (req, res, next) => {
 // Lấy tổng số liệu cho Dashboard Admin
 router.get("/dashboard", isAdmin, async (req, res) => {
   try {
-    // 1. Tổng số lượt truy cập (tất cả các ngày)
-    const totalVisitsResult = await Visit.aggregate([
-      {
-        $group: {
-          _id: null,
-          total: { $sum: "$count" },
-        },
-      },
+    const totalUsers = await User.countDocuments();
+
+    // Tổng lượt truy cập
+    const totalVisitsAgg = await Visit.aggregate([
+      { $group: { _id: null, total: { $sum: "$count" } } }
     ]);
-    const totalVisits = totalVisitsResult.length > 0 ? totalVisitsResult[0].total : 0;
+    const totalVisits = totalVisitsAgg[0]?.total || 0;
 
-    // 2. Tổng số người dùng đăng ký
-    const totalUsers = await User.countDocuments(); 
+    // 📅 Tháng hiện tại
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startOfYear = new Date(now.getFullYear(), 0, 1);
 
-    // 3. Lượt truy cập 7 ngày gần nhất
-    const sevenDaysAgo = new Date(new Date().setHours(0, 0, 0, 0));
-    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 6);
+    // 📊 Lượt truy cập tháng
+    const monthlyAgg = await Visit.aggregate([
+      { $match: { date: { $gte: startOfMonth } } },
+      { $group: { _id: null, total: { $sum: "$count" } } }
+    ]);
 
-    const recentVisits = await Visit.find({ date: { $gte: sevenDaysAgo } })
-      .sort({ date: 1 })
-      .select("date count -_id"); 
+    // 📊 Lượt truy cập năm
+    const yearlyAgg = await Visit.aggregate([
+      { $match: { date: { $gte: startOfYear } } },
+      { $group: { _id: null, total: { $sum: "$count" } } }
+    ]);
 
-    res.status(200).json({
+    res.json({
       totalUsers,
       totalVisits,
-      // Đảm bảo dữ liệu gửi về có trường này để AdminDashboard.jsx không bị lỗi
-      recentVisits, 
+      monthlyVisits: monthlyAgg[0]?.total || 0,
+      yearlyVisits: yearlyAgg[0]?.total || 0,
     });
-  } catch (error) {
-    console.error("Lỗi khi lấy dữ liệu thống kê:", error.message);
-    res.status(500).json({ message: "Lỗi Server khi lấy thống kê" });
+
+  } catch (err) {
+    res.status(500).json({ message: "Lỗi thống kê" });
   }
 });
+
 
 module.exports = router; // Dùng module.exports

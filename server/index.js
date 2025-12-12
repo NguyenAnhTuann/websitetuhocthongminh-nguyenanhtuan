@@ -48,31 +48,24 @@ app.use(
 // ===============================
 // Đặt ngay sau Cors/Body Parser và trước các định nghĩa routes khác.
 app.use(async (req, res, next) => {
-  // LƯU Ý: Đây là phương pháp ghi nhận lượt truy cập cho mọi request
-  // Nếu bạn muốn chỉ ghi nhận khi trang được tải lần đầu, hãy dùng custom header
-  // như đã gợi ý ở phản hồi trước.
-
-  // Dùng Custom Header 'X-Page-Load' từ frontend (sẽ thêm vào App.js) để tránh đếm các request assets.
-  const isPageLoad = req.headers["x-page-load"] === "true";
-
-  if (isPageLoad) {
-    const today = new Date(new Date().setHours(0, 0, 0, 0)); // Lấy ngày hôm nay (00:00:00)
+  // CHỈ ĐẾM KHI LOAD TRANG (GET) – tránh POST/API
+  if (req.method === "GET" && !req.path.startsWith("/api")) {
+    const today = new Date(new Date().setHours(0, 0, 0, 0));
 
     try {
-      // Tìm kiếm hoặc tạo mới bản ghi Visit và tăng count lên 1
       await Visit.findOneAndUpdate(
         { date: today },
         { $inc: { count: 1 } },
-        { upsert: true, new: true, setDefaultsOnInsert: true }
+        { upsert: true }
       );
-    } catch (error) {
-      console.error("❌ Lỗi khi ghi nhận lượt truy cập:", error.message);
-      // Tiếp tục mà không làm crash ứng dụng
+    } catch (err) {
+      console.error("❌ Lỗi ghi lượt truy cập:", err.message);
     }
   }
 
   next();
 });
+
 // ===============================
 
 const SUBJECT_PROMPTS = {
