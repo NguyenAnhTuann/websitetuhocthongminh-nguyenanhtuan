@@ -114,6 +114,39 @@ const AppWrapper = () => {
   }, []);
 
 
+
+  // ================================
+  // THÊM: useEffect để gửi request ghi nhận lượt truy cập (với custom header)
+  // ================================
+  useEffect(() => {
+    // Chỉ gửi request này khi tải trang chính (ví dụ: Trang chủ)
+    // Hoặc đơn giản là khi App.js được render lần đầu (giống như load vào website)
+    const recordVisit = async () => {
+      // Dùng 1 endpoint nhẹ, ví dụ: /api/auth/check (nếu có) hoặc 
+      // gọi tới root API /api. Tôi sẽ dùng /api/auth/status (giả định có 1 API nhẹ này)
+      // Nếu không có API nhẹ nào, bạn có thể gọi tới /api/auth/me (check user)
+      const lightEndpoint = 
+        "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/auth/status"; // Chọn 1 API nhẹ, an toàn
+
+      try {
+        await fetch(lightEndpoint, {
+          method: "GET",
+          headers: {
+            // **CUSTOM HEADER QUAN TRỌNG:** Kích hoạt middleware đếm lượt truy cập
+            "X-Page-Load": "true", 
+          },
+          // Timeout nhanh để request này không làm chậm quá trình tải trang
+          signal: AbortSignal.timeout(1000), 
+        });
+      } catch (e) {
+        // Bỏ qua lỗi kết nối/timeout của request ghi nhận lượt truy cập
+      }
+    };
+
+    recordVisit();
+  }, []); // [] đảm bảo chỉ chạy 1 lần khi AppWrapper mount
+
+
   useEffect(() => {
     const root = window.document.documentElement;
     if (isDarkMode) root.classList.add("dark");

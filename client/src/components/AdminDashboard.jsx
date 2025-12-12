@@ -19,6 +19,9 @@ export default function AdminDashboard() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [userToDeleteId, setUserToDeleteId] = useState(null); //
 
+  // THÊM: State để lưu dữ liệu thống kê
+  const [stats, setStats] = useState({ totalUsers: 0, totalVisits: 0 }); 
+
 
   const showNotify = (type, message) => {
     setNotify({ type, message });
@@ -29,6 +32,31 @@ export default function AdminDashboard() {
     }, 2500);
   };
 
+
+  // ================================
+  // THÊM: HÀM TẢI DỮ LIỆU THỐNG KÊ
+  // ================================
+  const fetchStats = async () => {
+    // Không dùng setIsDataLoading ở đây để tránh làm chung với bảng user
+    const token = localStorage.getItem("token");
+    const url = "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/stats/dashboard"; 
+
+    try {
+      const res = await fetch(url, {
+        headers: { Authorization: "Bearer " + token },
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+         console.error("Lỗi khi tải thống kê:", data.message || "Không thể lấy dữ liệu thống kê.");
+         // KHÔNG set error chung, chỉ log ra console
+         return;
+      }
+      setStats(data);
+    } catch (err) {
+      console.error("Lỗi kết nối khi tải thống kê:", err);
+    }
+  };
 
   // ================================
   // HÀM TẢI DỮ LIỆU USER
@@ -139,6 +167,8 @@ export default function AdminDashboard() {
 
     // Tải dữ liệu (lần đầu hoặc khi có tìm kiếm)
     fetchUsers(currentSearchTerm);
+
+    fetchStats();
 
   }, [currentSearchTerm])
 
@@ -274,6 +304,45 @@ export default function AdminDashboard() {
             DỮ LIỆU HỌC SINH
           </h1>
         </div>
+
+        {/* ======================= */}
+        {/* THÊM: KHU VỰC BẢNG THỐNG KÊ (Stats Cards) */}
+        {/* ======================= */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {/* Box 1: Tổng User */}
+            <div className="bg-white p-5 rounded-xl shadow-xl border-l-4 border-yellow-500 hover:shadow-2xl transition duration-300">
+                <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
+                    👥 Tổng Người Dùng
+                </p>
+                <p className="text-4xl font-bold text-gray-900 mt-1">
+                    {/* Hiển thị dữ liệu từ state stats */}
+                    {stats.totalUsers.toLocaleString('vi-VN')}
+                </p>
+            </div>
+
+            {/* Box 2: Tổng Lượt Truy Cập */}
+            <div className="bg-white p-5 rounded-xl shadow-xl border-l-4 border-teal-500 hover:shadow-2xl transition duration-300">
+                <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
+                    🌐 Tổng Lượt Truy Cập
+                </p>
+                <p className="text-4xl font-bold text-gray-900 mt-1">
+                    {/* Hiển thị dữ liệu từ state stats */}
+                    {stats.totalVisits.toLocaleString('vi-VN')}
+                </p>
+            </div>
+            
+            {/* Box 3: Số liệu khác (Giả định, có thể thay thế bằng dữ liệu thực tế) */}
+            <div className="bg-white p-5 rounded-xl shadow-xl border-l-4 border-purple-500 hover:shadow-2xl transition duration-300">
+                <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
+                    ⏰ Thời Gian Hoạt Động (Ngày)
+                </p>
+                <p className="text-4xl font-bold text-gray-900 mt-1">
+                    {/* Giả định: 7 ngày gần nhất hoặc số liệu khác */}
+                    {stats.recentVisits ? stats.recentVisits.length : 0}
+                </p>
+            </div>
+        </div>
+        {/* KẾT THÚC KHU VỰC BẢNG THỐNG KÊ */}
 
         {/* 2. KHU VỰC TÌM KIẾM NỔI BẬT */}
         <div className="bg-white p-5 md:p-6 rounded-xl shadow-2xl mb-8 border border-gray-100">
