@@ -63,6 +63,11 @@ export default function AdminDashboard() {
       console.error("Lỗi kết nối khi tải thống kê:", err);
     }
   };
+  useEffect(() => {
+    fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/visit", {
+      method: "POST",
+    }).catch(() => { });
+  }, []);
 
   // ================================
   // HÀM TẢI DỮ LIỆU USER
@@ -74,7 +79,7 @@ export default function AdminDashboard() {
 
     const token = localStorage.getItem("token");
     // Xây dựng URL với tham số search
-    const url = `https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/users${searchQuery ? `?search=${searchQuery}` : ""}`;
+
 
     try {
       const res = await fetch(url, {

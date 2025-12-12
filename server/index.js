@@ -6,8 +6,13 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const fetch = require("node-fetch");
 
+// KHỞI TẠO APP — PHẢI ĐỂ Ở ĐÂY
+const app = express();
 const Visit = require("./models/Visit"); // Sửa đường dẫn tuyệt đối
 const statsRoutes = require("./utils/stats"); // Import Stats Route
+const visitRoute = require("./routes/visit");
+app.use("/api/visit", visitRoute);
+
 
 // ===== OpenAI ChatGPT =====
 const OpenAI = require("openai");
@@ -23,8 +28,6 @@ const SYSTEM_PROMPT = `
 
 const User = require("./models/User");
 
-// KHỞI TẠO APP — PHẢI ĐỂ Ở ĐÂY
-const app = express();
 
 // Tăng giới hạn lên 50mb để nhận được ảnh base64
 app.use(express.json({ limit: "50mb" }));
@@ -47,24 +50,24 @@ app.use(
 // THÊM: MIDDLEWARE GHI NHẬN LƯỢT TRUY CẬP TRANG
 // ===============================
 // Đặt ngay sau Cors/Body Parser và trước các định nghĩa routes khác.
-app.use(async (req, res, next) => {
-  // CHỈ ĐẾM KHI LOAD TRANG (GET) – tránh POST/API
-  if (req.method === "GET" && !req.path.startsWith("/api")) {
-    const today = new Date(new Date().setHours(0, 0, 0, 0));
+// app.use(async (req, res, next) => {
+//   // CHỈ ĐẾM KHI LOAD TRANG (GET) – tránh POST/API
+//   if (req.method === "GET" && !req.path.startsWith("/api")) {
+//     const today = new Date(new Date().setHours(0, 0, 0, 0));
 
-    try {
-      await Visit.findOneAndUpdate(
-        { date: today },
-        { $inc: { count: 1 } },
-        { upsert: true }
-      );
-    } catch (err) {
-      console.error("❌ Lỗi ghi lượt truy cập:", err.message);
-    }
-  }
+//     try {
+//       await Visit.findOneAndUpdate(
+//         { date: today },
+//         { $inc: { count: 1 } },
+//         { upsert: true }
+//       );
+//     } catch (err) {
+//       console.error("❌ Lỗi ghi lượt truy cập:", err.message);
+//     }
+//   }
 
-  next();
-});
+//   next();
+// });
 
 // ===============================
 
