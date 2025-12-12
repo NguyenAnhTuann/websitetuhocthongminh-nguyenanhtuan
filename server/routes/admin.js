@@ -103,20 +103,5 @@ router.delete("/delete/:id", verifyAdmin, async (req, res) => {
 });
 
 
-// routes/admin.js (hoặc file route chung nếu bạn muốn đếm cả trang đăng nhập)
-router.get("/access-count", async (req, res) => {
-    try {
-        let access = await AccessCount.findOne({});
-        if (!access) {
-            access = await AccessCount.create({ count: 1 });
-        } else {
-            access.count += 1;
-            await access.save();
-        }
-        res.json({ count: access.count });
-    } catch (err) {
-        res.status(500).json({ message: "Lỗi server khi đếm truy cập" });
-    }
-});
 
 module.exports = router;
