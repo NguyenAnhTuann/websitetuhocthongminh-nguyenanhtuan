@@ -30,6 +30,19 @@ const app = express();
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
+
+app.use(
+  cors({
+    origin: [
+      "https://www.tuhocthongminh.online",
+      "https://tuhocthongminh.online",
+      "https://websitetuhocthongminh-nguyenanhtuan.onrender.com"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  })
+);
+
 // ===============================
 // THÊM: MIDDLEWARE GHI NHẬN LƯỢT TRUY CẬP TRANG
 // ===============================
@@ -62,19 +75,6 @@ app.use(async (req, res, next) => {
 });
 // ===============================
 
-app.use(
-  cors({
-    origin: [
-      "https://www.tuhocthongminh.online",
-      "https://tuhocthongminh.online",
-      "https://websitetuhocthongminh-nguyenanhtuan.onrender.com"
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-  })
-);
-
-
 const SUBJECT_PROMPTS = {
   toan: `
                                                                                                                                   Bạn là trợ lý AI CHUYÊN VỀ MÔN TOÁN.
@@ -92,7 +92,7 @@ const SUBJECT_PROMPTS = {
                                                                                                                                       Không trả lời các môn khác.
                                                                                                                                       `,
   vatly: `
-                                                                                                                                        Bạn là trợ lý AI môn VẬT LÝ.
+Bạn là trợ lý AI môn VẬT LÝ.
                                                                                                                                         Chỉ trả lời cơ học, điện học, quang học, hạt nhân, dao động, sóng.
                                                                                                                                         Câu hỏi ngoài Vật lý → từ chối.
                                                                                                                                         `,
@@ -161,6 +161,8 @@ app.use("/api/auth", authRoutes);
 const adminRoutes = require("./routes/admin");
 app.use("/api/admin", adminRoutes);
 
+
+app.use("/api/stats", statsRoutes);
 // ===============================
 // 1) KẾT NỐI MONGODB
 // ===============================
