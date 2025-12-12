@@ -73,6 +73,11 @@ const KyNangTuHoc = ({ language }) => {
 
   return (
     <section className="min-h-screen w-full px-4 py-20 bg-white max-w-7xl mx-auto">
+            {/* Background Decor */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute -top-[10%] -left-[10%] w-96 h-96 bg-[#1c7c76] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+        <div className="absolute top-[20%] -right-[10%] w-96 h-96 bg-teal-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+      </div>
 
       {/* --- TIÊU ĐỀ CHÍNH --- */}
       <motion.div
@@ -81,9 +86,9 @@ const KyNangTuHoc = ({ language }) => {
         transition={{ duration: 0.6 }}
         className="text-center mb-10 z-10 relative"
       >
-        <h1 className="mt-6 md:mt-10 mx-auto text-center block text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm">
-          KỸ NĂNG TỰ HỌC
-        </h1>
+        <h1 className="mt-6 md:mt-10 mx-auto w-fit text-center text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm">
+          KỸ NĂNG TỰ HỌC
+        </h1>
         <p className="text-gray-500 mt-2 max-w-2xl mx-auto text-lg">
           Nâng cao tư duy – Rèn luyện tinh thần tự chủ – Phát triển bản thân trong Kỷ nguyên số.
         </p>

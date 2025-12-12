@@ -89,7 +89,7 @@ const TaiNguyenOnline = ({ language }) => {
         transition={{ duration: 0.6 }}
         className="text-center mb-10 z-10 relative"
       >
-        <h1 className="mt-6 md:mt-10 mx-auto text-center block text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm">
+        <h1 className="mt-6 md:mt-10 mx-auto w-fit text-center text-3xl md:text-5xl lg:text-6xl font-extrabold text-white font-outfit bg-[#1c7c76] px-6 py-4 rounded-2xl shadow-sm">
           KỸ NĂNG MẠNG
         </h1>
         <p className="text-gray-500 mt-2 max-w-2xl mx-auto text-lg">
