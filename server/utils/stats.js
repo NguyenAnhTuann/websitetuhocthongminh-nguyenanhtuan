@@ -1,7 +1,9 @@
-// server/routes/utils/stats.js
+// server/utils/stats.js
+
 const express = require("express");
-const Visit = require("../../models/Visit"); // Dùng require
-const User = require("../../models/User"); // Dùng require
+const Visit = require("../models/Visit");
+const User  = require("../models/User");
+
 
 const router = express.Router();
 
