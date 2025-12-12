@@ -311,344 +311,344 @@ export default function Register() {
             placeholder="Nhập họ tên..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
           />
+        </div>
 
+        <div ref={refDob} className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">
+            Ngày sinh
+          </label>
 
-          <div ref={refDob} className="mb-4">
-            <label className="block text-gray-700 font-medium mb-1">
-              Ngày sinh
-            </label>
+          <div className="grid grid-cols-3 gap-3">
 
-            <div className="grid grid-cols-3 gap-3">
-
-              {/* Ngày */}
-              <div className="relative">
-                <select
-                  value={day}
-                  onChange={(e) => setDay(e.target.value)}
-                  className="w-full appearance-none px-4 py-3 border rounded-xl outline-none 
+            {/* Ngày */}
+            <div className="relative">
+              <select
+                value={day}
+                onChange={(e) => setDay(e.target.value)}
+                className="w-full appearance-none px-4 py-3 border rounded-xl outline-none 
                  focus:border-[#1c7c76] bg-white text-gray-700"
-                >
-                  <option value="">Ngày</option>
-                  {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
-                    <option key={d} value={d}>
-                      {d}
-                    </option>
-                  ))}
-                </select>
+              >
+                <option value="">Ngày</option>
+                {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
 
-                {/* Icon dropdown */}
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
-                  ▼
-                </span>
-              </div>
-
-              {/* Tháng */}
-              <div className="relative">
-                <select
-                  value={month}
-                  onChange={(e) => setMonth(e.target.value)}
-                  className="w-full appearance-none px-4 py-3 border rounded-xl outline-none 
-                 focus:border-[#1c7c76] bg-white text-gray-700"
-                >
-                  <option value="">Tháng</option>
-                  {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
-                    <option key={m} value={m}>
-                      {m}
-                    </option>
-                  ))}
-                </select>
-
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
-                  ▼
-                </span>
-              </div>
-
-              {/* Năm */}
-              <div className="relative">
-                <select
-                  value={year}
-                  onChange={(e) => setYear(e.target.value)}
-                  className="w-full appearance-none px-4 py-3 border rounded-xl outline-none 
-                 focus:border-[#1c7c76] bg-white text-gray-700"
-                >
-                  <option value="">Năm</option>
-                  {Array.from({ length: 30 }, (_, i) => 2025 - i).map((y) => (
-                    <option key={y} value={y}>
-                      {y}
-                    </option>
-                  ))}
-                </select>
-
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
-                  ▼
-                </span>
-              </div>
-
+              {/* Icon dropdown */}
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                ▼
+              </span>
             </div>
 
+            {/* Tháng */}
+            <div className="relative">
+              <select
+                value={month}
+                onChange={(e) => setMonth(e.target.value)}
+                className="w-full appearance-none px-4 py-3 border rounded-xl outline-none 
+                 focus:border-[#1c7c76] bg-white text-gray-700"
+              >
+                <option value="">Tháng</option>
+                {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+                  <option key={m} value={m}>
+                    {m}
+                  </option>
+                ))}
+              </select>
 
-            {dobError && (
-              <p className="text-sm mt-1 font-medium text-red-500">{dobError}</p>
-            )}
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                ▼
+              </span>
+            </div>
+
+            {/* Năm */}
+            <div className="relative">
+              <select
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                className="w-full appearance-none px-4 py-3 border rounded-xl outline-none 
+                 focus:border-[#1c7c76] bg-white text-gray-700"
+              >
+                <option value="">Năm</option>
+                {Array.from({ length: 30 }, (_, i) => 2025 - i).map((y) => (
+                  <option key={y} value={y}>
+                    {y}
+                  </option>
+                ))}
+              </select>
+
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                ▼
+              </span>
+            </div>
 
           </div>
 
 
+          {dobError && (
+            <p className="text-sm mt-1 font-medium text-red-500">{dobError}</p>
+          )}
 
-          {/* TRƯỜNG */}
-          <div ref={refSchool} className="mb-4">
-            <label className="block text-gray-700 font-medium mb-1">Trường học</label>
-            <input
-              type="text"
-              value={school}
-              onChange={(e) => {
-                const rawValue = e.target.value;
-                // Lọc ký tự không phải chữ cái và không phải khoảng trắng (bao gồm tiếng Việt có dấu)
-                const value = rawValue.replace(/[^a-zA-Z\sÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/g, "");
-                setSchool(value);
-
-                if (!value.trim()) setSchoolError("Tên trường không được trống!");
-                else setSchoolError("");
-              }}
-              placeholder="Nhập tên trường..."
-              className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
-            />
+        </div>
 
 
 
-            {/* GRADE */}
-        <div ref={refGrade} className="mb-4">
-          <label className="block text-gray-700 font-medium mb-1">Lớp</label>
-          <input
-            type="text"
-            value={grade}
-            onChange={(e) => {
-              const rawValue = e.target.value;
+        {/* TRƯỜNG */}
+        <div ref={refSchool} className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Trường học</label>
+          <input
+            type="text"
+            value={school}
+            onChange={(e) => {
+              const rawValue = e.target.value;
+              // Lọc ký tự không phải chữ cái và không phải khoảng trắng (bao gồm tiếng Việt có dấu)
+              const value = rawValue.replace(/[^a-zA-Z\sÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/g, "");
+              setSchool(value);
+
+              if (!value.trim()) setSchoolError("Tên trường không được trống!");
+              else setSchoolError("");
+            }}
+            placeholder="Nhập tên trường..."
+            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+          />
+        </div>
+
+
+        {/* GRADE */}
+        <div ref={refGrade} className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Lớp</label>
+          <input
+            type="text"
+            value={grade}
+            onChange={(e) => {
+              const rawValue = e.target.value;
               // Lọc ký tự không phải chữ cái, số, và khoảng trắng
-              const value = rawValue.replace(/[^a-zA-Z0-9\sÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/g, "");
-              setGrade(value);
+              const value = rawValue.replace(/[^a-zA-Z0-9\sÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/g, "");
+              setGrade(value);
 
-              if (!value.trim()) setGradeError("Vui lòng nhập tên lớp!");
-              else setGradeError("");
-            }}
-            placeholder="10A1"
-            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
-          />
+              if (!value.trim()) setGradeError("Vui lòng nhập tên lớp!");
+              else setGradeError("");
+            }}
+            placeholder="10A1"
+            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+          />
+        </div>
+
+        {/* PHONE */}
+        <div ref={refPhone} className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Số điện thoại</label>
+          <input
+            type="text"
+            value={phone}
+            onChange={(e) => {
+              const v = e.target.value.replace(/\D/g, "");
+              setPhone(v);
+
+              if (v.length !== 10) setPhoneError("Số điện thoại phải đúng 10 số!");
+              else setPhoneError("");
+            }}
+
+            placeholder="Nhập số điện thoại..."
+            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+          />
+          {phoneError && (
+            <p className="text-sm mt-1 font-medium text-red-500">{phoneError}</p>
+          )}
+
+        </div>
+
+        {/* EMAIL */}
+        <div ref={refEmail} className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => {
+              const v = e.target.value;
+              setEmail(v);
+
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+              if (!emailRegex.test(v)) setEmailError("Email không hợp lệ!");
+              else setEmailError("");
+            }}
+
+            placeholder="Nhập email..."
+            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+          />
+          {emailError && (
+            <p className="text-sm mt-1 font-medium text-red-500">{emailError}</p>
+          )}
+
+        </div>
+
+        {/* PASSWORD */}
+        <div ref={refPassword} className="mb-4 relative">
+          <label className="block text-gray-700 font-medium mb-1">Mật khẩu</label>
+
+          <input
+            type={showPass ? "text" : "password"}
+            value={pass}
+            onChange={(e) => {
+              setPass(e.target.value);
+              setStrength(checkStrength(e.target.value));
+            }}
+            placeholder="Tạo mật khẩu..."
+            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+          />
+
+          {pass && strength && (
+            <div className="mt-2">
+              <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  className={`h-full ${strength.color} ${strength.width} transition-all duration-300`}
+                ></div>
+              </div>
+              <p className="text-sm mt-1 font-medium text-gray-700">{strength.label}</p>
+            </div>
+          )}
 
 
-            {/* PHONE */}
-            <div ref={refPhone} className="mb-4">
-              <label className="block text-gray-700 font-medium mb-1">Số điện thoại</label>
-              <input
-                type="text"
-                value={phone}
-                onChange={(e) => {
-                  const v = e.target.value.replace(/\D/g, "");
-                  setPhone(v);
 
-                  if (v.length !== 10) setPhoneError("Số điện thoại phải đúng 10 số!");
-                  else setPhoneError("");
-                }}
+          <span
+            className="absolute right-4 top-[45px] text-gray-600 cursor-pointer"
+            onClick={() => setShowPass(!showPass)}
+          >
+            {showPass ? <FiEyeOff size={22} /> : <FiEye size={22} />}
+          </span>
+        </div>
 
-                placeholder="Nhập số điện thoại..."
-                className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
-              />
-              {phoneError && (
-                <p className="text-sm mt-1 font-medium text-red-500">{phoneError}</p>
+
+        {/* PASSWORD AGAIN */}
+        <div ref={refPasswordAgain} className="mb-4 relative">
+          <label className="block text-gray-700 font-medium mb-1">Nhập lại mật khẩu</label>
+
+          <input
+            type={showPass2 ? "text" : "password"}
+            value={passAgain}
+            onChange={(e) => setPassAgain(e.target.value)}
+            placeholder="Nhập lại mật khẩu..."
+            className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
+          />
+
+          <span
+            className="absolute right-4 top-[45px] text-gray-600 cursor-pointer"
+            onClick={() => setShowPass2(!showPass2)}
+          >
+            {showPass2 ? <FiEyeOff size={22} /> : <FiEye size={22} />}
+          </span>
+
+          {matchStatus === "no" && (
+            <p className="text-sm mt-1 font-medium text-red-600">
+              ❌ Mật khẩu không khớp
+            </p>
+          )}
+
+          {matchStatus === "yes" && (
+            <p className="text-sm mt-1 font-medium text-green-600">
+              ✔ Mật khẩu khớp
+            </p>
+          )}
+
+          {matchStatus === "" && passAgain.length > 0 && (
+            <p className="text-sm mt-1 font-medium text-gray-500">
+              ...Đang kiểm tra
+            </p>
+          )}
+
+
+        </div>
+
+
+        {/* REGISTER BUTTON */}
+        <button
+          onClick={handleRegister}
+          disabled={isSubmitting}
+          className="w-full bg-[#1c7c76] hover:bg-[#166662] disabled:bg-gray-400 text-white py-3 rounded-xl font-semibold shadow-md transition"
+        >
+          {isSubmitting ? "Đang xử lý..." : "Tạo tài khoản"}
+        </button>
+
+
+        <p className="text-center text-gray-600 mt-6 text-sm">
+          Đã có tài khoản?
+          <a href="/dangnhap" className="text-[#1c7c76] font-medium underline"> Đăng nhập</a>
+        </p>
+      </motion.div>
+
+
+      {isSubmitting && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
+
+
+
+      {msg && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+          <motion.div
+            initial={{ scale: 0.6, opacity: 0, y: 40 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="bg-white w-[88%] max-w-sm p-7 rounded-3xl shadow-xl text-center relative"
+          >
+
+            {/* ICON */}
+            <div className="flex justify-center mb-4">
+              {msgType === "success" ? (
+                <img
+                  src="/done.png"
+                  alt="success"
+                  className="w-24 h-24 drop-shadow-xl"
+                />
+              ) : (
+                <img
+                  src="/error.png"
+                  alt="error"
+                  className="w-24 h-24 drop-shadow-xl"
+                />
               )}
-
             </div>
 
-            {/* EMAIL */}
-            <div ref={refEmail} className="mb-4">
-              <label className="block text-gray-700 font-medium mb-1">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  const v = e.target.value;
-                  setEmail(v);
-
-                  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                  if (!emailRegex.test(v)) setEmailError("Email không hợp lệ!");
-                  else setEmailError("");
-                }}
-
-                placeholder="Nhập email..."
-                className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
-              />
-              {emailError && (
-                <p className="text-sm mt-1 font-medium text-red-500">{emailError}</p>
-              )}
-
-            </div>
-
-            {/* PASSWORD */}
-            <div ref={refPassword} className="mb-4 relative">
-              <label className="block text-gray-700 font-medium mb-1">Mật khẩu</label>
-
-              <input
-                type={showPass ? "text" : "password"}
-                value={pass}
-                onChange={(e) => {
-                  setPass(e.target.value);
-                  setStrength(checkStrength(e.target.value));
-                }}
-                placeholder="Tạo mật khẩu..."
-                className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
-              />
-
-              {pass && strength && (
-                <div className="mt-2">
-                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full ${strength.color} ${strength.width} transition-all duration-300`}
-                    ></div>
-                  </div>
-                  <p className="text-sm mt-1 font-medium text-gray-700">{strength.label}</p>
-                </div>
-              )}
-
-
-
-              <span
-                className="absolute right-4 top-[45px] text-gray-600 cursor-pointer"
-                onClick={() => setShowPass(!showPass)}
-              >
-                {showPass ? <FiEyeOff size={22} /> : <FiEye size={22} />}
-              </span>
-            </div>
-
-
-            {/* PASSWORD AGAIN */}
-            <div ref={refPasswordAgain} className="mb-4 relative">
-              <label className="block text-gray-700 font-medium mb-1">Nhập lại mật khẩu</label>
-
-              <input
-                type={showPass2 ? "text" : "password"}
-                value={passAgain}
-                onChange={(e) => setPassAgain(e.target.value)}
-                placeholder="Nhập lại mật khẩu..."
-                className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
-              />
-
-              <span
-                className="absolute right-4 top-[45px] text-gray-600 cursor-pointer"
-                onClick={() => setShowPass2(!showPass2)}
-              >
-                {showPass2 ? <FiEyeOff size={22} /> : <FiEye size={22} />}
-              </span>
-
-              {matchStatus === "no" && (
-                <p className="text-sm mt-1 font-medium text-red-600">
-                  ❌ Mật khẩu không khớp
-                </p>
-              )}
-
-              {matchStatus === "yes" && (
-                <p className="text-sm mt-1 font-medium text-green-600">
-                  ✔ Mật khẩu khớp
-                </p>
-              )}
-
-              {matchStatus === "" && passAgain.length > 0 && (
-                <p className="text-sm mt-1 font-medium text-gray-500">
-                  ...Đang kiểm tra
-                </p>
-              )}
-
-
-            </div>
-
-
-            {/* REGISTER BUTTON */}
-            <button
-              onClick={handleRegister}
-              disabled={isSubmitting}
-              className="w-full bg-[#1c7c76] hover:bg-[#166662] disabled:bg-gray-400 text-white py-3 rounded-xl font-semibold shadow-md transition"
+            {/* MESSAGE */}
+            <p
+              className={`text-lg leading-relaxed ${msgType === "success"
+                ? "text-[#1c7c76] font-bold"
+                : "text-red-600 font-semibold"
+                }`}
             >
-              {isSubmitting ? "Đang xử lý..." : "Tạo tài khoản"}
+              {msg}
+            </p>
+
+            {/* BUTTON — Đóng */}
+            <button
+              onClick={() => {
+                setMsg("");
+                setMsgType("");
+              }}
+              className="mt-6 w-full bg-[#1c7c76] hover:bg-[#166662] text-white py-3 rounded-2xl font-semibold shadow-md transition"
+            >
+              Đóng
             </button>
 
-
-            <p className="text-center text-gray-600 mt-6 text-sm">
-              Đã có tài khoản?
-              <a href="/dangnhap" className="text-[#1c7c76] font-medium underline"> Đăng nhập</a>
-            </p>
-          </motion.div>
-
-
-          {isSubmitting && (
-            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-              <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          )}
-
-
-
-          {msg && (
-            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-              <motion.div
-                initial={{ scale: 0.6, opacity: 0, y: 40 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                className="bg-white w-[88%] max-w-sm p-7 rounded-3xl shadow-xl text-center relative"
+            {/* BUTTON — Đăng nhập ngay (chỉ hiện khi thành công) */}
+            {msgType === "success" && (
+              <button
+                onClick={() => window.location.href = "/dangnhap"}
+                className="mt-3 w-full bg-yellow-400 hover:bg-yellow-300 text-[#1a2a2a] py-3 rounded-2xl font-bold shadow-md transition"
               >
+                Đăng nhập ngay
+              </button>
+            )}
 
-                {/* ICON */}
-                <div className="flex justify-center mb-4">
-                  {msgType === "success" ? (
-                    <img
-                      src="/done.png"
-                      alt="success"
-                      className="w-24 h-24 drop-shadow-xl"
-                    />
-                  ) : (
-                    <img
-                      src="/error.png"
-                      alt="error"
-                      className="w-24 h-24 drop-shadow-xl"
-                    />
-                  )}
-                </div>
-
-                {/* MESSAGE */}
-                <p
-                  className={`text-lg leading-relaxed ${msgType === "success"
-                    ? "text-[#1c7c76] font-bold"
-                    : "text-red-600 font-semibold"
-                    }`}
-                >
-                  {msg}
-                </p>
-
-                {/* BUTTON — Đóng */}
-                <button
-                  onClick={() => {
-                    setMsg("");
-                    setMsgType("");
-                  }}
-                  className="mt-6 w-full bg-[#1c7c76] hover:bg-[#166662] text-white py-3 rounded-2xl font-semibold shadow-md transition"
-                >
-                  Đóng
-                </button>
-
-                {/* BUTTON — Đăng nhập ngay (chỉ hiện khi thành công) */}
-                {msgType === "success" && (
-                  <button
-                    onClick={() => window.location.href = "/dangnhap"}
-                    className="mt-3 w-full bg-yellow-400 hover:bg-yellow-300 text-[#1a2a2a] py-3 rounded-2xl font-bold shadow-md transition"
-                  >
-                    Đăng nhập ngay
-                  </button>
-                )}
-
-              </motion.div>
-            </div>
-          )}
+          </motion.div>
+        </div>
+      )}
 
 
-        </section>
-        );
+    </section>
+  );
 }
