@@ -18,6 +18,7 @@ export default function AdminDashboard() {
   const [currentSearchTerm, setCurrentSearchTerm] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [userToDeleteId, setUserToDeleteId] = useState(null); //
+  const [totalAccessCount, setTotalAccessCount] = useState(0);
 
 
   const showNotify = (type, message) => {
@@ -126,6 +127,22 @@ export default function AdminDashboard() {
     setUserToDeleteId(null);
   };
 
+
+// ================================
+// Lấy và Tăng số lượt truy cập (Cần API Backend mới)
+// ================================
+const fetchAccessCount = async () => {
+    try {
+        // API TỰ TĂNG VÀ TRẢ VỀ GIÁ TRỊ MỚI
+        const res = await fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/access-count");
+        const data = await res.json();
+        if (res.ok && data.count !== undefined) {
+            setTotalAccessCount(data.count);
+        }
+    } catch (error) {
+        console.error("Lỗi khi tải số lượt truy cập:", error);
+    }
+};
 
   // ================================
   // useEffect CHÍNH: Tải và tìm kiếm data
@@ -256,6 +273,15 @@ export default function AdminDashboard() {
           </h1>
         </div>
 
+
+{/* THÊM: KHỐI THỐNG KÊ TRUY CẬP */}
+        <div className="bg-[#1c7c76] text-white p-4 rounded-xl shadow-lg mb-8">
+            <p className="font-semibold text-xl">
+                🌐 Tổng số lượt truy cập hệ thống: 
+                <span className="ml-2 text-2xl font-extrabold tracking-wider">{totalAccessCount.toLocaleString()}</span>
+            </p>
+        </div>
+        
         {/* 2. KHU VỰC TÌM KIẾM NỔI BẬT */}
         <div className="bg-white p-5 md:p-6 rounded-xl shadow-2xl mb-8 border border-gray-100">
           <p className="text-gray-600 font-semibold mb-3 text-lg border-b pb-2">
