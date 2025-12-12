@@ -278,7 +278,7 @@ export default function AdminDashboard() {
         {/* 2. KHU VỰC TÌM KIẾM NỔI BẬT */}
         <div className="bg-white p-5 md:p-6 rounded-xl shadow-2xl mb-8 border border-gray-100">
           <p className="text-gray-600 font-semibold mb-3 text-lg border-b pb-2">
-            🔎 Lọc và tìm kiếm thông tin học sinh
+            🔎 Tìm kiếm thông tin học sinh
           </p>
           <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-3">
             <input
