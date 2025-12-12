@@ -265,36 +265,41 @@ export default function AdminDashboard() {
         </h1>
 
 
-{/* ===== FORM TÌM KIẾM (THÊM MỚI) ===== */}
-        <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-3 mb-6">
-          <input
-            type="text"
-            placeholder="Tìm kiếm theo Tên, Email, SĐT, Lớp, Trường..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="flex-grow p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#1c7c76] focus:border-[#1c7c76]"
-          />
-          <button
-            type="submit"
-            className="px-6 py-3 bg-[#1c7c76] hover:bg-[#17635f] text-white font-semibold rounded-lg shadow-md transition duration-200"
-          >
-            Tìm kiếm
-          </button>
-          
-          {/* NÚT XÓA TÌM KIẾM */}
-          {currentSearchTerm && (
-             <button
-              type="button"
-              onClick={() => {
-                setSearchTerm("");
-                setCurrentSearchTerm(""); // Dùng state này để trigger lại fetchUsers
-              }}
-              className="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg shadow-md transition duration-200"
-            >
-              Xóa tìm kiếm
-            </button>
-          )}
-        </form>
+{/* 2. KHU VỰC TÌM KIẾM NỔI BẬT (KHUNG MỚI) */}
+        <div className="bg-white p-5 md:p-6 rounded-xl shadow-2xl mb-8 border border-gray-100">
+          <p className="text-gray-600 font-semibold mb-3 text-lg border-b pb-2">
+            🔎 Lọc và tìm kiếm thông tin học sinh
+          </p>
+          <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-3">
+            <input
+              type="text"
+              placeholder="Nhập Tên, Email, SĐT, Lớp, Trường..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="flex-grow p-3 border border-gray-300 rounded-lg shadow-inner focus:ring-2 focus:ring-[#1c7c76] focus:border-[#1c7c76] transition"
+            />
+            <button
+              type="submit"
+              className="px-6 py-3 bg-[#1c7c76] hover:bg-[#17635f] text-white font-semibold rounded-lg shadow-md transition duration-200"
+            >
+              Tìm kiếm
+            </button>
+            
+            {/* NÚT XÓA TÌM KIẾM */}
+            {currentSearchTerm && (
+               <button
+                type="button"
+                onClick={() => {
+                  setSearchTerm("");
+                  setCurrentSearchTerm(""); // Kích hoạt fetch lại toàn bộ dữ liệu
+                }}
+                className="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg shadow-md transition duration-200"
+              >
+                Xóa tìm kiếm
+              </button>
+            )}
+          </form>
+        </div>
 
         {error && (
           <div className="p-4 mb-4 bg-red-100 text-red-700 rounded-xl shadow">
