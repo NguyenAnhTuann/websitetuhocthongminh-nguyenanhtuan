@@ -29,6 +29,38 @@ function verifyAdmin(req, res, next) {
   }
 }
 
+
+// ===============================
+// API: Lấy danh sách user (ĐÃ THÊM TÌM KIẾM) <--- SỬA Ở ĐÂY
+// ===============================
+router.get("/users", verifyAdmin, async (req, res) => {
+    try {
+        const { search } = req.query; // Lấy tham số tìm kiếm
+        let query = {};
+
+        if (search) {
+            const regex = new RegExp(search, "i"); 
+            query = {
+                $or: [
+                    { fullName: { $regex: regex } },
+                    { email: { $regex: regex } },
+                    { phone: { $regex: regex } },
+                    { grade: { $regex: regex } },
+                    { school: { $regex: regex } },
+                ],
+            };
+        }
+
+        const users = await User.find(query).select("-password");
+        res.json(users);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Lỗi server" });
+    }
+});
+
+
+
 // ===============================
 // API: Lấy danh sách user
 // ===============================
