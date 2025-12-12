@@ -7,7 +7,7 @@ require("dotenv").config();
 const fetch = require("node-fetch");
 
 const Visit = require("./models/Visit"); // Import Visit Model
-const statsRoutes = require("./routes/utils/stats"); // Import Stats Route
+const statsRoutes = require("./utils/stats"); // Import Stats Route
 
 // ===== OpenAI ChatGPT =====
 const OpenAI = require("openai");
