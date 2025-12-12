@@ -377,45 +377,46 @@ export default function AdminDashboard() {
               </table>
 
 
-              {/* ======================= MODAL XÁC NHẬN XÓA ======================= */}
-              {showDeleteModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100]">
-                  <div className="bg-white rounded-xl shadow-2xl p-6 w-11/12 max-w-md transform transition-all duration-300 scale-100">
-
-                    {/* Header Modal */}
-                    <div className="border-b pb-3 mb-4 flex items-center gap-3 text-red-600">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                      </svg>
-                      <h3 className="text-xl font-bold">Xác nhận thao tác</h3>
-                    </div>
-
-                    {/* Nội dung */}
-                    <p className="text-gray-700 mb-6 text-base">
-                      Bạn **có chắc** muốn xóa học sinh này?
-                      <br />
-                      Học sinh sẽ bị **xóa vĩnh viễn** khỏi hệ thống và bị **cấm đăng ký lại** bằng email/số điện thoại này.
-                    </p>
-
-                    {/* Footer / Buttons */}
-                    <div className="flex justify-end space-x-3">
-                      <button
-                        onClick={cancelDelete}
-                        className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition duration-150"
-                      >
-                        Hủy
-                      </button>
-                      <button
-                        onClick={confirmDelete}
-                        className="px-5 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-150"
-                      >
-                        Xác nhận Xóa
-                      </button>
-                    </div>
-                  </div>
+              {/* ======================= MODAL XÁC NHẬN XÓA (THIẾT KẾ MỚI) ======================= */}
+    {showDeleteModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100]">
+            <div className="bg-white rounded-xl shadow-2xl p-6 w-11/12 max-w-sm md:max-w-md transform transition-all duration-300 scale-100">
+                
+                {/* Header Modal - Sử dụng màu chủ đạo xanh teal */}
+                <div className="border-b pb-3 mb-4 flex items-center gap-3 text-[#1c7c76]"> 
+                    {/* Icon Thùng rác (hoặc Cảnh báo nhẹ nhàng) */}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    <h3 className="text-xl font-bold tracking-wide">Xác nhận XÓA DỮ LIỆU</h3>
                 </div>
-              )}
-              {/* ================================================================= */}
+
+                {/* Nội dung */}
+                <p className="text-gray-700 mb-6 text-base leading-relaxed">
+                    Hành động này là **không thể hoàn tác**.
+                    <br/> 
+                    Bạn **có chắc chắn** muốn xóa học sinh này? Email và SĐT của họ sẽ bị khóa vĩnh viễn khỏi hệ thống.
+                </p>
+
+                {/* Footer / Buttons */}
+                <div className="flex justify-end space-x-3 mt-4">
+                    <button
+                        onClick={cancelDelete}
+                        className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition duration-150 shadow-sm"
+                    >
+                        Hủy
+                    </button>
+                    <button
+                        onClick={confirmDelete}
+                        className="px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg transition duration-150"
+                    >
+                        Xác nhận Xóa
+                    </button>
+                </div>
+            </div>
+        </div>
+    )}
+    {/* ================================================================= */}
 
               {/* PHÂN TRANG */}
               {users.length > 0 && (
