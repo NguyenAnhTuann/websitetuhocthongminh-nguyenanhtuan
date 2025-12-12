@@ -297,7 +297,7 @@ export default function AdminDashboard() {
                     <p><b>Email:</b> {u.email}</p>
                     <p><b>SĐT:</b> {u.phone}</p>
                     <p><b>Trường:</b> {u.school}</p>
-                    <p><b>Khối:</b> {u.grade}</p>
+                    <p><b>Lớp:</b> {u.grade}</p>
                   </div>
 
                   <button
