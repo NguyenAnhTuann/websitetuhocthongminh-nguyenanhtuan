@@ -50,9 +50,9 @@ const Home = ({ language }) => {
     vi: {
       heroTitle: "Nền tảng TỰ HỌC THÔNG MINH",
       heroType:
-        "Kết nối tài liệu số, kỹ năng mềm, bài tập trắc nghiệm và AI ChatGPT vào một website duy nhất.",
+        "Kết nối tài liệu số, kỹ năng mềm, bài tập trắc nghiệm và AI ChatBot vào một website duy nhất.",
       heroDesc:
-        "Website hỗ trợ học sinh, sinh viên chủ động học tập trong kỷ nguyên số: xem tài liệu PDF, video, hình ảnh từ Google Drive; luyện kỹ năng tự học, kỹ năng sống; làm bài trắc nghiệm có chấm điểm; và tương tác với ChatGPT ngay trên trang web.",
+        "Website hỗ trợ học sinh, sinh viên chủ động học tập trong kỷ nguyên số: xem tài liệu PDF, video, hình ảnh từ Google Drive; luyện kỹ năng tự học, kỹ năng sống; làm bài trắc nghiệm có chấm điểm; và tương tác với ChatBot ngay trên trang web.",
       heroPrimaryBtn: "Khám phá nội dung",
       heroSecondaryBtn: "Đăng nhập tài khoản",
 
@@ -96,12 +96,12 @@ const Home = ({ language }) => {
         },
         {
           key: "chatbot",
-          title: "4. Tích hợp công cụ AI ChatGPT",
+          title: "4. Tích hợp công cụ AI ChatBot",
           route: "/chatbot",
           icon: <MessageCircle className="w-7 h-7" />,
           points: [
             "PDF: Giới thiệu các công cụ AI phổ biến hiện nay",
-            "ChatBot ChatGPT tích hợp trực tiếp trên website",
+            "ChatBot tích hợp trực tiếp trên website",
             "Hỗ trợ hỏi đáp, gợi ý ý tưởng, luyện tập kỹ năng"
           ]
         },
@@ -142,7 +142,7 @@ const Home = ({ language }) => {
         "Bước 1: Học sinh truy cập website, xem nội dung miễn phí hoặc đăng ký tài khoản sinh viên.",
         "Bước 2: Học sinh chọn mục Kỹ năng tự học, Kỹ năng sống hoặc Tài nguyên để đọc tài liệu, xem video.",
         "Bước 3: Thực hành trên trang Bài tập trắc nghiệm, làm bài và xem điểm ngay sau khi nộp.",
-        "Bước 4: Sử dụng ChatGPT tích hợp để hỏi thêm, tìm gợi ý, giải thích nội dung khó.",
+        "Bước 4: Sử dụng ChatBot tích hợp để hỏi thêm, tìm gợi ý, giải thích nội dung khó.",
         "Bước 5: Admin đăng nhập vào tài khoản quản trị để xem thống kê học sinh, điểm số và cập nhật nội dung."
       ],
 
@@ -154,9 +154,9 @@ const Home = ({ language }) => {
     en: {
       heroTitle: "SMART SELF-LEARNING PLATFORM",
       heroType:
-        "Connecting digital materials, life skills, quizzes and AI ChatGPT into one website.",
+        "Connecting digital materials, life skills, quizzes and AI ChatBot into one website.",
       heroDesc:
-        "This website helps students become active learners in the digital era: view PDFs, videos, images from Google Drive; practice self-learning and life skills; take auto-graded quizzes; and interact with ChatGPT directly on the site.",
+        "This website helps students become active learners in the digital era: view PDFs, videos, images from Google Drive; practice self-learning and life skills; take auto-graded quizzes; and interact with ChatBot directly on the site.",
       heroPrimaryBtn: "Explore content",
       heroSecondaryBtn: "Sign in",
 
@@ -189,12 +189,12 @@ const Home = ({ language }) => {
         },
         {
           key: "chatbot",
-          title: "3. AI ChatGPT integration",
+          title: "3. AI ChatBot integration",
           route: "/chatbot",
           icon: <MessageCircle className="w-7 h-7" />,
           points: [
             "PDF: Overview of popular AI tools today",
-            "Built-in ChatGPT chatbot for Q&A and practice",
+            "Built-in ChatBot chatbot for Q&A and practice",
             "Support for exploring knowledge and generating ideas"
           ]
         },
@@ -246,7 +246,7 @@ const Home = ({ language }) => {
         "Step 1: Students access the website and optionally create a student account.",
         "Step 2: They choose Self-learning Skills, Life Skills, or Resources to study PDFs and watch videos.",
         "Step 3: They go to the Practice page, take quizzes, and see scores immediately.",
-        "Step 4: They use the built-in ChatGPT tool to ask questions and deepen understanding.",
+        "Step 4: They use the built-in ChatBot tool to ask questions and deepen understanding.",
         "Step 5: The Admin logs in to the management dashboard to see statistics and update content."
       ],
 
@@ -336,7 +336,7 @@ const Home = ({ language }) => {
             </div>
             <div className="flex items-center gap-2">
               <MessageCircle className="w-4 h-4 text-[#3C9E8F]" />
-              <span>ChatBot ChatGPT tích hợp</span>
+              <span>ChatBot ChatBot tích hợp</span>
             </div>
           </motion.div>
         </div>
