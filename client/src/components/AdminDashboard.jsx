@@ -5,17 +5,19 @@ export default function AdminDashboard() {
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 10;
-  
+
   // SỬA: Dùng isDataLoading để quản lý trạng thái tải dữ liệu (cục bộ)
-  const [isDataLoading, setIsDataLoading] = useState(true); 
-  
+  const [isDataLoading, setIsDataLoading] = useState(true);
+
   const [notify, setNotify] = useState({ type: "", message: "" });
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  
+
   // State quản lý từ khóa tìm kiếm
   const [searchTerm, setSearchTerm] = useState("");
   // State kích hoạt việc tìm kiếm thực tế (trigger useEffect)
   const [currentSearchTerm, setCurrentSearchTerm] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [userToDeleteId, setUserToDeleteId] = useState(null); //
 
 
   const showNotify = (type, message) => {
@@ -71,10 +73,26 @@ export default function AdminDashboard() {
 
 
   // ================================
-  // XÓA HỌC SINH VI PHẠM
+  // XÓA HỌC SINH VI PHẠM (Sửa để hiển thị Modal)
   // ================================
   const handleDelete = async (id) => {
-    if (!window.confirm("Bạn có chắc muốn xóa học sinh này và cấm đăng ký lại?")) return;
+    // XÓA DÒNG NÀY: if (!window.confirm("Bạn có chắc muốn xóa học sinh này và cấm đăng ký lại?")) return;
+
+    // THAY BẰNG: Hiển thị Modal
+    setUserToDeleteId(id);
+    setShowDeleteModal(true);
+  };
+
+  // ================================
+  // THÊM: Hàm xác nhận xóa sau khi nhấn OK trên Modal
+  // ================================
+  const confirmDelete = async () => {
+    const id = userToDeleteId;
+    if (!id) return;
+
+    // Ẩn modal ngay lập tức
+    setShowDeleteModal(false);
+    setUserToDeleteId(null);
 
     const token = localStorage.getItem("token");
 
@@ -97,16 +115,18 @@ export default function AdminDashboard() {
       }
 
       showNotify("success", "Đã xóa học sinh và khóa email + SĐT khỏi hệ thống!");
-
-
       setUsers((prev) => prev.filter((u) => u._id !== id));
     } catch (err) {
       showNotify("error", "Lỗi kết nối server!");
     }
-
   };
 
-  
+  const cancelDelete = () => {
+    setShowDeleteModal(false);
+    setUserToDeleteId(null);
+  };
+
+
   // ================================
   // useEffect CHÍNH: Tải và tìm kiếm data
   // ================================
@@ -128,7 +148,7 @@ export default function AdminDashboard() {
   // ===============================
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  
+
   // CHỈ CẮT USERS NẾU KHÔNG CÒN TẢI DATA
   const currentUsers = isDataLoading ? [] : users.slice(indexOfFirstUser, indexOfLastUser);
 
@@ -277,8 +297,8 @@ export default function AdminDashboard() {
             {error}
           </div>
         )}
-        
-        
+
+
         {/* === HIỂN THỊ LOADING HOẶC DATA === */}
         {isDataLoading ? (
           // SPINNER CHỈ Ở KHU VỰC DATA
@@ -308,10 +328,10 @@ export default function AdminDashboard() {
                   </button>
                 </div>
               ))}
-              
+
               {users.length === 0 && (
                 <p className="text-center py-6 text-gray-500">
-                   Không có học sinh nào {currentSearchTerm ? "phù hợp với từ khóa." : "trong hệ thống."}
+                  Không có học sinh nào {currentSearchTerm ? "phù hợp với từ khóa." : "trong hệ thống."}
                 </p>
               )}
             </div>
@@ -355,6 +375,47 @@ export default function AdminDashboard() {
                   ))}
                 </tbody>
               </table>
+
+
+              {/* ======================= MODAL XÁC NHẬN XÓA ======================= */}
+              {showDeleteModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100]">
+                  <div className="bg-white rounded-xl shadow-2xl p-6 w-11/12 max-w-md transform transition-all duration-300 scale-100">
+
+                    {/* Header Modal */}
+                    <div className="border-b pb-3 mb-4 flex items-center gap-3 text-red-600">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                      <h3 className="text-xl font-bold">Xác nhận thao tác</h3>
+                    </div>
+
+                    {/* Nội dung */}
+                    <p className="text-gray-700 mb-6 text-base">
+                      Bạn **có chắc** muốn xóa học sinh này?
+                      <br />
+                      Học sinh sẽ bị **xóa vĩnh viễn** khỏi hệ thống và bị **cấm đăng ký lại** bằng email/số điện thoại này.
+                    </p>
+
+                    {/* Footer / Buttons */}
+                    <div className="flex justify-end space-x-3">
+                      <button
+                        onClick={cancelDelete}
+                        className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition duration-150"
+                      >
+                        Hủy
+                      </button>
+                      <button
+                        onClick={confirmDelete}
+                        className="px-5 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-150"
+                      >
+                        Xác nhận Xóa
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {/* ================================================================= */}
 
               {/* PHÂN TRANG */}
               {users.length > 0 && (
