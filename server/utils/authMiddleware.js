@@ -1,23 +1,24 @@
 // server/utils/authMiddleware.js
 const jwt = require("jsonwebtoken");
-const User = require("../models/User"); // Giả định User model nằm ở đường dẫn này
+const User = require("../models/User"); 
 
 // Middleware kiểm tra token và vai trò admin
 const isAdmin = async (req, res, next) => {
     let token;
+    
+    // Đảm bảo JWT_SECRET được định nghĩa trong .env
+    const jwtSecret = process.env.JWT_SECRET || "your_fallback_secret"; 
 
     // 1. Kiểm tra header Authorization
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
         try {
-            // Lấy token từ header "Bearer <token>"
             token = req.headers.authorization.split(" ")[1];
 
             // 2. Xác thực token
-            const decoded = jwt.verify(token, process.env.JWT_SECRET || "your_secret_key"); 
-            // Lưu ý: Đảm bảo JWT_SECRET trong .env trùng với secret bạn dùng khi tạo token
+            const decoded = jwt.verify(token, jwtSecret); 
 
             // 3. Tìm người dùng
-            const user = await User.findById(decoded.userId).select("-password");
+            const user = await User.findById(decoded.userId).select("role");
 
             if (!user) {
                 return res.status(401).json({ message: "Người dùng không tồn tại." });
@@ -28,16 +29,17 @@ const isAdmin = async (req, res, next) => {
                 return res.status(403).json({ message: "Truy cập bị từ chối. Chỉ Admin mới được phép." });
             }
 
-            // Gán user vào request để sử dụng sau (nếu cần)
             req.user = user;
             next();
 
         } catch (error) {
-            console.error("Lỗi xác thực token:", error.message);
-            res.status(401).json({ message: "Không được phép, token không hợp lệ hoặc hết hạn." });
+            console.error("Lỗi xác thực hoặc truy vấn database:", error.message);
+            // Trả về lỗi 401 nếu token không hợp lệ (hết hạn, sai secret)
+            return res.status(401).json({ message: "Token không hợp lệ hoặc hết hạn. Vui lòng đăng nhập lại." });
         }
     } else {
-        res.status(401).json({ message: "Không có token, không được phép truy cập." });
+        // Trả về lỗi 401 nếu không tìm thấy token
+        return res.status(401).json({ message: "Không tìm thấy token. Vui lòng đăng nhập." });
     }
 };
 
