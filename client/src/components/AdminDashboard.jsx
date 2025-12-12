@@ -154,12 +154,31 @@ export default function AdminDashboard() {
 
   const totalPages = Math.ceil(users.length / usersPerPage);
 
+  // THÊM LOGIC NÀY: Tính toán dãy số trang để hiển thị (ví dụ: 5 trang quanh trang hiện tại)
+  const getPaginationItems = () => {
+    const maxPagesToShow = 5;
+    const startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+    const endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+    const pages = [];
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+    return pages;
+  };
+
   const prevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
   const nextPage = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const goToPage = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   // LOẠI BỎ: if (loading) { return <loading screen> }
@@ -422,27 +441,41 @@ export default function AdminDashboard() {
               )}
               {/* ================================================================= */}
 
-              {/* PHÂN TRANG */}
-              {users.length > 0 && (
-                <div className="flex justify-center items-center mt-6 gap-4">
+              {/* PHÂN TRANG - ĐÃ CẬP NHẬT THÊM DÃY SỐ TRANG */}
+              {users.length > 0 && totalPages > 1 && ( // Chỉ hiển thị nếu có > 1 trang
+                <div className="flex justify-center items-center mt-6 gap-2 md:gap-4 flex-wrap">
                   <button
                     onClick={prevPage}
                     disabled={currentPage === 1}
-                    className={`px-4 py-2 rounded-lg text-white font-semibold shadow 
-                    ${currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
+                    className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm md:text-base
+                    ${currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
                   >
                     Trang trước
                   </button>
 
-                  <span className="font-bold text-lg text-[#1c7c76]">
-                    {currentPage} / {totalPages}
-                  </span>
+                  {/* Dãy số trang */}
+                  {getPaginationItems().map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => goToPage(page)}
+                      className={`
+                        w-10 h-10 rounded-full font-bold shadow transition duration-150 text-sm md:text-base
+                        ${page === currentPage
+                          ? "bg-[#1c7c76] text-white ring-2 ring-offset-2 ring-[#1c7c76]" // Trang hiện tại
+                          : "bg-white text-[#1c7c76] border border-gray-300 hover:bg-gray-100" // Trang khác
+                        }
+                      `}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                  {/* Kết thúc Dãy số trang */}
 
                   <button
                     onClick={nextPage}
                     disabled={currentPage === totalPages}
-                    className={`px-4 py-2 rounded-lg text-white font-semibold shadow 
-                    ${currentPage === totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
+                    className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm md:text-base
+                    ${currentPage === totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
                   >
                     Trang sau
                   </button>
