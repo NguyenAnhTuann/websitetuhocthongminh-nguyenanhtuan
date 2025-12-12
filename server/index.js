@@ -6,8 +6,8 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const fetch = require("node-fetch");
 
-const Visit = require("./models/Visit"); // Import Visit Model
-const statsRoutes = require("./utils/stats"); // Import Stats Route
+const Visit = require("../models/Visit"); // Import Visit Model
+const statsRoutes = require("../utils/stats"); // Import Stats Route
 
 // ===== OpenAI ChatGPT =====
 const OpenAI = require("openai");
