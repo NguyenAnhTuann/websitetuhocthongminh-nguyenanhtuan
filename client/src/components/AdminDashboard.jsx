@@ -325,7 +325,7 @@ export default function AdminDashboard() {
                     <th className="p-3 text-sm font-semibold">Email</th>
                     <th className="p-3 text-sm font-semibold">Số điện thoại</th>
                     <th className="p-3 text-sm font-semibold">Trường</th>
-                    <th className="p-3 text-sm font-semibold">Khối</th>
+                    <th className="p-3 text-sm font-semibold">Lớp</th>
                     <th className="p-3 text-sm font-semibold text-center">Hành động</th>
                   </tr>
                 </thead>
