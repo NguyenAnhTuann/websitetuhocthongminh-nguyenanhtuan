@@ -156,6 +156,42 @@ app.get("/make-admin", async (req, res) => {
   }
 });
 
+
+// ===============================
+// API: Lấy danh sách user (ĐÃ THÊM TÌM KIẾM)
+// ===============================
+router.get("/users", verifyAdmin, async (req, res) => {
+  try {
+    const { search } = req.query; // <--- Lấy tham số tìm kiếm từ query
+    let query = {};
+
+    // Nếu có từ khóa tìm kiếm, tạo truy vấn để tìm kiếm không phân biệt chữ hoa/thường
+    // trên các trường fullName, email, phone, grade, school.
+    if (search) {
+      const regex = new RegExp(search, "i"); // 'i' cho tìm kiếm không phân biệt chữ hoa/thường
+
+      // Truy vấn $or để tìm kiếm trong nhiều trường
+      query = {
+        $or: [
+          { fullName: { $regex: regex } },
+          { email: { $regex: regex } },
+          { phone: { $regex: regex } },
+          { grade: { $regex: regex } },
+          { school: { $regex: regex } },
+        ],
+      };
+    }
+
+    // Sử dụng query đã tạo (nếu có search, nó sẽ lọc; nếu không, nó sẽ lấy tất cả)
+    const users = await User.find(query).select("-password"); // <--- Áp dụng bộ lọc query
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Lỗi server" });
+  }
+});
+
+
 // ===============================
 // 4) API ChatGPT (ĐÃ SỬA: CHỈ NHẬN TEXT)
 // ===============================

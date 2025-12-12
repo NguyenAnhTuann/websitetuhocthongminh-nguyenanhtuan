@@ -8,7 +8,10 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [notify, setNotify] = useState({ type: "", message: "" });
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-
+  // ---> THÊM STATE TÌM KIẾM
+  const [searchTerm, setSearchTerm] = useState("");
+  // ---> THÊM STATE ĐỂ LƯU TỪ KHÓA ĐANG TÌM KIẾM THỰC TẾ
+  const [currentSearchTerm, setCurrentSearchTerm] = useState("");
 
 
   const showNotify = (type, message) => {
@@ -85,6 +88,62 @@ export default function AdminDashboard() {
       });
   }, []);
 
+
+
+  // ================================
+  // HÀM TẢI DỮ LIỆU USER
+  // ================================
+  const fetchUsers = async (searchQuery = "") => {
+    setLoading(true);
+    setError("");
+    setCurrentPage(1); // Reset về trang 1 khi tìm kiếm mới
+
+    const token = localStorage.getItem("token");
+    // Xây dựng URL với tham số search
+    const url = `https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/users${searchQuery ? `?search=${searchQuery}` : ""
+      }`;
+
+    try {
+      const res = await fetch(url, {
+        headers: { Authorization: "Bearer " + token },
+      });
+
+      const data = await res.json();
+      if (!res.ok || !Array.isArray(data)) {
+        setError(data.message || "Lỗi khi tải danh sách");
+        setUsers([]);
+        return;
+      }
+      setUsers(data);
+    } catch (err) {
+      setError("Không thể tải danh sách người dùng. Lỗi kết nối.");
+      setUsers([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  // ================================
+  // Xử lý tìm kiếm
+  // ================================
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setCurrentSearchTerm(searchTerm); // Cập nhật từ khóa tìm kiếm thực tế
+  };
+
+
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role !== "admin") {
+      window.location.href = "/trangchu";
+      return;
+    }
+
+    // Gọi hàm tải dữ liệu với từ khóa tìm kiếm hiện tại
+    fetchUsers(currentSearchTerm);
+
+  }, [currentSearchTerm])
 
 
   // ===============================
@@ -205,6 +264,37 @@ export default function AdminDashboard() {
           DỮ LIỆU HỌC SINH
         </h1>
 
+
+{/* ===== FORM TÌM KIẾM (THÊM MỚI) ===== */}
+        <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-3 mb-6">
+          <input
+            type="text"
+            placeholder="Tìm kiếm theo Tên, Email, SĐT, Lớp, Trường..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="flex-grow p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#1c7c76] focus:border-[#1c7c76]"
+          />
+          <button
+            type="submit"
+            className="px-6 py-3 bg-[#1c7c76] hover:bg-[#17635f] text-white font-semibold rounded-lg shadow-md transition duration-200"
+          >
+            Tìm kiếm
+          </button>
+          
+          {/* NÚT XÓA TÌM KIẾM */}
+          {currentSearchTerm && (
+             <button
+              type="button"
+              onClick={() => {
+                setSearchTerm("");
+                setCurrentSearchTerm(""); // Dùng state này để trigger lại fetchUsers
+              }}
+              className="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg shadow-md transition duration-200"
+            >
+              Xóa tìm kiếm
+            </button>
+          )}
+        </form>
 
         {error && (
           <div className="p-4 mb-4 bg-red-100 text-red-700 rounded-xl shadow">
