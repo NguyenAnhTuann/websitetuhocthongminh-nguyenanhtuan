@@ -7,28 +7,28 @@ export default function AdminDashboard() {
   const usersPerPage = 10;
   const [totalUsers, setTotalUsers] = useState(0);
 
-const [visitToday, setVisitToday] = useState(0);
+  const [visitToday, setVisitToday] = useState(0);
 
 
-const fetchVisitStats = async () => {
-  const token = localStorage.getItem("token");
+  const fetchVisitStats = async () => {
+    const token = localStorage.getItem("token");
 
-  try {
-    const res = await fetch(
-      "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/visits/today",
-      {
-        headers: { Authorization: "Bearer " + token },
+    try {
+      const res = await fetch(
+        "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/visits/today",
+        {
+          headers: { Authorization: "Bearer " + token },
+        }
+      );
+
+      const data = await res.json();
+      if (res.ok) {
+        setVisitToday(data.today);
       }
-    );
-
-    const data = await res.json();
-    if (res.ok) {
-      setVisitToday(data.today);
+    } catch (err) {
+      console.error("Không lấy được lượt truy cập hôm nay");
     }
-  } catch (err) {
-    console.error("Không lấy được lượt truy cập hôm nay");
-  }
-};
+  };
 
 
 
@@ -391,8 +391,10 @@ const fetchVisitStats = async () => {
                   <div className="mt-2 text-sm text-gray-700 space-y-1">
                     <p><b>Email:</b> {u.email}</p>
                     <p><b>SĐT:</b> {u.phone}</p>
+                    <p><b>Ngày sinh:</b> {u.dob}</p>
                     <p><b>Trường:</b> {u.school}</p>
                     <p><b>Lớp:</b> {u.grade}</p>
+                    <p><b>Đăng ký:</b> {new Date(u.createdAt).toLocaleDateString("vi-VN")}</p>
                   </div>
 
                   <button
@@ -417,10 +419,12 @@ const fetchVisitStats = async () => {
                 <thead>
                   <tr className="bg-[#1c7c76] text-white">
                     <th className="p-3 text-sm font-semibold">Họ tên</th>
+                    <th className="p-3 text-sm font-semibold">Ngày sinh</th> {/* <--- THÊM MỚI */}
                     <th className="p-3 text-sm font-semibold">Email</th>
                     <th className="p-3 text-sm font-semibold">Số điện thoại</th>
                     <th className="p-3 text-sm font-semibold">Trường</th>
                     <th className="p-3 text-sm font-semibold">Lớp</th>
+                    <th className="p-3 text-sm font-semibold">Đăng ký</th>
                     <th className="p-3 text-sm font-semibold text-center">Hành động</th>
                   </tr>
                 </thead>
@@ -433,10 +437,12 @@ const fetchVisitStats = async () => {
                         }`}
                     >
                       <td className="p-3">{u.fullName}</td>
+                      <td className="p-3">{u.dob}</td>
                       <td className="p-3">{u.email}</td>
                       <td className="p-3">{u.phone}</td>
                       <td className="p-3">{u.school}</td>
                       <td className="p-3">{u.grade}</td>
+                      <td className="p-3">{new Date(u.createdAt).toLocaleDateString("vi-VN")}</td>
 
                       <td className="p-3 text-center">
                         <button
