@@ -341,7 +341,7 @@ export default function AdminDashboard() {
           </h1>
 
           <p className="mt-4 text-center text-lg font-semibold text-[#1c7c76]">
-            Tổng số người đã đăng ký: <span className="text-black">{totalUsers}</span>
+            Tổng số học sinh đã đăng ký: <span className="text-black">{totalUsers}</span>
           </p>
         </div>
 
