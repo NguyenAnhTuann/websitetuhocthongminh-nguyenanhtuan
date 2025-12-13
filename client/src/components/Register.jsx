@@ -465,7 +465,7 @@ export default function Register() {
         <div ref={refEmail} className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">Email</label>
           <input
-            type="email"
+            type="text"
             value={email}
             onChange={(e) => {
   if (e.nativeEvent.isComposing) return;
