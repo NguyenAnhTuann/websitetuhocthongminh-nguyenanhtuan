@@ -7,18 +7,15 @@ export default function AdminDashboard() {
   const usersPerPage = 10;
   const [totalUsers, setTotalUsers] = useState(0);
 
-  const [visitStats, setVisitStats] = useState({
-  today: 0,
-  month: 0,
-  year: 0,
-});
+const [visitToday, setVisitToday] = useState(0);
+
 
 const fetchVisitStats = async () => {
   const token = localStorage.getItem("token");
 
   try {
     const res = await fetch(
-      "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/visits/stats",
+      "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/visits/today",
       {
         headers: { Authorization: "Bearer " + token },
       }
@@ -26,12 +23,13 @@ const fetchVisitStats = async () => {
 
     const data = await res.json();
     if (res.ok) {
-      setVisitStats(data);
+      setVisitToday(data.today);
     }
   } catch (err) {
-    console.error("Không lấy được thống kê lượt truy cập");
+    console.error("Không lấy được lượt truy cập hôm nay");
   }
 };
+
 
 
 
@@ -333,28 +331,11 @@ const fetchVisitStats = async () => {
         </div>
 
         {/* THỐNG KÊ LƯỢT TRUY CẬP */}
-{/* <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-  <div className="bg-white rounded-xl shadow p-4 text-center border">
-    <p className="text-gray-500 font-semibold">Lượt truy cập hôm nay</p>
-    <p className="text-3xl font-bold text-[#1c7c76]">
-      {visitStats.today}
-    </p>
-  </div>
+<div className="mt-4 text-center text-lg font-semibold text-[#1c7c76]">
+  Lượt truy cập hôm nay:{" "}
+  <span className="text-black">{visitToday}</span>
+</div>
 
-  <div className="bg-white rounded-xl shadow p-4 text-center border">
-    <p className="text-gray-500 font-semibold">Lượt truy cập tháng này</p>
-    <p className="text-3xl font-bold text-blue-600">
-      {visitStats.month}
-    </p>
-  </div>
-
-  <div className="bg-white rounded-xl shadow p-4 text-center border">
-    <p className="text-gray-500 font-semibold">Lượt truy cập năm nay</p>
-    <p className="text-3xl font-bold text-purple-600">
-      {visitStats.year}
-    </p>
-  </div>
-</div> */}
 
 
         {/* 2. KHU VỰC TÌM KIẾM NỔI BẬT */}
