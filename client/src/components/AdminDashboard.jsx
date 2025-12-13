@@ -220,6 +220,51 @@ export default function AdminDashboard() {
         </div>
       )}
 
+      {/* ======================= MODAL XÁC NHẬN XÓA (CẬP NHẬT CHUYÊN NGHIỆP) ======================= */}
+              {showDeleteModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100]">
+                  <div className="bg-white rounded-xl shadow-2xl p-6 w-11/12 max-w-sm md:max-w-md transform transition-all duration-300 scale-100">
+
+                    {/* Header Modal - Sử dụng màu ĐỎ để nhấn mạnh CẢNH BÁO/XÓA */}
+                    <div className="border-b pb-3 mb-4 flex items-center gap-3 text-red-600">
+                      {/* Icon Cảnh báo (Exclamation Triangle) */}
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                      <h3 className="text-xl font-bold tracking-wide">Xác nhận Thao Tác Quan Trọng</h3>
+                    </div>
+
+                    {/* Nội dung CHUYÊN NGHIỆP, KHÔNG DÙNG DẤU * */}
+                    <p className="text-gray-700 mb-6 text-base leading-relaxed">
+                      Bạn vui lòng xác nhận việc xóa tài khoản người dùng này. Thao tác này là không thể hoàn tác.
+                      <br />
+                      <span className="font-semibold text-red-600">Hệ thống sẽ thực hiện các bước:</span>
+                      <ul className="list-disc ml-5 mt-2 text-sm text-gray-600 space-y-1">
+                        <li>Xóa vĩnh viễn toàn bộ dữ liệu người dùng khỏi cơ sở dữ liệu.</li>
+                        <li>Đưa Email và Số điện thoại vào danh sách cấm đăng ký lại.</li>
+                      </ul>
+                    </p>
+
+                    {/* Footer / Buttons */}
+                    <div className="flex justify-end space-x-3 mt-4">
+                      <button
+                        onClick={cancelDelete}
+                        className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition duration-150 shadow-sm"
+                      >
+                        Hủy bỏ
+                      </button>
+                      <button
+                        onClick={confirmDelete}
+                        className="px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg transition duration-150"
+                      >
+                        Xác nhận Xóa
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {/* ================================================================= */}
+
       {/* ====== HEADER ADMIN ====== */}
       <header className="bg-[#1c7c76] text-white py-4 px-4 shadow-lg flex justify-between items-center">
         {/* TIÊU ĐỀ */}
@@ -346,79 +391,79 @@ export default function AdminDashboard() {
 
         {/* === HIỂN THỊ LOADING HOẶC DATA === */}
         {isDataLoading ? (
-  // SPINNER CHỈ Ở KHU VỰC DATA
-  <div className="flex items-center justify-center py-10 bg-white rounded-xl shadow-xl">
-    <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#1c7c76] border-t-transparent"></div>
-  </div>
-) : (
-  <>
-    {/* ===== MOBILE VIEW (HIỆN TẠI ĐÃ CÓ PHÂN TRANG) ===== */}
-    <div className="md:hidden space-y-3">
-      {currentUsers.map((u) => (
-        <div key={u._id} className="bg-white shadow-md rounded-xl p-4 border border-gray-200">
-          <p className="font-bold text-black text-lg">{u.fullName}</p>
-
-          <div className="mt-2 text-sm text-gray-700 space-y-1">
-            <p><b>Email:</b> {u.email}</p>
-            <p><b>SĐT:</b> {u.phone}</p>
-            <p><b>Ngày sinh:</b> {u.dob}</p>
-            <p><b>Trường:</b> {u.school}</p>
-            <p><b>Lớp:</b> {u.grade}</p>
-            <p><b>Thời gian đăng ký:</b> {new Date(u.createdAt).toLocaleDateString("vi-VN")}</p>
+          // SPINNER CHỈ Ở KHU VỰC DATA
+          <div className="flex items-center justify-center py-10 bg-white rounded-xl shadow-xl">
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#1c7c76] border-t-transparent"></div>
           </div>
+        ) : (
+          <>
+            {/* ===== MOBILE VIEW (HIỆN TẠI ĐÃ CÓ PHÂN TRANG) ===== */}
+            <div className="md:hidden space-y-3">
+              {currentUsers.map((u) => (
+                <div key={u._id} className="bg-white shadow-md rounded-xl p-4 border border-gray-200">
+                  <p className="font-bold text-black text-lg">{u.fullName}</p>
 
-          <button
-            onClick={() => handleDelete(u._id)}
-            className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-semibold"
-          >
-            Xóa
-          </button>
-        </div>
-      ))}
+                  <div className="mt-2 text-sm text-gray-700 space-y-1">
+                    <p><b>Email:</b> {u.email}</p>
+                    <p><b>SĐT:</b> {u.phone}</p>
+                    <p><b>Ngày sinh:</b> {u.dob}</p>
+                    <p><b>Trường:</b> {u.school}</p>
+                    <p><b>Lớp:</b> {u.grade}</p>
+                    <p><b>Thời gian đăng ký:</b> {new Date(u.createdAt).toLocaleDateString("vi-VN")}</p>
+                  </div>
 
-      {/* ================================================================= */}
-      {/* KHỐI PHÂN TRANG CHO MOBILE (Hiển thị nếu có hơn 1 trang) */}
-      {users.length > 0 && totalPages > 1 && (
-        <div className="flex justify-center items-center mt-6 gap-2 flex-wrap">
-          <button
-            onClick={prevPage}
-            disabled={currentPage === 1}
-            className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm
+                  <button
+                    onClick={() => handleDelete(u._id)}
+                    className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-semibold"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              ))}
+
+              {/* ================================================================= */}
+              {/* KHỐI PHÂN TRANG CHO MOBILE (Hiển thị nếu có hơn 1 trang) */}
+              {users.length > 0 && totalPages > 1 && (
+                <div className="flex justify-center items-center mt-6 gap-2 flex-wrap">
+                  <button
+                    onClick={prevPage}
+                    disabled={currentPage === 1}
+                    className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm
               ${currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
-          >
-            Trang trước
-          </button>
+                  >
+                    Trang trước
+                  </button>
 
-          {/* Dãy số trang */}
-          {getPaginationItems().map((page) => (
-            <button
-              key={page}
-              onClick={() => goToPage(page)}
-              className={`
+                  {/* Dãy số trang */}
+                  {getPaginationItems().map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => goToPage(page)}
+                      className={`
                 w-9 h-9 rounded-full font-bold shadow transition duration-150 text-sm
                 ${page === currentPage
-                  ? "bg-[#1c7c76] text-white ring-2 ring-offset-2 ring-[#1c7c76]"
-                  : "bg-white text-[#1c7c76] border border-gray-300 hover:bg-gray-100"
-                }
+                          ? "bg-[#1c7c76] text-white ring-2 ring-offset-2 ring-[#1c7c76]"
+                          : "bg-white text-[#1c7c76] border border-gray-300 hover:bg-gray-100"
+                        }
               `}
-            >
-              {page}
-            </button>
-          ))}
-          {/* Kết thúc Dãy số trang */}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                  {/* Kết thúc Dãy số trang */}
 
-          <button
-            onClick={nextPage}
-            disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm
+                  <button
+                    onClick={nextPage}
+                    disabled={currentPage === totalPages}
+                    className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm
               ${currentPage === totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
-          >
-            Trang sau
-          </button>
-        </div>
-      )}
-      {/* KẾT THÚC KHỐI PHÂN TRANG MOBILE */}
-      {/* ================================================================= */}
+                  >
+                    Trang sau
+                  </button>
+                </div>
+              )}
+              {/* KẾT THÚC KHỐI PHÂN TRANG MOBILE */}
+              {/* ================================================================= */}
               {users.length === 0 && (
                 <p className="text-center py-6 text-gray-500">
                   Không có học sinh nào {currentSearchTerm ? "phù hợp với từ khóa." : "trong hệ thống."}
@@ -472,50 +517,7 @@ export default function AdminDashboard() {
                 </table>
               </div>
 
-              {/* ======================= MODAL XÁC NHẬN XÓA (CẬP NHẬT CHUYÊN NGHIỆP) ======================= */}
-              {showDeleteModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100]">
-                  <div className="bg-white rounded-xl shadow-2xl p-6 w-11/12 max-w-sm md:max-w-md transform transition-all duration-300 scale-100">
 
-                    {/* Header Modal - Sử dụng màu ĐỎ để nhấn mạnh CẢNH BÁO/XÓA */}
-                    <div className="border-b pb-3 mb-4 flex items-center gap-3 text-red-600">
-                      {/* Icon Cảnh báo (Exclamation Triangle) */}
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                      </svg>
-                      <h3 className="text-xl font-bold tracking-wide">Xác nhận Thao Tác Quan Trọng</h3>
-                    </div>
-
-                    {/* Nội dung CHUYÊN NGHIỆP, KHÔNG DÙNG DẤU * */}
-                    <p className="text-gray-700 mb-6 text-base leading-relaxed">
-                      Bạn vui lòng xác nhận việc xóa tài khoản người dùng này. Thao tác này là không thể hoàn tác.
-                      <br />
-                      <span className="font-semibold text-red-600">Hệ thống sẽ thực hiện các bước:</span>
-                      <ul className="list-disc ml-5 mt-2 text-sm text-gray-600 space-y-1">
-                        <li>Xóa vĩnh viễn toàn bộ dữ liệu người dùng khỏi cơ sở dữ liệu.</li>
-                        <li>Đưa Email và Số điện thoại vào danh sách cấm đăng ký lại.</li>
-                      </ul>
-                    </p>
-
-                    {/* Footer / Buttons */}
-                    <div className="flex justify-end space-x-3 mt-4">
-                      <button
-                        onClick={cancelDelete}
-                        className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition duration-150 shadow-sm"
-                      >
-                        Hủy bỏ
-                      </button>
-                      <button
-                        onClick={confirmDelete}
-                        className="px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg transition duration-150"
-                      >
-                        Xác nhận Xóa
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {/* ================================================================= */}
 
               {/* PHÂN TRANG - ĐÃ CẬP NHẬT THÊM DÃY SỐ TRANG */}
               {users.length > 0 && totalPages > 1 && ( // Chỉ hiển thị nếu có > 1 trang
