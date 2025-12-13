@@ -333,7 +333,7 @@ const fetchVisitStats = async () => {
         </div>
 
         {/* THỐNG KÊ LƯỢT TRUY CẬP */}
-<div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+{/* <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
   <div className="bg-white rounded-xl shadow p-4 text-center border">
     <p className="text-gray-500 font-semibold">Lượt truy cập hôm nay</p>
     <p className="text-3xl font-bold text-[#1c7c76]">
@@ -354,7 +354,7 @@ const fetchVisitStats = async () => {
       {visitStats.year}
     </p>
   </div>
-</div>
+</div> */}
 
 
         {/* 2. KHU VỰC TÌM KIẾM NỔI BẬT */}
