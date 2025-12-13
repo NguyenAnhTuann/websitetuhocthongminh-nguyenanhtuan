@@ -17,6 +17,13 @@ import { LuUserRoundPen } from "react-icons/lu";
 import { MdOutlineLibraryBooks } from "react-icons/md";
 import avatarImage from "../assets/avt.png";
 
+useEffect(() => {
+  fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/visit", {
+    method: "POST",
+  });
+}, []);
+
+
 const Typewriter = ({ text, speed = 40 }) => {
   const [displayed, setDisplayed] = useState("");
 
