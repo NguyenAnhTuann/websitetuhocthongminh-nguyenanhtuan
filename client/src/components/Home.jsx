@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
@@ -17,11 +17,6 @@ import { LuUserRoundPen } from "react-icons/lu";
 import { MdOutlineLibraryBooks } from "react-icons/md";
 import avatarImage from "../assets/avt.png";
 
-useEffect(() => {
-  fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/visit", {
-    method: "POST",
-  });
-}, []);
 
 
 const Typewriter = ({ text, speed = 40 }) => {
@@ -51,6 +46,12 @@ const Typewriter = ({ text, speed = 40 }) => {
 };
 
 const Home = ({ language }) => {
+
+  useEffect(() => {
+  fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/visit", {
+    method: "POST",
+  });
+}, []);
   const navigate = useNavigate();
 
   const translations = {
