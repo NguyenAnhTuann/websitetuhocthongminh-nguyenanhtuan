@@ -7,41 +7,13 @@ export default function AdminDashboard() {
   const usersPerPage = 10;
   const [totalUsers, setTotalUsers] = useState(0);
 
-  const [visitToday, setVisitToday] = useState(0);
 
-
-  const fetchVisitStats = async () => {
-    const token = localStorage.getItem("token");
-
-    try {
-      const res = await fetch(
-        "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/visits/today",
-        {
-          headers: { Authorization: "Bearer " + token },
-        }
-      );
-
-      const data = await res.json();
-      if (res.ok) {
-        setVisitToday(data.today);
-      }
-    } catch (err) {
-      console.error("Không lấy được lượt truy cập hôm nay");
-    }
-  };
-
-
-
-
-  // SỬA: Dùng isDataLoading để quản lý trạng thái tải dữ liệu (cục bộ)
   const [isDataLoading, setIsDataLoading] = useState(true);
 
   const [notify, setNotify] = useState({ type: "", message: "" });
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  // State quản lý từ khóa tìm kiếm
   const [searchTerm, setSearchTerm] = useState("");
-  // State kích hoạt việc tìm kiếm thực tế (trigger useEffect)
   const [currentSearchTerm, setCurrentSearchTerm] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [userToDeleteId, setUserToDeleteId] = useState(null); //
@@ -50,7 +22,6 @@ export default function AdminDashboard() {
   const showNotify = (type, message) => {
     setNotify({ type, message });
 
-    // Tự tắt sau 2.5 giây
     setTimeout(() => {
       setNotify({ type: "", message: "" });
     }, 2500);
@@ -394,7 +365,7 @@ export default function AdminDashboard() {
                     <p><b>Ngày sinh:</b> {u.dob}</p>
                     <p><b>Trường:</b> {u.school}</p>
                     <p><b>Lớp:</b> {u.grade}</p>
-                    <p><b>Đăng ký:</b> {new Date(u.createdAt).toLocaleDateString("vi-VN")}</p>
+                    <p><b>Thời gian đăng ký:</b> {new Date(u.createdAt).toLocaleDateString("vi-VN")}</p>
                   </div>
 
                   <button
@@ -425,7 +396,7 @@ export default function AdminDashboard() {
                       <th className="p-3 text-sm font-semibold whitespace-nowrap">Số điện thoại</th>
                       <th className="p-3 text-sm font-semibold whitespace-nowrap">Trường</th>
                       <th className="p-3 text-sm font-semibold whitespace-nowrap">Lớp</th>
-                      <th className="p-3 text-sm font-semibold whitespace-nowrap">Đăng ký</th>
+                      <th className="p-3 text-sm font-semibold whitespace-nowrap">Thời gian đăng ký</th>
                       <th className="p-3 text-sm font-semibold text-center">Hành động</th>
                     </tr>
                   </thead>
