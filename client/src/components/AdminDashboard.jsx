@@ -415,48 +415,49 @@ export default function AdminDashboard() {
 
             {/* ===== DESKTOP VIEW ===== */}
             <div className="hidden md:block bg-white shadow-xl rounded-xl p-6 border border-gray-200">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-[#1c7c76] text-white">
-                    <th className="p-3 text-sm font-semibold">Họ tên</th>
-                    <th className="p-3 text-sm font-semibold">Ngày sinh</th> {/* <--- THÊM MỚI */}
-                    <th className="p-3 text-sm font-semibold">Email</th>
-                    <th className="p-3 text-sm font-semibold">Số điện thoại</th>
-                    <th className="p-3 text-sm font-semibold">Trường</th>
-                    <th className="p-3 text-sm font-semibold">Lớp</th>
-                    <th className="p-3 text-sm font-semibold">Đăng ký</th>
-                    <th className="p-3 text-sm font-semibold text-center">Hành động</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {currentUsers.map((u, index) => (
-                    <tr
-                      key={u._id}
-                      className={`border-b hover:bg-gray-100 transition ${index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                        }`}
-                    >
-                      <td className="p-3">{u.fullName}</td>
-                      <td className="p-3">{u.dob}</td>
-                      <td className="p-3">{u.email}</td>
-                      <td className="p-3">{u.phone}</td>
-                      <td className="p-3">{u.school}</td>
-                      <td className="p-3">{u.grade}</td>
-                      <td className="p-3">{new Date(u.createdAt).toLocaleDateString("vi-VN")}</td>
-
-                      <td className="p-3 text-center">
-                        <button
-                          onClick={() => handleDelete(u._id)}
-                          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold shadow"
-                        >
-                          Xóa
-                        </button>
-                      </td>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-[#1c7c76] text-white">
+                      <th className="p-3 text-sm font-semibold whitespace-nowrap">Họ tên</th>
+                      <th className="p-3 text-sm font-semibold whitespace-nowrap">Ngày sinh</th> {/* <--- THÊM MỚI */}
+                      <th className="p-3 text-sm font-semibold whitespace-nowrap">Email</th>
+                      <th className="p-3 text-sm font-semibold whitespace-nowrap">Số điện thoại</th>
+                      <th className="p-3 text-sm font-semibold whitespace-nowrap">Trường</th>
+                      <th className="p-3 text-sm font-semibold whitespace-nowrap">Lớp</th>
+                      <th className="p-3 text-sm font-semibold whitespace-nowrap">Đăng ký</th>
+                      <th className="p-3 text-sm font-semibold text-center">Hành động</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
 
+                  <tbody>
+                    {currentUsers.map((u, index) => (
+                      <tr
+                        key={u._id}
+                        className={`border-b hover:bg-gray-100 transition ${index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                          }`}
+                      >
+                        <td className="p-3">{u.fullName}</td>
+                        <td className="p-3">{u.dob}</td>
+                        <td className="p-3">{u.email}</td>
+                        <td className="p-3">{u.phone}</td>
+                        <td className="p-3">{u.school}</td>
+                        <td className="p-3">{u.grade}</td>
+                        <td className="p-3">{new Date(u.createdAt).toLocaleDateString("vi-VN")}</td>
+
+                        <td className="p-3 text-center">
+                          <button
+                            onClick={() => handleDelete(u._id)}
+                            className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold shadow"
+                          >
+                            Xóa
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
 
               {/* ======================= MODAL XÁC NHẬN XÓA (CẬP NHẬT CHUYÊN NGHIỆP) ======================= */}
               {showDeleteModal && (
