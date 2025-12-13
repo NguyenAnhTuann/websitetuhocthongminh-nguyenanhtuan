@@ -188,7 +188,7 @@ const fetchVisitStats = async () => {
       return;
     }
 
-    // Tải dữ liệu (lần đầu hoặc khi có tìm kiếm)
+    // Tải dữ liệu (lần ađầu hoặc khi có tìm kiếm)
     fetchUsers(currentSearchTerm);
     fetchTotalUsers();
     fetchVisitStats();
@@ -330,8 +330,32 @@ const fetchVisitStats = async () => {
           <p className="mt-4 text-center text-lg font-semibold text-[#1c7c76]">
             Tổng số người đã đăng ký: <span className="text-black">{totalUsers}</span>
           </p>
-
         </div>
+
+        {/* THỐNG KÊ LƯỢT TRUY CẬP */}
+<div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div className="bg-white rounded-xl shadow p-4 text-center border">
+    <p className="text-gray-500 font-semibold">Lượt truy cập hôm nay</p>
+    <p className="text-3xl font-bold text-[#1c7c76]">
+      {visitStats.today}
+    </p>
+  </div>
+
+  <div className="bg-white rounded-xl shadow p-4 text-center border">
+    <p className="text-gray-500 font-semibold">Lượt truy cập tháng này</p>
+    <p className="text-3xl font-bold text-blue-600">
+      {visitStats.month}
+    </p>
+  </div>
+
+  <div className="bg-white rounded-xl shadow p-4 text-center border">
+    <p className="text-gray-500 font-semibold">Lượt truy cập năm nay</p>
+    <p className="text-3xl font-bold text-purple-600">
+      {visitStats.year}
+    </p>
+  </div>
+</div>
+
 
         {/* 2. KHU VỰC TÌM KIẾM NỔI BẬT */}
         <div className="bg-white p-5 md:p-6 rounded-xl shadow-2xl mb-8 border border-gray-100">
