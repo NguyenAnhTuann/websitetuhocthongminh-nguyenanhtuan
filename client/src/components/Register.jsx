@@ -41,6 +41,8 @@ export default function Register() {
   const refPassword = useRef(null);
   const refPasswordAgain = useRef(null);
   const refTop = useRef(null);
+  const asciiOnlyRegex = /^[\x00-\x7F]*$/;
+
 
 
   const [msg, setMsg] = useState("");
@@ -467,6 +469,13 @@ export default function Register() {
             value={email}
             onChange={(e) => {
               const v = e.target.value;
+
+              // ✅ QUY TẮC MỚI: chặn ký tự có dấu (non-ASCII)
+              if (!/^[\x00-\x7F]*$/.test(value)) {
+                setEmailError("Email không được chứa ký tự có dấu");
+                return; // ⛔ không cho nhập
+              }
+
               setEmail(v);
 
               const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
