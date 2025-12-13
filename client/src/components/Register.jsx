@@ -471,15 +471,15 @@ export default function Register() {
   if (e.nativeEvent.isComposing) return;
 
   const v = e.target.value;
-
-  // ✅ chặn ký tự có dấu
-  if (!/^[\x00-\x7F]*$/.test(v)) {
-    setEmailError("Email không được chứa ký tự có dấu");
-    return; // ⛔ không cho nhập
-  }
-
   setEmail(v);
 
+  // ⚠ báo lỗi nếu có ký tự có dấu (non-ASCII)
+  if (!/^[\x00-\x7F]*$/.test(v)) {
+    setEmailError("Email không được chứa ký tự có dấu");
+    return;
+  }
+
+  // 🔽 giữ nguyên toàn bộ quy tắc cũ
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!emailRegex.test(v)) setEmailError("Email không hợp lệ!");
