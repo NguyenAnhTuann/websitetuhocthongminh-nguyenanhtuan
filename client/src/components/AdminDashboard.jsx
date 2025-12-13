@@ -346,36 +346,79 @@ export default function AdminDashboard() {
 
         {/* === HIỂN THỊ LOADING HOẶC DATA === */}
         {isDataLoading ? (
-          // SPINNER CHỈ Ở KHU VỰC DATA
-          <div className="flex items-center justify-center py-10 bg-white rounded-xl shadow-xl">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#1c7c76] border-t-transparent"></div>
+  // SPINNER CHỈ Ở KHU VỰC DATA
+  <div className="flex items-center justify-center py-10 bg-white rounded-xl shadow-xl">
+    <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#1c7c76] border-t-transparent"></div>
+  </div>
+) : (
+  <>
+    {/* ===== MOBILE VIEW (HIỆN TẠI ĐÃ CÓ PHÂN TRANG) ===== */}
+    <div className="md:hidden space-y-3">
+      {currentUsers.map((u) => (
+        <div key={u._id} className="bg-white shadow-md rounded-xl p-4 border border-gray-200">
+          <p className="font-bold text-black text-lg">{u.fullName}</p>
+
+          <div className="mt-2 text-sm text-gray-700 space-y-1">
+            <p><b>Email:</b> {u.email}</p>
+            <p><b>SĐT:</b> {u.phone}</p>
+            <p><b>Ngày sinh:</b> {u.dob}</p>
+            <p><b>Trường:</b> {u.school}</p>
+            <p><b>Lớp:</b> {u.grade}</p>
+            <p><b>Thời gian đăng ký:</b> {new Date(u.createdAt).toLocaleDateString("vi-VN")}</p>
           </div>
-        ) : (
-          <>
-            {/* ===== MOBILE VIEW ===== */}
-            <div className="md:hidden space-y-3">
-              {currentUsers.map((u) => (
-                <div key={u._id} className="bg-white shadow-md rounded-xl p-4 border border-gray-200">
-                  <p className="font-bold text-black text-lg">{u.fullName}</p>
 
-                  <div className="mt-2 text-sm text-gray-700 space-y-1">
-                    <p><b>Email:</b> {u.email}</p>
-                    <p><b>SĐT:</b> {u.phone}</p>
-                    <p><b>Ngày sinh:</b> {u.dob}</p>
-                    <p><b>Trường:</b> {u.school}</p>
-                    <p><b>Lớp:</b> {u.grade}</p>
-                    <p><b>Thời gian đăng ký:</b> {new Date(u.createdAt).toLocaleDateString("vi-VN")}</p>
-                  </div>
+          <button
+            onClick={() => handleDelete(u._id)}
+            className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-semibold"
+          >
+            Xóa
+          </button>
+        </div>
+      ))}
 
-                  <button
-                    onClick={() => handleDelete(u._id)}
-                    className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-semibold"
-                  >
-                    Xóa
-                  </button>
-                </div>
-              ))}
+      {/* ================================================================= */}
+      {/* KHỐI PHÂN TRANG CHO MOBILE (Hiển thị nếu có hơn 1 trang) */}
+      {users.length > 0 && totalPages > 1 && (
+        <div className="flex justify-center items-center mt-6 gap-2 flex-wrap">
+          <button
+            onClick={prevPage}
+            disabled={currentPage === 1}
+            className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm
+              ${currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
+          >
+            Trang trước
+          </button>
 
+          {/* Dãy số trang */}
+          {getPaginationItems().map((page) => (
+            <button
+              key={page}
+              onClick={() => goToPage(page)}
+              className={`
+                w-9 h-9 rounded-full font-bold shadow transition duration-150 text-sm
+                ${page === currentPage
+                  ? "bg-[#1c7c76] text-white ring-2 ring-offset-2 ring-[#1c7c76]"
+                  : "bg-white text-[#1c7c76] border border-gray-300 hover:bg-gray-100"
+                }
+              `}
+            >
+              {page}
+            </button>
+          ))}
+          {/* Kết thúc Dãy số trang */}
+
+          <button
+            onClick={nextPage}
+            disabled={currentPage === totalPages}
+            className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm
+              ${currentPage === totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
+          >
+            Trang sau
+          </button>
+        </div>
+      )}
+      {/* KẾT THÚC KHỐI PHÂN TRANG MOBILE */}
+      {/* ================================================================= */}
               {users.length === 0 && (
                 <p className="text-center py-6 text-gray-500">
                   Không có học sinh nào {currentSearchTerm ? "phù hợp với từ khóa." : "trong hệ thống."}
@@ -515,51 +558,6 @@ export default function AdminDashboard() {
                 </div>
               )}
 
-
-
-{/* ================================================================= */}
-{/* THÊM PHÂN TRANG CHO MOBILE (ẨN TRÊN MD/LARGE) */}
-{users.length > 0 && totalPages > 1 && (
-  <div className="flex justify-center items-center mt-6 gap-2 flex-wrap md:hidden">
-    <button
-      onClick={prevPage}
-      disabled={currentPage === 1}
-      className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm
-        ${currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
-    >
-      Trang trước
-    </button>
-
-    {/* Dãy số trang */}
-    {getPaginationItems().map((page) => (
-      <button
-        key={page}
-        onClick={() => goToPage(page)}
-        className={`
-          w-9 h-9 rounded-full font-bold shadow transition duration-150 text-sm
-          ${page === currentPage
-            ? "bg-[#1c7c76] text-white ring-2 ring-offset-2 ring-[#1c7c76]"
-            : "bg-white text-[#1c7c76] border border-gray-300 hover:bg-gray-100"
-          }
-        `}
-      >
-        {page}
-      </button>
-    ))}
-    {/* Kết thúc Dãy số trang */}
-
-    <button
-      onClick={nextPage}
-      disabled={currentPage === totalPages}
-      className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm
-        ${currentPage === totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
-    >
-      Trang sau
-    </button>
-  </div>
-)}
-{/* KẾT THÚC PHÂN TRANG MOBILE */}
-{/* ================================================================= */}
 
 
               {users.length === 0 && (
