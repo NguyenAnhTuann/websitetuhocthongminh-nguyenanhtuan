@@ -160,7 +160,6 @@ export default function AdminDashboard() {
     // Tải dữ liệu (lần ađầu hoặc khi có tìm kiếm)
     fetchUsers(currentSearchTerm);
     fetchTotalUsers();
-    fetchVisitStats();
 
   }, [currentSearchTerm])
 
