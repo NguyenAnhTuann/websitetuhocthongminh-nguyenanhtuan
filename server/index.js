@@ -139,14 +139,19 @@ app.use("/api/admin", adminRoutes);
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("🔗 Đã kết nối với DATABSE:", mongoose.connection.name);
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB error:", err);
+    process.exit(1);
+  });
 
-    app.post("/api/visit", async (req, res) => {
+
+app.post("/api/visit", async (req, res) => {
   try {
     if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({ success: false });
     }
 
-    // 🔥 SỬA Ở ĐÂY
     const visit = new Visit();
     await visit.save();
 
@@ -156,16 +161,6 @@ mongoose.connect(process.env.MONGO_URI)
     res.status(500).json({ success: false });
   }
 });
-
-
-  })
-  .catch((err) => {
-    console.error("❌ MongoDB error:", err);
-    process.exit(1);
-  });
-
-
-
 
 
 // ===============================
