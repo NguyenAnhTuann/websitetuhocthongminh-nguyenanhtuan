@@ -468,21 +468,24 @@ export default function Register() {
             type="email"
             value={email}
             onChange={(e) => {
-              const v = e.target.value;
+  if (e.nativeEvent.isComposing) return;
 
-              // ✅ QUY TẮC MỚI: chặn ký tự có dấu (non-ASCII)
-              if (!/^[\x00-\x7F]*$/.test(value)) {
-                setEmailError("Email không được chứa ký tự có dấu");
-                return; // ⛔ không cho nhập
-              }
+  const v = e.target.value;
 
-              setEmail(v);
+  // ✅ chặn ký tự có dấu
+  if (!/^[\x00-\x7F]*$/.test(v)) {
+    setEmailError("Email không được chứa ký tự có dấu");
+    return; // ⛔ không cho nhập
+  }
 
-              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  setEmail(v);
 
-              if (!emailRegex.test(v)) setEmailError("Email không hợp lệ!");
-              else setEmailError("");
-            }}
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(v)) setEmailError("Email không hợp lệ!");
+  else setEmailError("");
+}}
+
 
             placeholder="Nhập email..."
             className="w-full px-4 py-3 border rounded-xl outline-none focus:border-[#1c7c76]"
