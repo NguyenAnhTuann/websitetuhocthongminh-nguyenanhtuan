@@ -66,24 +66,24 @@ export default function AdminDashboard() {
 
 
   const fetchTotalUsers = async () => {
-  const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-  try {
-    const res = await fetch(
-      "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/users/count",
-      {
-        headers: { Authorization: "Bearer " + token },
+    try {
+      const res = await fetch(
+        "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/users/count",
+        {
+          headers: { Authorization: "Bearer " + token },
+        }
+      );
+
+      const data = await res.json();
+      if (res.ok) {
+        setTotalUsers(data.totalUsers);
       }
-    );
-
-    const data = await res.json();
-    if (res.ok) {
-      setTotalUsers(data.totalUsers);
+    } catch (err) {
+      console.error("Không lấy được tổng số user");
     }
-  } catch (err) {
-    console.error("Không lấy được tổng số user");
-  }
-};
+  };
 
 
 
@@ -298,6 +298,11 @@ export default function AdminDashboard() {
           >
             DỮ LIỆU HỌC SINH
           </h1>
+
+          <p className="mt-4 text-center text-lg font-semibold text-[#1c7c76]">
+            Tổng số người đã đăng ký: <span className="text-black">{totalUsers}</span>
+          </p>
+
         </div>
 
         {/* 2. KHU VỰC TÌM KIẾM NỔI BẬT */}
