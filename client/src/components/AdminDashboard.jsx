@@ -477,12 +477,12 @@ export default function AdminDashboard() {
 
               {/* PHÂN TRANG - ĐÃ CẬP NHẬT THÊM DÃY SỐ TRANG */}
               {users.length > 0 && totalPages > 1 && ( // Chỉ hiển thị nếu có > 1 trang
-                <div className="flex justify-center items-center mt-6 gap-2 md:gap-4 flex-wrap">
+                <div className="hidden md:flex justify-center items-center mt-6 gap-2 md:gap-4 flex-wrap">
                   <button
                     onClick={prevPage}
                     disabled={currentPage === 1}
                     className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm md:text-base
-                    ${currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
+                    ${currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
                   >
                     Trang trước
                   </button>
@@ -515,6 +515,53 @@ export default function AdminDashboard() {
                   </button>
                 </div>
               )}
+
+
+
+{/* ================================================================= */}
+{/* THÊM PHÂN TRANG CHO MOBILE (ẨN TRÊN MD/LARGE) */}
+{users.length > 0 && totalPages > 1 && (
+  <div className="flex justify-center items-center mt-6 gap-2 flex-wrap md:hidden">
+    <button
+      onClick={prevPage}
+      disabled={currentPage === 1}
+      className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm
+        ${currentPage === 1 ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
+    >
+      Trang trước
+    </button>
+
+    {/* Dãy số trang */}
+    {getPaginationItems().map((page) => (
+      <button
+        key={page}
+        onClick={() => goToPage(page)}
+        className={`
+          w-9 h-9 rounded-full font-bold shadow transition duration-150 text-sm
+          ${page === currentPage
+            ? "bg-[#1c7c76] text-white ring-2 ring-offset-2 ring-[#1c7c76]"
+            : "bg-white text-[#1c7c76] border border-gray-300 hover:bg-gray-100"
+          }
+        `}
+      >
+        {page}
+      </button>
+    ))}
+    {/* Kết thúc Dãy số trang */}
+
+    <button
+      onClick={nextPage}
+      disabled={currentPage === totalPages}
+      className={`px-4 py-2 rounded-lg text-white font-semibold shadow text-sm
+        ${currentPage === totalPages ? "bg-gray-400 cursor-not-allowed" : "bg-[#1c7c76] hover:bg-[#17635f]"}`}
+    >
+      Trang sau
+    </button>
+  </div>
+)}
+{/* KẾT THÚC PHÂN TRANG MOBILE */}
+{/* ================================================================= */}
+
 
               {users.length === 0 && (
                 <p className="text-center py-6 text-gray-500">
