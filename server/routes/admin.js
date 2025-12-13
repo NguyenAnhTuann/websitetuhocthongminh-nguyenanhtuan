@@ -102,6 +102,20 @@ router.delete("/delete/:id", verifyAdmin, async (req, res) => {
   }
 });
 
+// ===============================
+// API: LẤY TỔNG SỐ USER ĐÃ ĐĂNG KÝ
+// ===============================
+router.get("/users/count", verifyAdmin, async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    res.json({ totalUsers });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Lỗi server" });
+  }
+});
+
+
 
 
 module.exports = router;

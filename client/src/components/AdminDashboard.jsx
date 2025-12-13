@@ -5,6 +5,8 @@ export default function AdminDashboard() {
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 10;
+  const [totalUsers, setTotalUsers] = useState(0);
+
 
   // SỬA: Dùng isDataLoading để quản lý trạng thái tải dữ liệu (cục bộ)
   const [isDataLoading, setIsDataLoading] = useState(true);
@@ -61,6 +63,28 @@ export default function AdminDashboard() {
       setIsDataLoading(false); // TẮT LOADING CỤC BỘ
     }
   };
+
+
+  const fetchTotalUsers = async () => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const res = await fetch(
+      "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/users/count",
+      {
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+
+    const data = await res.json();
+    if (res.ok) {
+      setTotalUsers(data.totalUsers);
+    }
+  } catch (err) {
+    console.error("Không lấy được tổng số user");
+  }
+};
+
 
 
   // ================================
@@ -139,6 +163,7 @@ export default function AdminDashboard() {
 
     // Tải dữ liệu (lần đầu hoặc khi có tìm kiếm)
     fetchUsers(currentSearchTerm);
+    fetchTotalUsers();
 
   }, [currentSearchTerm])
 
