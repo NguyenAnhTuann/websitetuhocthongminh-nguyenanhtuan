@@ -1,3 +1,4 @@
+//server/index.js
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -128,18 +129,6 @@ app.use("/api/auth", authRoutes);
 const adminRoutes = require("./routes/admin");
 app.use("/api/admin", adminRoutes);
 
-// ===============================
-// API: GHI NHẬN LƯỢT TRUY CẬP TRANG CHỦ
-// ===============================
-app.post("/api/visit", async (req, res) => {
-  try {
-    await Visit.create({});
-    res.json({ success: true });
-  } catch (err) {
-    console.error("Lỗi ghi nhận lượt truy cập:", err);
-    res.status(500).json({ success: false });
-  }
-});
 
 
 
@@ -148,13 +137,27 @@ app.post("/api/visit", async (req, res) => {
 // ===============================
 
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("🔗 Đã kết nối với DATABSE:", mongoose.connection.name);
-  })
-  .catch((err) => {
-    console.error("❌ MongoDB error:", err);
-    process.exit(1);
-  });
+.then(() => {
+  console.log("🔗 Đã kết nối với DATABSE:", mongoose.connection.name);
+
+  app.post("/api/visit", async (req, res) => {
+  try {
+    await Visit.create({});
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Lỗi ghi nhận lượt truy cập:", err);
+    res.status(500).json({ success: false });
+  }
+});
+})
+.catch((err) => {
+  console.error("❌ MongoDB error:", err);
+  process.exit(1);
+});
+
+
+
+
 
 // ===============================
 // TẠO ADMIN
