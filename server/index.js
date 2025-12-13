@@ -6,7 +6,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const fetch = require("node-fetch");
-const Visit = require("./models/Visit");
 
 
 // ===== OpenAI ChatGPT =====
@@ -145,22 +144,6 @@ mongoose.connect(process.env.MONGO_URI)
     process.exit(1);
   });
 
-
-app.post("/api/visit", async (req, res) => {
-  try {
-    if (mongoose.connection.readyState !== 1) {
-      return res.status(503).json({ success: false });
-    }
-
-    const visit = new Visit();
-    await visit.save();
-
-    res.json({ success: true });
-  } catch (err) {
-    console.error("Lỗi ghi nhận lượt truy cập:", err);
-    res.status(500).json({ success: false });
-  }
-});
 
 
 // ===============================
