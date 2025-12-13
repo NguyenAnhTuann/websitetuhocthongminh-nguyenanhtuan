@@ -330,13 +330,6 @@ const fetchVisitStats = async () => {
           </p>
         </div>
 
-        {/* THỐNG KÊ LƯỢT TRUY CẬP */}
-<div className="mt-4 text-center text-lg font-semibold text-[#1c7c76]">
-  Lượt truy cập hôm nay:{" "}
-  <span className="text-black">{visitToday}</span>
-</div>
-
-
 
         {/* 2. KHU VỰC TÌM KIẾM NỔI BẬT */}
         <div className="bg-white p-5 md:p-6 rounded-xl shadow-2xl mb-8 border border-gray-100">

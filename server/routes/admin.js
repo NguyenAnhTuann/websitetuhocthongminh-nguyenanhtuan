@@ -6,15 +6,6 @@ const BannedUser = require("../models/BannedUser");
 const jwt = require("jsonwebtoken");
 
 
-router.get("/visits/today", verifyAdmin, async (req, res) => {
-  const today = new Date().toISOString().slice(0, 10);
-
-  const visit = await Visit.findOne({ date: today });
-
-  res.json({
-    today: visit ? visit.count : 0
-  });
-});
 
 
 // ===============================

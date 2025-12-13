@@ -45,14 +45,8 @@ const Typewriter = ({ text, speed = 40 }) => {
   );
 };
 
-useEffect(() => {
-  fetch("https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/visit", {
-    method: "POST"
-  });
-}, []);
-
-
 const Home = ({ language }) => {
+
   const navigate = useNavigate();
 
   const translations = {

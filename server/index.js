@@ -25,23 +25,9 @@ const User = require("./models/User");
 // KHỞI TẠO APP — PHẢI ĐỂ Ở ĐÂY
 const app = express();
 
-app.post("/api/visit", async (req, res) => {
-  try {
-    const today = new Date().toISOString().slice(0, 10);
-
-    await Visit.findOneAndUpdate(
-      { date: today },
-      { $inc: { count: 1 } },
-      { upsert: true }
-    );
-
-    res.json({ success: true });
-  } catch (err) {
-    console.error("Visit error:", err);
-    res.status(500).json({ success: false });
-  }
-});
-
+// Tăng giới hạn lên 50mb để nhận được ảnh base64
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(
   cors({
