@@ -140,6 +140,11 @@ export default function Register() {
     if (!email.trim()) {
       setEmailError("Email không được để trống!");
       hasError = true;
+
+    } else if (!/^[\x00-\x7F]*$/.test(email)) {
+      setEmailError("Email chứa ký tự có dấu! Vui lòng nhập đúng định dạng email");
+      hasError = true;
+
     } else if (!emailRegex.test(email)) {
       setEmailError("Email không hợp lệ!");
       hasError = true;
@@ -468,23 +473,23 @@ export default function Register() {
             type="text"
             value={email}
             onChange={(e) => {
-  if (e.nativeEvent.isComposing) return;
+              if (e.nativeEvent.isComposing) return;
 
-  const v = e.target.value;
-  setEmail(v);
+              const v = e.target.value;
+              setEmail(v);
 
-  // ⚠ báo lỗi nếu có ký tự có dấu (non-ASCII)
-  if (!/^[\x00-\x7F]*$/.test(v)) {
-    setEmailError("Email không được chứa ký tự có dấu");
-    return;
-  }
+              // ⚠ báo lỗi nếu có ký tự có dấu (non-ASCII)
+              if (!/^[\x00-\x7F]*$/.test(v)) {
+                setEmailError("Email không được chứa ký tự có dấu");
+                return;
+              }
 
-  // 🔽 giữ nguyên toàn bộ quy tắc cũ
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              // 🔽 giữ nguyên toàn bộ quy tắc cũ
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!emailRegex.test(v)) setEmailError("Email không hợp lệ!");
-  else setEmailError("");
-}}
+              if (!emailRegex.test(v)) setEmailError("Email không hợp lệ!");
+              else setEmailError("");
+            }}
 
 
             placeholder="Nhập email..."
