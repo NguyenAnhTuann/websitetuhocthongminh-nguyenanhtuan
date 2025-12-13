@@ -114,7 +114,7 @@ Bạn là trợ lý AI môn KINH TẾ & PHÁP LUẬT.
 Chỉ giải thích luật, quy định, quyền công dân, kiến thức kinh tế cơ bản.
 Không trả lời câu hỏi ngoài môn.
 `,
-test: `
+  test: `
   Bạn là trợ lý AI dành cho người dùng trải nghiệm thử. 
   Hãy trả lời thân thiện, ngắn gọn và hữu ích về mọi lĩnh vực cơ bản.
   Luôn nhắc người dùng: "Hãy đăng nhập để chọn gia sư chuyên sâu từng môn học nhé!" ở cuối câu trả lời.
@@ -137,11 +137,15 @@ app.use("/api/admin", adminRoutes);
 // ===============================
 
 mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-  console.log("🔗 Đã kết nối với DATABSE:", mongoose.connection.name);
+  .then(() => {
+    console.log("🔗 Đã kết nối với DATABSE:", mongoose.connection.name);
 
-  app.post("/api/visit", async (req, res) => {
+    app.post("/api/visit", async (req, res) => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ success: false });
+    }
+
     await Visit.create({});
     res.json({ success: true });
   } catch (err) {
@@ -149,11 +153,12 @@ mongoose.connect(process.env.MONGO_URI)
     res.status(500).json({ success: false });
   }
 });
-})
-.catch((err) => {
-  console.error("❌ MongoDB error:", err);
-  process.exit(1);
-});
+
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB error:", err);
+    process.exit(1);
+  });
 
 
 
@@ -199,7 +204,7 @@ app.post("/api/chat", async (req, res) => {
     // 4. Gộp: [System Prompt] + [Lịch sử cũ] + [Câu hỏi mới]
     const fullConversation = [
       { role: "system", content: SUBJECT_PROMPTS[subject] },
-      ...previousMessages, 
+      ...previousMessages,
       { role: "user", content: userContent } // Lúc này content là chuỗi text, rất nhẹ
     ];
 
@@ -216,7 +221,7 @@ app.post("/api/chat", async (req, res) => {
     console.error("❌ Error:", err);
     // Log chi tiết lỗi để dễ kiểm tra nếu có vấn đề khác
     if (err.response) {
-        console.error(err.response.status, err.response.data);
+      console.error(err.response.status, err.response.data);
     }
     res.status(500).json({ reply: "Lỗi server." });
   }
