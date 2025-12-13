@@ -5,6 +5,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const fetch = require("node-fetch");
+const Visit = require("./models/Visit");
+
 
 // ===== OpenAI ChatGPT =====
 const OpenAI = require("openai");
@@ -125,6 +127,21 @@ app.use("/api/auth", authRoutes);
 
 const adminRoutes = require("./routes/admin");
 app.use("/api/admin", adminRoutes);
+
+// ===============================
+// API: GHI NHẬN LƯỢT TRUY CẬP TRANG CHỦ
+// ===============================
+app.post("/api/visit", async (req, res) => {
+  try {
+    await Visit.create({});
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Lỗi ghi nhận lượt truy cập:", err);
+    res.status(500).json({ success: false });
+  }
+});
+
+
 
 // ===============================
 // 1) KẾT NỐI MONGODB

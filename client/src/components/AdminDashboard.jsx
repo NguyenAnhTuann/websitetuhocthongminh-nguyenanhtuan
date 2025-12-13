@@ -7,6 +7,33 @@ export default function AdminDashboard() {
   const usersPerPage = 10;
   const [totalUsers, setTotalUsers] = useState(0);
 
+  const [visitStats, setVisitStats] = useState({
+  today: 0,
+  month: 0,
+  year: 0,
+});
+
+const fetchVisitStats = async () => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const res = await fetch(
+      "https://websitetuhocthongminh-nguyenanhtuan.onrender.com/api/admin/visits/stats",
+      {
+        headers: { Authorization: "Bearer " + token },
+      }
+    );
+
+    const data = await res.json();
+    if (res.ok) {
+      setVisitStats(data);
+    }
+  } catch (err) {
+    console.error("Không lấy được thống kê lượt truy cập");
+  }
+};
+
+
 
   // SỬA: Dùng isDataLoading để quản lý trạng thái tải dữ liệu (cục bộ)
   const [isDataLoading, setIsDataLoading] = useState(true);
@@ -164,6 +191,7 @@ export default function AdminDashboard() {
     // Tải dữ liệu (lần đầu hoặc khi có tìm kiếm)
     fetchUsers(currentSearchTerm);
     fetchTotalUsers();
+    fetchVisitStats();
 
   }, [currentSearchTerm])
 

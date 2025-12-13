@@ -3,6 +3,45 @@ const router = express.Router();
 const User = require("../models/User");
 const BannedUser = require("../models/BannedUser");
 const jwt = require("jsonwebtoken");
+const Visit = require("../models/Visit");
+
+
+// ===============================
+// API: THỐNG KÊ LƯỢT TRUY CẬP
+// ===============================
+router.get("/visits/stats", verifyAdmin, async (req, res) => {
+  try {
+    const now = new Date();
+
+    // ---- Hôm nay ----
+    const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+
+    // ---- Tháng này ----
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+
+    // ---- Năm nay ----
+    const startOfYear = new Date(now.getFullYear(), 0, 1);
+    const endOfYear = new Date(now.getFullYear() + 1, 0, 1);
+
+    const [today, month, year] = await Promise.all([
+      Visit.countDocuments({ createdAt: { $gte: startOfDay, $lt: endOfDay } }),
+      Visit.countDocuments({ createdAt: { $gte: startOfMonth, $lt: endOfMonth } }),
+      Visit.countDocuments({ createdAt: { $gte: startOfYear, $lt: endOfYear } }),
+    ]);
+
+    res.json({
+      today,
+      month,
+      year,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Lỗi server" });
+  }
+});
+
 
 // ===============================
 // Middleware kiểm tra Admin
