@@ -146,13 +146,17 @@ mongoose.connect(process.env.MONGO_URI)
       return res.status(503).json({ success: false });
     }
 
-    await Visit.create({});
+    // 🔥 SỬA Ở ĐÂY
+    const visit = new Visit();
+    await visit.save();
+
     res.json({ success: true });
   } catch (err) {
     console.error("Lỗi ghi nhận lượt truy cập:", err);
     res.status(500).json({ success: false });
   }
 });
+
 
   })
   .catch((err) => {
